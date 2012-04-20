@@ -46,3 +46,8 @@ Problem statement
 
 Proposed possible solutions/ideas.
 Fuzz random (BSD/Mach)syscalls with random data.
+
+
+--Scope
+Mac OSX XNU/Darwn Kernel fuzzer generator 
+framework-like thing
