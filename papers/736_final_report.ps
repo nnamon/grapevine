@@ -1,0 +1,5876 @@
+%!PS-Adobe-3.0
+%%BoundingBox: (atend)
+%%Pages: (atend)
+%%PageOrder: (atend)
+%%DocumentFonts: (atend)
+%%Creator: Frame 5.0
+%%DocumentData: Clean7Bit
+%%EndComments
+%%BeginProlog
+%
+% Frame ps_prolog 5.0, for use with Frame 5.0 products
+% This ps_prolog file is Copyright (c) 1986-1995 Frame Technology
+% Corporation.  All rights reserved.  This ps_prolog file may be
+% freely copied and distributed in conjunction with documents created
+% using FrameMaker, FrameMaker/SGML and FrameViewer as long as this 
+% copyright notice is preserved.
+%
+% FrameMaker users specify the proper paper size for each print job in the
+% "Print" dialog's "Printer Paper Size" "Width" and "Height~ fields.  If the
+% printer that the PS file is sent to does not support the requested paper
+% size, or if there is no paper tray of the proper size currently installed, 
+% then the job will not be printed.  The following flag, if set to true, will
+% cause the job to print on the default paper in such cases.
+/FMAllowPaperSizeMismatch            true def
+%
+% Frame products normally print colors as their true color on a color printer
+% or as shades of gray, based on luminance, on a black-and white printer. The
+% following flag, if set to true, forces all non-white colors to print as pure
+% black. This has no effect on bitmap images.
+/FMPrintAllColorsAsBlack             false def
+%
+% Frame products can either set their own line screens or use a printer's 
+% default settings. Three flags below control this separately for no 
+% separations, spot separations and process separations. If a flag
+% is true, then the default printer settings will not be changed. If it is
+% false, Frame products will use their own settings from a table based on
+% the printer's resolution.
+/FMUseDefaultNoSeparationScreen      true  def
+/FMUseDefaultSpotSeparationScreen    true  def
+/FMUseDefaultProcessSeparationScreen false def
+%
+% For any given PostScript printer resolution, Frame products have two sets of 
+% screen angles and frequencies for printing process separations, which are 
+% recomended by Adobe. The following variable chooses the higher frequencies
+% when set to true or the lower frequencies when set to false. This is only
+% effective if the appropriate FMUseDefault...SeparationScreen flag is false.
+/FMUseHighFrequencyScreens true def
+%
+% The following is a set of predefined optimal frequencies and angles for various
+% common dpi settings. This is taken from "Advances in Color Separation Using
+% PostScript Software Technology," from Adobe Systems (3/13/89 P.N. LPS 0043)
+% and corrolated with information which is in various PPD (4.0) files.
+%
+% The "dpiranges" figure is the minimum dots per inch device resolution which
+% can support this setting. The "low" and "high" values are controlled by the
+% setting of the FMUseHighFrequencyScreens flag above. The "TDot" flags control
+% the use of the "Yellow Triple Dot" feature whereby the frequency id divided by
+% three, but the dot function is "trippled" giving a block of 3x3 dots per cell.
+%
+% PatFreq is a compromise pattern frequency for ps Level 2 printers which is close
+% to the ideal WYSIWYG pattern frequency of 9 repetitions/inch but does not beat
+% (too badly) against the screen frequencies of any separations for that DPI.
+/dpiranges   [  2540    2400    1693     1270    1200     635      600      0      ] def
+/CMLowFreqs  [ 100.402  94.8683 89.2289 100.402  94.8683  66.9349  63.2456 47.4342 ] def
+/YLowFreqs   [  95.25   90.0    84.65    95.25   90.0     70.5556  66.6667 50.0    ] def
+/KLowFreqs   [  89.8026 84.8528 79.8088  89.8026 84.8528  74.8355  70.7107 53.033  ] def
+/CLowAngles  [  71.5651 71.5651 71.5651 71.5651  71.5651  71.5651  71.5651 71.5651 ] def
+/MLowAngles  [  18.4349 18.4349 18.4349 18.4349  18.4349  18.4349  18.4349 18.4349 ] def
+/YLowTDot    [  true    true    false    true    true     false    false   false   ] def
+/CMHighFreqs [ 133.87  126.491 133.843  108.503 102.523  100.402   94.8683 63.2456 ] def
+/YHighFreqs  [ 127.0   120.0   126.975  115.455 109.091   95.25    90.0    60.0    ] def
+/KHighFreqs  [ 119.737 113.137 119.713  128.289 121.218   89.8026  84.8528 63.6395 ] def
+/CHighAngles [  71.5651 71.5651 71.5651  70.0169 70.0169  71.5651  71.5651 71.5651 ] def
+/MHighAngles [  18.4349 18.4349 18.4349  19.9831 19.9831  18.4349  18.4349 18.4349 ] def
+/YHighTDot   [  false   false   true     false   false    true     true    false   ] def
+/PatFreq     [	10.5833 10.0     9.4055  10.5833 10.0	  10.5833  10.0	   9.375   ] def
+%
+% PostScript Level 2 printers contain an "Accurate Screens" feature which can
+% improve process separation rendering at the expense of compute time. This 
+% flag is ignored by PostScript Level 1 printers.
+/FMUseAcccurateScreens true def
+%
+% The following PostScript procedure defines the spot function that Frame
+% products will use for process separations. You may un-comment-out one of
+% the alternative functions below, or use your own.
+%
+% Dot function
+/FMSpotFunction {abs exch abs 2 copy add 1 gt 
+		{1 sub dup mul exch 1 sub dup mul add 1 sub }
+		{dup mul exch dup mul add 1 exch sub }ifelse } def
+%
+% Line function
+% /FMSpotFunction { pop } def
+%
+% Elipse function
+% /FMSpotFunction { dup 5 mul 8 div mul exch dup mul exch add 
+%		sqrt 1 exch sub } def
+%
+%
+/FMversion (5.0) def 
+/fMLevel1 /languagelevel where {pop languagelevel} {1} ifelse 2 lt def
+/FMPColor
+	fMLevel1 {
+		false
+		/colorimage where {pop pop true} if
+	} {
+		true
+	} ifelse
+def
+/FrameDict 400 dict def 
+systemdict /errordict known not {/errordict 10 dict def
+		errordict /rangecheck {stop} put} if
+% The readline in PS 23.0 doesn't recognize cr's as nl's on AppleTalk
+FrameDict /tmprangecheck errordict /rangecheck get put 
+errordict /rangecheck {FrameDict /bug true put} put 
+FrameDict /bug false put 
+mark 
+% Some PS machines read past the CR, so keep the following 3 lines together!
+currentfile 5 string readline
+00
+0000000000
+cleartomark 
+errordict /rangecheck FrameDict /tmprangecheck get put 
+FrameDict /bug get { 
+	/readline {
+		/gstring exch def
+		/gfile exch def
+		/gindex 0 def
+		{
+			gfile read pop 
+			dup 10 eq {exit} if 
+			dup 13 eq {exit} if 
+			gstring exch gindex exch put 
+			/gindex gindex 1 add def 
+		} loop
+		pop 
+		gstring 0 gindex getinterval true 
+		} bind def
+	} if
+/FMshowpage /showpage load def
+/FMquit /quit load def
+/FMFAILURE { 
+	dup = flush 
+	FMshowpage 
+	/Helvetica findfont 12 scalefont setfont
+	72 200 moveto show
+	72 220 moveto show
+	FMshowpage 
+	FMquit 
+	} def 
+/FMVERSION {
+	FMversion ne {
+		(Frame product version does not match ps_prolog!  Check installation;)
+		(also check ~/fminit and ./fminit for old versions) FMFAILURE
+		} if
+	} def 
+/FMBADEPSF { 
+	(Adobe's PostScript Language Reference Manual, 2nd Edition, section H.2.4)
+	(says your EPS file is not valid, as it calls X              )
+	dup dup (X) search pop exch pop exch pop length 
+	5 -1 roll 
+	putinterval 
+	FMFAILURE
+	} def
+/fmConcatProcs
+	{
+	/proc2 exch cvlit def/proc1 exch cvlit def/newproc proc1 length proc2 length add array def
+	newproc 0 proc1 putinterval newproc proc1 length proc2 putinterval newproc cvx
+}def
+FrameDict begin [
+	/ALDsave
+	/FMdicttop
+	/FMoptop
+	/FMpointsize
+	/FMsaveobject
+	/b
+	/bitmapsave
+	/blut
+	/bpside
+	/bs
+	/bstring
+	/bwidth
+	/c
+	/cf
+	/cs
+	/cynu
+	/depth
+	/edown
+	/fh
+	/fillvals
+	/fw
+	/fx
+	/fy
+	/g
+	/gfile
+	/gindex
+	/grnt
+	/gryt
+	/gstring
+	/height
+	/hh
+	/i
+	/im
+	/indx
+	/is
+	/k
+	/kk
+	/landscape
+	/lb
+	/len
+	/llx
+	/lly
+	/m
+	/magu
+	/manualfeed
+	/n
+	/offbits
+	/onbits
+	/organgle
+	/orgbangle
+	/orgbfreq
+	/orgbproc
+	/orgbxfer
+	/orgfreq
+	/orggangle
+	/orggfreq
+	/orggproc
+	/orggxfer
+	/orgmatrix
+	/orgproc
+	/orgrangle
+	/orgrfreq
+	/orgrproc
+	/orgrxfer
+	/orgxfer
+	/pagesave
+	/paperheight
+	/papersizedict
+	/paperwidth
+	/pos
+	/pwid
+	/r
+	/rad
+	/redt
+	/sl
+	/str
+	/tran
+	/u
+	/urx
+	/ury
+	/val
+	/width
+	/width
+	/ws
+	/ww
+	/x
+	/x1
+	/x2
+	/xindex
+	/xpoint
+	/xscale
+	/xx
+	/y
+	/y1
+	/y2
+	/yelu
+	/yindex
+	/ypoint
+	/yscale
+	/yy
+] { 0 def } forall
+/FmBD {bind def} bind def
+systemdict /pdfmark known {
+	/fMAcrobat true def
+	
+	/FmPD /pdfmark load def
+	
+	
+	/FmPT /show load def
+	
+	
+	currentdistillerparams /CoreDistVersion get 2000 ge {
+	
+		
+		/FmPD2 /pdfmark load def
+		
+		
+		
+		
+		
+		/FmPA { mark exch /Dest exch 5 3 roll 
+				/View [ /XYZ null 6 -2 roll FmDC exch pop null] /DEST FmPD 
+		}FmBD
+	} {
+		
+		/FmPD2 /cleartomark load def
+		/FmPA {pop pop pop}FmBD
+	} ifelse
+} {
+	
+	/fMAcrobat false def
+	/FmPD /cleartomark load def
+	/FmPD2 /cleartomark load def
+	/FmPT /pop load def
+	/FmPA {pop pop pop}FmBD
+} ifelse
+/FmDC {
+	transform fMDefaultMatrix itransform cvi exch cvi exch
+}FmBD
+/FmBx {
+	dup 3 index lt {3 1 roll exch} if 
+	1 index 4 index lt {4 -1 roll 3 1 roll exch 4 1 roll} if
+}FmBD
+/FMnone 0 def
+/FMcyan 1 def
+/FMmagenta 2 def
+/FMyellow 3 def
+/FMblack 4 def
+/FMcustom 5 def
+/fMNegative false def 
+/FrameSepIs FMnone def 
+/FrameSepBlack 0 def
+/FrameSepYellow 0 def
+/FrameSepMagenta 0 def
+/FrameSepCyan 0 def
+/FrameSepRed 1 def
+/FrameSepGreen 1 def
+/FrameSepBlue 1 def
+/FrameCurGray 1 def
+/FrameCurPat null def
+/FrameCurColors [ 0 0 0 1 0 0 0 ] def 
+/FrameColorEpsilon .001 def	
+/eqepsilon {		
+	sub dup 0 lt {neg} if
+	FrameColorEpsilon le
+} bind def
+/FrameCmpColorsCMYK { 
+	2 copy 0 get exch 0 get eqepsilon {
+		2 copy 1 get exch 1 get eqepsilon {
+			2 copy 2 get exch 2 get eqepsilon {
+				3 get exch 3 get eqepsilon
+			} {pop pop false} ifelse
+		}{pop pop false} ifelse
+	} {pop pop false} ifelse
+} bind def
+/FrameCmpColorsRGB { 
+	2 copy 4 get exch 0 get eqepsilon {
+		2 copy 5 get exch 1 get eqepsilon {
+			6 get exch 2 get eqepsilon
+		}{pop pop false} ifelse
+	} {pop pop false} ifelse
+} bind def
+/RGBtoCMYK { 
+	1 exch sub 
+	3 1 roll 
+	1 exch sub 
+	3 1 roll 
+	1 exch sub 
+	3 1 roll 
+	3 copy 
+	2 copy 
+	le { pop } { exch pop } ifelse 
+	2 copy 
+	le { pop } { exch pop } ifelse 
+	dup dup dup 
+	6 1 roll 
+	4 1 roll 
+	7 1 roll 
+	sub 
+	6 1 roll 
+	sub 
+	5 1 roll 
+	sub 
+	4 1 roll 
+} bind def
+/CMYKtoRGB { 
+	dup dup 4 -1 roll add 						  
+	5 1 roll 3 -1 roll add 						  
+	4 1 roll add 								  
+	1 exch sub dup 0 lt {pop 0} if 3 1 roll 	  
+	1 exch sub dup 0 lt {pop 0} if exch 	      
+	1 exch sub dup 0 lt {pop 0} if exch	  		  
+} bind def
+/FrameSepInit {
+	1.0 RealSetgray
+} bind def
+/FrameSetSepColor { 
+	/FrameSepBlue exch def
+	/FrameSepGreen exch def
+	/FrameSepRed exch def
+	/FrameSepBlack exch def
+	/FrameSepYellow exch def
+	/FrameSepMagenta exch def
+	/FrameSepCyan exch def
+	/FrameSepIs FMcustom def
+	setCurrentScreen	
+} bind def
+/FrameSetCyan {
+	/FrameSepBlue 1.0 def
+	/FrameSepGreen 1.0 def
+	/FrameSepRed 0.0 def
+	/FrameSepBlack 0.0 def
+	/FrameSepYellow 0.0 def
+	/FrameSepMagenta 0.0 def
+	/FrameSepCyan 1.0 def
+	/FrameSepIs FMcyan def
+	setCurrentScreen	
+} bind def
+ 
+/FrameSetMagenta {
+	/FrameSepBlue 1.0 def
+	/FrameSepGreen 0.0 def
+	/FrameSepRed 1.0 def
+	/FrameSepBlack 0.0 def
+	/FrameSepYellow 0.0 def
+	/FrameSepMagenta 1.0 def
+	/FrameSepCyan 0.0 def
+	/FrameSepIs FMmagenta def
+	setCurrentScreen
+} bind def
+ 
+/FrameSetYellow {
+	/FrameSepBlue 0.0 def
+	/FrameSepGreen 1.0 def
+	/FrameSepRed 1.0 def
+	/FrameSepBlack 0.0 def
+	/FrameSepYellow 1.0 def
+	/FrameSepMagenta 0.0 def
+	/FrameSepCyan 0.0 def
+	/FrameSepIs FMyellow def
+	setCurrentScreen
+} bind def
+ 
+/FrameSetBlack {
+	/FrameSepBlue 0.0 def
+	/FrameSepGreen 0.0 def
+	/FrameSepRed 0.0 def
+	/FrameSepBlack 1.0 def
+	/FrameSepYellow 0.0 def
+	/FrameSepMagenta 0.0 def
+	/FrameSepCyan 0.0 def
+	/FrameSepIs FMblack def
+	setCurrentScreen
+} bind def
+ 
+/FrameNoSep { 
+	/FrameSepIs FMnone def
+	setCurrentScreen
+} bind def
+/FrameSetSepColors { 
+	FrameDict begin
+	[ exch 1 add 1 roll ]
+	/FrameSepColors  
+	exch def end
+	} bind def
+/FrameColorInSepListCMYK { 
+	FrameSepColors {  
+       		exch dup 3 -1 roll 
+       		FrameCmpColorsCMYK 
+       		{ pop true exit } if
+    	} forall 
+	dup true ne {pop false} if
+	} bind def
+/FrameColorInSepListRGB { 
+	FrameSepColors {  
+       		exch dup 3 -1 roll 
+       		FrameCmpColorsRGB 
+       		{ pop true exit } if
+    	} forall 
+	dup true ne {pop false} if
+	} bind def
+/RealSetgray /setgray load def
+/RealSetrgbcolor /setrgbcolor load def
+/RealSethsbcolor /sethsbcolor load def
+end 
+/setgray { 
+	FrameDict begin
+	FrameSepIs FMnone eq
+		{ RealSetgray } 
+		{ 
+		FrameSepIs FMblack eq 
+			{ RealSetgray } 
+			{ FrameSepIs FMcustom eq 
+			  FrameSepRed 0 eq and
+			  FrameSepGreen 0 eq and
+			  FrameSepBlue 0 eq and {
+			  	RealSetgray
+			  } {
+				1 RealSetgray pop 
+			  } ifelse
+			} ifelse
+		} ifelse
+	end
+} bind def
+/setrgbcolor { 
+	FrameDict begin
+	FrameSepIs FMnone eq
+	{  RealSetrgbcolor }
+	{
+		3 copy [ 4 1 roll ] 
+		FrameColorInSepListRGB
+		{
+				FrameSepBlue eq exch 
+			 	FrameSepGreen eq and exch 
+			 	FrameSepRed eq and
+			 	{ 0 } { 1 } ifelse
+		}
+		{
+			FMPColor {
+				RealSetrgbcolor
+				currentcmykcolor
+			} {
+				RGBtoCMYK
+			} ifelse
+			FrameSepIs FMblack eq
+			{1.0 exch sub 4 1 roll pop pop pop} {
+			FrameSepIs FMyellow eq
+			{pop 1.0 exch sub 3 1 roll pop pop} {
+			FrameSepIs FMmagenta eq
+			{pop pop 1.0 exch sub exch pop } {
+			FrameSepIs FMcyan eq
+			{pop pop pop 1.0 exch sub } 
+			{pop pop pop pop 1} ifelse } ifelse } ifelse } ifelse 
+		} ifelse
+		RealSetgray
+	} 
+	ifelse
+	end
+} bind def
+/sethsbcolor {
+	FrameDict begin
+	FrameSepIs FMnone eq 
+	{ RealSethsbcolor } 
+	{
+		RealSethsbcolor 
+		currentrgbcolor  
+		setrgbcolor 
+	} 
+	ifelse
+	end
+} bind def
+FrameDict begin
+/setcmykcolor where {
+	pop /RealSetcmykcolor /setcmykcolor load def
+} {
+	/RealSetcmykcolor {
+		4 1 roll
+		3 { 3 index add 0 max 1 min 1 exch sub 3 1 roll} repeat 
+		RealSetrgbcolor pop
+	} bind def
+} ifelse
+userdict /setcmykcolor { 
+		FrameDict begin
+		FrameSepIs FMnone eq
+		{ RealSetcmykcolor } 
+		{
+			4 copy [ 5 1 roll ]
+			FrameColorInSepListCMYK
+			{
+				FrameSepBlack eq exch 
+				FrameSepYellow eq and exch 
+				FrameSepMagenta eq and exch 
+				FrameSepCyan eq and 
+				{ 0 } { 1 } ifelse
+			}
+			{
+				FrameSepIs FMblack eq
+				{1.0 exch sub 4 1 roll pop pop pop} {
+				FrameSepIs FMyellow eq
+				{pop 1.0 exch sub 3 1 roll pop pop} {
+				FrameSepIs FMmagenta eq
+				{pop pop 1.0 exch sub exch pop } {
+				FrameSepIs FMcyan eq
+				{pop pop pop 1.0 exch sub } 
+				{pop pop pop pop 1} ifelse } ifelse } ifelse } ifelse 
+			} ifelse
+			RealSetgray
+		}
+		ifelse
+		end
+	} bind put
+fMLevel1 { 
+	
+	
+	
+	/patScreenDict 7 dict dup begin
+		<0f1e3c78f0e1c387> [ 45  { pop } {exch pop} 		.5   2 sqrt] FmBD
+		<0f87c3e1f0783c1e> [ 135 { pop } {exch pop}			.5   2 sqrt] FmBD
+		<cccccccccccccccc> [ 0   { pop } dup				.5   2	   ] FmBD
+		<ffff0000ffff0000> [ 90  { pop } dup				.5   2	   ] FmBD
+		<8142241818244281> [ 45  { 2 copy lt {exch} if pop}	dup .75  2 sqrt] FmBD
+		<03060c183060c081> [ 45  { pop } {exch pop}			.875 2 sqrt] FmBD
+		<8040201008040201> [ 135 { pop } {exch pop}			.875 2 sqrt] FmBD
+	end def
+} { 
+	
+	/patProcDict 5 dict dup begin
+		<0f1e3c78f0e1c387> { 3 setlinewidth -1 -1 moveto 9 9 lineto stroke 
+											4 -4 moveto 12 4 lineto stroke
+											-4 4 moveto 4 12 lineto stroke} bind def
+		<0f87c3e1f0783c1e> { 3 setlinewidth -1 9 moveto 9 -1 lineto stroke 
+											-4 4 moveto 4 -4 lineto stroke
+											4 12 moveto 12 4 lineto stroke} bind def
+		<8142241818244281> { 1 setlinewidth -1 9 moveto 9 -1 lineto stroke
+											-1 -1 moveto 9 9 lineto stroke } bind def
+		<03060c183060c081> { 1 setlinewidth -1 -1 moveto 9 9 lineto stroke 
+											4 -4 moveto 12 4 lineto stroke
+											-4 4 moveto 4 12 lineto stroke} bind def
+		<8040201008040201> { 1 setlinewidth -1 9 moveto 9 -1 lineto stroke 
+											-4 4 moveto 4 -4 lineto stroke
+											4 12 moveto 12 4 lineto stroke} bind def
+	end def
+	/patDict 15 dict dup begin
+		/PatternType 1 def		
+		/PaintType 2 def		
+		/TilingType 3 def		
+		/BBox [ 0 0 8 8 ] def 	
+		/XStep 8 def			
+		/YStep 8 def			
+		/PaintProc {
+			begin
+			patProcDict bstring known {
+				patProcDict bstring get exec
+			} {
+				8 8 true [1 0 0 -1 0 8] bstring imagemask
+			} ifelse
+			end
+		} bind def
+	end def
+} ifelse
+/combineColor {
+    FrameSepIs FMnone eq
+	{
+		graymode fMLevel1 or not {
+			
+			[/Pattern [/DeviceCMYK]] setcolorspace
+			FrameCurColors 0 4 getinterval aload pop FrameCurPat setcolor
+		} {
+			FrameCurColors 3 get 1.0 ge {
+				FrameCurGray RealSetgray
+			} {
+				fMAcrobat not FMPColor graymode and and {
+					0 1 3 { 
+						FrameCurColors exch get
+						1 FrameCurGray sub mul
+					} for
+					RealSetcmykcolor
+				} {
+					4 1 6 {
+						FrameCurColors exch get
+						graymode {
+							1 exch sub 1 FrameCurGray sub mul 1 exch sub
+						} {
+							1.0 lt {FrameCurGray} {1} ifelse
+						} ifelse
+					} for
+					RealSetrgbcolor
+				} ifelse
+			} ifelse
+		} ifelse
+	} { 
+		FrameCurColors 0 4 getinterval aload
+		FrameColorInSepListCMYK {
+			FrameSepBlack eq exch 
+			FrameSepYellow eq and exch 
+			FrameSepMagenta eq and exch 
+			FrameSepCyan eq and
+			FrameSepIs FMcustom eq and
+			{ FrameCurGray } { 1 } ifelse
+		} {
+			FrameSepIs FMblack eq
+			{FrameCurGray 1.0 exch sub mul 1.0 exch sub 4 1 roll pop pop pop} {
+			FrameSepIs FMyellow eq
+			{pop FrameCurGray 1.0 exch sub mul 1.0 exch sub 3 1 roll pop pop} {
+			FrameSepIs FMmagenta eq
+			{pop pop FrameCurGray 1.0 exch sub mul 1.0 exch sub exch pop } {
+			FrameSepIs FMcyan eq
+			{pop pop pop FrameCurGray 1.0 exch sub mul 1.0 exch sub } 
+			{pop pop pop pop 1} ifelse } ifelse } ifelse } ifelse 
+		} ifelse
+		graymode fMLevel1 or not {
+			
+			[/Pattern [/DeviceGray]] setcolorspace
+			FrameCurPat setcolor
+		} { 
+			graymode not fMLevel1 and {
+				
+				dup 1 lt {pop FrameCurGray} if
+			} if
+			RealSetgray
+		} ifelse
+	} ifelse
+} bind def
+/savematrix {
+	orgmatrix currentmatrix pop
+	} bind def
+/restorematrix {
+	orgmatrix setmatrix
+	} bind def
+/fMDefaultMatrix matrix defaultmatrix def
+/fMatrix2 matrix def
+/dpi    72 0 fMDefaultMatrix dtransform
+    dup mul exch   dup mul add   sqrt def
+	
+/freq dpi dup 72 div round dup 0 eq {pop 1} if 8 mul div def
+/sangle 1 0 fMDefaultMatrix dtransform exch atan def
+	sangle fMatrix2 rotate 
+	fMDefaultMatrix fMatrix2 concatmatrix 
+	dup 0 get /sflipx exch def
+	    3 get /sflipy exch def
+/screenIndex {
+	0 1 dpiranges length 1 sub { dup dpiranges exch get 1 sub dpi le {exit} {pop} ifelse } for
+} bind def
+/getCyanScreen {
+	FMUseHighFrequencyScreens { CHighAngles CMHighFreqs} {CLowAngles CMLowFreqs} ifelse
+		screenIndex dup 3 1 roll get 3 1 roll get /FMSpotFunction load
+} bind def
+/getMagentaScreen {
+	FMUseHighFrequencyScreens { MHighAngles CMHighFreqs } {MLowAngles CMLowFreqs} ifelse
+		screenIndex dup 3 1 roll get 3 1 roll get /FMSpotFunction load
+} bind def
+/getYellowScreen {
+	FMUseHighFrequencyScreens { YHighTDot YHighFreqs} { YLowTDot YLowFreqs } ifelse
+		screenIndex dup 3 1 roll get 3 1 roll get { 3 div
+			{2 { 1 add 2 div 3 mul dup floor sub 2 mul 1 sub exch} repeat
+			FMSpotFunction } } {/FMSpotFunction load } ifelse
+			0.0 exch
+} bind def
+/getBlackScreen  {
+	FMUseHighFrequencyScreens { KHighFreqs } { KLowFreqs } ifelse
+		screenIndex get 45.0 /FMSpotFunction load 
+} bind def
+/getSpotScreen {
+	getBlackScreen
+} bind def
+/getCompositeScreen {
+	getBlackScreen
+} bind def
+/FMSetScreen 
+	fMLevel1 { /setscreen load 
+	}{ {
+		8 dict begin
+		/HalftoneType 1 def
+		/SpotFunction exch def
+		/Angle exch def
+		/Frequency exch def
+		/AccurateScreens FMUseAcccurateScreens def
+		currentdict end sethalftone
+	} bind } ifelse
+def
+/setDefaultScreen {
+	FMPColor {
+		orgrxfer cvx orggxfer cvx orgbxfer cvx orgxfer cvx setcolortransfer
+	}
+	{
+		orgxfer cvx settransfer
+	} ifelse
+	orgfreq organgle orgproc cvx setscreen
+} bind def
+/setCurrentScreen {
+	FrameSepIs FMnone eq {
+		FMUseDefaultNoSeparationScreen {
+			setDefaultScreen
+		} {
+			getCompositeScreen FMSetScreen
+		} ifelse
+	} {
+		FrameSepIs FMcustom eq {
+			FMUseDefaultSpotSeparationScreen {
+				setDefaultScreen
+			} {
+				getSpotScreen FMSetScreen
+			} ifelse
+		} {
+			FMUseDefaultProcessSeparationScreen {
+				setDefaultScreen
+			} {
+				FrameSepIs FMcyan eq {
+					getCyanScreen FMSetScreen
+				} {
+					FrameSepIs FMmagenta eq {
+						getMagentaScreen FMSetScreen
+					} {
+						FrameSepIs FMyellow eq {
+							getYellowScreen FMSetScreen
+						} {
+							getBlackScreen FMSetScreen
+						} ifelse
+					} ifelse
+				} ifelse
+			} ifelse
+		} ifelse
+	} ifelse 
+} bind def
+end
+	
+/FMDOCUMENT { 
+	array /FMfonts exch def 
+	/#copies exch def
+	FrameDict begin
+	0 ne /manualfeed exch def
+	/paperheight exch def
+	/paperwidth exch def
+	0 ne /fMNegative exch def 
+	0 ne /edown exch def 
+	/yscale exch def
+	/xscale exch def
+	fMLevel1 {
+		manualfeed {setmanualfeed} if
+		/FMdicttop countdictstack 1 add def 
+		/FMoptop count def 
+		setpapername 
+		manualfeed {true} {papersize} ifelse 
+		{manualpapersize} {false} ifelse 
+		{desperatepapersize} {false} ifelse 
+		{papersizefailure} if
+		count -1 FMoptop {pop pop} for
+		countdictstack -1 FMdicttop {pop end} for 
+		}
+		{2 dict
+		 dup /PageSize [paperwidth paperheight] put
+		 manualfeed {dup /ManualFeed manualfeed put} if
+		 {setpagedevice} stopped {papersizefailure} if
+		}
+	ifelse 
+	
+	FMPColor {
+		currentcolorscreen
+			cvlit /orgproc exch def
+				  /organgle exch def 
+				  /orgfreq exch def
+			cvlit /orgbproc exch def
+				  /orgbangle exch def 
+				  /orgbfreq exch def
+			cvlit /orggproc exch def
+				  /orggangle exch def 
+				  /orggfreq exch def
+			cvlit /orgrproc exch def
+				  /orgrangle exch def 
+				  /orgrfreq exch def
+			currentcolortransfer 
+			fMNegative {
+				1 1 4 { 
+					pop { 1 exch sub } fmConcatProcs 4 1 roll
+				} for
+				4 copy
+				setcolortransfer
+			} if
+			cvlit /orgxfer exch def
+			cvlit /orgbxfer exch def
+			cvlit /orggxfer exch def
+			cvlit /orgrxfer exch def
+	} {
+		currentscreen 
+			cvlit /orgproc exch def
+				  /organgle exch def 
+				  /orgfreq exch def
+				  
+		currenttransfer 
+		fMNegative {
+			{ 1 exch sub } fmConcatProcs
+			dup settransfer
+		} if 
+		cvlit /orgxfer exch def
+	} ifelse
+	end 
+} def 
+/FMBEGINPAGE { 
+	FrameDict begin 
+	/pagesave save def
+	3.86 setmiterlimit
+	/landscape exch 0 ne def
+	landscape { 
+		90 rotate 0 exch dup /pwid exch def neg translate pop 
+	}{
+		pop /pwid exch def
+	} ifelse
+	edown { [-1 0 0 1 pwid 0] concat } if
+	0 0 moveto paperwidth 0 lineto paperwidth paperheight lineto 
+	0 paperheight lineto 0 0 lineto 1 setgray fill
+	xscale yscale scale
+	/orgmatrix matrix def
+	gsave 
+} def 
+/FMENDPAGE {
+	grestore 
+	pagesave restore
+	end 
+	showpage
+	} def 
+/FMFONTDEFINE { 
+	FrameDict begin
+	findfont 
+	ReEncode 
+	1 index exch 
+	definefont 
+	FMfonts 3 1 roll 
+	put
+	end 
+	} def 
+/FMFILLS {
+	FrameDict begin dup
+	array /fillvals exch def
+	dict /patCache exch def
+	end 
+	} def 
+/FMFILL {
+	FrameDict begin
+	 fillvals 3 1 roll put
+	end 
+	} def 
+/FMNORMALIZEGRAPHICS { 
+	newpath
+	1 setlinewidth
+	0 setlinecap
+	0 0 0 sethsbcolor
+	0 setgray 
+	} bind def
+/FMBEGINEPSF { 
+	end 
+	/FMEPSF save def 
+	/showpage {} def 
+% See Adobe's "PostScript Language Reference Manual, 2nd Edition", page 714.
+% "...the following operators MUST NOT be used in an EPS file:" (emphasis ours)
+	/banddevice {(banddevice) FMBADEPSF} def
+	/clear {(clear) FMBADEPSF} def
+	/cleardictstack {(cleardictstack) FMBADEPSF} def 
+	/copypage {(copypage) FMBADEPSF} def
+	/erasepage {(erasepage) FMBADEPSF} def
+	/exitserver {(exitserver) FMBADEPSF} def
+	/framedevice {(framedevice) FMBADEPSF} def
+	/grestoreall {(grestoreall) FMBADEPSF} def
+	/initclip {(initclip) FMBADEPSF} def
+	/initgraphics {(initgraphics) FMBADEPSF} def
+	/quit {(quit) FMBADEPSF} def
+	/renderbands {(renderbands) FMBADEPSF} def
+	/setglobal {(setglobal) FMBADEPSF} def
+	/setpagedevice {(setpagedevice) FMBADEPSF} def
+	/setshared {(setshared) FMBADEPSF} def
+	/startjob {(startjob) FMBADEPSF} def
+	/lettertray {(lettertray) FMBADEPSF} def
+	/letter {(letter) FMBADEPSF} def
+	/lettersmall {(lettersmall) FMBADEPSF} def
+	/11x17tray {(11x17tray) FMBADEPSF} def
+	/11x17 {(11x17) FMBADEPSF} def
+	/ledgertray {(ledgertray) FMBADEPSF} def
+	/ledger {(ledger) FMBADEPSF} def
+	/legaltray {(legaltray) FMBADEPSF} def
+	/legal {(legal) FMBADEPSF} def
+	/statementtray {(statementtray) FMBADEPSF} def
+	/statement {(statement) FMBADEPSF} def
+	/executivetray {(executivetray) FMBADEPSF} def
+	/executive {(executive) FMBADEPSF} def
+	/a3tray {(a3tray) FMBADEPSF} def
+	/a3 {(a3) FMBADEPSF} def
+	/a4tray {(a4tray) FMBADEPSF} def
+	/a4 {(a4) FMBADEPSF} def
+	/a4small {(a4small) FMBADEPSF} def
+	/b4tray {(b4tray) FMBADEPSF} def
+	/b4 {(b4) FMBADEPSF} def
+	/b5tray {(b5tray) FMBADEPSF} def
+	/b5 {(b5) FMBADEPSF} def
+	FMNORMALIZEGRAPHICS 
+	[/fy /fx /fh /fw /ury /urx /lly /llx] {exch def} forall 
+	fx fw 2 div add fy fh 2 div add  translate
+	rotate
+	fw 2 div neg fh 2 div neg translate
+	fw urx llx sub div fh ury lly sub div scale 
+	llx neg lly neg translate 
+	/FMdicttop countdictstack 1 add def 
+	/FMoptop count def 
+	} bind def
+/FMENDEPSF {
+	count -1 FMoptop {pop pop} for 
+	countdictstack -1 FMdicttop {pop end} for 
+	FMEPSF restore
+	FrameDict begin 
+	} bind def
+FrameDict begin 
+/setmanualfeed {
+%%BeginFeature *ManualFeed True
+	 statusdict /manualfeed true put
+%%EndFeature
+	} bind def
+/max {2 copy lt {exch} if pop} bind def
+/min {2 copy gt {exch} if pop} bind def
+/inch {72 mul} def
+/pagedimen { 
+	paperheight sub abs 16 lt exch 
+	paperwidth sub abs 16 lt and
+	{/papername exch def} {pop} ifelse
+	} bind def
+/setpapername { 
+	/papersizedict 14 dict def 
+	papersizedict begin
+	/papername /unknown def 
+		/Letter 8.5 inch 11.0 inch pagedimen
+		/LetterSmall 7.68 inch 10.16 inch pagedimen
+		/Tabloid 11.0 inch 17.0 inch pagedimen
+		/Ledger 17.0 inch 11.0 inch pagedimen
+		/Legal 8.5 inch 14.0 inch pagedimen
+		/Statement 5.5 inch 8.5 inch pagedimen
+		/Executive 7.5 inch 10.0 inch pagedimen
+		/A3 11.69 inch 16.5 inch pagedimen
+		/A4 8.26 inch 11.69 inch pagedimen
+		/A4Small 7.47 inch 10.85 inch pagedimen
+		/B4 10.125 inch 14.33 inch pagedimen
+		/B5 7.16 inch 10.125 inch pagedimen
+	end
+	} bind def
+/papersize {
+	papersizedict begin
+		/Letter {lettertray letter} def
+		/LetterSmall {lettertray lettersmall} def
+		/Tabloid {11x17tray 11x17} def
+		/Ledger {ledgertray ledger} def
+		/Legal {legaltray legal} def
+		/Statement {statementtray statement} def
+		/Executive {executivetray executive} def
+		/A3 {a3tray a3} def
+		/A4 {a4tray a4} def
+		/A4Small {a4tray a4small} def
+		/B4 {b4tray b4} def
+		/B5 {b5tray b5} def
+		/unknown {unknown} def
+	papersizedict dup papername known {papername} {/unknown} ifelse get
+	end
+	statusdict begin stopped end 
+	} bind def
+/manualpapersize {
+	papersizedict begin
+		/Letter {letter} def
+		/LetterSmall {lettersmall} def
+		/Tabloid {11x17} def
+		/Ledger {ledger} def
+		/Legal {legal} def
+		/Statement {statement} def
+		/Executive {executive} def
+		/A3 {a3} def
+		/A4 {a4} def
+		/A4Small {a4small} def
+		/B4 {b4} def
+		/B5 {b5} def
+		/unknown {unknown} def
+	papersizedict dup papername known {papername} {/unknown} ifelse get
+	end
+	stopped 
+	} bind def
+/desperatepapersize {
+	statusdict /setpageparams known
+		{
+		paperwidth paperheight 0 1 
+		statusdict begin
+		{setpageparams} stopped 
+		end
+		} {true} ifelse 
+	} bind def
+/papersizefailure {
+	FMAllowPaperSizeMismatch not
+		{
+(The requested paper size is not available in any currently-installed tray)
+(Edit the PS file to "FMAllowPaperSizeMismatch true" to use default tray)
+		 FMFAILURE } if
+	} def
+/DiacriticEncoding [
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/.notdef /.notdef /.notdef /.notdef /space /exclam /quotedbl
+/numbersign /dollar /percent /ampersand /quotesingle /parenleft
+/parenright /asterisk /plus /comma /hyphen /period /slash /zero /one
+/two /three /four /five /six /seven /eight /nine /colon /semicolon
+/less /equal /greater /question /at /A /B /C /D /E /F /G /H /I /J /K
+/L /M /N /O /P /Q /R /S /T /U /V /W /X /Y /Z /bracketleft /backslash
+/bracketright /asciicircum /underscore /grave /a /b /c /d /e /f /g /h
+/i /j /k /l /m /n /o /p /q /r /s /t /u /v /w /x /y /z /braceleft /bar
+/braceright /asciitilde /.notdef /Adieresis /Aring /Ccedilla /Eacute
+/Ntilde /Odieresis /Udieresis /aacute /agrave /acircumflex /adieresis
+/atilde /aring /ccedilla /eacute /egrave /ecircumflex /edieresis
+/iacute /igrave /icircumflex /idieresis /ntilde /oacute /ograve
+/ocircumflex /odieresis /otilde /uacute /ugrave /ucircumflex
+/udieresis /dagger /.notdef /cent /sterling /section /bullet
+/paragraph /germandbls /registered /copyright /trademark /acute
+/dieresis /.notdef /AE /Oslash /.notdef /.notdef /.notdef /.notdef
+/yen /.notdef /.notdef /.notdef /.notdef /.notdef /.notdef
+/ordfeminine /ordmasculine /.notdef /ae /oslash /questiondown
+/exclamdown /logicalnot /.notdef /florin /.notdef /.notdef
+/guillemotleft /guillemotright /ellipsis /.notdef /Agrave /Atilde
+/Otilde /OE /oe /endash /emdash /quotedblleft /quotedblright
+/quoteleft /quoteright /.notdef /.notdef /ydieresis /Ydieresis
+/fraction /currency /guilsinglleft /guilsinglright /fi /fl /daggerdbl
+/periodcentered /quotesinglbase /quotedblbase /perthousand
+/Acircumflex /Ecircumflex /Aacute /Edieresis /Egrave /Iacute
+/Icircumflex /Idieresis /Igrave /Oacute /Ocircumflex /.notdef /Ograve
+/Uacute /Ucircumflex /Ugrave /dotlessi /circumflex /tilde /macron
+/breve /dotaccent /ring /cedilla /hungarumlaut /ogonek /caron
+] def
+/ReEncode { 
+	dup 
+	length 
+	dict begin 
+	{
+	1 index /FID ne 
+		{def} 
+		{pop pop} ifelse 
+	} forall 
+	0 eq {/Encoding DiacriticEncoding def} if 
+	currentdict 
+	end 
+	} bind def
+FMPColor 
+	
+	{
+	/BEGINBITMAPCOLOR { 
+		BITMAPCOLOR} def
+	/BEGINBITMAPCOLORc { 
+		BITMAPCOLORc} def
+	/BEGINBITMAPTRUECOLOR { 
+		BITMAPTRUECOLOR } def
+	/BEGINBITMAPTRUECOLORc { 
+		BITMAPTRUECOLORc } def
+	/BEGINBITMAPCMYK { 
+		BITMAPCMYK } def
+	/BEGINBITMAPCMYKc { 
+		BITMAPCMYKc } def
+	}
+	
+	{
+	/BEGINBITMAPCOLOR { 
+		BITMAPGRAY} def
+	/BEGINBITMAPCOLORc { 
+		BITMAPGRAYc} def
+	/BEGINBITMAPTRUECOLOR { 
+		BITMAPTRUEGRAY } def
+	/BEGINBITMAPTRUECOLORc { 
+		BITMAPTRUEGRAYc } def
+	/BEGINBITMAPCMYK { 
+		BITMAPCMYKGRAY } def
+	/BEGINBITMAPCMYKc { 
+		BITMAPCMYKGRAYc } def
+	}
+ifelse
+/K { 
+	FMPrintAllColorsAsBlack {
+		dup 1 eq 2 index 1 eq and 3 index 1 eq and not
+			{7 {pop} repeat 0 0 0 1 0 0 0} if
+	} if 
+	FrameCurColors astore 
+	pop combineColor
+} bind def
+/graymode true def
+fMLevel1 {
+	/fmGetFlip {
+		fMatrix2 exch get mul 0 lt { -1 } { 1 } ifelse
+	} FmBD
+} if
+/setPatternMode {
+	fMLevel1 {
+		2 index patScreenDict exch known {
+			pop pop
+			patScreenDict exch get aload pop 
+			freq 								
+			mul									
+			5 2 roll							
+			fMatrix2 currentmatrix 1 get 0 ne {
+				3 -1 roll 90 add 3 1 roll 		
+				sflipx 1 fmGetFlip sflipy 2 fmGetFlip neg mul
+			} {  								
+				sflipx 0 fmGetFlip sflipy 3 fmGetFlip mul 
+			} ifelse
+			0 lt {exch pop} {pop} ifelse 		
+			fMNegative { 
+				{neg} fmConcatProcs 			
+			} if
+			bind
+			
+			
+			
+			systemdict /setscreen get exec		
+			/FrameCurGray exch def
+		} {
+			/bwidth  exch def
+			/bpside  exch def
+			/bstring exch def
+			/onbits 0 def  /offbits 0 def
+			freq sangle landscape {90 add} if 
+				{/ypoint exch def
+				 /xpoint exch def
+				 /xindex xpoint 1 add 2 div bpside mul cvi def
+				 /yindex ypoint 1 add 2 div bpside mul cvi def
+				 bstring yindex bwidth mul xindex 8 idiv add get
+				 1 7 xindex 8 mod sub bitshift and 0 ne fMNegative {not} if
+				 {/onbits  onbits  1 add def 1}
+				 {/offbits offbits 1 add def 0}
+				 ifelse
+				}
+				setscreen
+			offbits offbits onbits add div fMNegative {1.0 exch sub} if
+			/FrameCurGray exch def
+		} ifelse
+	} { 
+		pop pop
+		dup patCache exch known {
+			patCache exch get
+		} { 
+			dup
+			patDict /bstring 3 -1 roll put
+			patDict 
+			9 PatFreq screenIndex get div dup matrix scale
+			makepattern
+			dup 
+			patCache 4 -1 roll 3 -1 roll put
+		} ifelse
+		/FrameCurGray 0 def
+		/FrameCurPat exch def
+	} ifelse
+	/graymode false def
+	combineColor
+} bind def
+/setGrayScaleMode {
+	graymode not {
+		/graymode true def
+		fMLevel1 {
+			setCurrentScreen
+		} if
+	} if
+	/FrameCurGray exch def
+	combineColor
+} bind def
+/normalize {
+	transform round exch round exch itransform
+	} bind def
+/dnormalize {
+	dtransform round exch round exch idtransform
+	} bind def
+/lnormalize { 
+	0 dtransform exch cvi 2 idiv 2 mul 1 add exch idtransform pop
+	} bind def
+/H { 
+	lnormalize setlinewidth
+	} bind def
+/Z {
+	setlinecap
+	} bind def
+	
+/PFill {
+	graymode fMLevel1 or not {
+		gsave 1 setgray eofill grestore
+	} if
+} bind def
+/PStroke {
+	graymode fMLevel1 or not {
+		gsave 1 setgray stroke grestore
+	} if
+	stroke
+} bind def
+/X { 
+	fillvals exch get
+	dup type /stringtype eq
+	{8 1 setPatternMode} 
+	{setGrayScaleMode}
+	ifelse
+	} bind def
+/V { 
+	PFill gsave eofill grestore
+	} bind def
+/Vclip {
+	clip
+	} bind def
+/Vstrk {
+	currentlinewidth exch setlinewidth PStroke setlinewidth
+	} bind def
+/N { 
+	PStroke
+	} bind def
+/Nclip {
+	strokepath clip newpath
+	} bind def
+/Nstrk {
+	currentlinewidth exch setlinewidth PStroke setlinewidth
+	} bind def
+/M {newpath moveto} bind def
+/E {lineto} bind def
+/D {curveto} bind def
+/O {closepath} bind def
+/L { 
+ 	/n exch def
+	newpath
+	normalize
+	moveto 
+	2 1 n {pop normalize lineto} for
+	} bind def
+/Y { 
+	L 
+	closepath
+	} bind def
+/R { 
+	/y2 exch def
+	/x2 exch def
+	/y1 exch def
+	/x1 exch def
+	x1 y1
+	x2 y1
+	x2 y2
+	x1 y2
+	4 Y 
+	} bind def
+/rarc 
+	{rad 
+	 arcto
+	} bind def
+/RR { 
+	/rad exch def
+	normalize
+	/y2 exch def
+	/x2 exch def
+	normalize
+	/y1 exch def
+	/x1 exch def
+	mark
+	newpath
+	{
+	x1 y1 rad add moveto
+	x1 y2 x2 y2 rarc
+	x2 y2 x2 y1 rarc
+	x2 y1 x1 y1 rarc
+	x1 y1 x1 y2 rarc
+	closepath
+	} stopped {x1 y1 x2 y2 R} if 
+	cleartomark
+	} bind def
+/RRR { 
+	/rad exch def
+	normalize /y4 exch def /x4 exch def
+	normalize /y3 exch def /x3 exch def
+	normalize /y2 exch def /x2 exch def
+	normalize /y1 exch def /x1 exch def
+	newpath
+	normalize moveto 
+	mark
+	{
+	x2 y2 x3 y3 rarc
+	x3 y3 x4 y4 rarc
+	x4 y4 x1 y1 rarc
+	x1 y1 x2 y2 rarc
+	closepath
+	} stopped
+	 {x1 y1 x2 y2 x3 y3 x4 y4 newpath moveto lineto lineto lineto closepath} if
+	cleartomark
+	} bind def
+/C { 
+	grestore
+	gsave
+	R 
+	clip
+	setCurrentScreen
+} bind def
+/CP { 
+	grestore
+	gsave
+	Y 
+	clip
+	setCurrentScreen
+} bind def
+/F { 
+	FMfonts exch get
+	FMpointsize scalefont
+	setfont
+	} bind def
+/Q { 
+	/FMpointsize exch def
+	F 
+	} bind def
+/T { 
+	moveto show
+	} bind def
+/RF { 
+	rotate
+	0 ne {-1 1 scale} if
+	} bind def
+/TF { 
+	gsave
+	moveto 
+	RF
+	show
+	grestore
+	} bind def
+/P { 
+	moveto
+	0 32 3 2 roll widthshow
+	} bind def
+/PF { 
+	gsave
+	moveto 
+	RF
+	0 32 3 2 roll widthshow
+	grestore
+	} bind def
+/S { 
+	moveto
+	0 exch ashow
+	} bind def
+/SF { 
+	gsave
+	moveto
+	RF
+	0 exch ashow
+	grestore
+	} bind def
+/B { 
+	moveto
+	0 32 4 2 roll 0 exch awidthshow
+	} bind def
+/BF { 
+	gsave
+	moveto
+	RF
+	0 32 4 2 roll 0 exch awidthshow
+	grestore
+	} bind def
+/G { 
+	gsave
+	newpath
+	normalize translate 0.0 0.0 moveto 
+	dnormalize scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	closepath 
+	PFill fill
+	grestore
+	} bind def
+/Gstrk {
+	savematrix
+    newpath
+    2 index 2 div add exch 3 index 2 div sub exch 
+    normalize 2 index 2 div sub exch 3 index 2 div add exch 
+    translate
+    scale 
+    0.0 0.0 1.0 5 3 roll arc 
+    restorematrix
+    currentlinewidth exch setlinewidth PStroke setlinewidth
+    } bind def
+/Gclip { 
+	newpath
+	savematrix
+	normalize translate 0.0 0.0 moveto 
+	dnormalize scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	closepath 
+	clip newpath
+	restorematrix
+	} bind def
+/GG { 
+	gsave
+	newpath
+	normalize translate 0.0 0.0 moveto 
+	rotate 
+	dnormalize scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	closepath
+	PFill
+	fill
+	grestore
+	} bind def
+/GGclip { 
+	savematrix
+	newpath
+    normalize translate 0.0 0.0 moveto 
+    rotate 
+    dnormalize scale 
+    0.0 0.0 1.0 5 3 roll arc 
+    closepath
+	clip newpath
+	restorematrix
+	} bind def
+/GGstrk { 
+	savematrix
+    newpath
+    normalize translate 0.0 0.0 moveto 
+    rotate 
+    dnormalize scale 
+    0.0 0.0 1.0 5 3 roll arc 
+    closepath 
+	restorematrix
+    currentlinewidth exch setlinewidth PStroke setlinewidth
+	} bind def
+/A { 
+	gsave
+	savematrix
+	newpath
+	2 index 2 div add exch 3 index 2 div sub exch 
+	normalize 2 index 2 div sub exch 3 index 2 div add exch 
+	translate 
+	scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	restorematrix
+	PStroke
+	grestore
+	} bind def
+/Aclip {
+	newpath
+	savematrix
+	normalize translate 0.0 0.0 moveto 
+	dnormalize scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	closepath 
+	strokepath clip newpath
+	restorematrix
+} bind def
+/Astrk {
+	Gstrk
+} bind def
+/AA { 
+	gsave
+	savematrix
+	newpath
+	
+	3 index 2 div add exch 4 index 2 div sub exch 
+	
+	normalize 3 index 2 div sub exch 4 index 2 div add exch
+	translate 
+	rotate 
+	scale 
+	0.0 0.0 1.0 5 3 roll arc 
+	restorematrix
+	PStroke
+	grestore
+	} bind def
+/AAclip {
+	savematrix
+	newpath
+    normalize translate 0.0 0.0 moveto 
+    rotate 
+    dnormalize scale 
+    0.0 0.0 1.0 5 3 roll arc 
+    closepath
+	strokepath clip newpath
+	restorematrix
+} bind def
+/AAstrk {
+	GGstrk
+} bind def
+/BEGINPRINTCODE { 
+	/FMdicttop countdictstack 1 add def 
+	/FMoptop count 7 sub def 
+	/FMsaveobject save def
+	userdict begin 
+	/showpage {} def 
+	FMNORMALIZEGRAPHICS 
+	3 index neg 3 index neg translate
+	} bind def
+/ENDPRINTCODE {
+	count -1 FMoptop {pop pop} for 
+	countdictstack -1 FMdicttop {pop end} for 
+	FMsaveobject restore 
+	} bind def
+/gn { 
+	0 
+	{	46 mul 
+		cf read pop 
+		32 sub 
+		dup 46 lt {exit} if 
+		46 sub add 
+		} loop
+	add 
+	} bind def
+/cfs { 
+	/str sl string def 
+	0 1 sl 1 sub {str exch val put} for 
+	str def 
+	} bind def
+/ic [ 
+	0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0223
+	0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0223
+	0
+	{0 hx} {1 hx} {2 hx} {3 hx} {4 hx} {5 hx} {6 hx} {7 hx} {8 hx} {9 hx}
+	{10 hx} {11 hx} {12 hx} {13 hx} {14 hx} {15 hx} {16 hx} {17 hx} {18 hx}
+	{19 hx} {gn hx} {0} {1} {2} {3} {4} {5} {6} {7} {8} {9} {10} {11} {12}
+	{13} {14} {15} {16} {17} {18} {19} {gn} {0 wh} {1 wh} {2 wh} {3 wh}
+	{4 wh} {5 wh} {6 wh} {7 wh} {8 wh} {9 wh} {10 wh} {11 wh} {12 wh}
+	{13 wh} {14 wh} {gn wh} {0 bl} {1 bl} {2 bl} {3 bl} {4 bl} {5 bl} {6 bl}
+	{7 bl} {8 bl} {9 bl} {10 bl} {11 bl} {12 bl} {13 bl} {14 bl} {gn bl}
+	{0 fl} {1 fl} {2 fl} {3 fl} {4 fl} {5 fl} {6 fl} {7 fl} {8 fl} {9 fl}
+	{10 fl} {11 fl} {12 fl} {13 fl} {14 fl} {gn fl}
+	] def
+/ms { 
+	/sl exch def 
+	/val 255 def 
+	/ws cfs 
+	/im cfs 
+	/val 0 def 
+	/bs cfs 
+	/cs cfs 
+	} bind def
+400 ms 
+/ip { 
+	is 
+	0 
+	cf cs readline pop 
+	{	ic exch get exec 
+		add 
+		} forall 
+	pop 
+	
+	} bind def
+/rip { 
+	   
+	  
+	  bis ris copy pop 
+      is
+      0
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+	  pop pop 
+	  ris gis copy pop 
+	  dup is exch 
+	  
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+	  pop pop
+	  gis bis copy pop 
+	  dup add is exch 
+	  
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+      pop 
+      
+      } bind def
+/rip4 { 
+	   
+	  
+	  kis cis copy pop 
+      is
+      0
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+	  pop pop 
+	  cis mis copy pop 
+	  dup is exch 
+	  
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+	  pop pop
+	  mis yis copy pop 
+	  dup dup add is exch 
+	  
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+	  pop pop
+	  yis kis copy pop 
+	  3 mul is exch 
+	  
+      cf cs readline pop 
+      {       ic exch get exec 
+              add 
+              } forall 
+      pop 
+      
+      } bind def
+/wh { 
+	/len exch def 
+	/pos exch def 
+	ws 0 len getinterval im pos len getinterval copy pop
+	pos len 
+	} bind def
+/bl { 
+	/len exch def 
+	/pos exch def 
+	bs 0 len getinterval im pos len getinterval copy pop
+	pos len 
+	} bind def
+/s1 1 string def
+/fl { 
+	/len exch def 
+	/pos exch def 
+	/val cf s1 readhexstring pop 0 get def
+	pos 1 pos len add 1 sub {im exch val put} for
+	pos len 
+	} bind def
+/hx { 
+	3 copy getinterval 
+	cf exch readhexstring pop pop 
+	} bind def
+/wbytes { 
+      dup dup
+      8 gt { pop 8 idiv mul }
+      { 8 eq {pop} {1 eq {7 add 8 idiv} {3 add 4 idiv} ifelse} ifelse } ifelse
+	} bind def
+/BEGINBITMAPBWc { 
+	1 {} COMMONBITMAPc
+	} bind def
+/BEGINBITMAPGRAYc { 
+	8 {} COMMONBITMAPc
+	} bind def
+/BEGINBITMAP2BITc { 
+	2 {} COMMONBITMAPc
+	} bind def
+/COMMONBITMAPc { 
+		 
+	/cvtProc exch def
+	/depth exch def
+	gsave
+	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/lb width depth wbytes def 
+	sl lb lt {lb ms} if 
+	/bitmapsave save def 
+	cvtProc                
+	/is im 0 lb getinterval def 
+	ws 0 lb getinterval is copy pop 
+	/cf currentfile def 
+	width height depth [width 0 0 height neg 0 height] 
+	{ip} image 
+	bitmapsave restore 
+	grestore
+	} bind def
+/BEGINBITMAPBW { 
+	1 {} COMMONBITMAP
+	} bind def
+/BEGINBITMAPGRAY { 
+	8 {} COMMONBITMAP
+	} bind def
+/BEGINBITMAP2BIT { 
+	2 {} COMMONBITMAP
+	} bind def
+/COMMONBITMAP { 
+	/cvtProc exch def
+	/depth exch def
+	gsave
+	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/bitmapsave save def 
+	cvtProc              
+	/is width depth wbytes string def
+	/cf currentfile def 
+	width height depth [width 0 0 height neg 0 height] 
+	{cf is readhexstring pop} image
+	bitmapsave restore 
+	grestore
+	} bind def
+/ngrayt 256 array def
+/nredt 256 array def
+/nbluet 256 array def
+/ngreent 256 array def
+fMLevel1 {
+/colorsetup {
+	currentcolortransfer
+	/gryt exch def
+	/blut exch def
+	/grnt exch def
+	/redt exch def
+	0 1 255 {
+		/indx exch def
+		/cynu 1 red indx get 255 div sub def
+		/magu 1 green indx get 255 div sub def
+		/yelu 1 blue indx get 255 div sub def
+		/kk cynu magu min yelu min def
+		/u kk currentundercolorremoval exec def
+%		/u 0 def
+		nredt indx 1 0 cynu u sub max sub redt exec put
+		ngreent indx 1 0 magu u sub max sub grnt exec put
+		nbluet indx 1 0 yelu u sub max sub blut exec put
+		ngrayt indx 1 kk currentblackgeneration exec sub gryt exec put
+	} for
+	{255 mul cvi nredt exch get}
+	{255 mul cvi ngreent exch get}
+	{255 mul cvi nbluet exch get}
+	{255 mul cvi ngrayt exch get}
+	setcolortransfer
+	{pop 0} setundercolorremoval
+	{} setblackgeneration
+	} bind def
+}
+{
+/colorSetup2 {
+	[ /Indexed /DeviceRGB 255 
+		{dup red exch get 255 div 
+		 exch dup green exch get 255 div 
+		 exch blue exch get 255 div}
+	] setcolorspace
+} bind def
+} ifelse
+/fakecolorsetup {
+	/tran 256 string def
+	0 1 255 {/indx exch def 
+		tran indx
+		red indx get 77 mul
+		green indx get 151 mul
+		blue indx get 28 mul
+		add add 256 idiv put} for
+	currenttransfer
+	{255 mul cvi tran exch get 255.0 div}
+	exch fmConcatProcs settransfer
+} bind def
+/BITMAPCOLOR { 
+	/depth 8 def
+	gsave
+	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/bitmapsave save def
+	fMLevel1 {	
+		colorsetup
+		/is width depth wbytes string def
+		/cf currentfile def 
+		width height depth [width 0 0 height neg 0 height] 
+		{cf is readhexstring pop} {is} {is} true 3 colorimage 
+	} {
+		colorSetup2
+		/is width depth wbytes string def
+		/cf currentfile def 
+		7 dict dup begin
+			/ImageType 1 def
+			/Width width def
+			/Height height def
+			/ImageMatrix [width 0 0 height neg 0 height] def
+			/DataSource {cf is readhexstring pop} bind def
+			/BitsPerComponent depth def
+			/Decode [0 255] def
+		end image	
+	} ifelse
+	bitmapsave restore 
+	grestore
+	} bind def
+/BITMAPCOLORc { 
+	/depth 8 def
+	gsave
+	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/lb width depth wbytes def 
+	sl lb lt {lb ms} if 
+	/bitmapsave save def 
+	fMLevel1 {	
+		colorsetup
+		/is im 0 lb getinterval def 
+		ws 0 lb getinterval is copy pop 
+		/cf currentfile def 
+		width height depth [width 0 0 height neg 0 height] 
+		{ip} {is} {is} true 3 colorimage
+	} {
+		colorSetup2
+		/is im 0 lb getinterval def 
+		ws 0 lb getinterval is copy pop 
+		/cf currentfile def 
+		7 dict dup begin
+			/ImageType 1 def
+			/Width width def
+			/Height height def
+			/ImageMatrix [width 0 0 height neg 0 height] def
+			/DataSource {ip} bind def
+			/BitsPerComponent depth def
+			/Decode [0 255] def
+		end image	
+	} ifelse
+	bitmapsave restore 
+	grestore
+	} bind def
+/BITMAPTRUECOLORc { 
+	/depth 24 def
+        gsave
+ 	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/lb width depth wbytes def 
+	sl lb lt {lb ms} if 
+	/bitmapsave save def 
+        
+	/is im 0 lb getinterval def	
+	/ris im 0 width getinterval def	
+	/gis im width width getinterval def	
+	/bis im width 2 mul width getinterval def 
+        
+	ws 0 lb getinterval is copy pop 
+	/cf currentfile def 
+	width height 8 [width 0 0 height neg 0 height] 
+	{width rip pop ris} {gis} {bis} true 3 colorimage
+	bitmapsave restore 
+	grestore
+	} bind def
+/BITMAPCMYKc { 
+	/depth 32 def
+        gsave
+ 	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/lb width depth wbytes def 
+	sl lb lt {lb ms} if 
+	/bitmapsave save def 
+        
+	/is im 0 lb getinterval def	
+	/cis im 0 width getinterval def	
+	/mis im width width getinterval def	
+	/yis im width 2 mul width getinterval def 
+	/kis im width 3 mul width getinterval def 
+        
+	ws 0 lb getinterval is copy pop 
+	/cf currentfile def 
+	width height 8 [width 0 0 height neg 0 height] 
+	{width rip4 pop cis} {mis} {yis} {kis} true 4 colorimage
+	bitmapsave restore 
+	grestore
+	} bind def
+/BITMAPTRUECOLOR { 
+        gsave
+		
+		3 index 2 div add exch	
+		4 index 2 div add exch	
+		translate		
+		rotate			
+		1 index 2 div neg	
+		1 index 2 div neg	
+		translate		
+		scale			
+		/height exch def /width exch def
+        /bitmapsave save def 
+        /is width string def
+        /gis width string def
+        /bis width string def
+        /cf currentfile def 
+        width height 8 [width 0 0 height neg 0 height] 
+        { cf is readhexstring pop } 
+        { cf gis readhexstring pop } 
+        { cf bis readhexstring pop } 
+        true 3 colorimage 
+        bitmapsave restore 
+        grestore
+        } bind def
+/BITMAPCMYK { 
+        gsave
+		
+		3 index 2 div add exch	
+		4 index 2 div add exch	
+		translate		
+		rotate			
+		1 index 2 div neg	
+		1 index 2 div neg	
+		translate		
+		scale			
+		/height exch def /width exch def
+        /bitmapsave save def 
+        /is width string def
+        /mis width string def
+        /yis width string def
+        /kis width string def
+        /cf currentfile def 
+        width height 8 [width 0 0 height neg 0 height] 
+        { cf is readhexstring pop } 
+        { cf mis readhexstring pop } 
+        { cf yis readhexstring pop } 
+        { cf kis readhexstring pop } 
+        true 4 colorimage 
+        bitmapsave restore 
+        grestore
+        } bind def
+/BITMAPTRUEGRAYc { 
+	/depth 24 def
+        gsave
+	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/lb width depth wbytes def 
+	sl lb lt {lb ms} if 
+        /bitmapsave save def 
+        
+	/is im 0 lb getinterval def	
+	/ris im 0 width getinterval def	
+	/gis im width width getinterval def	
+	/bis im width 2 mul width getinterval def 
+        ws 0 lb getinterval is copy pop 
+        /cf currentfile def 
+        width height 8 [width 0 0 height neg 0 height] 
+        {width rip pop ris gis bis width gray} image
+        bitmapsave restore 
+        grestore
+        } bind def
+/BITMAPCMYKGRAYc { 
+	/depth 32 def
+        gsave
+	
+	3 index 2 div add exch	
+	4 index 2 div add exch	
+	translate		
+	rotate			
+	1 index 2 div neg	
+	1 index 2 div neg	
+	translate		
+	scale			
+	/height exch def /width exch def
+	/lb width depth wbytes def 
+	sl lb lt {lb ms} if 
+        /bitmapsave save def 
+        
+	/is im 0 lb getinterval def	
+	/cis im 0 width getinterval def	
+	/mis im width width getinterval def	
+	/yis im width 2 mul width getinterval def 
+	/kis im width 3 mul width getinterval def 
+        ws 0 lb getinterval is copy pop 
+        /cf currentfile def 
+        width height 8 [width 0 0 height neg 0 height] 
+        {width rip pop cis mis yis kis width cgray} image
+        bitmapsave restore 
+        grestore
+        } bind def
+/cgray { 
+        /ww exch def
+        /k exch def
+        /y exch def
+        /m exch def
+        /c exch def
+        0 1 ww 1 sub { /i exch def c i get m i get y i get k i get CMYKtoRGB
+				.144 mul 3 1 roll .587 mul 3 1 roll .299 mul add add
+				c i 3 -1 roll floor cvi put } for
+        c
+ 		} bind def
+/gray { 
+        /ww exch def
+        /b exch def
+        /g exch def
+        /r exch def
+        0 1 ww 1 sub { /i exch def r i get .299 mul g i get .587 mul
+			b i get .114 mul add add r i 3 -1 roll floor cvi put } for
+        r
+        } bind def
+/BITMAPTRUEGRAY { 
+        gsave
+		
+		3 index 2 div add exch	
+		4 index 2 div add exch	
+		translate		
+		rotate			
+		1 index 2 div neg	
+		1 index 2 div neg	
+		translate		
+		scale			
+		/height exch def /width exch def
+        /bitmapsave save def 
+        /is width string def
+        /gis width string def
+        /bis width string def
+        /cf currentfile def 
+        width height 8 [width 0 0 height neg 0 height] 
+        { cf is readhexstring pop 
+          cf gis readhexstring pop 
+          cf bis readhexstring pop width gray}  image
+        bitmapsave restore 
+        grestore
+        } bind def
+/BITMAPCMYKGRAY { 
+        gsave
+		
+		3 index 2 div add exch	
+		4 index 2 div add exch	
+		translate		
+		rotate			
+		1 index 2 div neg	
+		1 index 2 div neg	
+		translate		
+		scale			
+		/height exch def /width exch def
+        /bitmapsave save def 
+        /is width string def
+        /yis width string def
+        /mis width string def
+        /kis width string def
+        /cf currentfile def 
+        width height 8 [width 0 0 height neg 0 height] 
+        { cf is readhexstring pop 
+          cf mis readhexstring pop 
+          cf yis readhexstring pop 
+          cf kis readhexstring pop width cgray}  image
+        bitmapsave restore 
+        grestore
+        } bind def
+/BITMAPGRAY { 
+	8 {fakecolorsetup} COMMONBITMAP
+	} bind def
+/BITMAPGRAYc { 
+	8 {fakecolorsetup} COMMONBITMAPc
+	} bind def
+/ENDBITMAP {
+	} bind def
+end 
+	/ALDmatrix matrix def ALDmatrix currentmatrix pop
+/StartALD {
+	/ALDsave save def
+	 savematrix
+	 ALDmatrix setmatrix
+	} bind def
+/InALD {
+	 restorematrix
+	} bind def
+/DoneALD {
+	 ALDsave restore
+	} bind def
+/I { setdash } bind def
+/J { [] 0 setdash } bind def
+%%EndProlog
+%%BeginSetup
+(5.0) FMVERSION
+1 1 0 0 612 792 0 1 15 FMDOCUMENT
+0 0 /Times-Roman FMFONTDEFINE
+1 0 /Times-Bold FMFONTDEFINE
+2 0 /Times-Italic FMFONTDEFINE
+3 0 /Courier FMFONTDEFINE
+4 0 /Courier-Oblique FMFONTDEFINE
+5 1 /ZapfDingbats FMFONTDEFINE
+32 FMFILLS
+0 0 FMFILL
+1 0.1 FMFILL
+2 0.3 FMFILL
+3 0.5 FMFILL
+4 0.7 FMFILL
+5 0.9 FMFILL
+6 0.97 FMFILL
+7 1 FMFILL
+8 <0f1e3c78f0e1c387> FMFILL
+9 <0f87c3e1f0783c1e> FMFILL
+10 <cccccccccccccccc> FMFILL
+11 <ffff0000ffff0000> FMFILL
+12 <8142241818244281> FMFILL
+13 <03060c183060c081> FMFILL
+14 <8040201008040201> FMFILL
+16 1 FMFILL
+17 0.9 FMFILL
+18 0.7 FMFILL
+19 0.5 FMFILL
+20 0.3 FMFILL
+21 0.1 FMFILL
+22 0.03 FMFILL
+23 0 FMFILL
+24 <f0e1c3870f1e3c78> FMFILL
+25 <f0783c1e0f87c3e1> FMFILL
+26 <3333333333333333> FMFILL
+27 <0000ffff0000ffff> FMFILL
+28 <7ebddbe7e7dbbd7e> FMFILL
+29 <fcf9f3e7cf9f3f7e> FMFILL
+30 <7fbfdfeff7fbfdfe> FMFILL
+%%EndSetup
+%%Page: "1" 1
+%%BeginPaperSize: Letter
+%%EndPaperSize
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+J
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(1) 536 34.17 T
+0 18 Q
+(Using Fuzz to T) 124.87 708 T
+(est the Reliability of Unix K) 240.1 708 T
+(ernels) 444.15 708 T
+0 12 Q
+(T) 218.5 675 T
+(odd M. Bezenek and Derek Wright) 224.87 675 T
+(CS 736, Adv) 213.99 661 T
+(anced Operating Systems) 276.03 661 T
+(Uni) 223.82 647 T
+(v) 241.52 647 T
+(ersity of W) 247.34 647 T
+(isconsin\320Madison) 300.85 647 T
+(December 12, 1996) 258.85 633 T
+1 14 Q
+(Abstract) 279.95 593.67 T
+0 10 Q
+-0.12 (This paper presents the results of applying random inputs \050fuzz\051 to the system call interf) 129.6 566.33 P
+-0.12 (ace of) 479.97 566.33 P
+1.74 (se) 108 542.33 P
+1.74 (v) 116.08 542.33 P
+1.74 (eral contemporary Unix k) 120.93 542.33 P
+1.74 (ernels. Recently published w) 229.08 542.33 P
+1.74 (ork has sho) 349.73 542.33 P
+1.74 (wn that applying random) 398.51 542.33 P
+0.03 (inputs to Unix applications and X-W) 108 518.33 P
+0.03 (indo) 255.26 518.33 P
+0.03 (w clients can be surprisingly ef) 272.79 518.33 P
+0.03 (fecti) 397.4 518.33 P
+0.03 (v) 414.92 518.33 P
+0.03 (e at e) 419.77 518.33 P
+0.03 (xposing b) 440.79 518.33 P
+0.03 (ugs in) 479.8 518.33 P
+0.26 (those systems. W) 108 494.33 P
+0.26 (e present a tool that uses the same method to test the Unix k) 177.44 494.33 P
+0.26 (ernel, and the results) 420.45 494.33 P
+-0.04 (of applying that tool to \336v) 108 470.33 P
+-0.04 (e k) 212.37 470.33 P
+-0.04 (ernels. Problems were found in three of the \336v) 224.17 470.33 P
+-0.04 (e systems tested. In tw) 409.49 470.33 P
+-0.04 (o) 499.5 470.33 P
+1.33 (of the systems \050Solaris 2.5.1 and IRIX 6.2\051, b) 108 446.33 P
+1.33 (ugs that are capable of crashing the system were) 300.08 446.33 P
+(found.) 108 422.33 T
+1 14 Q
+(1.0  Intr) 72 379.67 T
+(oduction) 120.36 379.67 T
+0 10 Q
+0.47 (A) 93.6 352.33 P
+2 F
+0.47 (fuzz g) 103.79 352.33 P
+0.47 (ener) 127.22 352.33 P
+0.47 (ator) 144.84 352.33 P
+0 F
+0.47 ( is a program that creates pseudo-random, possibly v) 161.51 352.33 P
+0.47 (alid input to a tar) 375.81 352.33 P
+0.47 (get program or service.) 445.84 352.33 P
+0.15 (By applying random input produced by the fuzz generator to the tar) 72 328.33 P
+0.15 (get program, weaknesses in the rob) 343.66 328.33 P
+0.15 (ustness of the) 485.27 328.33 P
+(tar) 72 304.33 T
+(get program can be e) 82.37 304.33 T
+(xposed.) 166.08 304.33 T
+0.01 (Fuzz generators ha) 93.6 270.33 P
+0.01 (v) 168.94 270.33 P
+0.01 (e been used to study the reliability of Unix utilities, X-W) 173.79 270.33 P
+0.01 (indo) 401.5 270.33 P
+0.01 (w serv) 419.03 270.33 P
+0.01 (ers and clients, and net-) 445.27 270.33 P
+0.01 (w) 72 246.33 P
+0.01 (ork services [1]. The easily applied technique produced unw) 79.12 246.33 P
+0.01 (anted beha) 320.41 246.33 P
+0.01 (vior in 6 to 30% of the Unix utilities in each) 363.26 246.33 P
+0.21 (system tested and more than 25% of the X-W) 72 222.33 P
+0.21 (indo) 255.48 222.33 P
+0.21 (w clients. In almost all cases where the source code w) 273.01 222.33 P
+0.21 (as a) 490.81 222.33 P
+0.21 (v) 506.09 222.33 P
+0.21 (ailable,) 510.84 222.33 P
+-0.25 (the reason for the aberrant beha) 72 198.33 P
+-0.25 (vior w) 196.9 198.33 P
+-0.25 (as located, producing a signi\336cant opportunity to remo) 222.38 198.33 P
+-0.25 (v) 439.37 198.33 P
+-0.25 (e b) 444.22 198.33 P
+-0.25 (ugs. In the case of X-) 455.71 198.33 P
+0.95 (W) 72 174.33 P
+0.95 (indo) 81.04 174.33 P
+0.95 (w serv) 98.57 174.33 P
+0.95 (ers and netw) 125.75 174.33 P
+0.95 (ork services, no cases of bad performance were found, producing strong support for the) 178.08 174.33 P
+0.27 (high reliability of these systems. This e) 72 150.33 P
+0.27 (xamination of Unix utilities, interf) 230.43 150.33 P
+0.27 (aces, and netw) 368.93 150.33 P
+0.27 (ork services pro) 427.97 150.33 P
+0.27 (vided infor-) 492.24 150.33 P
+0.11 (mation about much of the support system that is a) 72 126.33 P
+0.11 (v) 271.99 126.33 P
+0.11 (ailable for using the Unix operating system, b) 276.74 126.33 P
+0.11 (ut it did not directly) 460.09 126.33 P
+-0.12 (address the Unix system component upon which e) 72 102.33 P
+-0.12 (v) 271.73 102.33 P
+-0.12 (erything else relies: the Unix k) 276.58 102.33 P
+-0.12 (ernel. In this paper) 398.93 102.33 P
+-0.12 (, we describe the) 473.15 102.33 P
+(design of a k) 72 78.33 T
+(ernel-speci\336c fuzz tester and present the results of applying it to \336v) 123.28 78.33 T
+(e Unix k) 392.25 78.33 T
+(ernels.) 426.59 78.33 T
+FMENDPAGE
+%%EndPage: "1" 1
+%%Page: "2" 2
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(2) 536 34.17 T
+0 10 Q
+0.68 ( that demonstrated v) 93.6 713.33 P
+0.68 (arying de) 176.77 713.33 P
+0.68 (grees of stability during testing. Se) 214.79 713.33 P
+0.68 (v) 357.37 713.33 P
+0.68 (eral of the Unix k) 362.22 713.33 P
+0.68 (ernels tested pro) 435.38 713.33 P
+0.68 (v) 502.13 713.33 P
+0.68 (ed to be) 506.98 713.33 P
+0.66 (entirely stable for all reasonable inputs, with no detectable problems present. Others were stable, b) 72 689.33 P
+0.66 (ut demonstrated) 475.18 689.33 P
+-0.16 (undesirable beha) 72 665.33 P
+-0.16 (vior for one or more subsets of all possible inputs. F) 139.12 665.33 P
+-0.16 (or one k) 346 665.33 P
+-0.16 (ernel, inputs were found that caused it to) 378.35 665.33 P
+(immediately crash.) 72 641.33 T
+0.42 (The remainder of this paper includes a description of the fuzz tester in Section 2, the procedure that is used to) 93.6 607.33 P
+-0.04 (apply the fuzz tester to a k) 72 583.33 P
+-0.04 (ernel in Section 3, and the results of its application to se) 177.21 583.33 P
+-0.04 (v) 400.43 583.33 P
+-0.04 (eral contemporary k) 405.28 583.33 P
+-0.04 (ernels in Sec-) 485.64 583.33 P
+(tion 4. A description of a related k) 72 559.33 T
+(ernel testing tool is gi) 209.1 559.33 T
+(v) 295.52 559.33 T
+(en in Section 5, follo) 300.37 559.33 T
+(wed by a summary in Section 6.) 383.73 559.33 T
+1 14 Q
+(2.0  The Fuzz T) 72 516.67 T
+(ester) 163.66 516.67 T
+0 10 Q
+0.5 (While creating the k) 93.6 489.33 P
+0.5 (ernel fuzz tester) 176.38 489.33 P
+0.5 (, we w) 240.85 489.33 P
+0.5 (anted to produce something that w) 268.14 489.33 P
+0.5 (as as automated as possible. But) 408.6 489.33 P
+0.91 (there are issues in) 72 465.33 P
+0.91 (v) 145.7 465.33 P
+0.91 (olv) 150.49 465.33 P
+0.91 (ed in testing the k) 163.12 465.33 P
+0.91 (ernel that require a comprehensi) 237.77 465.33 P
+0.91 (v) 370 465.33 P
+0.91 (e tester to include some manual control.) 374.85 465.33 P
+-0.1 (Although the tester we created is not fully automatic, at e) 72 441.33 P
+-0.1 (v) 299.92 441.33 P
+-0.1 (ery point in the design described belo) 304.77 441.33 P
+-0.1 (w where manual con-) 453.93 441.33 P
+(trol is required, we carefully considered and rejected automatic alternati) 72 417.33 T
+(v) 359.45 417.33 T
+(es.) 364.3 417.33 T
+1 12 Q
+(2.1  The k) 72 380 T
+(er) 122.56 380 T
+(nel access mechanism) 133.03 380 T
+0 10 Q
+0.48 (The fuzz tester probes the k) 93.6 355.33 P
+0.48 (ernel via the BSD standard C library function) 206.7 355.33 P
+3 F
+1.15 (syscall\050\051.) 394.97 355.33 P
+0 F
+0.48 ( Each probe includes) 454.97 355.33 P
+(one of the a) 72 331.33 T
+(v) 118.73 331.33 T
+(ailable system functions and a set of random parameters:) 123.48 331.33 T
+3 F
+(int syscall\050<system function number>, <parameter list>\051;) 108 297.33 T
+-0.18 (The syscall\050\051) 72 263.33 P
+0 F
+-0.08 ( interf) 149.82 263.33 P
+-0.08 (ace e) 173.8 263.33 P
+-0.08 (xists on each of the operating systems we in) 193.83 263.33 P
+-0.08 (v) 368.91 263.33 P
+-0.08 (estig) 373.76 263.33 P
+-0.08 (ated \050see T) 392.6 263.33 P
+-0.08 (able) 435.52 263.33 P
+-0.08 (3\051. In Solaris running) 454.68 263.33 P
+-0.02 (on a SP) 72 239.33 P
+-0.02 (ARC platform, it is implemented as a wrapper that translates the call to a system trap. The gi) 101.61 239.33 P
+-0.02 (v) 471.86 239.33 P
+-0.02 (en system func-) 476.71 239.33 P
+0.04 (tion is popped of) 72 215.33 P
+0.04 (f of the top of the stack and placed in re) 139.37 215.33 P
+0.04 (gister) 298.48 215.33 P
+3 F
+0.1 (g1) 323.24 215.33 P
+0 F
+0.04 (, and the remaining parameters are left on the stack) 335.24 215.33 P
+(where the) 72 191.33 T
+(y are a) 111 191.33 T
+(v) 137.45 191.33 T
+(ailable to the system function after the trap instruction completes.) 142.2 191.33 T
+-0.1 (Using the) 93.6 157.33 P
+3 F
+-0.25 (syscall\050\051) 134.5 157.33 P
+0 F
+-0.1 ( mechanism allo) 188.5 157.33 P
+-0.1 (ws the fuzz tester to call k) 253.6 157.33 P
+-0.1 (ernel routines directly without using a custom) 357.3 157.33 P
+1.33 (assembly language interf) 72 133.33 P
+1.33 (ace for each platform. In the case that the) 174.54 133.33 P
+3 F
+3.2 (syscall\050\051) 354.25 133.33 P
+0 F
+1.33 ( mechanism is not a) 408.25 133.33 P
+1.33 (v) 492.82 133.33 P
+1.33 (ailable, an) 497.57 133.33 P
+0.26 (equi) 72 109.33 P
+0.26 (v) 88.97 109.33 P
+0.26 (alent wrapper can be hand-coded, and the tool used without modi\336cation. This direct mechanism for accessing) 93.72 109.33 P
+0.13 (k) 72 85.33 P
+0.13 (ernel calls allo) 76.9 85.33 P
+0.13 (ws automation of the tester across platforms, b) 135.24 85.33 P
+0.13 (ut it bypasses an) 322.61 85.33 P
+0.13 (y parameter checks in the library rou-) 388.69 85.33 P
+0 0 0 1 0 0 0 K
+FMENDPAGE
+%%EndPage: "2" 2
+%%Page: "3" 3
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(3) 536 34.17 T
+0 10 Q
+-0.19 (tines. As it is possible that the library routines may check parameter v) 72 713.33 P
+-0.19 (alues, each problematic parameter list should be) 348.65 713.33 P
+(v) 72 689.33 T
+(eri\336ed by passing it to the system call via the library interf) 76.85 689.33 T
+(ace.) 310.34 689.33 T
+0.07 (Using the) 93.6 655.33 P
+3 F
+0.17 (syscall\050\051) 134.85 655.33 P
+0 F
+0.07 ( mechanism, the tester repeatedly probes system calls with random ar) 188.85 655.33 P
+0.07 (guments. The sys-) 466.81 655.33 P
+-0.01 (tem function to be used for each probe is randomly chosen from a list contained in a \336le. The list can be an automati-) 72 631.33 P
+-0.19 (cally generated complete list of system calls or a subset of system calls chosen by the user) 72 607.33 P
+-0.19 (. The parameter list def) 428.93 607.33 P
+-0.19 (aults) 521.11 607.33 P
+0.34 (to al) 72 583.33 P
+0.34 (w) 89.74 583.33 P
+0.34 (ays contain eight randomly generated parameters. Eight is the lar) 96.86 583.33 P
+0.34 (gest number of parameters required by all of) 359.64 583.33 P
+0.44 (the system calls on all of the systems that we tested, and is con\336gurable by the user) 72 559.33 P
+0.44 (. W) 411.48 559.33 P
+0.44 (e chose to \336x the size of the) 425.56 559.33 P
+-0.1 (parameter list in this w) 72 535.33 P
+-0.1 (ay because using too fe) 163.17 535.33 P
+-0.1 (w parameters can cause problems with the tester\325) 255.85 535.33 P
+-0.1 (s stack as discussed in) 451.51 535.33 P
+(Section) 72 511.33 T
+(4.1, whereas using too man) 104.5 511.33 T
+(y parameters simply w) 213.78 511.33 T
+(astes a small amount of stack space.) 304.5 511.33 T
+0.75 (When inputs to the system functions cause a system lock-up or crash, information about the state of the fuzz) 93.6 477.33 P
+0.51 (generator that can aid in the disco) 72 453.33 P
+0.51 (v) 209.88 453.33 P
+0.51 (ery of system b) 214.73 453.33 P
+0.51 (ugs is lost. Although it is tri) 277.43 453.33 P
+0.51 (vial to create reproducible results by) 391.65 453.33 P
+0.28 (\336xing the random number generator\325) 72 429.33 P
+0.28 (s seed,) 220.31 429.33 P
+0 8 Q
+0.22 (1) 247.25 433.33 P
+0 10 Q
+0.28 ( once the system has f) 251.25 429.33 P
+0.28 (ailed, it is not possible to \336nd out which call e) 340.58 429.33 P
+0.28 (x) 527.38 429.33 P
+0.28 (e-) 532.23 429.33 P
+0.04 (cuted last. This problem is addressed by ha) 72 405.33 P
+0.04 (ving tw) 244.26 405.33 P
+0.04 (o e) 274.48 405.33 P
+0.04 (x) 286.31 405.33 P
+0.04 (ecution modes\321normal and logging\321that are controlled by a) 291.16 405.33 P
+0.38 (command-line parameter) 72 381.33 P
+0.38 (. The normal mode e) 172.08 381.33 P
+0.38 (x) 256.49 381.33 P
+0.38 (ecutes quickly) 261.34 381.33 P
+0.38 (, without sa) 318.56 381.33 P
+0.38 (ving information about each call that could) 365.52 381.33 P
+0.53 (be used to determine the reason for unusual beha) 72 357.33 P
+0.53 (vior) 271.58 357.33 P
+0.53 (. The logging mode logs each system call\321including parame-) 287.14 357.33 P
+0.81 (ters\321to a \336le, and e) 72 333.33 P
+0.81 (x) 155.92 333.33 P
+0.81 (ecutes) 160.77 333.33 P
+3 F
+1.95 (flush\050\051) 189.07 333.33 P
+0 F
+0.81 ( and) 231.07 333.33 P
+3 F
+1.95 (fsync\050\051) 252.13 333.33 P
+0 F
+0.81 ( before e) 294.13 333.33 P
+0.81 (x) 330.59 333.33 P
+0.81 (ecuting the call, guaranteeing that the information) 335.44 333.33 P
+(will be a) 72 309.33 T
+(v) 106.24 309.33 T
+(ailable if the call f) 110.99 309.33 T
+(ails. The relati) 183.65 309.33 T
+(v) 240.89 309.33 T
+(e speeds of these operating modes are sho) 245.74 309.33 T
+(wn in T) 412.95 309.33 T
+(able) 443.26 309.33 T
+(1.) 462.42 309.33 T
+72 75 540 95 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 83 204 83 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 0 612 792 C
+0 8 Q
+0 X
+0 0 0 1 0 0 0 K
+(1.) 72 69.67 T
+(W) 84 69.67 T
+(e assume that an idle k) 90.91 69.67 T
+(ernel represents a single base state and therefore a consistent starting point for repeated tests.) 163.49 69.67 T
+90.89 191 528.89 198 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+96.89 194.16 222.89 194.16 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 0 612 792 C
+0 9 Q
+0 X
+0 0 0 1 0 0 0 K
+(a.) 96.89 185 T
+(Some system calls e) 108.89 185 T
+(x) 181.5 185 T
+(ecute v) 185.87 185 T
+(ery f) 211.47 185 T
+(ast \050e.g.) 228.12 185 T
+3 F
+(rename\050\051) 258.61 185 T
+0 F
+(\051, while others spend some time in the k) 301.81 185 T
+(ernel \050e.g.) 445.46 185 T
+3 F
+(brk\050\051) 108.89 174 T
+0 F
+(\051.) 135.89 174 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+(T) 104.63 275.33 T
+(ABLE 1. System call rates f) 110.4 275.33 T
+(or Solaris on a SP) 227.36 275.33 T
+(ARC 20 w) 302.74 275.33 T
+(orkstation.) 346.52 275.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Mode) 96.89 251.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(T) 271.89 251.33 T
+(ime per call \050msec\051) 278.38 251.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Calls per second) 370.89 251.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Calls per hour) 452.89 251.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 F
+(W) 96.89 235.33 T
+(ith logging) 105.93 235.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(90) 310.39 235.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(11) 400.89 235.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(~40,000) 471.43 235.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(W) 96.89 219.33 T
+(ithout logging \050a mix) 105.93 219.33 T
+0 8 Q
+(a) 190.66 223.33 T
+0 10 Q
+( of system calls\051) 194.21 219.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(2.03) 306.64 219.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(490) 398.39 219.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(~1,750,000) 465.18 219.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(W) 96.89 203.33 T
+(ithout logging \050f) 105.93 203.33 T
+(astest system calls\051) 171.39 203.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(0.73) 306.64 203.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(1360) 395.89 203.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(~5,000,000) 465.18 203.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+90.89 265.75 90.89 198.25 2 L
+V
+0.5 H
+0 Z
+N
+265.89 266.25 265.89 197.75 2 L
+V
+0.25 H
+N
+364.89 266.25 364.89 197.75 2 L
+V
+N
+446.89 266.25 446.89 197.75 2 L
+V
+N
+528.89 265.75 528.89 198.25 2 L
+V
+0.5 H
+N
+90.64 266 529.14 266 2 L
+V
+N
+91.14 247.25 528.64 247.25 2 L
+V
+N
+91.14 244.75 528.64 244.75 2 L
+V
+N
+90.64 230 529.14 230 2 L
+V
+0.25 H
+N
+90.64 214 529.14 214 2 L
+V
+N
+90.64 198 529.14 198 2 L
+V
+0.5 H
+N
+0 0 0 1 0 0 0 K
+FMENDPAGE
+%%EndPage: "3" 3
+%%Page: "4" 4
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(4) 536 34.17 T
+1 12 Q
+(2.2  Handling special case parameters) 72 712 T
+0 10 Q
+-0.22 (The v) 93.6 687.33 P
+-0.22 (ariability of system call parameter lists, and the f) 116.18 687.33 P
+-0.22 (act that no de\336niti) 309.58 687.33 P
+-0.22 (v) 381.18 687.33 P
+-0.22 (e information is kno) 386.03 687.33 P
+-0.22 (wn about each call) 465.95 687.33 P
+0.11 (on a gi) 72 663.33 P
+0.11 (v) 99.18 663.33 P
+0.11 (en system) 104.03 663.33 P
+0 8 Q
+0.09 (1) 143.86 667.33 P
+0 10 Q
+0.11 ( mak) 147.86 663.33 P
+0.11 (es system calls a hard tar) 167.59 663.33 P
+0.11 (get for an automated tester) 267.64 663.33 P
+0.11 (. If the tester kne) 374.16 663.33 P
+0.11 (w more about what each) 441.82 663.33 P
+0.09 (system call e) 72 639.33 P
+0.09 (xpected for each parameter) 123.69 639.33 P
+0.09 (, it could test each call more deeply) 232.12 639.33 P
+0.09 (. F) 373.75 639.33 P
+0.09 (or instance, if a system call has se) 384.25 639.33 P
+0.09 (v) 520.16 639.33 P
+0.09 (eral) 525.01 639.33 P
+-0.15 (parameters, where one is a pointer that is check) 72 615.33 P
+-0.15 (ed for v) 260.35 615.33 P
+-0.15 (alidity) 290.89 615.33 P
+-0.15 (, an) 315.8 615.33 P
+-0.15 (y in) 329.94 615.33 P
+-0.15 (v) 344.67 615.33 P
+-0.15 (ocation of this call with a bad pointer can return) 349.46 615.33 P
+0.17 (with a SIGSEGV error) 72 591.33 P
+0.17 (, re) 163.49 591.33 P
+0.17 (g) 176.29 591.33 P
+0.17 (ardless of the v) 181.24 591.33 P
+0.17 (alues of the other parameters. Therefore, the potential for testing the other) 242.33 591.33 P
+(parameters is mask) 72 567.33 T
+(ed by the error that is al) 148.55 567.33 T
+(w) 243.43 567.33 T
+(ays returned as a result of the bad pointer parameter) 250.55 567.33 T
+(.) 457.44 567.33 T
+1.34 (The v) 93.6 533.33 P
+1.34 (alidity constraint on pointer parameters is satis\336ed by using the tester in) 117.74 533.33 P
+2 F
+1.34 (a) 423.75 533.33 P
+1.34 (g) 428.65 533.33 P
+1.34 (gr) 433.55 533.33 P
+1.34 (essive mode) 442.07 533.33 P
+0 F
+1.34 (, essentially) 491.44 533.33 P
+0.27 (bypassing the \336rst layer of defense inside the k) 72 509.33 P
+0.27 (ernel. Aggressi) 261.83 509.33 P
+0.27 (v) 322.39 509.33 P
+0.27 (e mode creates a b) 327.24 509.33 P
+0.27 (uf) 401.99 509.33 P
+0.27 (fer of random data in user space) 410.07 509.33 P
+0.4 (for each possible system call parameter) 72 485.33 P
+0.4 (. Each system call is then made with all parameters being pointers to unique) 230.92 485.33 P
+(b) 72 461.33 T
+(uf) 76.8 461.33 T
+(fers in user memory) 84.88 461.33 T
+(, guaranteeing that the system call cannot be rejected because of an in) 164.49 461.33 T
+(v) 442.63 461.33 T
+(alid pointer) 447.38 461.33 T
+(.) 492.66 461.33 T
+0.99 (There are other cases of special parameters that can be identi\336ed as not v) 93.6 427.33 P
+0.99 (alid. F) 398.1 427.33 P
+0.99 (or instance, a \336le number is) 424.5 427.33 P
+-0.21 (e) 72 403.33 P
+-0.21 (xpected to be a small positi) 76.29 403.33 P
+-0.21 (v) 184.14 403.33 P
+-0.21 (e inte) 188.99 403.33 P
+-0.21 (ger) 210.57 403.33 P
+-0.21 (. After \336nding that the aggressi) 222.79 403.33 P
+-0.21 (v) 345.91 403.33 P
+-0.21 (e mode did not yield an) 350.76 403.33 P
+-0.21 (y interesting results \050see) 443.71 403.33 P
+0.36 (Section) 72 379.33 P
+0.36 (3.0\051, we decided to attempt to co) 104.5 379.33 P
+0.36 (v) 237.63 379.33 P
+0.36 (er the possible input combinations as completely as possible by including) 242.48 379.33 P
+0.3 (the normal \050non-logging\051 mode. Although it admittedly results in a v) 72 355.33 P
+0.3 (ery sparse co) 350.15 355.33 P
+0.3 (v) 402.81 355.33 P
+0.3 (erage of the space of all possible) 407.66 355.33 P
+0.14 (parameters, it allo) 72 331.33 P
+0.14 (ws the lar) 143.97 331.33 P
+0.14 (gest possible number of calls to be attempted in a gi) 182.96 331.33 P
+0.14 (v) 391.92 331.33 P
+0.14 (en amount of time. The hope is that) 396.77 331.33 P
+1.76 (random brute-force attack will co) 72 307.33 P
+1.76 (v) 212.74 307.33 P
+1.76 (er as man) 217.59 307.33 P
+1.76 (y special cases as possible\321that is the essence of the fuzz testing) 259.29 307.33 P
+(method.) 72 283.33 T
+1 12 Q
+(2.3  Handling poorly-beha) 72 246 T
+(v) 205.73 246 T
+(ed system calls) 211.61 246 T
+0 10 Q
+0.8 (Man) 93.6 221.33 P
+0.8 (y system calls e) 111.78 221.33 P
+0.8 (xhibit beha) 177.07 221.33 P
+0.8 (vior that interferes with the operation of the tester) 222.39 221.33 P
+0.8 (. F) 427.08 221.33 P
+0.8 (or instance, the) 438.29 221.33 P
+3 F
+1.92 (exit\050\051) 504 221.33 P
+0 F
+0.11 (system call will cause the tester to e) 72 197.33 P
+0.11 (xit, and the) 216.22 197.33 P
+3 F
+0.27 (pause\050\051) 263.77 197.33 P
+0 F
+0.11 ( system call will cause the tester to sleep until it recei) 305.77 197.33 P
+0.11 (v) 519.77 197.33 P
+0.11 (es a) 524.62 197.33 P
+0.61 (signal \050which will ne) 72 173.33 P
+0.61 (v) 157.74 173.33 P
+0.61 (er happen\051. These special calls can be tested by using the tool) 162.59 173.33 P
+4 F
+1.47 (runmany) 418.49 173.33 P
+0 F
+0.61 (.) 459.84 173.33 P
+3 F
+1.47 (Runmany) 465.45 173.33 P
+0 F
+0.61 ( serially) 507.45 173.33 P
+0.62 (e) 72 149.33 P
+0.62 (x) 76.29 149.33 P
+0.62 (ecutes multiple instances of the tester) 81.14 149.33 P
+0.62 (, creating a ne) 233.54 149.33 P
+0.62 (w child process for each. It can be told on the command line) 291.23 149.33 P
+-0.23 (ho) 72 125.33 P
+-0.23 (w man) 81.75 125.33 P
+-0.23 (y cases to run, i.e. instances of the fuzz tester to start, and for each one, ho) 108.31 125.33 P
+-0.23 (w man) 401.3 125.33 P
+-0.23 (y tests should be performed.) 427.87 125.33 P
+3 F
+0.34 (Runmany) 72 101.33 P
+0 F
+0.14 ( monitors the beha) 114 101.33 P
+0.14 (vior of the tester process, recognizing if it e) 188.38 101.33 P
+0.14 (xits prematurely or hangs. If the tester com-) 363.49 101.33 P
+72 75 540 95 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 83 204 83 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 0 612 792 C
+0 8 Q
+0 X
+0 0 0 1 0 0 0 K
+(1.) 72 69.67 T
+(A creati) 84 69.67 T
+(v) 109.34 69.67 T
+(e tester implementation might parse manual pages to \336nd information about system call parameters.) 113.22 69.67 T
+0 0 0 1 0 0 0 K
+FMENDPAGE
+%%EndPage: "4" 4
+%%Page: "5" 5
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(5) 536 34.17 T
+0 10 Q
+2.11 (pletes successfully) 72 713.33 P
+2.11 (, it sends the) 148.16 713.33 P
+3 F
+5.05 (SIGUSR1) 209.09 713.33 P
+0 F
+2.11 ( signal to) 251.09 713.33 P
+3 F
+5.05 (runmany) 296.57 713.33 P
+0 F
+2.11 (. The signal is needed because random calls to) 337.92 713.33 P
+3 F
+2.28 (exit\050\051) 72 689.33 P
+0 F
+0.95 ( made by the fuzz tester can produce random return v) 108 689.33 P
+0.95 (alues.) 330.54 689.33 P
+3 F
+2.28 (Runmany) 357.04 689.33 P
+0 F
+0.95 ( creates a summary \336le. F) 399.04 689.33 P
+0.95 (or e) 506.41 689.33 P
+0.95 (v) 522.38 689.33 P
+0.95 (ery) 527.23 689.33 P
+0.11 (case, it records the random number seed used and the result of the fuzz tester\325) 72 665.33 P
+0.11 (s e) 383.75 665.33 P
+0.11 (x) 394.54 665.33 P
+0.11 (ecution. In the e) 399.39 665.33 P
+0.11 (v) 463.9 665.33 P
+0.11 (ent of a crash, the) 468.75 665.33 P
+0.58 (last case can be restarted with logging turned on to \336nd the speci\336c problem.) 72 641.33 P
+3 F
+1.4 (Runmany) 389.82 641.33 P
+0 F
+0.58 ( also allo) 431.82 641.33 P
+0.58 (ws the automated) 468.85 641.33 P
+(testing of millions of calls by specifying lar) 72 617.33 T
+(ge numbers of cases and tests.) 245.98 617.33 T
+1 14 Q
+(3.0  Using the Fuzz T) 72 574.67 T
+(ester) 196.71 574.67 T
+0 10 Q
+0.23 (Installation of the k) 93.6 547.33 P
+0.23 (ernel tester is done by unpacking the archi) 172.24 547.33 P
+0.23 (v) 342.72 547.33 P
+0.23 (e and compiling all components with one appli-) 347.57 547.33 P
+-0.18 (cation of mak) 72 523.33 P
+-0.18 (e. F) 126.53 523.33 P
+-0.18 (or all systems that we tested, the installation required no user interv) 141.2 523.33 P
+-0.18 (ention. After installation, the test) 409.05 523.33 P
+(procedure requires four main steps to locate problematic system calls, as diagrammed in Figure) 72 499.33 T
+(1.) 456.1 499.33 T
+0.89 (Step) 93.6 465.33 P
+5 F
+0.99 (\254) 114.77 465.33 P
+0 F
+0.89 ( creates an input \336le for the tester that maps system call numbers to names, and speci\336es which calls) 122.65 465.33 P
+-0.02 (should be tested. In all cases b) 72 441.33 P
+-0.02 (ut IRIX, this is accomplished by parsing) 193.06 441.33 P
+3 F
+-0.04 (/usr/include/sys/syscall.h) 356.82 441.33 P
+0 F
+-0.02 ( with a) 512.82 441.33 P
+2.38 (simple script. IRIX did a number of things dif) 72 417.33 P
+2.38 (ferently and required using a modi\336ed script to parse) 274.42 417.33 P
+3 F
+5.72 (/usr/) 510 417.33 P
+0.7 (include/sys.s.) 72 393.33 P
+0 F
+0.29 ( The output of the script is a \336le with tw) 156 393.33 P
+0.29 (o columns: the system call number and the system call) 319.35 393.33 P
+0.37 (name. The script remo) 72 369.33 P
+0.37 (v) 162.95 369.33 P
+0.37 (es most special-case system calls that need to be tak) 167.8 369.33 P
+0.37 (en out for proper testing on all systems.) 379.07 369.33 P
+0.13 (All systems ha) 72 345.33 P
+0.13 (v) 130.95 345.33 P
+0.13 (e additional calls that are easily identi\336ed and remo) 135.8 345.33 P
+0.13 (v) 342.79 345.33 P
+0.13 (ed manually by iterating through steps) 347.64 345.33 P
+5 F
+0.15 (\255) 504.54 345.33 P
+0 F
+0.13 ( and) 512.41 345.33 P
+5 F
+0.15 (\256) 532.12 345.33 P
+0 F
+(belo) 72 321.33 T
+(w) 88.97 321.33 T
+(.) 95.54 321.33 T
+-0.21 (In step) 93.6 287.33 P
+5 F
+-0.23 (\255) 122.63 287.33 P
+0 F
+-0.21 (, run the tester with logging turned on, typically set to do 1000 calls. In our e) 130.51 287.33 P
+-0.21 (xperience, both the system) 433.97 287.33 P
+-0.22 (that had k) 72 263.33 P
+-0.22 (ernel b) 110.9 263.33 P
+-0.22 (ugs and systems that had special-case calls that needed to be remo) 137.97 263.33 P
+-0.22 (v) 400.08 263.33 P
+-0.22 (ed displayed them on the \336rst run.) 404.93 263.33 P
+-0.08 (After the tester e) 72 239.33 P
+-0.08 (xits, hangs, or crashes, the last entry in the log \336le contains the problematic system call \050system calls) 138.54 239.33 P
+-0.15 (are logged right before the) 72 215.33 P
+-0.15 (y are e) 177.32 215.33 P
+-0.15 (x) 203.51 215.33 P
+-0.15 (ecuted\051. In step) 208.36 215.33 P
+5 F
+-0.17 (\256) 271.77 215.33 P
+0 F
+-0.15 (, comment this system call out of the input \336le. F) 279.65 215.33 P
+-0.15 (or calls that trig-) 474.08 215.33 P
+0.48 (gered k) 72 191.33 P
+0.48 (ernel crashes or hangs, the log \336le for that run should be renamed and sa) 102.09 191.33 P
+0.48 (v) 398.26 191.33 P
+0.48 (ed for later in) 403.11 191.33 P
+0.48 (v) 458.3 191.33 P
+0.48 (estig) 463.15 191.33 P
+0.48 (ation. Steps) 481.99 191.33 P
+5 F
+0.53 (\255) 532.12 191.33 P
+0 F
+-0.17 (and) 72 167.33 P
+5 F
+-0.19 (\256) 88.77 167.33 P
+0 F
+-0.17 ( are repeated. After a fe) 96.65 167.33 P
+-0.17 (w iterations, you reach a point of stability with the tester completing one thousand cases) 189.93 167.33 P
+(and not e) 72 143.33 T
+(xiting or crashing. At this point, all of the problematic system calls ha) 108.51 143.33 T
+(v) 387.74 143.33 T
+(e probably been remo) 392.59 143.33 T
+(v) 479.36 143.33 T
+(ed.) 484.21 143.33 T
+0.41 (Step) 93.6 108.62 P
+5 F
+0.46 (\257) 114.29 109.33 P
+0 F
+0.41 ( uses the) 122.17 108.62 P
+3 F
+0.99 (runmany) 160.35 108.62 P
+0 F
+0.41 ( program to mak) 202.35 108.62 P
+0.41 (e millions of calls with logging turned of) 269.86 108.62 P
+0.41 (f. This allo) 436.11 108.62 P
+0.41 (ws the random) 480.3 108.62 P
+0.45 (inputs to co) 72 84.62 P
+0.45 (v) 119.42 84.62 P
+0.45 (er a wide range in the space of all possible inputs, hopefully triggering b) 124.27 84.62 P
+0.45 (ugs that require more special-) 419.33 84.62 P
+0 0 0 1 0 0 0 K
+FMENDPAGE
+%%EndPage: "5" 5
+%%Page: "6" 6
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(6) 536 34.17 T
+72 63 540 720 C
+0 0 0 1 0 0 0 K
+85.28 63 526.72 720 C
+0 0 0 328 496 377.2 570.4 119.68 123.8 FMBEGINEPSF
+%%BeginDocument: /afs/cs.wisc.edu/u/b/e/bezenek/private/class/736/Project/Paper/Figures/method3.eps
+%!PS-Adobe-2.0 EPSF-2.0
+%%Title: method3.fig
+%%Creator: fig2dev Version 3.1 Patchlevel 1
+%%CreationDate: Tue Dec 10 02:59:31 1996
+%%For: derek@phenh3 (Derek Wright,,,256-6901)
+%%Orientation: Portrait
+%%BoundingBox: 0 0 328 496
+%%Pages: 0
+%%BeginSetup
+%%IncludeFeature: *PageSize Letter
+%%EndSetup
+%%EndComments
+/$F2psDict 200 dict def
+$F2psDict begin
+$F2psDict /mtrx matrix put
+/col-1 {} def
+/col0 {0.000 0.000 0.000 srgb} bind def
+/col1 {0.000 0.000 1.000 srgb} bind def
+/col2 {0.000 1.000 0.000 srgb} bind def
+/col3 {0.000 1.000 1.000 srgb} bind def
+/col4 {1.000 0.000 0.000 srgb} bind def
+/col5 {1.000 0.000 1.000 srgb} bind def
+/col6 {1.000 1.000 0.000 srgb} bind def
+/col7 {1.000 1.000 1.000 srgb} bind def
+/col8 {0.000 0.000 0.560 srgb} bind def
+/col9 {0.000 0.000 0.690 srgb} bind def
+/col10 {0.000 0.000 0.820 srgb} bind def
+/col11 {0.530 0.810 1.000 srgb} bind def
+/col12 {0.000 0.560 0.000 srgb} bind def
+/col13 {0.000 0.690 0.000 srgb} bind def
+/col14 {0.000 0.820 0.000 srgb} bind def
+/col15 {0.000 0.560 0.560 srgb} bind def
+/col16 {0.000 0.690 0.690 srgb} bind def
+/col17 {0.000 0.820 0.820 srgb} bind def
+/col18 {0.560 0.000 0.000 srgb} bind def
+/col19 {0.690 0.000 0.000 srgb} bind def
+/col20 {0.820 0.000 0.000 srgb} bind def
+/col21 {0.560 0.000 0.560 srgb} bind def
+/col22 {0.690 0.000 0.690 srgb} bind def
+/col23 {0.820 0.000 0.820 srgb} bind def
+/col24 {0.500 0.190 0.000 srgb} bind def
+/col25 {0.630 0.250 0.000 srgb} bind def
+/col26 {0.750 0.380 0.000 srgb} bind def
+/col27 {1.000 0.500 0.500 srgb} bind def
+/col28 {1.000 0.630 0.630 srgb} bind def
+/col29 {1.000 0.750 0.750 srgb} bind def
+/col30 {1.000 0.880 0.880 srgb} bind def
+/col31 {1.000 0.840 0.000 srgb} bind def
+
+end
+save
+-4.0 506.0 translate
+1 -1 scale
+
+/clp {closepath} bind def
+/ef {eofill} bind def
+/gr {grestore} bind def
+/gs {gsave} bind def
+/l {lineto} bind def
+/m {moveto} bind def
+/n {newpath} bind def
+/s {stroke} bind def
+/slc {setlinecap} bind def
+/slj {setlinejoin} bind def
+/slw {setlinewidth} bind def
+/srgb {setrgbcolor} bind def
+/rot {rotate} bind def
+/sc {scale} bind def
+/tr {translate} bind def
+/tnt {dup dup currentrgbcolor
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add
+  4 -2 roll dup 1 exch sub 3 -1 roll mul add srgb}
+  bind def
+/shd {dup dup currentrgbcolor 4 -2 roll mul 4 -2 roll mul
+  4 -2 roll mul srgb} bind def
+ /DrawEllipse {
+	/endangle exch def
+	/startangle exch def
+	/yrad exch def
+	/xrad exch def
+	/y exch def
+	/x exch def
+	/savematrix mtrx currentmatrix def
+	x y tr xrad yrad sc 0 0 1 startangle endangle arc
+	closepath
+	savematrix setmatrix
+	} def
+
+/$F2psBegin {$F2psDict begin /$F2psEnteredState save def} def
+/$F2psEnd {$F2psEnteredState restore end} def
+%%EndProlog
+
+$F2psBegin
+10 setmiterlimit
+ 0.03900 0.03900 sc
+7.500 slw
+% Ellipse
+n 4500 8175 691 691 0 360 DrawEllipse gs col-1 s gr
+
+/Times-Bold findfont 240.00 scalefont setfont
+3975 8250 m
+gs 1 -1 sc (fuzz tester) col-1 show gr
+% Polyline
+n 5745 11220 m 7770 11220 l  7770 11595 l  5745 11595 l  clp  gs col-1 s gr 
+% Polyline
+n 5745 11595 m 7770 11595 l  7770 11970 l  5745 11970 l  clp  gs col-1 s gr 
+/Courier-Bold findfont 270.00 scalefont setfont
+6495 11820 m
+gs 1 -1 sc (...) col-1 show gr
+/Times-Bold findfont 240.00 scalefont setfont
+6045 11520 m
+gs 1 -1 sc (summary file) col-1 show gr
+% Polyline
+n 1200 9300 m 3225 9300 l  3225 9675 l  1200 9675 l  clp  gs col-1 s gr 
+% Polyline
+n 1200 9675 m 3225 9675 l  3225 10950 l  1200 10950 l  clp  gs col-1 s gr 
+/Courier findfont 150.00 scalefont setfont
+1275 10425 m
+gs 1 -1 sc (143: flock: 625328...) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+1275 10200 m
+gs 1 -1 sc ( 45:   brk: 783273...) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+1275 9975 m
+gs 1 -1 sc ( 21: mount: 232785... ) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+1275 10650 m
+gs 1 -1 sc (  5:  open: 321829...) col-1 show gr
+/Courier-Bold findfont 270.00 scalefont setfont
+1875 10800 m
+gs 1 -1 sc (...) col-1 show gr
+/Times-Bold findfont 240.00 scalefont setfont
+1800 9600 m
+gs 1 -1 sc (log file) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+3675 10875 m
+gs 1 -1 sc (-This test completed..) col-1 show gr
+% Polyline
+n 3600 9300 m 5625 9300 l  5625 9675 l  3600 9675 l  clp  gs col-1 s gr 
+% Polyline
+n 5625 9675 m 3600 9675 l  3600 10950 l  5625 10950 l  clp  gs col-1 s gr 
+/Courier findfont 150.00 scalefont setfont
+3675 9975 m
+gs 1 -1 sc (Using call file 'in'.) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+3675 10200 m
+gs 1 -1 sc (Performing 1000 tests) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+3675 10650 m
+gs 1 -1 sc (The initial random...) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+3675 10425 m
+gs 1 -1 sc (The maximum parame...) col-1 show gr
+/Times-Bold findfont 240.00 scalefont setfont
+3900 9600 m
+gs 1 -1 sc (summary file) col-1 show gr
+% Ellipse
+n 3361 451 121 121 0 360 DrawEllipse gs col-1 s gr
+
+/Helvetica-Bold findfont 240.00 scalefont setfont
+3301 526 m
+gs 1 -1 sc (1) col-1 show gr
+% Polyline
+n 3270 270 m 3165 270 3165 765 105 arcto 4 {pop} repeat 3165 870 5460 870 105 arcto 4 {pop} repeat 5565 870 5565 375 105 arcto 4 {pop} repeat 5565 270 3270 270 105 arcto 4 {pop} repeat clp  gs col-1 s gr 
+/Helvetica findfont 210.00 scalefont setfont
+3225 780 m
+gs 1 -1 sc (syscall.h with the script) col-1 show gr
+/Helvetica findfont 210.00 scalefont setfont
+3510 540 m
+gs 1 -1 sc ( You start by parsing) col-1 show gr
+% Polyline
+n 150 300 m 2850 300 l  2850 750 l  150 750 l  clp  gs col-1 s gr 
+% Polyline
+n 2850 750 m 150 750 l  150 3000 l  2850 3000 l  clp  gs col-1 s gr 
+/Courier findfont 150.00 scalefont setfont
+375 1275 m
+gs 1 -1 sc (#define SYS_fork         2) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+375 1050 m
+gs 1 -1 sc (#define SYS_exit         1 ) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+375 1500 m
+gs 1 -1 sc (#define SYS_read         3) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+375 1725 m
+gs 1 -1 sc (#define SYS_write        4) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+375 1950 m
+gs 1 -1 sc (#define SYS_open         5) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+375 2175 m
+gs 1 -1 sc (#define SYS_close        6) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+375 2400 m
+gs 1 -1 sc (#define SYS_waitpid      7) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+375 2625 m
+gs 1 -1 sc (#define SYS_creat        8) col-1 show gr
+/Times-Bold findfont 240.00 scalefont setfont
+225 600 m
+gs 1 -1 sc (/usr/include/sys/syscall.h) col-1 show gr
+/Courier-Bold findfont 270.00 scalefont setfont
+1125 2850 m
+gs 1 -1 sc (...) col-1 show gr
+/Times-Bold findfont 240.00 scalefont setfont
+3675 1800 m
+gs 1 -1 sc (parse script) col-1 show gr
+% Ellipse
+n 4275 1725 691 691 0 360 DrawEllipse gs col-1 s gr
+
+/Times-Bold findfont 240.00 scalefont setfont
+3825 3450 m
+gs 1 -1 sc (fuzz tester) col-1 show gr
+% Ellipse
+n 4350 3375 691 691 0 360 DrawEllipse gs col-1 s gr
+
+% Polyline
+n 420 12585 m 645 12585 l  645 12810 l  420 12810 l  clp  gs col-1 s gr 
+/Helvetica findfont 210.00 scalefont setfont
+720 12780 m
+gs 1 -1 sc (= Files) col-1 show gr
+% Polyline
+n 1635 12615 m 1590 12615 1590 12780 45 arcto 4 {pop} repeat 1590 12825 2010 12825 45 arcto 4 {pop} repeat 2055 12825 2055 12660 45 arcto 4 {pop} repeat 2055 12615 1635 12615 45 arcto 4 {pop} repeat clp  gs col-1 s gr 
+/Helvetica findfont 210.00 scalefont setfont
+2145 12795 m
+gs 1 -1 sc (= Comments) col-1 show gr
+% Ellipse
+n 1928 12368 128 128 0 360 DrawEllipse gs col-1 s gr
+
+/Helvetica findfont 210.00 scalefont setfont
+2138 12428 m
+gs 1 -1 sc (= Processes) col-1 show gr
+15.000 slw
+% Polyline
+n 3765 12360 m 3840 12360 l  gs col-1 s gr 
+n 3600.00 12300.00 m 3840.00 12360.00 l 3600.00 12420.00 l  3600.50 12360.50 l 3600.00 12300.00 l clp gs col7 1.00 shd ef gr gs col-1 s gr
+% Polyline
+n 3765 12705 m 3840 12705 l  gs col-1 s gr 
+n 3600.00 12645.00 m 3840.00 12705.00 l 3600.00 12765.00 l  3600.50 12705.50 l 3600.00 12645.00 l clp gs 0.00 setgray ef gr gs col-1 s gr
+7.500 slw
+% Polyline
+n 375 12165 m 270 12165 270 12855 105 arcto 4 {pop} repeat 270 12960 7635 12960 105 arcto 4 {pop} repeat 7740 12960 7740 12270 105 arcto 4 {pop} repeat 7740 12165 375 12165 105 arcto 4 {pop} repeat clp  gs col-1 s gr 
+/Helvetica-Bold findfont 240.00 scalefont setfont
+405 12465 m
+gs 1 -1 sc (Legend:) col-1 show gr
+/Helvetica findfont 210.00 scalefont setfont
+3915 12435 m
+gs 1 -1 sc (= Arrows from files read as input) col-1 show gr
+/Helvetica findfont 210.00 scalefont setfont
+3915 12780 m
+gs 1 -1 sc (= Arrows to files or processes created) col-1 show gr
+% Ellipse
+n 496 3451 121 121 0 360 DrawEllipse gs col-1 s gr
+
+/Helvetica-Bold findfont 240.00 scalefont setfont
+436 3526 m
+gs 1 -1 sc (2) col-1 show gr
+% Polyline
+n 405 3225 m 300 3225 300 4020 105 arcto 4 {pop} repeat 300 4125 2670 4125 105 arcto 4 {pop} repeat 2775 4125 2775 3330 105 arcto 4 {pop} repeat 2775 3225 405 3225 105 arcto 4 {pop} repeat clp  gs col-1 s gr 
+/Helvetica findfont 210.00 scalefont setfont
+705 3510 m
+gs 1 -1 sc (You then run the fuzz) col-1 show gr
+/Helvetica findfont 210.00 scalefont setfont
+375 3780 m
+gs 1 -1 sc (tester with logging on to) col-1 show gr
+/Helvetica findfont 210.00 scalefont setfont
+450 4035 m
+gs 1 -1 sc (find problem syscalls) col-1 show gr
+% Ellipse
+n 346 7351 121 121 0 360 DrawEllipse gs col-1 s gr
+
+/Helvetica-Bold findfont 240.00 scalefont setfont
+286 7426 m
+gs 1 -1 sc (3) col-1 show gr
+% Ellipse
+n 1816 8656 121 121 0 360 DrawEllipse gs col-1 s gr
+
+/Helvetica-Bold findfont 240.00 scalefont setfont
+1756 8731 m
+gs 1 -1 sc (2) col-1 show gr
+% Polyline
+n 240 7110 m 135 7110 135 8730 105 arcto 4 {pop} repeat 135 8835 3030 8835 105 arcto 4 {pop} repeat 3135 8835 3135 7215 105 arcto 4 {pop} repeat 3135 7110 240 7110 105 arcto 4 {pop} repeat clp  gs col-1 s gr 
+/Helvetica findfont 210.00 scalefont setfont
+2100 7650 m
+gs 1 -1 sc ( ) col-1 show gr
+/Helvetica findfont 210.00 scalefont setfont
+300 7935 m
+gs 1 -1 sc (bad system call at the end of ) col-1 show gr
+/Helvetica findfont 210.00 scalefont setfont
+300 8220 m
+gs 1 -1 sc (the log file is removed from ) col-1 show gr
+/Helvetica findfont 210.00 scalefont setfont
+300 7680 m
+gs 1 -1 sc (of a premature tester exit, the ) col-1 show gr
+/Helvetica findfont 210.00 scalefont setfont
+600 7425 m
+gs 1 -1 sc (In the event of a crash or ) col-1 show gr
+/Helvetica findfont 210.00 scalefont setfont
+285 8730 m
+gs 1 -1 sc (Return to step      and repeat.) col-1 show gr
+/Helvetica findfont 210.00 scalefont setfont
+300 8475 m
+gs 1 -1 sc (the fuzz input file by hand. ) col-1 show gr
+% Polyline
+n 1050 4500 m 3075 4500 l  3075 4875 l  1050 4875 l  clp  gs col-1 s gr 
+% Polyline
+n 1050 4875 m 3075 4875 l  3075 6525 l  1050 6525 l  clp  gs col-1 s gr 
+/Courier findfont 150.00 scalefont setfont
+1125 5400 m
+gs 1 -1 sc ( 35: ftime: 234535...  ) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+1125 5175 m
+gs 1 -1 sc (  4: write: 123245...) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+1125 5625 m
+gs 1 -1 sc ( 53:  lock: 983463... ) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+1125 5850 m
+gs 1 -1 sc ( 16: chown: 734643...) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+1125 6075 m
+gs 1 -1 sc ( 90:  mmap: 434398...) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+1125 6300 m
+gs 1 -1 sc (  9:  link: 328923...) col-1 show gr
+/Times-Bold findfont 240.00 scalefont setfont
+1650 4800 m
+gs 1 -1 sc (log file) col-1 show gr
+% Ellipse
+n 646 11326 121 121 0 360 DrawEllipse gs col-1 s gr
+
+/Helvetica-Bold findfont 240.00 scalefont setfont
+586 11401 m
+gs 1 -1 sc (4) col-1 show gr
+% Polyline
+n 5775 4500 m 7800 4500 l  7800 4950 l  5775 4950 l  clp  gs col-1 s gr 
+% Polyline
+n 5775 4950 m 7800 4950 l  7800 7200 l  5775 7200 l  clp  gs col-1 s gr 
+/Times-Bold findfont 240.00 scalefont setfont
+5925 4800 m
+gs 1 -1 sc (fuzz tester input) col-1 show gr
+/Courier-Bold findfont 270.00 scalefont setfont
+6375 7125 m
+gs 1 -1 sc (...) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5970 6945 m
+gs 1 -1 sc (10 SYS_unlink) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5970 6495 m
+gs 1 -1 sc (8  SYS_creat) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5970 6270 m
+gs 1 -1 sc (7  SYS_waitpid) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5970 6045 m
+gs 1 -1 sc (6  SYS_close) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5970 5595 m
+gs 1 -1 sc (4  SYS_write) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5970 5370 m
+gs 1 -1 sc (3  SYS_read) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5970 5820 m
+gs 1 -1 sc (5  SYS_open) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5970 5160 m
+gs 1 -1 sc (1  SYS_exit) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5895 6720 m
+gs 1 -1 sc (#9  SYS_link [crash]) col-1 show gr
+/Courier-Bold findfont 270.00 scalefont setfont
+6270 2910 m
+gs 1 -1 sc (...) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5865 2730 m
+gs 1 -1 sc (10 SYS_unlink) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5865 2505 m
+gs 1 -1 sc (9  SYS_link) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5865 2280 m
+gs 1 -1 sc (8  SYS_creat) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5865 2055 m
+gs 1 -1 sc (7  SYS_waitpid) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5865 1830 m
+gs 1 -1 sc (6  SYS_close) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5865 1380 m
+gs 1 -1 sc (4  SYS_write) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5865 1155 m
+gs 1 -1 sc (3  SYS_read) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5865 1605 m
+gs 1 -1 sc (5  SYS_open) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+5865 945 m
+gs 1 -1 sc (1  SYS_exit) col-1 show gr
+% Polyline
+n 5700 300 m 7725 300 l  7725 750 l  5700 750 l  clp  gs col-1 s gr 
+% Polyline
+n 5700 750 m 7725 750 l  7725 3000 l  5700 3000 l  clp  gs col-1 s gr 
+/Times-Bold findfont 240.00 scalefont setfont
+5850 600 m
+gs 1 -1 sc (fuzz tester input) col-1 show gr
+/Times-Bold findfont 240.00 scalefont setfont
+6090 9990 m
+gs 1 -1 sc (runmany) col-1 show gr
+/Times-Bold findfont 240.00 scalefont setfont
+6120 10260 m
+gs 1 -1 sc (program) col-1 show gr
+/Courier findfont 180.00 scalefont setfont
+7095 8910 m
+gs 1 -1 sc (SIGUSR1) col-1 show gr
+/Courier findfont 180.00 scalefont setfont
+7095 9090 m
+gs 1 -1 sc (sent on) col-1 show gr
+/Courier findfont 180.00 scalefont setfont
+7095 9270 m
+gs 1 -1 sc (successful) col-1 show gr
+/Courier findfont 180.00 scalefont setfont
+7095 9450 m
+gs 1 -1 sc (completion) col-1 show gr
+15.000 slw
+% Arc
+n 5175.00 4950.00 1352.08 -19.44 -86.82 arcn
+gs col-1 s gr
+
+7.500 slw
+% Arc
+n 6952.43 9333.94 m 6855.00 9420.00 l 6862.49 9290.22 l gs col-1 s gr
+	[66.7] 0 setdash
+n 6315.00 9157.50 600.42 -25.92 25.92 arc
+gs col-1 s gr
+	[] 0 setdash
+% Ellipse
+n 6555 8250 691 691 0 360 DrawEllipse gs col-1 s gr
+
+% Ellipse
+n 6555 10050 691 691 0 360 DrawEllipse gs col-1 s gr
+
+15.000 slw
+% Polyline
+n 5025 1725 m 5700 1725 l  gs col-1 s gr 
+n 5460.00 1665.00 m 5700.00 1725.00 l 5460.00 1785.00 l  5460.50 1725.50 l 5460.00 1665.00 l clp gs 0.00 setgray ef gr gs col-1 s gr
+% Polyline
+n 4500 8850 m 4500 9300 l  gs col-1 s gr 
+n 4560.00 9060.00 m 4500.00 9300.00 l 4440.00 9060.00 l  4500.50 9060.50 l 4560.00 9060.00 l clp gs 0.00 setgray ef gr gs col-1 s gr
+% Polyline
+n 3900 8550 m 2475 9300 l  gs col-1 s gr 
+n 2715.33 9241.32 m 2475.00 9300.00 l 2659.44 9135.13 l  2687.88 9188.72 l 2715.33 9241.32 l clp gs 0.00 setgray ef gr gs col-1 s gr
+% Polyline
+n 5775 7200 m 5025 7725 l  gs col-1 s gr 
+n 5256.02 7636.52 m 5025.00 7725.00 l 5187.21 7538.22 l  5222.12 7587.87 l 5256.02 7636.52 l clp gs col7 1.00 shd ef gr gs col-1 s gr
+% Polyline
+n 2850 1725 m 3525 1725 l  gs col-1 s gr 
+n 3285.00 1665.00 m 3525.00 1725.00 l 3285.00 1785.00 l  3285.50 1725.50 l 3285.00 1665.00 l clp gs col7 1.00 shd ef gr gs col-1 s gr
+% Polyline
+n 5700 2550 m 4950 2925 l  gs col-1 s gr 
+n 5191.50 2871.33 m 4950.00 2925.00 l 5137.83 2764.00 l  5165.16 2818.17 l 5191.50 2871.33 l clp gs col7 1.00 shd ef gr gs col-1 s gr
+% Polyline
+n 4350 4050 m 4350 4500 l  gs col-1 s gr 
+n 4410.00 4260.00 m 4350.00 4500.00 l 4290.00 4260.00 l  4350.50 4260.50 l 4410.00 4260.00 l clp gs 0.00 setgray ef gr gs col-1 s gr
+% Polyline
+n 3750 3750 m 2325 4500 l  gs col-1 s gr 
+n 2565.33 4441.32 m 2325.00 4500.00 l 2509.44 4335.13 l  2537.88 4388.72 l 2565.33 4441.32 l clp gs 0.00 setgray ef gr gs col-1 s gr
+% Polyline
+n 5250 3600 m 5025 3600 l  gs col-1 s gr 
+n 5265.00 3660.00 m 5025.00 3600.00 l 5265.00 3540.00 l  5265.50 3600.50 l 5265.00 3660.00 l clp gs col7 1.00 shd ef gr gs col-1 s gr
+7.500 slw
+% Polyline
+n 480 11130 m 375 11130 375 11850 105 arcto 4 {pop} repeat 375 11955 5295 11955 105 arcto 4 {pop} repeat 5400 11955 5400 11235 105 arcto 4 {pop} repeat 5400 11130 480 11130 105 arcto 4 {pop} repeat clp  gs col-1 s gr 
+% Polyline
+n 3450 4500 m 5475 4500 l  5475 4875 l  3450 4875 l  clp  gs col-1 s gr 
+% Polyline
+n 3450 4875 m 5475 4875 l  5475 6525 l  3450 6525 l  clp  gs col-1 s gr 
+15.000 slw
+% Polyline
+n 6555 10725 m 6555 11175 l  gs col-1 s gr 
+n 6615.00 10935.00 m 6555.00 11175.00 l 6495.00 10935.00 l  6555.50 10935.50 l 6615.00 10935.00 l clp gs 0.00 setgray ef gr gs col-1 s gr
+% Polyline
+n 6555 9375 m 6555 8925 l  gs col-1 s gr 
+n 6495.00 9165.00 m 6555.00 8925.00 l 6615.00 9165.00 l  6555.50 9165.50 l 6495.00 9165.00 l clp gs 0.00 setgray ef gr gs col-1 s gr
+% Polyline
+n 5970 7200 m 6255 7620 l  gs col-1 s gr 
+n 6169.89 7387.72 m 6255.00 7620.00 l 6070.59 7455.10 l  6120.74 7421.91 l 6169.89 7387.72 l clp gs col7 1.00 shd ef gr gs col-1 s gr
+% Interp Spline
+n 1395 6390 m
+	2422.05 6717.65 2872.05 6841.40 3195 6885 curveto
+	3644.79 6945.72 4695.02 6946.81 5145 6885 curveto
+	5279.79 6866.48 5467.29 6813.98 5895 6675 curveto
+ gs col-1 s gr
+
+n 5648.21 6692.11 m 5895.00 6675.00 l 5685.29 6806.23 l  5667.25 6749.67 l 5648.21 6692.11 l clp gs 0.00 setgray ef gr gs col-1 s gr
+% Interp Spline
+n 4260 6510 m
+	4389.83 6639.59 4449.83 6692.09 4500 6720 curveto
+	4588.83 6769.42 4723.83 6810.67 5040 6885 curveto
+ gs col-1 s gr
+
+/Helvetica findfont 210.00 scalefont setfont
+825 11355 m
+gs 1 -1 sc (When a run finally completes successfully, use ) col-1 show gr
+/Helvetica findfont 210.00 scalefont setfont
+525 11610 m
+gs 1 -1 sc (a program to run the fuzz tester thousands of   ) col-1 show gr
+/Helvetica findfont 210.00 scalefont setfont
+525 11865 m
+gs 1 -1 sc (times and verify that there are no other bugs.) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+3525 5175 m
+gs 1 -1 sc (Using call file 'in'.) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+3525 5400 m
+gs 1 -1 sc (Performing 1000 tests) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+3525 5850 m
+gs 1 -1 sc (The initial random...) col-1 show gr
+/Courier findfont 150.00 scalefont setfont
+3525 5625 m
+gs 1 -1 sc (The maximum parame...) col-1 show gr
+/Times-Bold findfont 240.00 scalefont setfont
+3750 4800 m
+gs 1 -1 sc (summary file) col-1 show gr
+/Times-Bold findfont 240.00 scalefont setfont
+6060 8310 m
+gs 1 -1 sc (fuzz tester) col-1 show gr
+/Courier findfont 180.00 scalefont setfont
+8400 1785 m
+gs 1 -1 sc ( ) col-1 show gr
+$F2psEnd
+restore
+
+%%EndDocument
+FMENDEPSF
+0 0 0 1 0 0 0 K
+1 10 Q
+0 X
+0 0 0 1 0 0 0 K
+(FIGURE 1. K) 126.03 92.33 T
+(er) 184.95 92.33 T
+(nel testing methodology as described in the text.) 193.68 92.33 T
+0 0 0 1 0 0 0 K
+72 63 540 720 C
+0 0 612 792 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+FMENDPAGE
+%%EndPage: "6" 6
+%%Page: "7" 7
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(7) 536 34.17 T
+0 10 Q
+0.12 (ized inputs.) 72 713.33 P
+3 F
+0.28 (Runmany) 120.85 713.33 P
+0 F
+0.12 ( is typically set to perform 1000 cases, of 1000 tests each. In the e) 162.85 713.33 P
+0.12 (v) 427.53 713.33 P
+0.12 (ent of a crash, the last case) 432.38 713.33 P
+-0.05 (can be started ag) 72 689.33 P
+-0.05 (ain in logging mode to \336nd the problem. Since logging mode is so time consuming compared to re) 138.73 689.33 P
+-0.05 (g-) 531.67 689.33 P
+0.2 (ular mode \050see T) 72 665.33 P
+0.2 (able) 139.29 665.33 P
+0.2 (1\051, using v) 158.45 665.33 P
+0.2 (ery lar) 201.21 665.33 P
+0.2 (ge numbers of tests per case can become unreasonable when trying to in) 227.06 665.33 P
+0.2 (v) 517.93 665.33 P
+0.2 (esti-) 522.78 665.33 P
+(g) 72 641.33 T
+(ate problems.) 76.95 641.33 T
+0.26 (All of the systems we tested \050with the e) 93.6 607.33 P
+0.26 (xception of IRIX\051 were stable. Once the special-case system calls were) 253.3 607.33 P
+(isolated, the tester ran for hours at a time, testing hundreds of millions of system calls without an) 72 583.33 T
+(y problems.) 459.32 583.33 T
+0.44 (After the abo) 93.6 549.33 P
+0.44 (v) 147.09 549.33 P
+0.44 (e testing is completed, the tester\325) 151.94 549.33 P
+0.44 (s aggressi) 285.23 549.33 P
+0.44 (v) 324.58 549.33 P
+0.44 (e mode \050see Section) 329.43 549.33 P
+0.44 (2.2\051 can be tried. Note that this) 413.5 549.33 P
+0.59 (method can generate huge amounts of g) 72 525.33 P
+0.59 (arbage \336les in the testing directory \050due to calls that create \336les or directo-) 234.9 525.33 P
+0.17 (ries\051, some of which are dif) 72 501.33 P
+0.17 (\336cult to remo) 182.58 501.33 P
+0.17 (v) 236.66 501.33 P
+0.17 (e. In our e) 241.51 501.33 P
+0.17 (xperience, aggressi) 282.42 501.33 P
+0.17 (v) 358.98 501.33 P
+0.17 (e mode yielded no more errors than re) 363.83 501.33 P
+0.17 (gular) 517.35 501.33 P
+0.17 (,) 537.5 501.33 P
+(purely random testing.) 72 477.33 T
+-0.07 (The \336nal stage of testing is to look more closely at the problematic calls that were isolated in the pre) 93.6 443.33 P
+-0.07 (vious steps.) 493.4 443.33 P
+0.69 (System calls that caused abnormal beha) 72 419.33 P
+0.69 (vior can be in) 234.41 419.33 P
+0.69 (v) 290.8 419.33 P
+0.69 (estig) 295.65 419.33 P
+0.69 (ated to \336nd the types of inputs that trigger the b) 314.49 419.33 P
+0.69 (ug. W) 511.23 419.33 P
+0.69 (e) 535.56 419.33 P
+-0.02 (pro) 72 395.33 P
+-0.02 (vide se) 85.18 395.33 P
+-0.02 (v) 112.96 395.33 P
+-0.02 (eral small tools to aid in) 117.81 395.33 P
+-0.02 (v) 213.69 395.33 P
+-0.02 (estig) 218.54 395.33 P
+-0.02 (ation of speci\336c system calls. First, we pro) 237.38 395.33 P
+-0.02 (vide a tool that allo) 407.91 395.33 P
+-0.02 (ws the user to) 484.79 395.33 P
+-0.17 (mak) 72 371.33 P
+-0.17 (e a single system call e) 89.12 371.33 P
+-0.17 (xactly as the tester does, pro) 180.04 371.33 P
+-0.17 (viding the ar) 292.34 371.33 P
+-0.17 (guments to the call on the command line. W) 342.37 371.33 P
+-0.17 (e also) 517.12 371.33 P
+0.54 (pro) 72 347.33 P
+0.54 (vide the sk) 85.18 347.33 P
+0.54 (eleton of a short program that can be modi\336ed to see if doing the system call via the library wrapper) 129.49 347.33 P
+0.83 (functions causes the same problems or if the library \336lters the inputs. Last, we pro) 72 323.33 P
+0.83 (vide a script that reads a list of) 411.73 323.33 P
+0.38 (man) 72 299.33 P
+0.38 (y calls and creates separate \336les containing each one indi) 89.07 299.33 P
+0.38 (vidually) 320.26 299.33 P
+0.38 (. This allo) 352.39 299.33 P
+0.38 (ws the user to easily focus the tester) 393.18 299.33 P
+0.64 (on an) 72 275.33 P
+0.64 (y single system call, which can be useful in \336nding speci\336c inputs that cause problems, or in v) 94.43 275.33 P
+0.64 (erifying that a) 482.62 275.33 P
+(gi) 72 251.33 T
+(v) 79.53 251.33 T
+(en call is beha) 84.38 251.33 T
+(ving normally) 141.11 251.33 T
+(.) 196.85 251.33 T
+0.2 (By using the) 93.6 217.33 P
+3 F
+0.49 (runmany) 147.27 217.33 P
+0 F
+0.2 ( program in conjunction with the single system call \336les, we were able to test the prob-) 189.27 217.33 P
+1.18 (lematic calls that were eliminated in steps) 72 193.33 P
+5 F
+1.31 (\255) 249.95 193.33 P
+0 F
+1.18 ( and) 257.83 193.33 P
+5 F
+1.31 (\256) 279.62 193.33 P
+0 F
+1.18 ( \050see Section) 287.5 193.33 P
+1.18 (3.1\051. In the e) 343.46 193.33 P
+1.18 (v) 397.56 193.33 P
+1.18 (ent of an e) 402.41 193.33 P
+1.18 (xit, runman) 447.73 193.33 P
+1.18 (y will start) 494.86 193.33 P
+0.08 (another case immediately) 72 169.33 P
+0.08 (. In the e) 173.7 169.33 P
+0.08 (v) 208.67 169.33 P
+0.08 (ent of a hang, runman) 213.52 169.33 P
+0.08 (y will time out, kill the hung instance of the tester) 301.16 169.33 P
+0.08 (, and start) 500.69 169.33 P
+(another case.) 72 145.33 T
+0 0 0 1 0 0 0 K
+FMENDPAGE
+%%EndPage: "7" 7
+%%Page: "8" 8
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(8) 536 34.17 T
+0 0 0 1 0 0 0 K
+72 63 540 720 C
+0 0 0 1 0 0 0 K
+78.19 101.33 532.59 108.33 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+84.19 104.49 210.19 104.49 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+72 63 540 720 C
+0 9 Q
+0 X
+0 0 0 1 0 0 0 K
+(a.) 84.19 95.33 T
+(These calls caused problems based on some special case. Each is e) 96.19 95.33 T
+(xplained in the section of the te) 335.99 95.33 T
+(xt that discusses) 448.84 95.33 T
+(the system in which it appears.) 96.19 84.33 T
+(b) 84.19 70.33 T
+(.) 88.33 70.33 T
+(These calls caused k) 96.19 70.33 T
+(ernel crashes. Each is discussed in the te) 169.83 70.33 T
+(xt.) 315.16 70.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+-0.2 (T) 91.93 706.33 P
+-0.2 (ABLE 2. The list of system calls excluded f) 97.7 706.33 P
+-0.2 (or each k) 277.27 706.33 P
+-0.2 (er) 316.21 706.33 P
+-0.2 (nel.) 324.94 706.33 P
+0 F
+-0.2 (Underlined calls are automatically remo) 342.52 706.33 P
+-0.2 (v) 502.1 706.33 P
+-0.2 (ed by) 506.95 706.33 P
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(the script that b) 91.93 694.33 T
+(uilds the input \336le. Calls in italics are tested using the) 153.67 694.33 T
+3 F
+(runmany) 370.34 694.33 T
+0 F
+( program.) 412.34 694.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 F
+(T) 82.19 670.33 T
+(ype of Call) 88.12 670.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Solaris 2.5.1) 168.59 670.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Digital UNIX 3.2) 240.59 670.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(HP-UX 9.05) 320.59 670.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Linux) 392.59 670.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(IRIX 6.2) 464.59 670.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 F
+(Exit\320causes the) 82.19 652.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(process to e) 82.19 640.33 T
+(xit) 129.25 640.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+173.03 651.33 168.59 651.33 2 L
+V
+0.5 H
+0 Z
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+2 F
+(e) 168.59 652.33 T
+0 0 0 1 0 0 0 K
+182.83 651.33 172.83 651.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(xit) 172.83 652.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+184.15 637.33 168.59 637.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sigr) 168.59 638.33 T
+0 0 0 1 0 0 0 K
+204.89 637.33 183.78 637.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(eturn) 183.78 638.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(lwp_e) 168.59 624.33 T
+(xit) 192.28 624.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+245.03 651.33 240.59 651.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(e) 240.59 652.33 T
+0 0 0 1 0 0 0 K
+254.83 651.33 244.83 651.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(xit) 244.83 652.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+256.15 637.33 240.59 637.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sigr) 240.59 638.33 T
+0 0 0 1 0 0 0 K
+276.89 637.33 255.78 637.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(eturn) 255.78 638.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+325.03 651.33 320.59 651.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(e) 320.59 652.33 T
+0 0 0 1 0 0 0 K
+334.83 651.33 324.83 651.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(xit) 324.83 652.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+336.15 637.33 320.59 637.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sigr) 320.59 638.33 T
+0 0 0 1 0 0 0 K
+356.89 637.33 335.78 637.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(eturn) 335.78 638.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+397.03 651.33 392.59 651.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(e) 392.59 652.33 T
+0 0 0 1 0 0 0 K
+406.83 651.33 396.83 651.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(xit) 396.83 652.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+408.15 637.33 392.59 637.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sigr) 392.59 638.33 T
+0 0 0 1 0 0 0 K
+428.89 637.33 407.78 637.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(eturn) 407.78 638.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+469.03 651.33 464.59 651.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(e) 464.59 652.33 T
+0 0 0 1 0 0 0 K
+478.83 651.33 468.83 651.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(xit) 468.83 652.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+480.15 634.67 464.59 634.67 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sigr) 464.59 635.67 T
+0 0 0 1 0 0 0 K
+500.89 634.67 479.78 634.67 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(eturn) 479.78 635.67 T
+0 8 Q
+(b) 500.89 639.67 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 10 Q
+(Sleep\320causes the) 82.19 606.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(process to hang) 82.19 594.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+191.92 605.33 168.59 605.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+2 F
+(pause) 168.59 606.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+191.36 591.33 168.59 591.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(select) 168.59 592.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+212.48 577.33 168.59 577.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sigsuspend) 168.59 578.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sigtimedwait) 168.59 564.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(lwp_sema_wait) 168.59 550.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(nanosleep) 168.59 536.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(wait4) 240.59 606.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+263.36 591.33 240.59 591.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(select) 240.59 592.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+284.48 577.33 240.59 577.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sigsuspend) 240.59 578.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+343.92 605.33 320.59 605.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(pause) 320.59 606.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+343.36 591.33 320.59 591.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(select) 320.59 592.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+364.48 577.33 320.59 577.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sigsuspend) 320.59 578.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+415.92 605.33 392.59 605.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(pause) 392.59 606.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+415.36 591.33 392.59 591.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(select) 392.59 592.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+436.48 577.33 392.59 577.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sigsuspend) 392.59 578.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+487.92 605.33 464.59 605.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(pause) 464.59 606.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+487.36 591.33 464.59 591.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(select) 464.59 592.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+508.48 577.33 464.59 577.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sigsuspend) 464.59 578.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sginap) 464.59 564.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 F
+(F) 82.19 518.33 T
+(ork\320creates) 87.6 518.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(unw) 82.19 506.33 T
+(anted copies) 99.31 506.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(of the tester) 82.19 494.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+185.25 517.33 168.59 517.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(fork) 168.59 518.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+190.25 503.33 168.59 503.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(vfork) 168.59 504.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+190.25 489.33 168.59 489.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(fork1) 168.59 490.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+257.25 517.33 240.59 517.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(fork) 240.59 518.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+262.25 503.33 240.59 503.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(vfork) 240.59 504.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+337.25 517.33 320.59 517.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(fork) 320.59 518.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+342.25 503.33 320.59 503.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(vfork) 320.59 504.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+409.25 517.33 392.59 517.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(fork) 392.59 518.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(clone) 392.59 504.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+481.25 517.33 464.59 517.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(fork) 464.59 518.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sproc) 464.59 504.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sprocsp) 464.59 490.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Not de\336ned\320these) 82.19 472.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(calls are not) 82.19 460.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(de\336ned because) 82.19 448.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(the) 82.19 436.33 T
+(y are not imple-) 94.26 436.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(mented or ha) 82.19 424.33 T
+(v) 134.2 424.33 T
+(e) 139.05 424.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(been replaced by) 82.19 412.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(user) 82.19 400.33 T
+(-le) 98.65 400.33 T
+(v) 108.95 400.33 T
+(el library) 113.8 400.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(routines) 82.19 388.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+195.81 471.33 168.59 471.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(syscall) 168.59 472.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(ptrace) 168.59 458.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(x) 168.59 444.33 T
+(enix) 173.44 444.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(plock) 168.59 430.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(syssun) 168.59 416.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(e) 168.59 402.33 T
+(vsys) 172.78 402.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(e) 168.59 388.33 T
+(vtrapret) 172.78 388.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(hrtsys) 168.59 374.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(acancel) 168.59 360.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(async) 168.59 346.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(clocal) 168.59 332.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(vtrace) 168.59 318.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+267.81 471.33 240.59 471.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(syscall) 240.59 472.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(ch\337ags) 240.59 458.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(fch\337ags) 240.59 444.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(security) 240.59 430.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sw) 320.59 472.33 T
+(apof) 331.6 472.33 T
+(f) 349.12 472.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(gethostid) 320.59 458.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(sethostid) 320.59 444.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(test) 320.59 430.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(bigio) 320.59 416.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(pipenode) 320.59 402.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(rmtprocess) 320.59 388.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(dskless_stats) 320.59 374.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(bf) 320.59 360.33 T
+(actl) 328.82 360.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(ulconnect) 320.59 346.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(ulcontrol) 320.59 332.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(ulcreate) 320.59 318.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(uldest) 320.59 304.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(ulrecv) 320.59 290.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(ulrecvcn) 320.59 276.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(ulsend) 320.59 262.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(ulshutdo) 320.59 248.33 T
+(wn) 354.79 248.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(getmsg) 320.59 234.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(putmsg) 320.59 220.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(getpmsg) 320.59 206.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(putpmsg) 320.59 192.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(strioctl) 320.59 178.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+491.81 471.33 464.59 471.33 2 L
+V
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(syscall) 464.59 472.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(stat) 464.59 458.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Miscellaneous) 82.19 160.33 T
+0 8 Q
+(a) 139.96 164.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+2 10 Q
+(kmodcall) 240.59 160.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(async_daemon) 320.59 160.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(vm86) 392.59 160.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(async_daemon) 464.59 160.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 F
+(getitimer) 464.59 146.33 T
+0 8 Q
+(b) 500.7 150.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 10 Q
+(nsproc) 464.59 132.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(setconte) 464.59 115.67 T
+(xt) 497.21 115.67 T
+0 8 Q
+(b) 504.99 119.67 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+78.19 684.75 78.19 108.58 2 L
+V
+N
+164.59 685.25 164.59 108.08 2 L
+V
+0.25 H
+N
+236.59 685.25 236.59 108.08 2 L
+V
+N
+316.59 685.25 316.59 108.08 2 L
+V
+N
+388.59 685.25 388.59 108.08 2 L
+V
+N
+460.59 685.25 460.59 108.08 2 L
+V
+N
+532.59 684.75 532.59 108.58 2 L
+V
+0.5 H
+N
+77.94 685 532.84 685 2 L
+V
+N
+78.44 664.25 532.34 664.25 2 L
+V
+N
+78.44 661.75 532.34 661.75 2 L
+V
+N
+77.94 617 532.84 617 2 L
+V
+0.25 H
+N
+77.94 529 532.84 529 2 L
+V
+N
+77.94 483 532.84 483 2 L
+V
+N
+77.94 171 532.84 171 2 L
+V
+N
+77.94 108.33 532.84 108.33 2 L
+V
+0.5 H
+N
+0 0 0 1 0 0 0 K
+0 0 612 792 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+FMENDPAGE
+%%EndPage: "8" 8
+%%Page: "9" 9
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(9) 536 34.17 T
+1 12 Q
+(3.1  The pr) 72 712 T
+(oblematic system calls) 127.79 712 T
+0 10 Q
+0.11 (Problematic calls f) 93.6 687.33 P
+0.11 (all into \336v) 168.7 687.33 P
+0.11 (e main cate) 209.89 687.33 P
+0.11 (gories on the systems we tested, as sho) 255.49 687.33 P
+0.11 (wn in T) 411.53 687.33 P
+0.11 (able) 442.05 687.33 P
+0.11 (2. The \336rst group is) 461.21 687.33 P
+-0.18 (calls that cause the tester to e) 72 663.33 P
+-0.18 (xit immediately) 187.41 663.33 P
+-0.18 (, such as) 249.64 663.33 P
+3 F
+-0.43 (exit\050\051) 285.76 663.33 P
+0 F
+-0.18 ( or) 321.76 663.33 P
+3 F
+-0.43 (sigreturn\050\051) 334.73 663.33 P
+0 F
+-0.18 (. The second group is calls that can) 400.73 663.33 P
+-0.06 (cause the tester to hang, such as) 72 639.33 P
+3 F
+-0.15 (pause\050\051) 201.52 639.33 P
+0 F
+-0.06 ( or) 243.52 639.33 P
+3 F
+-0.15 (sigsuspend\050\051) 256.73 639.33 P
+0 F
+-0.06 (. Both of these types of calls were isolated and tested) 328.73 639.33 P
+1.18 (separately to ensure that the testing of the remaining calls w) 72 615.33 P
+1.18 (ould proceed rapidly) 323.62 615.33 P
+1.18 (, without interruption. The third) 408.08 615.33 P
+0.38 (group of calls is) 72 591.33 P
+3 F
+0.9 (fork\050\051) 140.16 591.33 P
+0 F
+0.38 ( and its relati) 176.16 591.33 P
+0.38 (v) 228.98 591.33 P
+0.38 (es. The) 233.82 591.33 P
+0.38 (y create e) 262.93 591.33 P
+0.38 (xtra copies of the testing process and produce log \336les that) 301.84 591.33 P
+0.15 (are dif) 72 567.33 P
+0.15 (\336cult to interpret. Application of the fuzz tester to) 97.72 567.33 P
+3 F
+0.37 (fork\050\051) 300.74 567.33 P
+0 F
+0.15 ( is uninteresting because it requires no parameters.) 336.74 567.33 P
+0.53 (The fourth group is system calls that e) 72 543.33 P
+0.53 (xist in) 228.57 543.33 P
+3 F
+1.26 (syscall.h) 256.86 543.33 P
+0 F
+0.53 (, b) 310.86 543.33 P
+0.53 (ut are not implemented within the k) 321.18 543.33 P
+0.53 (ernel. Attempts to) 467.01 543.33 P
+0.05 (mak) 72 519.33 P
+0.05 (e these calls generate the message \322Bad System Call.) 89.12 519.33 P
+0 8 Q
+0.04 (1) 301.98 523.33 P
+0 10 Q
+0.05 (\323 Some of these calls are implemented as library functions) 305.98 519.33 P
+0.06 (instead of functions within the k) 72 495.33 P
+0.06 (ernel.) 201.38 495.33 P
+0 8 Q
+0.05 (2) 223.87 499.33 P
+0 10 Q
+0.06 ( Others seem to be calls that are optionally compiled into the k) 227.87 495.33 P
+0.06 (ernel. The \336nal) 479.05 495.33 P
+1.26 (group of calls are miscellaneous calls that v) 72 471.33 P
+1.26 (aried from system to system. Some caused the tester to hang, others) 255.29 471.33 P
+(caused it to e) 72 447.33 T
+(xit prematurely) 124.34 447.33 T
+(. Also included in this group are the calls that caused k) 185.07 447.33 T
+(ernel crashes.) 403.83 447.33 T
+1 14 Q
+(4.0  Results) 72 404.67 T
+0 10 Q
+0.09 (This section describes our e) 93.6 377.33 P
+0.09 (xperiences when applying the fuzz tester to the k) 204.91 377.33 P
+0.09 (ernels of se) 401.07 377.33 P
+0.09 (v) 446.55 377.33 P
+0.09 (eral systems. The sys-) 451.4 377.33 P
+(tems and the de) 72 353.33 T
+(gree to which each f) 134.34 353.33 T
+(ailed are summarized in T) 215.32 353.33 T
+(able) 318.94 353.33 T
+(3.) 338.1 353.33 T
+72 87 540 107 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 95 204 95 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 0 612 792 C
+0 8 Q
+0 X
+0 0 0 1 0 0 0 K
+(1.) 72 81.67 T
+(The message te) 84 81.67 T
+(xt v) 133.2 81.67 T
+(aries between k) 145.22 81.67 T
+(ernel implementations.) 194.9 81.67 T
+(2.) 72 69.67 T
+(If these system calls are library functions and not system calls at all, wh) 84 69.67 T
+(y are the) 313.7 69.67 T
+(y included in) 341.13 69.67 T
+3 F
+(syscall.h) 384.9 69.67 T
+0 F
+(? W) 428.1 69.67 T
+(e consider this a b) 440.57 69.67 T
+(ug.) 498.17 69.67 T
+93.89 173.67 525.89 180.67 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+99.89 176.82 225.89 176.82 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 0 612 792 C
+0 9 Q
+0 X
+0 0 0 1 0 0 0 K
+(a.) 99.89 167.67 T
+(Source code w) 111.89 167.67 T
+(as a) 164.78 167.67 T
+(v) 178.34 167.67 T
+(ailable for these systems.) 182.62 167.67 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+1 10 Q
+(T) 107.63 319.33 T
+(ABLE 3. The systems that wer) 113.4 319.33 T
+(e e) 243.21 319.33 T
+(v) 254.44 319.33 T
+(aluated and a summary of the r) 259.34 319.33 T
+(esults f) 393.6 319.33 T
+(or each.) 423.07 319.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Operating System) 99.89 295.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Platf) 243.89 295.33 T
+(orm) 264.19 295.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Results) 387.89 295.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 F
+-0.7 (Solaris 2.5.1) 99.89 279.33 P
+0 8 Q
+-0.56 (a) 149.47 283.33 P
+0 10 Q
+-0.7 ( \050also called SunOS) 153.02 279.33 P
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(5.5.1\051) 99.89 267.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Sun SP) 243.89 279.33 T
+(ARC 20 w) 272.15 279.33 T
+(orkstation) 314.83 279.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(The k) 387.89 279.33 T
+(ernel is stable. W) 410.84 279.33 T
+(e found) 479.47 279.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(an AFS problem.) 387.89 267.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Digital UNIX 3.2) 99.89 251.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Alpha) 243.89 251.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(The k) 387.89 251.33 T
+(ernel is stable.) 410.84 251.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(HP-UX 9.05) 99.89 235.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(HPP) 243.89 235.33 T
+(A RISC) 261.31 235.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(The k) 387.89 235.33 T
+(ernel is stable. W) 410.84 235.33 T
+(e found a) 479.47 235.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(poorly handled pointer) 387.89 223.33 T
+(.) 478.44 223.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(Linux) 99.89 204.67 T
+0 8 Q
+(a) 123.78 208.67 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 10 Q
+(Intel Architecture PC clone) 243.89 207.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(The k) 387.89 207.33 T
+(ernel is stable.) 410.84 207.33 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(IRIX 6.2) 99.89 186 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(SGI Indigo2) 243.89 188.67 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(The k) 387.89 188.67 T
+(ernel is) 410.84 188.67 T
+0 0 0 1 0 0 0 K
+455.28 187.67 442.5 187.67 2 L
+V
+0.5 H
+0 Z
+N
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+(not) 442.5 188.67 T
+( stable.) 455.28 188.67 T
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+93.89 309.75 93.89 180.92 2 L
+V
+N
+237.89 310.25 237.89 180.42 2 L
+V
+0.25 H
+N
+381.89 310.25 381.89 180.42 2 L
+V
+N
+525.89 309.75 525.89 180.92 2 L
+V
+0.5 H
+N
+93.64 310 526.14 310 2 L
+V
+N
+94.14 291.25 525.64 291.25 2 L
+V
+N
+94.14 288.75 525.64 288.75 2 L
+V
+N
+93.64 262 526.14 262 2 L
+V
+0.25 H
+N
+93.64 246 526.14 246 2 L
+V
+N
+93.64 218 526.14 218 2 L
+V
+N
+93.64 199.33 526.14 199.33 2 L
+V
+N
+93.64 180.67 526.14 180.67 2 L
+V
+0.5 H
+N
+0 0 0 1 0 0 0 K
+FMENDPAGE
+%%EndPage: "9" 9
+%%Page: "10" 10
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(10) 532 34.17 T
+1 12 Q
+(4.1  Solaris 2.5.1) 72 712 T
+0 10 Q
+0.32 (Solaris 2.5.1 w) 93.6 687.33 P
+0.32 (as tested using a Sun SP) 154.14 687.33 P
+0.32 (ARC 20 w) 251.78 687.33 P
+0.32 (orkstation. The Andre) 295.1 687.33 P
+0.32 (w File System \050AFS\051 [2] is used in the) 383.54 687.33 P
+(en) 72 663.33 T
+(vironment that we tested.) 81.04 663.33 T
+-0.05 (The fuzz tester w) 93.6 629.33 P
+-0.05 (as de) 162.48 629.33 P
+-0.05 (v) 182.45 629.33 P
+-0.05 (eloped on this platform. This, and the f) 187.29 629.33 P
+-0.05 (act that this k) 342.64 629.33 P
+-0.05 (ernel pro) 395.99 629.33 P
+-0.05 (v) 431.6 629.33 P
+-0.05 (ed to be stable in all cases) 436.45 629.33 P
+-0.19 (resulted in v) 72 605.33 P
+-0.19 (ery aggressi) 120.91 605.33 P
+-0.19 (v) 168.52 605.33 P
+-0.19 (e testing of this system. Each method of k) 173.37 605.33 P
+-0.19 (ernel testing that we de) 339.25 605.33 P
+-0.19 (v) 431.01 605.33 P
+-0.19 (eloped w) 435.86 605.33 P
+-0.19 (as \336rst applied to) 471.95 605.33 P
+(this k) 72 581.33 T
+(ernel. Man) 93.85 581.33 T
+(y of the methods were created with the intent of disco) 137.02 581.33 T
+(v) 351.83 581.33 T
+(ering problems with it.) 356.68 581.33 T
+1.29 (In total, more than 100 million random system calls with random data were made to the Solaris k) 93.6 547.33 P
+1.29 (ernel. Its) 503.72 547.33 P
+0.58 (beha) 72 523.33 P
+0.58 (vior w) 90.68 523.33 P
+0.58 (as stable in all cases. Ho) 116.99 523.33 P
+0.58 (we) 217.41 523.33 P
+0.58 (v) 228.82 523.33 P
+0.58 (er) 233.67 523.33 P
+0.58 (, we did \336nd a method of crashing the k) 241.04 523.33 P
+0.58 (ernel by e) 405.05 523.33 P
+0.58 (xploiting its interaction) 445.5 523.33 P
+(with AFS.) 72 499.33 T
+0.51 (Early v) 93.6 465.33 P
+0.51 (ersions of the fuzz tester randomly chose the number of parameters to put on the stack for each test. It) 123.12 465.33 P
+-0 (w) 72 441.33 P
+-0 (as therefore possible for the called routine to write v) 79.12 441.33 P
+-0 (alues past the end of the stack) 287.97 441.33 P
+-0 (ed parameter list, o) 407.28 441.33 P
+-0 (v) 483.77 441.33 P
+-0 (erwriting the) 488.62 441.33 P
+0.49 (tester\325) 72 417.33 P
+0.49 (s local v) 96.44 417.33 P
+0.49 (ariables. In some cases, the mangled v) 130.49 417.33 P
+0.49 (alues caused the tester to core dump. A core dump w) 286.46 417.33 P
+0.49 (ould nor-) 502.57 417.33 P
+-0.15 (mally not cause a problem, b) 72 393.33 P
+-0.15 (ut in this case, random calls to) 186.6 393.33 P
+3 F
+-0.35 (brk\050\051) 309.45 393.33 P
+0 F
+-0.15 ( had increased the data se) 339.45 393.33 P
+-0.15 (gment of the process to a) 440.48 393.33 P
+0.22 (lar) 72 369.33 P
+0.22 (ge size \050>200MB\051. When the k) 82.37 369.33 P
+0.22 (ernel tried to write the lar) 207.31 369.33 P
+0.22 (ge core \336le to the AFS, it o) 310.14 369.33 P
+0.22 (v) 419.84 369.33 P
+0.22 (er\337o) 424.69 369.33 P
+0.22 (wed the local \336le cache,) 442.77 369.33 P
+(and e) 72 345.33 T
+(v) 93.13 345.33 T
+(entually lock) 97.98 345.33 T
+(ed the system.) 149.82 345.33 T
+1 12 Q
+(4.2  Digital UNIX 3.2) 72 308 T
+0 10 Q
+0.05 (Digital Unix pro) 93.6 283.33 P
+0.05 (v) 159.66 283.33 P
+0.05 (ed to be a stable system. The Digital Unix k) 164.51 283.33 P
+0.05 (ernel survi) 340.38 283.33 P
+0.05 (v) 382.66 283.33 P
+0.05 (ed hundreds of millions of purely ran-) 387.51 283.33 P
+(dom calls, as well as aggressi) 72 259.33 T
+(v) 189.51 259.33 T
+(e testing.) 194.36 259.33 T
+0.43 (As sho) 93.6 225.33 P
+0.43 (wn in T) 121.28 225.33 P
+0.43 (able) 152.44 225.33 P
+0.43 (2, the standard system calls were remo) 171.6 225.33 P
+0.43 (v) 328.71 225.33 P
+0.43 (ed from the list of calls to test. Also remo) 333.56 225.33 P
+0.43 (v) 503.35 225.33 P
+0.43 (ed were) 508.2 225.33 P
+-0.17 (se) 72 201.33 P
+-0.17 (v) 80.08 201.33 P
+-0.17 (eral calls that \336t the bad system call cate) 84.93 201.33 P
+-0.17 (gory) 245.1 201.33 P
+-0.17 (. The only unusual case for Digital Unix w) 262.78 201.33 P
+-0.17 (as) 432.17 201.33 P
+3 F
+-0.4 (kmodcall\050\051) 442.84 201.33 P
+0 F
+-0.17 (. There is) 502.84 201.33 P
+-0.05 (no mention of this call in an) 72 177.33 P
+-0.05 (y include \336les \050other than) 183.74 177.33 P
+3 F
+-0.13 (syscall.h) 288.18 177.33 P
+0 F
+-0.05 (\051 or man pages. This routine hung the testing pro-) 342.18 177.33 P
+0.2 (cess most of the time it w) 72 153.33 P
+0.2 (as called. It is still unclear what it is trying to do, and therefore if it is a b) 175.29 153.33 P
+0.2 (ug that is causing) 469.69 153.33 P
+0.47 (the hanging or if that is the e) 72 129.33 P
+0.47 (xpected beha) 189.82 129.33 P
+0.47 (vior) 242.57 129.33 P
+0.47 (. This call w) 258.13 129.33 P
+0.47 (as remo) 308.87 129.33 P
+0.47 (v) 340.57 129.33 P
+0.47 (ed to allo) 345.42 129.33 P
+0.47 (w the automated scripts to run without) 383.32 129.33 P
+(interruptions.) 72 105.33 T
+0 0 0 1 0 0 0 K
+FMENDPAGE
+%%EndPage: "10" 10
+%%Page: "11" 11
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(11) 532 34.17 T
+1 12 Q
+(4.3  HP-UX 9.05) 72 712 T
+0 10 Q
+-0.23 (HP-UX 9.05 w) 93.6 687.33 P
+-0.23 (as tested on a 700 series HP w) 153.31 687.33 P
+-0.23 (orkstation. The k) 272.95 687.33 P
+-0.23 (ernel pro) 340.44 687.33 P
+-0.23 (v) 375.88 687.33 P
+-0.23 (ed to be stable in all cases. Ho) 380.73 687.33 P
+-0.23 (we) 499.94 687.33 P
+-0.23 (v) 511.35 687.33 P
+-0.23 (er) 516.2 687.33 P
+-0.23 (, we) 523.57 687.33 P
+(did \336nd e) 72 663.33 T
+(vidence of an e) 109.53 663.33 T
+(xception case that the k) 170.19 663.33 T
+(ernel handles incorrectly) 263.96 663.33 T
+(.) 362.17 663.33 T
+0.68 (The mechanism that the k) 93.6 629.33 P
+0.68 (ernel uses to report e) 199.53 629.33 P
+0.68 (xceptions is by returning) 285.41 629.33 P
+3 F
+1.63 (-1) 389.78 629.33 P
+0 F
+0.68 ( from the system call. The calling) 401.78 629.33 P
+0.46 (program must then inspect the v) 72 605.33 P
+0.46 (alue of the inte) 202.64 605.33 P
+0.46 (ger v) 263.58 605.33 P
+0.46 (ariable) 284.05 605.33 P
+3 F
+1.1 (errno) 314.22 605.33 P
+0 F
+0.46 ( to determine what e) 344.22 605.33 P
+0.46 (xception occurred. No error) 427.55 605.33 P
+(should be reported from within the k) 72 581.33 T
+(ernel.) 218.55 581.33 T
+(Under HP-UX, if a pointer is passed to and referenced by the k) 93.6 547.33 T
+(ernel, there are three cases to consider:) 345.38 547.33 T
+(1.) 108 517.33 T
+(The pointer references memory that is contained in the current user data or stack se) 126 517.33 T
+(gment.) 458.54 517.33 T
+(2.) 108 499.33 T
+(The pointer references memory that can ne) 126 499.33 T
+(v) 297.36 499.33 T
+(er be contained in the user or stack se) 302.21 499.33 T
+(gment, as de\336ned by) 452.02 499.33 T
+(the start of each se) 126 487.33 T
+(gment and the maximum size of the se) 200.27 487.33 T
+(gment. The maximum size of the se) 354.27 487.33 T
+(gment is) 497.16 487.33 T
+(determined when the k) 126 475.33 T
+(ernel is b) 217.27 475.33 T
+(uilt.) 253.73 475.33 T
+(3.) 108 457.33 T
+-0.03 (The pointer references memory that is not de\336ned by the \336rst tw) 126 457.33 P
+-0.03 (o cases. That is, the memory is not cur-) 383.04 457.33 P
+-0.22 (rently part of the user data or stack se) 126 445.33 P
+-0.22 (gment, b) 274.06 445.33 P
+-0.22 (ut it is at a location that could become part of one of these) 308.64 445.33 P
+(se) 126 433.33 T
+(gments if the se) 134.18 433.33 T
+(gment were to gro) 197.08 433.33 T
+(w) 269.87 433.33 T
+(.) 276.44 433.33 T
+0.26 (Case 1 represents a v) 72 405.33 P
+0.26 (alid memory reference and generates no error) 157.2 405.33 P
+0.26 (. Case 2 is handled in the e) 340.33 405.33 P
+0.26 (xpected manner:) 449.19 405.33 P
+3 F
+0.62 (-1) 518.57 405.33 P
+0 F
+0.26 ( is) 530.57 405.33 P
+0.09 (returned from the system call and) 72 381.33 P
+3 F
+0.21 (errno) 209.16 381.33 P
+0 F
+0.09 ( is set to) 239.16 381.33 P
+3 F
+0.21 (SIGSEGV) 275.07 381.33 P
+0 F
+0.09 (. Case 3 should be treated the same as case 2, b) 315.77 381.33 P
+0.09 (ut is not.) 505.1 381.33 P
+0.14 (Instead, case 3 causes the k) 72 357.33 P
+0.14 (ernel to emit an error message to) 182.01 357.33 P
+3 F
+0.34 (stderr) 316.58 357.33 P
+0 F
+0.14 (, and return) 352.18 357.33 P
+3 F
+0.34 (-1) 400.92 357.33 P
+0 F
+0.14 ( with) 412.92 357.33 P
+3 F
+0.34 (errno) 435.98 357.33 P
+0 F
+0.14 ( set to) 465.98 357.33 P
+3 F
+0.34 (SIGSEGV) 492.79 357.33 P
+0 F
+0.14 (.) 533.5 357.33 P
+0 8 Q
+0.11 (1) 536 361.33 P
+0 10 Q
+-0.16 (The error message can be suppressed by using the) 72 333.33 P
+3 F
+-0.38 (signal\050\051) 273.01 333.33 P
+0 F
+-0.16 ( mechanism to either ignore se) 321.01 333.33 P
+-0.16 (gmentation violations or) 442.54 333.33 P
+-0.03 (to install a user handler) 72 309.33 P
+-0.03 (. Ho) 164.63 309.33 P
+-0.03 (we) 181.57 309.33 P
+-0.03 (v) 192.98 309.33 P
+-0.03 (er) 197.83 309.33 P
+-0.03 (, the k) 205.2 309.33 P
+-0.03 (ernel does not call the user handler) 229.75 309.33 P
+-0.03 (, so the only beha) 368.56 309.33 P
+-0.03 (vior that can be produced) 438.49 309.33 P
+(is the beha) 72 285.33 T
+(vior produced by case 2, which is con) 114.57 285.33 T
+(v) 265.25 285.33 T
+(eniently the correct beha) 270.1 285.33 T
+(vior) 368.48 285.33 T
+(.) 384.04 285.33 T
+1.05 (The only special case call that needed to be remo) 93.6 251.33 P
+1.05 (v) 299.24 251.33 P
+1.05 (ed from the input \336le w) 304.1 251.33 P
+1.05 (as) 403.41 251.33 P
+3 F
+2.52 (async_daemon\050\051) 415.29 251.33 P
+0 F
+1.05 (, an NFS-) 499.29 251.33 P
+(related system call that ne) 72 227.33 T
+(v) 175.62 227.33 T
+(er returns.) 180.47 227.33 T
+1 12 Q
+(4.4  Linux) 72 190 T
+0 10 Q
+-0.24 (Linux pro) 93.6 165.33 P
+-0.24 (v) 132.93 165.33 P
+-0.24 (ed to be a stable system under hea) 137.78 165.33 P
+-0.24 (vy ab) 272.28 165.33 P
+-0.24 (use. The Linux k) 293.78 165.33 P
+-0.24 (ernel survi) 360.74 165.33 P
+-0.24 (v) 402.74 165.33 P
+-0.24 (ed hundreds of millions of purely) 407.59 165.33 P
+0.6 (random calls, as well as aggressi) 72 141.33 P
+0.6 (v) 205.26 141.33 P
+0.6 (e testing. The only special-case calls that needed to be remo) 210.11 141.33 P
+0.6 (v) 455.59 141.33 P
+0.6 (ed were) 460.44 141.33 P
+3 F
+1.43 (clone\050\051) 495.5 141.33 P
+0 F
+0.6 (,) 537.5 141.33 P
+0.57 (which is Linux\325) 72 117.33 P
+0.57 (s more po) 135.92 117.33 P
+0.57 (werful v) 176.26 117.33 P
+0.57 (ersion of) 210.28 117.33 P
+3 F
+1.37 (fork\050\051) 249.19 117.33 P
+0 F
+0.57 (, and) 285.19 117.33 P
+3 F
+1.37 (vm86\050\051) 308.27 117.33 P
+0 F
+0.57 (.) 344.27 117.33 P
+3 F
+1.37 (vm86\050\051) 349.84 117.33 P
+0 F
+0.57 ( tries to mak) 385.84 117.33 P
+0.57 (e the system enter virtual) 437.17 117.33 P
+72 75 540 95 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 83 204 83 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 0 612 792 C
+0 8 Q
+0 X
+0 0 0 1 0 0 0 K
+(1.) 72 69.67 T
+(This happens whether the system call is accessed via the) 84 69.67 T
+3 F
+(syscall\050\051) 266.63 69.67 T
+0 F
+( mechanism or through the system library wrapper) 309.83 69.67 T
+(.) 470.92 69.67 T
+0 0 0 1 0 0 0 K
+FMENDPAGE
+%%EndPage: "11" 11
+%%Page: "12" 12
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(12) 532 34.17 T
+0 10 Q
+0.65 (8086 mode. This call almost al) 72 713.33 P
+0.65 (w) 198.46 713.33 P
+0.65 (ays caused the tester to abort. It w) 205.58 713.33 P
+0.65 (as remo) 346.08 713.33 P
+0.65 (v) 377.95 713.33 P
+0.65 (ed from the list so the fully-automated) 382.8 713.33 P
+(scripts that ran millions of cases could proceed without interruption.) 72 689.33 T
+1 12 Q
+(4.5  IRIX 6.2) 72 652 T
+0 10 Q
+0.27 (IRIX 6.2 pro) 93.6 627.33 P
+0.27 (vided us with ob) 145.38 627.33 P
+0.27 (vious k) 212.43 627.33 P
+0.27 (ernel b) 241.78 627.33 P
+0.27 (ugs. T) 269.34 627.33 P
+0.27 (w) 293.81 627.33 P
+0.27 (o system calls were isolated in a matter of minutes, each of) 300.93 627.33 P
+0.72 (which caused the machine we were testing to either k) 72 603.33 P
+0.72 (ernel panic and crash, or to hang completely \050the mouse and) 291.98 603.33 P
+0.81 (k) 72 579.33 P
+0.81 (e) 76.9 579.33 P
+0.81 (yboard stopped w) 81.19 579.33 P
+0.81 (orking and the machine no longer responded to pings, telnet requests, or other netw) 153.81 579.33 P
+0.81 (ork opera-) 497.82 579.33 P
+0.01 (tions\051. A third system call that causes a k) 72 555.33 P
+0.01 (ernel crash w) 236.13 555.33 P
+0.01 (as disco) 289.36 555.33 P
+0.01 (v) 321.17 555.33 P
+0.01 (ered during the application of the) 326.02 555.33 P
+3 F
+0.03 (runmany) 461.61 555.33 P
+0 F
+0.01 ( program) 503.61 555.33 P
+(to the list of problematic calls.) 72 531.33 T
+0.28 (Our e) 93.6 497.33 P
+0.28 (xperience with IRIX w) 116.22 497.33 P
+0.28 (as much dif) 208.88 497.33 P
+0.28 (ferent than the other systems we tested. IRIX does not store its system) 255.85 497.33 P
+1.1 (call information in) 72 473.33 P
+3 F
+2.64 (syscall.h) 152.23 473.33 P
+0 F
+1.1 (, as the other v) 206.23 473.33 P
+1.1 (ersions of Unix did. Instead, IRIX stores it in) 269.08 473.33 P
+3 F
+2.64 (/usr/include/) 462 473.33 P
+0.15 (sys.s) 72 449.33 P
+0 F
+0.06 (. Also, IRIX of) 102 449.33 P
+0.06 (fsets all the system call numbers by 1000, so) 162.21 449.33 P
+3 F
+0.15 (read\050\051) 343.86 449.33 P
+0 F
+0.06 ( is syscall number 1003 instead of num-) 379.86 449.33 P
+(ber 3. This required some e) 72 425.33 T
+(xtra w) 181.27 425.33 T
+(ork in the parsing script.) 206.44 425.33 T
+1.12 (The \336rst k) 93.6 391.33 P
+1.12 (ernel b) 136.85 391.33 P
+1.12 (ugs we found were in the IRIX implementation of) 165.26 391.33 P
+3 F
+2.69 (setcontext\050\051) 377.82 391.33 P
+0 F
+1.12 ( and) 449.82 391.33 P
+3 F
+2.69 (getitimer\050\051) 471.5 391.33 P
+0 F
+1.12 (.) 537.5 391.33 P
+3 F
+2.86 (setcontext\050\051) 72 367.33 P
+0 F
+1.19 ( e) 144 367.33 P
+1.19 (xpects just one ar) 151.98 367.33 P
+1.19 (gument: a pointer to a conte) 225.08 367.33 P
+1.19 (xt structure. If this pointer is in) 342.81 367.33 P
+1.19 (v) 473.71 367.33 P
+1.19 (alid, instead of) 478.46 367.33 P
+0.58 (returning) 72 343.33 P
+3 F
+1.38 (-1) 111.74 343.33 P
+0 F
+0.58 ( and setting) 123.74 343.33 P
+3 F
+1.38 (errno) 174.08 343.33 P
+0 F
+0.58 ( to) 204.08 343.33 P
+3 F
+1.38 (EFAULT) 218.01 343.33 P
+0 F
+0.58 ( \050lik) 254.01 343.33 P
+0.58 (e other system calls that are gi) 270.88 343.33 P
+0.58 (v) 395.18 343.33 P
+0.58 (en bad pointers\051, the k) 400.03 343.33 P
+0.58 (ernel panics) 491.38 343.33 P
+1.15 (and the system crashes in nearly all cases. Calling) 72 319.33 P
+3 F
+2.77 (setcontext\050\051) 284.56 319.33 P
+0 F
+1.15 ( either directly with) 356.56 319.33 P
+3 F
+2.77 (syscall\050\051) 442.27 319.33 P
+0 F
+1.15 ( or via the) 496.27 319.33 P
+(library function yields the same result.) 72 295.33 T
+0.37 (The b) 93.6 261.33 P
+0.37 (ug in) 116.82 261.33 P
+3 F
+0.89 (getitimer\050\051) 140.35 261.33 P
+0 F
+0.37 ( results in either the machine hanging or a k) 206.35 261.33 P
+0.37 (ernel panic, depending on the parame-) 384.85 261.33 P
+1.1 (ters used.) 72 237.33 P
+3 F
+2.63 (getitimer\050\051) 114.47 237.33 P
+0 F
+1.1 ( e) 180.47 237.33 P
+1.1 (xpects tw) 188.35 237.33 P
+1.1 (o parameters: an inte) 227.4 237.33 P
+1.1 (ger and a pointer) 314.14 237.33 P
+1.1 (.) 384.36 237.33 P
+3 F
+2.63 (getitimer\050\051) 390.46 237.33 P
+0 F
+1.1 ( properly checks for) 456.46 237.33 P
+-0.05 (in) 72 213.33 P
+-0.05 (v) 79.38 213.33 P
+-0.05 (alid pointers and returns) 84.13 213.33 P
+3 F
+-0.13 (-1) 183.35 213.33 P
+0 F
+-0.05 (, setting) 195.35 213.33 P
+3 F
+-0.13 (errno) 229.41 213.33 P
+0 F
+-0.05 ( to) 259.41 213.33 P
+3 F
+-0.13 (EFAULT) 272.08 213.33 P
+0 F
+-0.05 ( as you w) 308.08 213.33 P
+-0.05 (ould e) 345.87 213.33 P
+-0.05 (xpect. Ho) 370.39 213.33 P
+-0.05 (we) 408.96 213.33 P
+-0.05 (v) 420.37 213.33 P
+-0.05 (er) 425.22 213.33 P
+-0.05 (, when the inte) 432.59 213.33 P
+-0.05 (ger is a ne) 491.16 213.33 P
+-0.05 (g-) 531.67 213.33 P
+0.69 (ati) 72 189.33 P
+0.69 (v) 81.75 189.33 P
+0.69 (e v) 86.6 189.33 P
+0.69 (alue belo) 98.98 189.33 P
+0.69 (w) 135.8 189.33 P
+3 F
+1.66 (-851) 146.22 189.33 P
+0 F
+0.69 (, the machine hangs. F) 170.22 189.33 P
+0.69 (or certain ranges of v) 262.83 189.33 P
+0.69 (ery lar) 350.41 189.33 P
+0.69 (ge ne) 376.75 189.33 P
+0.69 (g) 398.67 189.33 P
+0.69 (ati) 403.62 189.33 P
+0.69 (v) 413.37 189.33 P
+0.69 (e numbers, the call to) 418.22 189.33 P
+3 F
+1.66 (geti-) 510 189.33 P
+-0.52 (timer\050\051) 72 165.33 P
+0 F
+-0.22 ( results in a b) 114 165.33 P
+-0.22 (us error and k) 166.26 165.33 P
+-0.22 (ernel panic, instead of a hang. Lik) 220.76 165.33 P
+-0.22 (e the b) 355.43 165.33 P
+-0.22 (ug in) 381.46 165.33 P
+3 F
+-0.52 (setcontext\050\051) 403.8 165.33 P
+0 F
+-0.22 (, this b) 475.8 165.33 P
+-0.22 (ug can be) 502.12 165.33 P
+(triggered via either the library wrapper or a direct call.) 72 141.33 T
+1.44 (Other special case calls that needed to be remo) 93.6 107.33 P
+1.44 (v) 292.14 107.33 P
+1.44 (ed from the input \336le were) 296.99 107.33 P
+3 F
+3.46 (async_daemon\050\051) 414.51 107.33 P
+0 F
+1.44 (, an NFS-) 498.51 107.33 P
+(related system call that ne) 72 83.33 T
+(v) 175.62 83.33 T
+(er returns, and) 180.47 83.33 T
+3 F
+(nsproc\050\051) 240.45 83.33 T
+0 F
+(, which usually hung the tester) 288.45 83.33 T
+(.) 410.11 83.33 T
+0 0 0 1 0 0 0 K
+FMENDPAGE
+%%EndPage: "12" 12
+%%Page: "13" 13
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(13) 532 34.17 T
+3 10 Q
+0.64 (Runmany) 93.6 713.33 P
+0 F
+0.27 ( w) 135.6 713.33 P
+0.27 (as used to test the pre) 145.49 713.33 P
+0.27 (viously e) 232.39 713.33 P
+0.27 (xcluded calls and another k) 268.89 713.33 P
+0.27 (ernel b) 379.28 713.33 P
+0.27 (ug w) 406.84 713.33 P
+0.27 (as found in the implementa-) 426.72 713.33 P
+0.53 (tion of) 72 689.33 P
+3 F
+1.28 (sigreturn\050\051) 101.96 689.33 P
+0 F
+0.53 (. F) 167.96 689.33 P
+0.53 (or a small range of v) 178.9 689.33 P
+0.53 (alues of) 263.79 689.33 P
+3 F
+1.28 (sigreturn\050\051) 298.73 689.33 P
+0 F
+0.53 (\324s parameter) 364.73 689.33 P
+0.53 (,) 414.57 689.33 P
+0 8 Q
+0.43 (1) 417.07 693.33 P
+0 10 Q
+0.53 ( the k) 421.07 689.33 P
+0.53 (ernel panics and dumps) 444.25 689.33 P
+(core. This call has a comment in the) 72 665.33 T
+3 F
+(sys.s) 218.92 665.33 T
+0 F
+( \336le that reads:) 248.92 665.33 T
+3 F
+(/* This system call is internal for mips signal handling code */) 93.6 631.33 T
+0 F
+0.45 (There is no library function for) 72 597.33 P
+3 F
+1.09 (sigreturn\050\051) 201.35 597.33 P
+0 F
+0.45 ( and no man pages. It seems as though the designers of IRIX ne) 267.35 597.33 P
+0.45 (v) 527.38 597.33 P
+0.45 (er) 532.23 597.33 P
+0.76 (intended the call to be made from outside of the k) 72 573.33 P
+0.76 (ernel. If this were the case, it w) 278.34 573.33 P
+0.76 (ould be easy for them to simply) 408.79 573.33 P
+0.03 (return -1 and set errno to) 72 549.33 P
+3 F
+0.06 (EPERM) 173.79 549.33 P
+0 F
+0.03 ( \050\322operation not permitted\323\051 as is done in similar cases. Ho) 203.79 549.33 P
+0.03 (we) 439.03 549.33 P
+0.03 (v) 450.44 549.33 P
+0.03 (er) 455.29 549.33 P
+0.03 (, the call is allo) 462.66 549.33 P
+0.03 (wed) 523.34 549.33 P
+(to proceed, and for a small range of v) 72 525.33 T
+(alues, the call produces a k) 221.43 525.33 T
+(ernel panic and crash.) 329.08 525.33 T
+1 14 Q
+(5.0  Other T) 72 482.67 T
+(ools) 143.82 482.67 T
+0 10 Q
+-0.14 (Another program for testing a k) 93.6 455.33 P
+-0.14 (ernel that is based on random input is called) 219.71 455.33 P
+2 F
+-0.14 (cr) 397.01 455.33 P
+-0.14 (ashme) 405.19 455.33 P
+0 F
+-0.14 ( and w) 430.74 455.33 P
+-0.14 (as written by Geor) 457.02 455.33 P
+-0.14 (ge) 530.56 455.33 P
+-0.11 (J. Carrette.) 72 431.33 P
+0 8 Q
+-0.09 (2) 115.49 435.33 P
+0 10 Q
+-0.11 ( Crashme w) 119.49 431.33 P
+-0.11 (orks by generating a random string of bytes, then e) 166.94 431.33 P
+-0.11 (x) 369.11 431.33 P
+-0.11 (ecuting that string as if it were a function.) 373.96 431.33 P
+-0.19 (This program has been used for years by the de) 72 407.33 P
+-0.19 (v) 259.16 407.33 P
+-0.19 (elopers of the Linux k) 264.01 407.33 P
+-0.19 (ernel to test for b) 351.48 407.33 P
+-0.19 (ugs. Crashme\325) 418.84 407.33 P
+-0.19 (s success can be) 475.87 407.33 P
+0.78 (easily seen by the number of references to it in b) 72 383.33 P
+0.78 (ug reports to the Linux k) 274.05 383.33 P
+0.78 (ernel de) 377.03 383.33 P
+0.78 (v) 409.49 383.33 P
+0.78 (eloper\325) 414.34 383.33 P
+0.78 (s mailing list and ne) 442.11 383.33 P
+0.78 (ws-) 525.56 383.33 P
+0.19 (groups. The use of crashme during de) 72 359.33 P
+0.19 (v) 223.72 359.33 P
+0.19 (elopment of the Linux k) 228.57 359.33 P
+0.19 (ernel may ha) 325.91 359.33 P
+0.19 (v) 377.75 359.33 P
+0.19 (e contrib) 382.6 359.33 P
+0.19 (uted to Linux\325) 417.86 359.33 P
+0.19 (s in) 474.92 359.33 P
+0.19 (vulnerability) 488.89 359.33 P
+(to our tool.) 72 335.33 T
+1 14 Q
+(6.0  Summary) 72 292.67 T
+0 10 Q
+0.28 (Using random data pro) 93.6 265.33 P
+0.28 (v) 186.23 265.33 P
+0.28 (ed to be a simple and ef) 191.08 265.33 P
+0.28 (fecti) 287.51 265.33 P
+0.28 (v) 305.03 265.33 P
+0.28 (e w) 309.88 265.33 P
+0.28 (ay to test the rob) 324.22 265.33 P
+0.28 (ustness of man) 391.81 265.33 P
+0.28 (y aspects of operating) 451.67 265.33 P
+1.24 (systems. Bugs that can be the source of unw) 72 241.33 P
+1.24 (anted crashes, security holes, or other undesirable ef) 258.72 241.33 P
+1.24 (fects ha) 476.24 241.33 P
+1.24 (v) 508.09 241.33 P
+1.24 (e been) 512.94 241.33 P
+0.26 (found inside standard utilities, X-W) 72 217.33 P
+0.26 (indo) 216.24 217.33 P
+0.26 (w clients, and the k) 233.77 217.33 P
+0.26 (ernel itself. The tool described here can be used for easy) 312.2 217.33 P
+0.71 (testing of an) 72 193.33 P
+0.71 (y modern Unix k) 122.72 193.33 P
+0.71 (ernel. The de) 192.81 193.33 P
+0.71 (v) 246.47 193.33 P
+0.71 (elopers of these k) 251.32 193.33 P
+0.71 (ernels w) 323.62 193.33 P
+0.71 (ould bene\336t from using this tool as a w) 357.84 193.33 P
+0.71 (ay to) 519.57 193.33 P
+-0.04 (impro) 72 169.33 P
+-0.04 (v) 95.74 169.33 P
+-0.04 (e the reliability and security of their systems. T) 100.59 169.33 P
+-0.04 (o their credit, most of the systems we tested survi) 288.07 169.33 P
+-0.04 (v) 485.23 169.33 P
+-0.04 (ed our tool\325) 490.08 169.33 P
+-0.04 (s) 536.11 169.33 P
+0.68 (ab) 72 145.33 P
+0.68 (uses, which indicates a high de) 81.24 145.33 P
+0.68 (gree of f) 208.38 145.33 P
+0.68 (ault tolerance within the k) 243.52 145.33 P
+0.68 (ernel. Ho) 350.58 145.33 P
+0.68 (we) 388.23 145.33 P
+0.68 (v) 399.64 145.33 P
+0.68 (er) 404.49 145.33 P
+0.68 (, the f) 411.86 145.33 P
+0.68 (ailure of the most current) 436.17 145.33 P
+0.13 (release of IRIX, a major operating system used by engineers to design things lik) 72 121.33 P
+0.13 (e the Boeing 777, speaks to the con-) 394.11 121.33 P
+72 89 540 109 C
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 97 204 97 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 0 612 792 C
+0 8 Q
+0 X
+0 0 0 1 0 0 0 K
+(1.) 72 83.67 T
+(In this case, we were unable to determine an) 84 83.67 T
+(y meaningful pattern to the v) 225.84 83.67 T
+(alues of the parameter which caused the crash.) 318.3 83.67 T
+(2.) 72 70.33 T
+(Geor) 84 70.33 T
+(ge Carrette can be contacted at) 99.85 70.33 T
+3 9 Q
+(GJC@BU-IT.BU.EDU) 200.26 70.33 T
+0 10 Q
+(.) 286.66 70.33 T
+0 0 0 1 0 0 0 K
+FMENDPAGE
+%%EndPage: "13" 13
+%%Page: "14" 14
+612 792 0 FMBEGINPAGE
+[0 0 0 1 0 0 0]
+[ 0 1 1 0 1 0 0]
+[ 1 0 1 0 0 1 0]
+[ 1 1 0 0 0 0 1]
+[ 1 0 0 0 0 1 1]
+[ 0 1 0 0 1 0 1]
+[ 0 0 1 0 1 1 0]
+ 7 FrameSetSepColors
+FrameNoSep
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+0 0 0 1 0 0 0 K
+72 54 540 54 2 L
+0.25 H
+2 Z
+0 X
+0 0 0 1 0 0 0 K
+N
+0 8 Q
+(Using Fuzz to T) 72 34.17 T
+(est the Reliability of Unix K) 123.22 34.17 T
+(ernels) 213.9 34.17 T
+(January 28, 1997) 278.56 34.17 T
+(14) 532 34.17 T
+0 10 Q
+0.47 (tinued need for this form of testing. Ev) 72 713.33 P
+0.47 (ery ne) 230.67 713.33 P
+0.47 (w release of an operating system should be subjected to a fe) 255.6 713.33 P
+0.47 (w days of) 500.18 713.33 P
+0.7 (k) 72 689.33 P
+0.7 (ernel fuzz testing. In the case of IRIX, its b) 76.9 689.33 P
+0.7 (ugs w) 255.49 689.33 P
+0.7 (ould ha) 279.7 689.33 P
+0.7 (v) 309.92 689.33 P
+0.7 (e been disco) 314.77 689.33 P
+0.7 (v) 365.46 689.33 P
+0.7 (ered in the \336rst half-hour) 370.31 689.33 P
+0.7 (, and could ha) 472.7 689.33 P
+0.7 (v) 530.71 689.33 P
+0.7 (e) 535.56 689.33 P
+(been \336x) 72 665.33 T
+(ed.) 103.79 665.33 T
+1 14 Q
+(Ackno) 72 614.67 T
+(wledgments) 110.75 614.67 T
+0 10 Q
+0.21 (W) 93.6 587.33 P
+0.21 (e w) 102.24 587.33 P
+0.21 (ould lik) 116.51 587.33 P
+0.21 (e to thank T) 147.46 587.33 P
+0.21 (odd T) 195.33 587.33 P
+0.21 (annenbaum and Jef) 218.35 587.33 P
+0.21 (f Ballard of the Model Adv) 295.72 587.33 P
+0.21 (anced F) 405.67 587.33 P
+0.21 (acility at the UW Colle) 437.1 587.33 P
+0.21 (ge) 530.56 587.33 P
+0.44 (of Engineering for the use of an SGI Indigo2 w) 72 563.33 P
+0.44 (orkstation that suf) 265.02 563.33 P
+0.44 (fered man) 337.88 563.33 P
+0.44 (y hard crashes as a result of our testing.) 378.43 563.33 P
+0.03 (W) 72 539.33 P
+0.03 (e w) 80.64 539.33 P
+0.03 (ould also lik) 94.72 539.33 P
+0.03 (e to thank Bart Miller) 144.12 539.33 P
+0.03 (, Oscar Naim, and the P) 230.48 539.33 P
+0.03 (aradyn project at the UW Computer Sciences Depart-) 325.72 539.33 P
+-0.16 (ment for the use of an HP series 700 w) 72 515.33 P
+-0.16 (orkstation. It did not suf) 225.73 515.33 P
+-0.16 (fer as badly as the SGI, b) 321.24 515.33 P
+-0.16 (ut the potential w) 420.91 515.33 P
+-0.16 (as there, and) 490.05 515.33 P
+0.3 (we appreciate the sacri\336ce made by its users. W) 72 491.33 P
+0.3 (e w) 265.5 491.33 P
+0.3 (ould also lik) 279.86 491.33 P
+0.3 (e to thank Sun Microsystems for making the Solaris) 329.82 491.33 P
+(source code a) 72 467.33 T
+(v) 126.22 467.33 T
+(ailable to us.) 130.97 467.33 T
+1 14 Q
+(Refer) 72 416.67 T
+(ences) 105.17 416.67 T
+0 10 Q
+([1]) 72 389.33 T
+-0.02 (Barton P) 90 389.33 P
+-0.02 (. Miller) 124.15 389.33 P
+-0.02 (, et al. \322Fuzz Re) 153.72 389.33 P
+-0.02 (visited: A Re-e) 217.8 389.33 P
+-0.02 (xamination of the Reliability of Unix Utilities and Services,) 278.16 389.33 P
+-0.02 (\323 Pre-) 516.42 389.33 P
+(liminary cop) 90 377.33 T
+(y) 140.73 377.33 T
+(, No) 145.08 377.33 T
+(v) 162.15 377.33 T
+(ember 9, 1995, 23 pages.) 167 377.33 T
+([2]) 72 355.33 T
+0.57 (John H. Ho) 90 355.33 P
+0.57 (w) 136.72 355.33 P
+0.57 (ard, Michael L. Kazar) 143.84 355.33 P
+0.57 (, Sherri G. Menees, Da) 233.16 355.33 P
+0.57 (vid A. Nichols, M. Satyanarayanan, Robert N. Side-) 327.16 355.33 P
+-0.24 (botham, Michael J. W) 90 343.33 P
+-0.24 (est, \322Scale and Performance in a Distrib) 177.07 343.33 P
+-0.24 (uted File System,) 335.65 343.33 P
+-0.24 (\323) 404.19 343.33 P
+2 F
+-0.24 (A) 410.89 343.33 P
+-0.24 (CM T) 416.7 343.33 P
+-0.24 (r) 438.97 343.33 P
+-0.24 (ansactions on Computer) 442.71 343.33 P
+(Systems) 90 331.33 T
+0 F
+(,) 121.66 331.33 T
+1 F
+(6) 126.66 331.33 T
+0 F
+( 1, pp. 51\32081. February 1988.) 131.66 331.33 T
+0 0 0 1 0 0 0 K
+FMENDPAGE
+%%EndPage: "14" 14
+%%Trailer
+%%BoundingBox: 0 0 612 792
+%%PageOrder: Ascend
+%%Pages: 14
+%%DocumentFonts: Times-Roman
+%%+ Times-Bold
+%%+ Times-Italic
+%%+ Courier
+%%+ Courier-Oblique
+%%+ ZapfDingbats
+%%EOF
