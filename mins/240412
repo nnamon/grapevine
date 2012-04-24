@@ -9,3 +9,14 @@ OSX86 Leopard in virtualbox -> upgrade to Snow Leopard
 >Install xcode
 >Compile Darwin
 
+Workplan
+
+- Something to analyse BSD and Mach syscall files.
+- Start from basic fuzzer (Using fuzzing inputs similar to Android Kernel Fuzzer)
+- modular, add in different fuzzing inputs (int, char, etc)
+- Design a fuzzing algorithm
+
+- Expand with network capabilities
+- 'Cluster' Fuzzing
+- Host <-> Guest
+- VM control over network
