@@ -4,3 +4,8 @@ Minutes
 fuzzer generator based on mutation
 
 code coverage
+
+OSX86 Leopard in virtualbox -> upgrade to Snow Leopard
+>Install xcode
+>Compile Darwin
+
