@@ -51,3 +51,12 @@ Fuzz random (BSD/Mach)syscalls with random data.
 --Scope
 Mac OSX XNU/Darwn Kernel fuzzer generator 
 framework-like thing
+
+
+--
+Assessment Criteria
+-Content - subject knowledge, organisation
+-Content - Presentation Material Design and Layout
+-Delivery - Effectiveness of communcation, pacing and time management
+-Delivery - Eye contact, poise and body language
+-Verbal Skills - enthusiasm
