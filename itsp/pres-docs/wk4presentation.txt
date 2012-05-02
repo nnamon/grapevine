@@ -1,0 +1,62 @@
+--Requirement Analysis & Requirement Specification
+
+Automated Fuzzer generator for XNU/Darwin/OSX Kernel syscalls 
+
+--Proposed Deliverables
+Hardware/Software configuration for dev/deploy
+Software Functions
+
+-Development
+
+\Hardware
+ - MacBook
+ - Intel x86_64 CPU-based computer
+
+\Software
+ - Mac OSX
+ - PureDarwin
+ - Various Linux distros
+ - GNU C Compiler
+ - python
+ - xcode 
+ - Virtualbox
+ - VMWare Workstation/Player
+ - QEMU
+
+-Deployment
+\Hardware 
+ - Macbook (or other modern Macintosh Computers)
+ - Intel x86_64 CPU-based computer
+
+\Software
+ - Mac OSX
+ - python
+ - Linux
+ - QEMU
+ - Virtualbox
+ - VMWare Workstation/Player
+
+-Software Functions
+generateFuzzerData();
+logCrash();
+
+--Marketing-based material video/flash/ppt
+Problem statement
+ - Mac userbase is growing. The number or malware targeted at Mac OSX is growing as well. Security research on the Mac OSX platform has been gaining popularity recently in response to the malicious attacks. There is a need to develop tools for security research to find vulnerabilities within the Mac OSX operating system. Especially the XNU/Darwin kernel which is the main component of the Mac OSX operating system.
+
+Proposed possible solutions/ideas.
+Fuzz random (BSD/Mach)syscalls with random data.
+
+
+--Scope
+Mac OSX XNU/Darwn Kernel fuzzer generator 
+framework-like thing
+
+
+--
+Assessment Criteria
+-Content - subject knowledge, organisation
+-Content - Presentation Material Design and Layout
+-Delivery - Effectiveness of communcation, pacing and time management
+-Delivery - Eye contact, poise and body language
+-Verbal Skills - enthusiasm
