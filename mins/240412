@@ -40,14 +40,14 @@ Main Manager (Interface for VM/Fuzzer Managers)
                           `-- Mach
         `-- Logger
                                     
-                                        *Introduction
+*Introduction
+                           
                                         
-                                        
-                                        *Background
-                                        According to statistics the number of Mac OSX users is growing.
-                                        Mac OSX is beginning to be targetted by security
-                                        http://www.eweek.com/c/a/Security/Macs-iPhones-iPads-Are-Now-Bigger-Targets-for-Malware-Attackers-298500/
-                                        http://arstechnica.com/apple/news/2012/04/kaspersky-lab-mac-os-x-invulnerability-to-malware-is-a-myth.ars
-                                        
-                                        *Resources
-                                        1xMacBook with Mac OSX
+*Background
+According to statistics the number of Mac OSX users is growing.
+Mac OSX is beginning to be targetted by security
+http://www.eweek.com/c/a/Security/Macs-iPhones-iPads-Are-Now-Bigger-Targets-for-Malware-Attackers-298500/
+ http://arstechnica.com/apple/news/2012/04/kaspersky-lab-mac-os-x-invulnerability-to-malware-is-a-myth.ars
+                              
+*Resources
+1xMacBook with Mac OSX
