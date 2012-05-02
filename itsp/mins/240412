@@ -33,11 +33,11 @@ Mac OSX XNU/Darwn Kernel Fuzzer Generator
 Sections:
 Main Manager (Interface for VM/Fuzzer Managers)
   `-- VM Manager (Interface to the User) - Responsible for Starting and Restarting the VM
-   `-- Fuzzer Manager (Network-based)
+  `-- Fuzzer Manager (Network-based)
        `-- Fuzzer Generator 
               `-- Syscall header analyser
                          `-- BSD
-                          `-- Mach
+                         `-- Mach
         `-- Logger
                                     
 *Introduction
