@@ -1,0 +1,53 @@
+Minutes (T2135)
+--
+
+fuzzer generator based on mutation
+
+code coverage
+
+OSX86 Leopard in virtualbox -> upgrade to Snow Leopard
+>Install xcode
+>Compile Darwin
+
+Workplan
+
+- Something to analyse BSD and Mach syscall files.
+- Start from basic fuzzer (Using fuzzing inputs similar to Android Kernel Fuzzer)
+- modular, add in different fuzzing inputs (int, char, etc)
+- Design a fuzzing algorithm
+
+- Expand with network capabilities
+- 'Cluster' Fuzzing
+- Host <-> Guest
+- VM control over network
+
+-----------
+
+Part 2
+
+The Scope of The Most Epic Project Ever
+Grapevine XNU Kernel Fuzzer
+
+*Scope
+Mac OSX XNU/Darwn Kernel Fuzzer Generator
+Sections:
+Main Manager (Interface for VM/Fuzzer Managers)
+  `-- VM Manager (Interface to the User) - Responsible for Starting and Restarting the VM
+  `-- Fuzzer Manager (Network-based)
+       `-- Fuzzer Generator 
+              `-- Syscall header analyser
+                         `-- BSD
+                         `-- Mach
+        `-- Logger
+                                    
+*Introduction
+                           
+                                        
+*Background
+According to statistics the number of Mac OSX users is growing.
+Mac OSX is beginning to be targetted by security
+http://www.eweek.com/c/a/Security/Macs-iPhones-iPads-Are-Now-Bigger-Targets-for-Malware-Attackers-298500/
+ http://arstechnica.com/apple/news/2012/04/kaspersky-lab-mac-os-x-invulnerability-to-malware-is-a-myth.ars
+                              
+*Resources
+1xMacBook with Mac OSX

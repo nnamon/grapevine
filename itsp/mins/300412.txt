@@ -1,0 +1,14 @@
+Minutes (T2135)
+--------------------
+Automate virtualmachine
+--on/off
+--automating kernel updating (grab/download-->compile-->run)
+
+week4presentation
+quickly mention what alternatives are out there
+pitch idea
+good points
+why it is needed
+challenges
+potential problems that we may encounter
+

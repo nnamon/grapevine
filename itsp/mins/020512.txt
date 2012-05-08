@@ -1,0 +1,40 @@
+presentation - CSIT help
+Today:
+what needs to be done 
+timeline/milestone  schedule
+
+keep Mr Yeow updated.
+
+Technical stuff
+functions:
+parsing syscall headers/files
+fuzz -> crash -> recover from crash -> continue fuzzing
+ -> get fuzz input that cause crash
+ 
+--build (latest) kernel
+
+Generic fuzzer.
+Different fuzzing techniques.
+ -> mutate valid inputs
+ -> deterministically random input
+ -> combine multiple of fuzzing
+-> code coverage
+
+Fuzzer for multi platform. 
+Documentation is important.
+
+
+Python import ctypes library (like leetmore)
+
+kernel module to find data that created crash.
+
+Handling crashes:
+Detecting/monitoring crashes. Logging data that cause crash.
+ ->VBOX python extension
+ 
+ 
+Causing crashes:
+ -> write a buggy kernel module to cause crash
+ -> ioctl
+
+Notify CSIT about wk4 presentation timing/venue 
