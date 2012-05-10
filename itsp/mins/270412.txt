@@ -1,9 +1,0 @@
-Minutes (Syscan)
------
-Things to talk about at meeting at CSIT on 2nd May.
--> Development plan (incremental)
--> Parts of the fuzz generator
--> Dev environment
--> kernels
--> 
-

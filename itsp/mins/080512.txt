@@ -1,9 +1,0 @@
-080512 mins
-------------
-
-Automate
- - logging
- - documentation (logging of fuzz environment etc)
-  - Kernel version/build version
-  - OS version
-  - Fuzz input
