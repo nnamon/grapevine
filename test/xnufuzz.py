@@ -28,5 +28,8 @@ def getrand():
 
 def getnumber():
     state = random.randrange(0,5)
+    #case statement goes here
 
-
+def getarg():
+    state = random.randrange(0,5)
+    b = ''
