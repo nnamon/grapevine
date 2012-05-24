@@ -1,4 +1,6 @@
 from ctypes import *
+import random
+import binascii
 libc = cdll.LoadLibrary("libc.dylib")
 
 
@@ -16,5 +18,15 @@ ignore[] = [
 ]
 
 def getseed():
-	f = open('/dev/urandom', 'r')
-	
+	return int(binascii.hexlify(open("/dev/urandom", 'r').read(5).rstrip()),16)
+
+def getrand():
+    f = open('/dev/urandom', 'r')
+    d = f.read(128).rstrip()
+    f.close()
+    return d
+
+def getnumber():
+    state = random.randrange(0,5)
+
+
