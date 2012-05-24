@@ -1,6 +1,7 @@
 #calls syscall using libc
-
+#untested
 from ctypes import *
+class syscall:
 
 libc = cdll.LoadLibrary("libc.dylib")
 
