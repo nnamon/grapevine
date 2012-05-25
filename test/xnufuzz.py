@@ -58,3 +58,5 @@ def getarg():
 
 def memfuzz():
 
+if __name__ == "__main__"
+  memfuzz()
