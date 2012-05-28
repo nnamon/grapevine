@@ -10,7 +10,7 @@ libc = cdll.LoadLibrary("libc.dylib")
 ignore = [
 	8, 11, 17, 19, 21, 22, 38, 40, 45, 62, 63, 64, 67, 
     68, 69, 70, 71, 72, 77, 84, 87, 88, 91, 94, 99, 101, 
-    102, 103, 107, 108, 109, 110, 112, 113, 114 115, 119, 125, 129, 130, 
+    102, 103, 107, 108, 109, 110, 112, 113, 114, 115, 119, 125, 129, 130, 
     141, 143, 144, 145, 146, 148, 149, 150, 156, 160, 162,
     163, 164, 166, 168, 170, 171, 172, 174, 175, 177, 178,
     179, 186, 193, 198, 213, 214, 215, 224, 246, 249, 257,
@@ -61,18 +61,18 @@ def memfuzz():
     arg = []
     syscallnr = 0
     flag = 1
-    random.seed(getseed())
     while True:
         flag = 1
         while not flag == 0:
             flag = 0
+            random.seed(getseed())
             syscallnr = (random.randrange(2147483647) % 253)
             for i in ignore:
                 if(i == syscallnr):
                     flag = 1
                     break
     
-        for i in range(0,8)
+        for i in range(0,8):
            arg.append(getarg())
 
         print('syscall({}, {}, {}, {}, {}, {}, {}, {}, {})\n').format(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
@@ -80,5 +80,5 @@ def memfuzz():
         returnVal = libc.syscall(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
         print "return: ", returnVal
         
-if __name__ == "__main__"
+if __name__ == "__main__":
     memfuzz()
