@@ -5,7 +5,7 @@ import fuzzmod.randomFI
 randomFI = fuzzmod.randomFI()
 libc = cdll.LoadLibrary("libc.dylib")
 
-#This ignore list is customized for xnu-1486.2.11 (10.6.2).
+#This ignore list is customized for xnu-1504.9.37 (10.6.7).
 
 ignore = [
 	8, 11, 17, 19, 21, 22, 38, 40, 45, 62, 63, 64, 67, 
