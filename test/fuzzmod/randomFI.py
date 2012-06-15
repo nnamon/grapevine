@@ -3,7 +3,7 @@ import binascii
 
 class randomFI:
 	def getseed(self):
-	return int(binascii.hexlify(open("/dev/urandom", 'r').read(5).rstrip()),16)
+	   return int(binascii.hexlify(open("/dev/urandom", 'r').read(5).rstrip()),16)
 
 	def getrand(self):
     	f = open('/dev/urandom', 'r')
@@ -40,3 +40,9 @@ class randomFI:
 	    	return self.getnumber() #some number
     	elif state == 4:
 	    	return self.getrand()
+
+    def getargs(self):
+        arg = []
+        for i in range(0,8):
+           arg.append(self.getarg())
+        return arg

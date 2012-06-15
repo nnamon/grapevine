@@ -3,7 +3,7 @@ import random
 from time import sleep
 import fuzzmod.randomFI
 randomFI = fuzzmod.randomFI()
-libc = cdll.LoadLibrary("libc.dylib")
+#libc = cdll.LoadLibrary("libc.dylib")
 
 #This ignore list is customized for xnu-1486.2.11 (10.6.2).
 
@@ -43,8 +43,8 @@ def memfuzz():
 
         print('syscall({}, {}, {}, {}, {}, {}, {}, {}, {})\n').format(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
         sleep(5/1000000.0)
-        returnVal = libc.syscall(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
-        print "return: ", returnVal
+        #returnVal = libc.syscall(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
+        #print "return: ", returnVal
         
 if __name__ == "__main__":
     memfuzz()
