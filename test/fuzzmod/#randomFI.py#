@@ -3,19 +3,19 @@ import binascii
 
 class randomFI:
 	def getseed(self):
-	    return int(binascii.hexlify(open("/dev/urandom", 'r').read(5).rstrip()),16)
+		return int(binascii.hexlify(open("/dev/urandom", 'r').read(5).rstrip()),16)
 
 	def getrand(self):
-            f = open('/dev/urandom', 'r')
-            d = f.read(128).rstrip()
-            f.close()
-            return d
+		f = open('/dev/urandom', 'r')
+		d = f.read(128).rstrip()
+		f.close()
+		return d
 
 	def getnumber(self):
-    	   state = random.randrange(0,5)
+		state = random.randrange(0,5)
     	#case statement goes here, lol python doesnt have switch
-    	   if state == 0:
-	    	  random.seed(1)
+		if state == 0:
+			random.seed(1)
 	    	  return random.randrange(2147483647)
     	   elif state == 1:
 	    	  random.seed(1)
@@ -41,8 +41,8 @@ class randomFI:
     	   elif state == 4:
 	    	  return self.getrand()
 
-    def getargs(self):
-        arg = []
-        for i in range(0,8):
-            arg.append(self.getarg())
-        return arg
+        def getargs(self):
+            arg = []
+            for i in range(0,8):
+                arg.append(self.getarg())
+            return arg
