@@ -15,6 +15,7 @@ if __name__ == "__main__":
     print "Fuzzd Port: ", UDP_PORT
     while True:
         msg = prompt()
+        #if fuzzing, program should fork a new udp listener at a specific port, and send the details to fuzzd for logging.
         if msg == "exit":
             print "Exiting"
             exit()

@@ -52,7 +52,7 @@ def memfuzz():
 if __name__ == "__main__":
     sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
     sock.bind ( (UDP_IP,UDP_PORT) )
-    while True:
+    while True:   #fuzzd should receive logging port details
         data, addr = sock.recvfrom( 1024 ) #buffer size 1024 bytes
         print "Instructs: ", data
         print "From: ", addr
