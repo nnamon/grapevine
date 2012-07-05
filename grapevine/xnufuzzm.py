@@ -1,12 +1,15 @@
 from ctypes import *
 import random
 import socket
+import time
 from time import sleep
 import fuzzmod.randomFI
+from threading import Timer
+from threading import Thread
 randomFI = fuzzmod.randomFI()
 libc = cdll.LoadLibrary("libc.dylib")
 UDP_IP="127.0.0.1"
-UDP_PORT="10001"
+UDP_PORT=10001
 #This ignore list is customized for xnu-1504.9.37 (10.6.7).
 
 ignore = [
@@ -27,6 +30,7 @@ ignore = [
     -95, -96, -97, -98, -99, -100
 ]
 
+
 def memfuzz():
     arg = []
     syscallnr = 0
@@ -42,19 +46,36 @@ def memfuzz():
                     flag = 1
                     break
     
-        arg = randomFI.getargs()
+            arg = randomFI.getargs()
 
-        print('syscall({}, {}, {}, {}, {}, {}, {}, {}, {})\n').format(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
-        sleep(5/1000000.0)
-        returnVal = libc.syscall(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
-        print "return: ", returnVal
+            #print('syscall({}, {}, {}, {}, {}, {}, {}, {}, {})\n').format(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
+            print('syscall({0})\n').format(syscallnr)
+            sleep(5/1000000.0)
+            returnVal = libc.syscall(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
+            print "return: ", returnVal
+
+def checkFuzz(thread):
+    print "Checking"
+    if thread.isAlive() is False:
+        fuzzing = Thread(target=memfuzz, name=fuzz)
+        fuzzing.start()
+    else:
+        print "Thread is alive"
         
+
+    
 if __name__ == "__main__":
     sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
     sock.bind ( (UDP_IP,UDP_PORT) )
-    while True:   #fuzzd should receive logging port details
-        data, addr = sock.recvfrom( 1024 ) #buffer size 1024 bytes
-        print "Instructs: ", data
-        print "From: ", addr
+    print "Socket binding success. Listening on",UDP_PORT
+    while True:
+        data, addr = sock.recvfrom( 1024 ) #buffer 1024
+        print "Instructs: ",data
+        print "From: ",addr
         if data == 'fuzz':
-            memfuzz()
+            fuzzing = Thread(target=memfuzz,name="fuzz")
+            fuzzing.start()
+            checker = Timer(30.0, checkFuzz, [fuzzing])
+            checker.start()
+        if data == "exit":
+            exit()

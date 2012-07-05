@@ -1,13 +1,15 @@
 from ctypes import *
 import random
 import socket
+import time
 from time import sleep
 import fuzzmod.randomFI
+from threading import Timer
 from threading import Thread
 randomFI = fuzzmod.randomFI()
 #libc = cdll.LoadLibrary("libc.dylib")
 UDP_IP="127.0.0.1"
-UDP_PORT="10001"
+UDP_PORT=10001
 #This ignore list is customized for xnu-1504.9.37 (10.6.7).
 
 ignore = [
@@ -35,38 +37,44 @@ def memfuzz():
     flag = 1
     while True:
         flag = 1
-         while not flag == 0:
-             flag = 0
-             random.seed(randomFI.getseed())
-             syscallnr = random.randint(-100, 433)
-             for i in ignore:
-                 if(i == syscallnr):
-                     flag = 1
-                      break
+        while not flag == 0:
+            flag = 0
+            random.seed(randomFI.getseed())
+            syscallnr = random.randint(-100, 433)
+            for i in ignore:
+                if(i == syscallnr):
+                    flag = 1
+                    break
     
-             arg = randomFI.getargs()
+            arg = randomFI.getargs()
 
-             print('syscall({}, {}, {}, {}, {}, {}, {}, {}, {})\n').format(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
-             sleep(5/1000000.0)
+            #print('syscall({}, {}, {}, {}, {}, {}, {}, {}, {})\n').format(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
+            sleep(5/1000000.0)
         #returnVal = libc.syscall(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
         #print "return: ", returnVal
 
-def checkFuzz(threads):
-    if !threads[0].isAlive():
+def checkFuzz(thread):
+    print "Checking"
+    if thread.isAlive() is False:
         fuzzing = Thread(target=memfuzz, name=fuzz)
         fuzzing.start()
     else:
-        break
+        print "Thread is alive"
+        
+
     
 if __name__ == "__main__":
     sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
     sock.bind ( (UDP_IP,UDP_PORT) )
+    print "Socket binding success. Listening on",UDP_PORT
     while True:
         data, addr = sock.recvfrom( 1024 ) #buffer 1024
         print "Instructs: ",data
         print "From: ",addr
         if data == 'fuzz':
-            fuzzing = Thread(target=memfuzz,name=fuzz)
+            fuzzing = Thread(target=memfuzz,name="fuzz")
             fuzzing.start()
             checker = Timer(30.0, checkFuzz, [fuzzing])
-            t.start()
+            checker.start()
+        if data == "exit":
+            exit()
