@@ -3,6 +3,7 @@ import random
 import socket
 from time import sleep
 import fuzzmod.randomFI
+from threading import Thread
 randomFI = fuzzmod.randomFI()
 #libc = cdll.LoadLibrary("libc.dylib")
 UDP_IP="127.0.0.1"
@@ -27,25 +28,26 @@ ignore = [
     -95, -96, -97, -98, -99, -100
 ]
 
-def memfuzz():
-    arg = []
-    syscallnr = 0
-    flag = 1
-    while True:
+class memfuzz(Thread):
+    def run():
+        arg = []
+        syscallnr = 0
         flag = 1
-        while not flag == 0:
-            flag = 0
-            random.seed(randomFI.getseed())
-            syscallnr = random.randint(-100, 433)
-            for i in ignore:
-                if(i == syscallnr):
-                    flag = 1
-                    break
+        while True:
+            flag = 1
+            while not flag == 0:
+                flag = 0
+                random.seed(randomFI.getseed())
+                syscallnr = random.randint(-100, 433)
+                for i in ignore:
+                    if(i == syscallnr):
+                        flag = 1
+                        break
     
-        arg = randomFI.getargs()
+                arg = randomFI.getargs()
 
-        print('syscall({}, {}, {}, {}, {}, {}, {}, {}, {})\n').format(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
-        sleep(5/1000000.0)
+                print('syscall({}, {}, {}, {}, {}, {}, {}, {}, {})\n').format(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
+                sleep(5/1000000.0)
         #returnVal = libc.syscall(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
         #print "return: ", returnVal
         
@@ -57,4 +59,5 @@ if __name__ == "__main__":
         print "Instructs: ",data
         print "From: ",addr
         if data == 'fuzz':
-            memfuzz()
+            fuzzing = memfuzz()
+            fuzzing.start()
