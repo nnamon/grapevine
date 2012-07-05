@@ -28,29 +28,36 @@ ignore = [
     -95, -96, -97, -98, -99, -100
 ]
 
-class memfuzz(Thread):
-    def run():
-        arg = []
-        syscallnr = 0
-        flag = 1
-        while True:
-            flag = 1
-            while not flag == 0:
-                flag = 0
-                random.seed(randomFI.getseed())
-                syscallnr = random.randint(-100, 433)
-                for i in ignore:
-                    if(i == syscallnr):
-                        flag = 1
-                        break
-    
-                arg = randomFI.getargs()
 
-                print('syscall({}, {}, {}, {}, {}, {}, {}, {}, {})\n').format(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
-                sleep(5/1000000.0)
+def memfuzz():
+    arg = []
+    syscallnr = 0
+    flag = 1
+    while True:
+        flag = 1
+         while not flag == 0:
+             flag = 0
+             random.seed(randomFI.getseed())
+             syscallnr = random.randint(-100, 433)
+             for i in ignore:
+                 if(i == syscallnr):
+                     flag = 1
+                      break
+    
+             arg = randomFI.getargs()
+
+             print('syscall({}, {}, {}, {}, {}, {}, {}, {}, {})\n').format(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
+             sleep(5/1000000.0)
         #returnVal = libc.syscall(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
         #print "return: ", returnVal
-        
+
+def checkFuzz(threads):
+    if !threads[0].isAlive():
+        fuzzing = Thread(target=memfuzz, name=fuzz)
+        fuzzing.start()
+    else:
+        break
+    
 if __name__ == "__main__":
     sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
     sock.bind ( (UDP_IP,UDP_PORT) )
@@ -59,5 +66,7 @@ if __name__ == "__main__":
         print "Instructs: ",data
         print "From: ",addr
         if data == 'fuzz':
-            fuzzing = memfuzz()
+            fuzzing = Thread(target=memfuzz,name=fuzz)
             fuzzing.start()
+            checker = Timer(30.0, checkFuzz, [fuzzing])
+            t.start()
