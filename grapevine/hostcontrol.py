@@ -31,11 +31,14 @@ if __name__ == "__main__":
             sys.stdout.write( "Input port> ")
             port = raw_input().rstrip()
             set_connection( ip, int(port) )
+        if msg == "fuzz":
+            print "Fuzzing:",udp_ip
+            #fork udp logger listener
         if msg == "exit":
             print "Exiting"
             sock.sendto(msg, ( udp_ip, udp_port ) )
             exit()
         if msg == "help":
-            sys.stdout.write( "Grapevine Host Control alpha\nCommands:\n\tcurrentvm:\t displays IP and PORT of currently connected VM\n\tconnect:\t prompts for new connection details\n\texit:\t\t exits the program.\n\thelp:\t\t Prints this help message.\n" )
+            sys.stdout.write( "Grapevine Host Control alpha\nCommands:\n\tcurrentvm:\t displays IP and PORT of currently connected VM\n\tconnect:\t prompts for new connection details\n\tfuzz:\t\t start fuzzing in the connected vm.\n\texit:\t\t exits the program.\n\thelp:\t\t Prints this help message.\n" )
         print "Send: ", msg
         sock.sendto( msg, (udp_ip, udp_port) )
