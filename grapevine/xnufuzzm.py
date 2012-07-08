@@ -10,6 +10,8 @@ randomFI = fuzzmod.randomFI()
 libc = cdll.LoadLibrary("libc.dylib")
 UDP_IP="127.0.0.1"
 UDP_PORT=10001
+log_ip = "0.0.0.0"
+log_port = 0
 #This ignore list is customized for xnu-1504.9.37 (10.6.7).
 
 ignore = [
@@ -31,7 +33,7 @@ ignore = [
 ]
 
 
-def memfuzz():
+def memfuzz():#add logging functions
     arg = []
     syscallnr = 0
     flag = 1
@@ -47,9 +49,9 @@ def memfuzz():
                     break
     
             arg = randomFI.getargs()
-
+            print('sycall({0})').format(syscallnr)
             #print('syscall({}, {}, {}, {}, {}, {}, {}, {}, {})\n').format(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
-            print('syscall({0})\n').format(syscallnr)
+            #logging code here
             sleep(5/1000000.0)
             returnVal = libc.syscall(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
             print "return: ", returnVal
@@ -73,6 +75,10 @@ if __name__ == "__main__":
         print "Instructs: ",data
         print "From: ",addr
         if data == 'fuzz':
+            global log_ip
+            log_ip = addr
+            global log_port
+            log_port = sock.recvfrom( 512 ) #recv log port
             fuzzing = Thread(target=memfuzz,name="fuzz")
             fuzzing.start()
             checker = Timer(30.0, checkFuzz, [fuzzing])
