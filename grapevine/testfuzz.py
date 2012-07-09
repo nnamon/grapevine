@@ -12,6 +12,7 @@ UDP_IP="127.0.0.1"
 UDP_PORT=10001
 log_ip = "0.0.0.0"
 log_port = 0
+
 #This ignore list is customized for xnu-1504.9.37 (10.6.7).
 
 ignore = [
@@ -52,8 +53,8 @@ def memfuzz():#add logging functions
 
             #print('syscall({}, {}, {}, {}, {}, {}, {}, {}, {})\n').format(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
             sleep(5/1000000.0)
-        #returnVal = libc.syscall(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
-        #print "return: ", returnVal
+            #returnVal = libc.syscall(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
+            #print "return: ", returnVal
 
 def checkFuzz(thread):
     print "Checking"
