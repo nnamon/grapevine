@@ -33,8 +33,8 @@ if __name__ == "__main__":
     while True:
         msg = prompt()
         #if fuzzing, program should fork a new udp listener at a specific port, and send the details to fuzzd for logging.
-        print "Send:",msg
-        sock.sendto( msg, ( udp_ip, udp_port ) )
+        print "Msg:",msg
+        #sock.sendto( msg, ( udp_ip, udp_port ) )
         if msg == "currentvm":
             print "Current VM ip:",udp_ip
             print "Current VM port:",udp_port
@@ -48,11 +48,12 @@ if __name__ == "__main__":
             sys.stdout.write("Do some parsing, get some values")
         if msg == "fuzz":
             print "Fuzzing:",udp_ip
+            sock.sendto( msg, (udp_ip, udp_port) ) #send "fuzz"
             #fork udp logger listener
             global log_listeners
-            log_listeners.append(log_listeners[len(log_listeners)-1]+1)
-            port = log_listeners[len(log_listeners)-1]
-            sock.sendto( port, (udp_ip,udp_port) )
+            log_listeners.append(log_listeners[len(log_listeners)-1]+1) #add new port to list
+            port = log_listeners[len(log_listeners)-1] #same value as above
+            sock.sendto( port, (udp_ip,udp_port) ) #send logger port
             logging = Thread( target=logger, args=( port ) )
             logging.start()
         if msg == "exit":
