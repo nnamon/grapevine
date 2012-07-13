@@ -5,6 +5,10 @@ from threading import Thread
 udp_ip="127.0.0.1"
 udp_port=10001
 log_listeners = [4999]
+
+def parse():
+    pass
+
 def prompt():
     sys.stdout.write( "command> ")
     uin = raw_input()
@@ -40,6 +44,8 @@ if __name__ == "__main__":
             sys.stdout.write( "Input port> ")
             port = raw_input().rstrip()
             set_connection( ip, int(port) )
+        if msg == "parse":
+            sys.stdout.write("Do some parsing, get some values")
         if msg == "fuzz":
             print "Fuzzing:",udp_ip
             #fork udp logger listener
