@@ -38,7 +38,7 @@ ignore = [
 def logit(syscallnr, arg):
     """Logging to UDP listener. Sends a JSON string with syscall numbers and arguments. Arguments and hexlifyied."""
     sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
-    payload = json.dumps({"syscallnr": syscallnr, "arg1": hexlify(arg[0]), "arg2": hexlify(arg[1]), "arg3": hexlify(arg[2]), "arg4": hexlify(arg[3]), "arg5": hexlify(arg[4]), "arg6": hexlify(arg[5]), "arg7": hexlify(arg[6]), "arg8": hexlify(arg[7])},ensure_ascii=True)
+    payload = json.dumps({"syscallnr": syscallnr, "arg1": binascii.hexlify(arg[0]), "arg2": binascii.hexlify(arg[1]), "arg3": binascii.hexlify(arg[2]), "arg4": binascii.hexlify(arg[3]), "arg5": binascii.hexlify(arg[4]), "arg6": binascii.hexlify(arg[5]), "arg7": binascii.hexlify(arg[6]), "arg8": binascii.hexlify(arg[7])},ensure_ascii=True)
     sock.sendto( payload, (log_ip, log_port) )
     
 
