@@ -40,9 +40,15 @@ def logit(syscallnr, arg):
     sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
     payload = json.dumps({"syscallnr": syscallnr, "arg1": binascii.hexlify(arg[0]), "arg2": binascii.hexlify(arg[1]), "arg3": binascii.hexlify(arg[2]), "arg4": binascii.hexlify(arg[3]), "arg5": binascii.hexlify(arg[4]), "arg6": binascii.hexlify(arg[5]), "arg7": binascii.hexlify(arg[6]), "arg8": binascii.hexlify(arg[7])},ensure_ascii=True)
     sock.sendto( payload, (log_ip, log_port) )
-    
+
+def logret(retVal):
+    """Sends return value of syscall to logger."""
+    sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
+    payload = json.dumps({"returnVal": str(retVal)}, ensure_ascii=True)
+    sock.sendto( payload, (log_ip, log_port) )
 
 def memfuzz():
+    """Fuzz XNU Kernel. Generates random input and calls syscalls with random inputs as arguments."""
     arg = []
     syscallnr = 0
     flag = 1
@@ -62,9 +68,11 @@ def memfuzz():
             #print('syscall({}, {}, {}, {}, {}, {}, {}, {}, {})\n').format(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
             sleep(5/1000000.0)
             #returnVal = libc.syscall(syscallnr, arg[0], arg[1], arg[2], arg[3], arg[4], arg[5], arg[6], arg[7])
+            #logret(returnVal)
             #print "return: ", returnVal
 
 def checkFuzz(thread):
+    """Checks for dead fuzzing thread and starts a new thread if none exists."""
     print "Checking"
     if thread.isAlive() is False:
         fuzzing = Thread(target=memfuzz, name="fuzz")
