@@ -48,17 +48,17 @@ class Syscaller:
         """Takes in a syscall number and a list or tuple of arguments"""
         Logger.logit(syscallnr, args)
         sleep(5/1000000.0)
-        returnVal = libc.syscall(syscallnr, 
-                                 args[0], 
-                                 args[1], 
-                                 args[2], 
-                                 args[3],
-                                 args[4],
-                                 args[5],
-                                 args[6],
-                                 args[7]
-                                 )
-        Logger.logret(returnVal)
+        #returnVal = libc.syscall(syscallnr, 
+        #                         args[0], 
+        #                         args[1], 
+        #                         args[2], 
+        #                         args[3],
+        #                         args[4],
+        #                         args[5],
+        #                         args[6],
+        #                         args[7]
+        #                         )
+        #Logger.logret(returnVal)
                                  
         
 ignore = [8, 11, 17, 19, 21, 22, 38, 40, 45, 62, 63, 64, 67,
