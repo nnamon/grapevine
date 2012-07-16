@@ -3,6 +3,7 @@ import random
 import socket
 import time
 import json
+import pickle
 import binascii
 from time import sleep
 import fuzzmod.randomFI
@@ -38,7 +39,28 @@ ignore = [
 def logit(syscallnr, arg):
     """Logging to UDP listener. Sends a JSON string with syscall numbers and arguments. Arguments and hexlifyied."""
     sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
-    payload = json.dumps({"syscallnr": syscallnr, "arg1": binascii.hexlify(arg[0]), "arg2": binascii.hexlify(arg[1]), "arg3": binascii.hexlify(arg[2]), "arg4": binascii.hexlify(arg[3]), "arg5": binascii.hexlify(arg[4]), "arg6": binascii.hexlify(arg[5]), "arg7": binascii.hexlify(arg[6]), "arg8": binascii.hexlify(arg[7])},ensure_ascii=True)
+    #payload = json.dumps({"syscallnr": str(syscallnr),
+    #                      "arg1": binascii.b2a_base64(arg[0]),
+    #                      "arg2": binascii.b2a_base64(arg[1]),
+    #                      "arg3": binascii.b2a_base64(arg[2]),
+    #                      "arg4": binascii.b2a_base64(arg[3]),
+    #                      "arg5": binascii.b2a_base64(arg[4]),
+    #                      "arg6": binascii.b2a_base64(arg[5]),
+    #                      "arg7": binascii.b2a_base64(arg[6]),
+    #                      "arg8": binascii.b2a_base64(arg[7])},
+    #                     ensure_ascii=True)
+    #print payload
+    prepayload = {"syscallnr": syscallnr,
+                  "arg1": arg[0],
+                  "arg2": arg[1],
+                  "arg3": arg[2],
+                  "arg4": arg[3],
+                  "arg5": arg[4],
+                  "arg6": arg[5],
+                  "arg7": arg[6],
+                  "arg8": arg[7]}
+    payload = binascii.b2a_base64(pickle.dumps(prepayload))
+    print payload
     sock.sendto( payload, (log_ip, log_port) )
 
 def logret(retVal):
@@ -91,9 +113,7 @@ if __name__ == "__main__":
         print "Instructs: ",data
         print "From: ",addr
         if data == 'fuzz':
-            global log_ip
             log_ip = addr
-            global log_port
             log_port = sock.recvfrom( 512 ) #recv log port
             fuzzing = Thread(target=memfuzz,name="fuzz")
             fuzzing.start()
