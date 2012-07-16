@@ -2,7 +2,6 @@ from ctypes import *
 import random
 import socket
 import time
-import json
 import pickle
 import binascii
 from time import sleep
@@ -39,17 +38,6 @@ ignore = [
 def logit(syscallnr, arg):
     """Logging to UDP listener. Sends a JSON string with syscall numbers and arguments. Arguments and hexlifyied."""
     sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
-    #payload = json.dumps({"syscallnr": str(syscallnr),
-    #                      "arg1": binascii.b2a_base64(arg[0]),
-    #                      "arg2": binascii.b2a_base64(arg[1]),
-    #                      "arg3": binascii.b2a_base64(arg[2]),
-    #                      "arg4": binascii.b2a_base64(arg[3]),
-    #                      "arg5": binascii.b2a_base64(arg[4]),
-    #                      "arg6": binascii.b2a_base64(arg[5]),
-    #                      "arg7": binascii.b2a_base64(arg[6]),
-    #                      "arg8": binascii.b2a_base64(arg[7])},
-    #                     ensure_ascii=True)
-    #print payload
     prepayload = {"syscallnr": syscallnr,
                   "arg1": arg[0],
                   "arg2": arg[1],
@@ -59,7 +47,8 @@ def logit(syscallnr, arg):
                   "arg6": arg[5],
                   "arg7": arg[6],
                   "arg8": arg[7]}
-    payload = binascii.b2a_base64(pickle.dumps(prepayload))
+    #payload = binascii.b2a_base64(pickle.dumps(prepayload))
+    payload = pickle.dumps(prepayload)
     sock.sendto( payload, (log_ip, log_port) )
 
 def logret(retVal):

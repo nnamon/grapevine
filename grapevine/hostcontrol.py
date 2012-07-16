@@ -28,8 +28,6 @@ def logger(port,udp_ip,udp_port):
     sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
     sock.bind( ('0.0.0.0',port) )
     print "Port Bound",port
-    #f = open('test', 'w')
-    #f.close()
     filename = str(int(time()))
     f = open( filename, 'w')
     f.write("VMIP: ")
@@ -44,7 +42,7 @@ def logger(port,udp_ip,udp_port):
         f = open(filename, 'a')
         data, addr = sock.recvfrom( 1024 )
         f.write(data)
-        f.write("\n")
+        f.write("\nNEWSET\n")
         f.close()
         
 
