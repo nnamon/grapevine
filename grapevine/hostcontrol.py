@@ -1,10 +1,12 @@
 import socket
 import sys
 from threading import Thread
+from time import time
 
 udp_ip="127.0.0.1"
 udp_port=10001
 log_listeners = [4999]
+loggers = []
 
 def parse():
     pass
@@ -15,16 +17,36 @@ def prompt():
     return uin
 
 def set_connection(ip,port):
-    global udp_ip 
+    #global udp_ip 
     udp_ip = ip
-    global udp_port 
+    #global udp_port 
     udp_port = port
 
-def logger(port):
+def logger(port,udp_ip,udp_port):
+    """UDP Logging function, writes to file"""
+    print "Logger spawned"
     sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
     sock.bind( ('0.0.0.0',port) )
+    print "Port Bound",port
+    #f = open('test', 'w')
+    #f.close()
+    filename = str(int(time()))
+    f = open( filename, 'w')
+    f.write("VMIP: ")
+    f.write(udp_ip)
+    f.write(" VMPORT: ")
+    f.write(str(udp_port))
+    f.write(" Logger port ")
+    f.write(str(port))
+    f.write("\n")
+    f.close()
     while True:
+        f = open(filename, 'a')
         data, addr = sock.recvfrom( 1024 )
+        f.write(data)
+        f.write("\n")
+        f.close()
+        
 
 if __name__ == "__main__":
     sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
@@ -50,11 +72,13 @@ if __name__ == "__main__":
             print "Fuzzing:",udp_ip
             sock.sendto( msg, (udp_ip, udp_port) ) #send "fuzz"
             #fork udp logger listener
-            global log_listeners
+            #global log_listeners
             log_listeners.append(log_listeners[len(log_listeners)-1]+1) #add new port to list
             port = log_listeners[len(log_listeners)-1] #same value as above
-            sock.sendto( port, (udp_ip,udp_port) ) #send logger port
-            logging = Thread( target=logger, args=( port ) )
+            sock.sendto( str(port), (udp_ip,udp_port) ) #send logger port
+            logging = Thread( target=logger, args=([port,udp_ip,udp_port]) )
+            logging.daemon = True
+            loggers.append(logging)
             logging.start()
         if msg == "exit":
             print "Exiting"
