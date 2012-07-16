@@ -40,7 +40,7 @@ def logger(port,udp_ip,udp_port):
     f.close()
     while True:
         f = open(filename, 'a')
-        data, addr = sock.recvfrom( 1024 )
+        data, addr = sock.recvfrom( 2048 )
         f.write(data)
         f.write("\nNEWSET\n")
         f.close()
