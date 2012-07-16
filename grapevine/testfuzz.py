@@ -60,7 +60,6 @@ def logit(syscallnr, arg):
                   "arg7": arg[6],
                   "arg8": arg[7]}
     payload = binascii.b2a_base64(pickle.dumps(prepayload))
-    print payload
     sock.sendto( payload, (log_ip, log_port) )
 
 def logret(retVal):
@@ -113,8 +112,8 @@ if __name__ == "__main__":
         print "Instructs: ",data
         print "From: ",addr
         if data == 'fuzz':
-            log_ip = addr
-            log_port = sock.recvfrom( 512 ) #recv log port
+            log_ip = addr[0]
+            log_port = int(sock.recvfrom( 512 )[0]) #recv log port
             fuzzing = Thread(target=memfuzz,name="fuzz")
             fuzzing.start()
             checker = Timer(30.0, checkFuzz, [fuzzing])
