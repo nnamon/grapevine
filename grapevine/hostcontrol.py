@@ -9,11 +9,12 @@ log_listeners = [4999]
 loggers = []
 
 def parse():
+    """Function to make use of the parser."""
     pass
 
 def prompt():
     sys.stdout.write( "command> ")
-    uin = raw_input()
+    uin = raw_input().rstrip()
     return uin
 
 def set_connection(ip,port):
@@ -40,7 +41,7 @@ def logger(port,udp_ip,udp_port):
     f.close()
     while True:
         f = open(filename, 'a')
-        data, addr = sock.recvfrom( 2048 )
+        data, addr = sock.recvfrom( 3072 )
         f.write(data)
         f.write("\nNEWSET\n")
         f.close()
@@ -84,5 +85,7 @@ if __name__ == "__main__":
             exit()
         if msg == "help":
             sys.stdout.write( "Grapevine Host Control alpha\nCommands:\n\tcurrentvm:\t displays IP and PORT of currently connected VM\n\tconnect:\t prompts for new connection details\n\tfuzz:\t\t start fuzzing in the connected vm.\n\texit:\t\t exits the program.\n\thelp:\t\t Prints this help message.\n" )
+        else:
+            sys.stdout.write("Command not supported\n")
         
         

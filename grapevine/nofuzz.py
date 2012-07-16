@@ -18,7 +18,7 @@ log_port = 0
 #This ignore list is customized for xnu-1504.9.37 (10.6.7).
 
 class Logger:
-    def logit(syscallnr, arg):
+    def logit(self, syscallnr, arg):
         """Logging to UDP listener. Sends a JSON string with syscall numbers and arguments. Arguments and hexlifyied."""
         sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
         prepayload = {"syscallnr": syscallnr,
@@ -35,18 +35,18 @@ class Logger:
         payload = pickle.dumps(prepayload)
         sock.sendto( payload, (log_ip, log_port) )
 
-    def logret(retVal):
+    def logret(self, retVal):
         """Sends return value of syscall to logger."""
         sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
         payload = json.dumps({"returnVal": str(retVal)}, ensure_ascii=True)
         sock.sendto( payload, (log_ip, log_port) )
 
 class Syscaller:
-    """Functions to call syscalls"""
-    logger = Logger()
-    def call(syscallnr, args):
+    """Functions to call syscalls. Takes in a syscall number and a tuple or list of args"""
+    def call(self, syscallnr, args):
         """Takes in a syscall number and a list or tuple of arguments"""
-        Logger.logit(syscallnr, args)
+        logger = Logger()
+        logger.logit(syscallnr, args)
         sleep(5/1000000.0)
         #returnVal = libc.syscall(syscallnr, 
         #                         args[0], 
@@ -58,7 +58,7 @@ class Syscaller:
         #                         args[6],
         #                         args[7]
         #                         )
-        #Logger.logret(returnVal)
+        #logger.logret(returnVal)
                                  
         
 ignore = [8, 11, 17, 19, 21, 22, 38, 40, 45, 62, 63, 64, 67,
