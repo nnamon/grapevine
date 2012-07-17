@@ -1,0 +1,1211 @@
+
+<!-- saved from url=(0138)http://webcache.googleusercontent.com/search?q=cache:9uyvnP9YsAcJ:ftp://www.cs.toronto.edu/doc/mach/machsys.ps.Z+&cd=4&hl=en&ct=clnk&gl=sg -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!--<base href="ftp://www.cs.toronto.edu/doc/mach/machsys.ps.Z">--><base href="."><style type="text/css"></style></head><body bgcolor="#ffffff" vlink="blue" link="blue"><div style="background:#fff;border:1px solid #999;margin:-1px -1px 0;padding:0;"><div style="background:#ddd;border:1px solid #999;color:#000;font:13px arial,sans-serif;font-weight:normal;margin:12px;padding:8px;text-align:left">This is the html version of the file <a href="ftp://www.cs.toronto.edu/doc/mach/machsys.ps.Z" style="text-decoration:underline;color:#00c">ftp://www.cs.toronto.edu/doc/mach/machsys.ps.Z</a>.<br><b>Google</b> automatically generates html versions of documents as we crawl the web.</div></div><div style="position:relative">
+
+
+
+<meta name="Producer" content="GNU Ghostscript 7.07">
+<meta name="Title" content="machsys.mss">
+<meta name="Creator" content="Mach Software and Scribe 5(1501)">
+<meta name="CreationDate" content="19 February 1988 16:46">
+<title>A Programmer’s Guide to the Mach System Calls</title>
+
+<table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="1"><b>Page 1</b></a></font></td></tr></tbody></table><font size="4" face="Times"><span style="font-size:20px;font-family:Times">
+<div style="position:absolute;top:453;left:198"><nobr><b>A Programmer’s Guide to the Mach System Calls</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:496;left:403"><nobr>Linda R. Walmer</nobr></div>
+<div style="position:absolute;top:517;left:395"><nobr>Mary R. Thompson</nobr></div>
+<div style="position:absolute;top:560;left:348"><nobr>Department of Computer Science</nobr></div>
+<div style="position:absolute;top:581;left:369"><nobr>Carnegie-Mellon University</nobr></div>
+<div style="position:absolute;top:603;left:388"><nobr>Pittsburgh, PA 15213</nobr></div>
+<div style="position:absolute;top:624;left:420"><nobr><b>Version of:</b></nobr></div>
+<div style="position:absolute;top:645;left:400"><nobr>19 February 1988</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:17px;font-family:Times">
+<div style="position:absolute;top:858;left:419"><nobr><b>Abstract</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:901;left:108"><nobr>This document is one of two tutorials designed to teach basic Mach programming skills.  This manual</nobr></div>
+<div style="position:absolute;top:918;left:108"><nobr>explains the use of the Mach kernel calls. The companion document to this one, <b>A Programmer’s Guide</b></nobr></div>
+<div style="position:absolute;top:935;left:108"><nobr><b>to the Mach User Environment </b>explains the use of higher level methods for implementing multi-</nobr></div>
+<div style="position:absolute;top:952;left:108"><nobr>threaded programs and interprocess communication.  Before writing programs that use the system calls</nobr></div>
+<div style="position:absolute;top:970;left:108"><nobr>directly, the user should be aware that the methods outlined in the other document may be used to solve</nobr></div>
+<div style="position:absolute;top:987;left:108"><nobr>his problem more simply.</nobr></div>
+<div style="position:absolute;top:1021;left:108"><nobr>Comments, suggestions and additions to this document are wlecome.</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:1363;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="2"><b>Page 2</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:1413;left:455"><nobr><b>1</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:16px;font-family:Times">
+<div style="position:absolute;top:1467;left:108"><nobr><b>1. Introduction</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:1523;left:108"><nobr><b>1.1. Tutorial documents</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:1546;left:125"><nobr>This document is one of two tutorials designed to teach basic Mach programming skills.  This manual</nobr></div>
+<div style="position:absolute;top:1568;left:108"><nobr>explains the use of the Mach kernel calls. It begins with an introduction to the basic Mach abstractions of</nobr></div>
+<div style="position:absolute;top:1589;left:108"><nobr>ports, messages, virtual memory, tasks and threads. It then contains a number of simple programs which</nobr></div>
+<div style="position:absolute;top:1611;left:108"><nobr>send and receive Mach messages, and use virtual memory.</nobr></div>
+<div style="position:absolute;top:1649;left:125"><nobr>There is a companion document to this one, <b>A Programmer’s Guide to the Mach User Environment</b></nobr></div>
+<div style="position:absolute;top:1671;left:108"><nobr>that explains the use of higher level methods for implementing multi-threaded programs and interprocess</nobr></div>
+<div style="position:absolute;top:1692;left:108"><nobr>communication. Before writing programs that use the system calls directly, the user should be aware that</nobr></div>
+<div style="position:absolute;top:1713;left:108"><nobr>the methods outlined in the other document may be used to solve his problem more simply.</nobr></div>
+<div style="position:absolute;top:1752;left:125"><nobr>The final section of <b>A Programmer’s Guide to the Mach User Environment </b>describes where to find</nobr></div>
+<div style="position:absolute;top:1773;left:108"><nobr>the mach environment on-line at CMU and how to use it.</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:1827;left:108"><nobr><b>1.2. Basic Mach Concepts</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:1850;left:125"><nobr>In many ways the Mach operating system can be viewed as an extension of the UNIX operating</nobr></div>
+<div style="position:absolute;top:1871;left:108"><nobr>system. Existing 4.3bsd programs which do not use knowledge about internal UNIX data structures will</nobr></div>
+<div style="position:absolute;top:1893;left:108"><nobr>continue to function in Mach.  However, Mach provides a number of new features not available in</nobr></div>
+<div style="position:absolute;top:1914;left:108"><nobr>traditional UNIX systems.  The primary motivation for the differences between Mach and UNIX was a</nobr></div>
+<div style="position:absolute;top:1935;left:108"><nobr>desire to better support multiprocessors and to provide a solid foundation for distributed computing.</nobr></div>
+<div style="position:absolute;top:1974;left:125"><nobr>In order to use Mach’s new features, the programmer needs to be familiar with four fundamental Mach</nobr></div>
+<div style="position:absolute;top:1995;left:108"><nobr>abstractions:</nobr></div>
+<div style="position:absolute;top:2016;left:139"><nobr>• A <i>task </i>is an execution environment, including a paged virtual address space and protected</nobr></div>
+<div style="position:absolute;top:2034;left:150"><nobr>access to system resources such as processors and ports. In general for a task to be useful,</nobr></div>
+<div style="position:absolute;top:2052;left:150"><nobr>it must have at least one thread executing within it. Thus when we speak of communicating</nobr></div>
+<div style="position:absolute;top:2069;left:150"><nobr>with a task, it means to communicate with a thread running in that task. A task with one</nobr></div>
+<div style="position:absolute;top:2086;left:150"><nobr>thread is the Mach equivalent of a traditional process.</nobr></div>
+<div style="position:absolute;top:2112;left:139"><nobr>• A <i>thread </i>is the basic unit of execution. It consists of a processor state, an execution stack</nobr></div>
+<div style="position:absolute;top:2130;left:150"><nobr>and a limited amount of per thread static storage.  It shares all other memory and resources</nobr></div>
+<div style="position:absolute;top:2147;left:150"><nobr>with all the other threads executing in the same task. A thread can only execute in one task.</nobr></div>
+<div style="position:absolute;top:2174;left:139"><nobr>• A <i>port </i>is a communication channel - a logical queue of messages protected by the kernel.</nobr></div>
+<div style="position:absolute;top:2192;left:150"><nobr>Only one task can receive messages from a port, but all tasks that have access to the port</nobr></div>
+<div style="position:absolute;top:2209;left:150"><nobr>can send messages.</nobr></div>
+<div style="position:absolute;top:2235;left:139"><nobr>• A <i>message </i>is a typed collection of data objects used in communication between threads.</nobr></div>
+<div style="position:absolute;top:2275;left:125"><nobr>This tutorial presents and explains several simple programs which make use of these Mach</nobr></div>
+<div style="position:absolute;top:2296;left:108"><nobr>abstractions to solve simple programming problems.  A more detailed explanation of the basic Mach</nobr></div>
+<div style="position:absolute;top:2317;left:108"><nobr>abstractions can be found in the Unix Review article <i>Threads of a New System</i>, Richard F. Rashid, Aug.</nobr></div>
+<div style="position:absolute;top:2339;left:108"><nobr>1986 or in the <i>Mach Kernel Interface Manual</i>. The latter document gives the complete calling semantics</nobr></div>
+<div style="position:absolute;top:2360;left:108"><nobr>for all the Mach system calls.</nobr></div>
+<div style="position:absolute;top:2398;left:125"><nobr><b>Tasks versus threads. </b>Mach tasks have independent address spaces and typically communicate by</nobr></div>
+<div style="position:absolute;top:2420;left:108"><nobr>sending messages to each other.  Separate tasks can be used to perform parts of a computation on</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:2551;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="3"><b>Page 3</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:2601;left:455"><nobr><b>2</b></nobr></div>
+<div style="position:absolute;top:2656;left:108"><nobr>different workstations connected by a network.  The port and message passing facilities of Mach have</nobr></div>
+<div style="position:absolute;top:2677;left:108"><nobr>been designed to allow transparent communication between tasks whether they are on the same node or</nobr></div>
+<div style="position:absolute;top:2698;left:108"><nobr>on two separate nodes in a network.  All message operations are location independent and, in theory, it is</nobr></div>
+<div style="position:absolute;top:2720;left:108"><nobr>impossible to tell whether a message has been sent to or received from a task on the same machine or a</nobr></div>
+<div style="position:absolute;top:2741;left:108"><nobr>remote one. In practice, however, the timing and failure modes are different between local messages and</nobr></div>
+<div style="position:absolute;top:2763;left:108"><nobr>remote messages.  System services such as remote file access and network message communication</nobr></div>
+<div style="position:absolute;top:2784;left:108"><nobr>are themselves implemented as tasks communicating via messages.</nobr></div>
+<div style="position:absolute;top:2822;left:125"><nobr>Threads, on the other hand, share their memory and access rights with the other threads in a task.</nobr></div>
+<div style="position:absolute;top:2844;left:108"><nobr>They often communicate within a task through shared memory locations.  Threads are intended to allow</nobr></div>
+<div style="position:absolute;top:2865;left:108"><nobr>separate execution units to work in parallel on the same problem. This gives a user an easy way to get</nobr></div>
+<div style="position:absolute;top:2887;left:108"><nobr>parallel computation on a multi-processor. On a single processor, multiple threads may simplify the</nobr></div>
+<div style="position:absolute;top:2908;left:108"><nobr>structure of a program that is logically doing several different functions. Multiple threads are also useful if</nobr></div>
+<div style="position:absolute;top:2929;left:108"><nobr>some of a program’s actions may cause a line of exection to be blocked, while other lines of execution</nobr></div>
+<div style="position:absolute;top:2951;left:108"><nobr>could usefully continue.  For example, server that handles requests from multiple clients may find one</nobr></div>
+<div style="position:absolute;top:2972;left:108"><nobr>request blocked, but be able to continue working on another request.  Creating or destroying a thread is</nobr></div>
+<div style="position:absolute;top:2994;left:108"><nobr>also a much less expensive operation than creating or destroying a task.</nobr></div>
+<div style="position:absolute;top:3032;left:125"><nobr><b>Communications. </b>There are two basic ways to communicate between tasks or between threads</nobr></div>
+<div style="position:absolute;top:3054;left:108"><nobr>within a task: shared memory and message passing (IPC).  The most obvious and probably most efficient</nobr></div>
+<div style="position:absolute;top:3075;left:108"><nobr>form of communication between two threads in the same task is through shared memory.  The most</nobr></div>
+<div style="position:absolute;top:3096;left:108"><nobr>common form of communication between tasks is through message passing. However, threads in the</nobr></div>
+<div style="position:absolute;top:3118;left:108"><nobr>same task may send messages to each other as long as the programmer is careful about which threads</nobr></div>
+<div style="position:absolute;top:3139;left:108"><nobr>are waiting for messages on which ports. Also, it is possible for a task to share memory with tasks that</nobr></div>
+<div style="position:absolute;top:3160;left:108"><nobr>have a common ancestor. Since these tasks will probably be on the same machine this sharing can be</nobr></div>
+<div style="position:absolute;top:3182;left:108"><nobr>efficient. Unrelated tasks can also share memory, but that style of memory sharing is made potentially</nobr></div>
+<div style="position:absolute;top:3203;left:108"><nobr>more complex when two unrelated tasks are not located on the same node.  Memory sharing between</nobr></div>
+<div style="position:absolute;top:3225;left:108"><nobr>unrelated tasks is not covered in this tutorial.  When two threads/tasks are using the same memory,</nobr></div>
+<div style="position:absolute;top:3246;left:108"><nobr>locking is often needed. Unfortunately, hardware mechanisms for locking memory locations vary from one</nobr></div>
+<div style="position:absolute;top:3267;left:108"><nobr>machine to another.  The Mach C threads library package provides machine-independent locking</nobr></div>
+<div style="position:absolute;top:3289;left:108"><nobr>primitives. Tasks that don’t use the C threads library must provide their own locking protocols.</nobr></div>
+<div style="position:absolute;top:3327;left:125"><nobr><b>Virtual memory primitives versus malloc. </b>The Mach kernel provides a set of primitives to allow a</nobr></div>
+<div style="position:absolute;top:3349;left:108"><nobr>programmer to manipulate the virtual address space of a task. The two most fundamental ones are</nobr></div>
+<div style="position:absolute;top:3372;left:108"><nobr>vm_allocate to get new virtual memory and vm_deallocate to free virtual memory.  The programmer</nobr></div>
+<div style="position:absolute;top:3391;left:108"><nobr>also has available the UNIX functions sbrk, malloc and calloc.</nobr></div>
+<div style="position:absolute;top:3430;left:125"><nobr>The decision to use one allocation method rather than another should be based on several factors.</nobr></div>
+<div style="position:absolute;top:3453;left:108"><nobr>sbrk is now obsolete and only retained for backward compatibility with older UNIX programs.  It is not</nobr></div>
+<div style="position:absolute;top:3473;left:108"><nobr>recommended that new programs which expect to use Mach features should use sbrk. In fact, sbrk</nobr></div>
+<div style="position:absolute;top:3494;left:108"><nobr>calls vm_allocate to increase the user’s address space. vm_allocate always adds new, zero-filled</nobr></div>
+<div style="position:absolute;top:3516;left:108"><nobr>virtual memory in paged-aligned, multiple of page-sized chunks (where a page is currenly 4K or 8K bytes</nobr></div>
+<div style="position:absolute;top:3537;left:108"><nobr>). Malloc allocates approximately the size it is asked for (plus a few bytes) out of a pre-allocated heap.</nobr></div>
+<div style="position:absolute;top:3560;left:108"><nobr>calloc is the same as malloc except that it zeros the memory before returning it. malloc and calloc</nobr></div>
+<div style="position:absolute;top:3580;left:108"><nobr>are library subroutine calls while vm_allocate is a kernel syscall which is somewhat more expensive.</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:3739;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="4"><b>Page 4</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:3789;left:455"><nobr><b>3</b></nobr></div>
+<div style="position:absolute;top:3844;left:125"><nobr>The the most obvious basis on which to choose an allocation function is the size of the desired space.</nobr></div>
+<div style="position:absolute;top:3865;left:108"><nobr>There is one other consideration, however, which is the desirability of page-aligned storage. If the</nobr></div>
+<div style="position:absolute;top:3886;left:108"><nobr>memory that is allocated is to be passed out-of-line in a message, it is more efficient if it is page-aligned.</nobr></div>
+<div style="position:absolute;top:3908;left:108"><nobr>Note that it is essential that the correct deallocation function be used. If memory has been</nobr></div>
+<div style="position:absolute;top:3931;left:108"><nobr>vm_allocated it must be vm_deallocated, if it was malloced it must be freed. Memory that is</nobr></div>
+<div style="position:absolute;top:3951;left:108"><nobr>received out-of-line from a message has been vm_allocated by the kernel.</nobr></div>
+<div style="position:absolute;top:3989;left:125"><nobr><b>Standard Mach servers. </b>There are a couple of standard servers that support use of Mach style</nobr></div>
+<div style="position:absolute;top:4010;left:108"><nobr>communications. One is the NetMsgServer. It passes Mach IPC messages between machines. It also</nobr></div>
+<div style="position:absolute;top:4032;left:108"><nobr>provides network-wide port registration and lookup functions. The names of these calls are</nobr></div>
+<div style="position:absolute;top:4055;left:108"><nobr>netname_check_in and netname_look_up and are documented in the man section netname.3.</nobr></div>
+<div style="position:absolute;top:4075;left:108"><nobr>The other general purpose Mach server is the Environment Manager. It can register or lookup ports or</nobr></div>
+<div style="position:absolute;top:4096;left:108"><nobr>named strings but does not communicate with other Environment Managers. The functions that it</nobr></div>
+<div style="position:absolute;top:4117;left:108"><nobr>provides are documented in the manual <i>The Mach Environment Manager </i>or in the man sections</nobr></div>
+<div style="position:absolute;top:4141;left:108"><nobr>env_conn.3, env_list.3, and env_port.3. In general, one decides to register a port with the</nobr></div>
+<div style="position:absolute;top:4160;left:108"><nobr>NetMsgServer if it is to be known by tasks on arbitrary remote machines within the local network.  Ports</nobr></div>
+<div style="position:absolute;top:4182;left:108"><nobr>are registered with the Environment Manager if they are to be used only by tasks which share access to</nobr></div>
+<div style="position:absolute;top:4203;left:108"><nobr>the same Environment Manager.  Often such tasks are part of the same creation tree or are performing a</nobr></div>
+<div style="position:absolute;top:4224;left:108"><nobr>computation on a single node.</nobr></div>
+<div style="position:absolute;top:4263;left:125"><nobr>The examples in this document demonstrate the creation of tasks and threads, message passing</nobr></div>
+<div style="position:absolute;top:4284;left:108"><nobr>between tasks, shared memory communication between tasks and threads, and the use of the virtual</nobr></div>
+<div style="position:absolute;top:4306;left:108"><nobr>memory primitives.</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:16px;font-family:Times">
+<div style="position:absolute;top:4359;left:108"><nobr><b>2. Message Communication Between Processes</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:4383;left:125"><nobr>The first sample program shows how to pass messages between two tasks. This is a good illustration</nobr></div>
+<div style="position:absolute;top:4405;left:108"><nobr>of the following fundamental Mach features:  allocation, deallocation, and use of ports; use of the</nobr></div>
+<div style="position:absolute;top:4426;left:108"><nobr>Environment Manager; setting up message structures; and communication between two processes via</nobr></div>
+<div style="position:absolute;top:4448;left:108"><nobr>messages on ports.  In this example the parent task will fork a child task, which will send the parent a</nobr></div>
+<div style="position:absolute;top:4469;left:108"><nobr>message containing data.  The parent will then notify the child that he received the data by sending a</nobr></div>
+<div style="position:absolute;top:4490;left:108"><nobr>reply message.</nobr></div>
+<div style="position:absolute;top:4529;left:125"><nobr>At this point, the reader should be aware that most <font style="font-size:10px">MACH </font>programmers do not code IPC at this level of</nobr></div>
+<div style="position:absolute;top:4550;left:108"><nobr>detail, but instead use the Mach Interface Generator (MIG) to produce the message handling code.  The</nobr></div>
+<div style="position:absolute;top:4572;left:108"><nobr>use of MIG is explained in the <b>Programmers’s Guide to the Mach User Environment</b>. Users who are</nobr></div>
+<div style="position:absolute;top:4593;left:108"><nobr>new the the <font style="font-size:10px">MACH </font>probably want to read that document before attempting to write code following these</nobr></div>
+<div style="position:absolute;top:4614;left:108"><nobr>examples.</nobr></div>
+<div style="position:absolute;top:4653;left:125"><nobr>This example uses a Mach version of the UNIX fork utility to create a child task. The UNIX part of the</nobr></div>
+<div style="position:absolute;top:4674;left:108"><nobr>fork creates a complete copy of the parent’s address space and prepares the child to begin executing</nobr></div>
+<div style="position:absolute;top:4696;left:108"><nobr>immediately after the fork call. The Mach part of the fork creates two ports for the child task: its task</nobr></div>
+<div style="position:absolute;top:4717;left:108"><nobr>kernel port, defined by task_self(); and a notification port, defined by task_notify(). The task</nobr></div>
+<div style="position:absolute;top:4738;left:108"><nobr>port is the port that represents that task in calls to the kernel.  The notify port is the port on which the task</nobr></div>
+<div style="position:absolute;top:4760;left:108"><nobr>may receive special messages from the kernel.  The child task also inherits an exception port, a bootstrap</nobr></div>
+<div style="position:absolute;top:4781;left:108"><nobr>port and some ports for system servers such as the Environment Manager and the Netmsgserver. Access</nobr></div>
+<div style="position:absolute;top:4803;left:108"><nobr>to user defined ports is not inherited through forking.  The thread that is created has a thread kernel port,</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:4927;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="5"><b>Page 5</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:4977;left:455"><nobr><b>4</b></nobr></div>
+<div style="position:absolute;top:5032;left:108"><nobr>referenced by thread_self(), and a thread reply port, referenced by thread_reply() created for it.</nobr></div>
+<div style="position:absolute;top:5053;left:108"><nobr>The thread kernel port is the port that represents the thread in kernel call. The thread reply port is a port</nobr></div>
+<div style="position:absolute;top:5074;left:108"><nobr>on which the thread can receive any initialization messages from its parent.</nobr></div>
+<div style="position:absolute;top:5113;left:125"><nobr>Message passing between the parent and child cannot take place until a port is known by both</nobr></div>
+<div style="position:absolute;top:5134;left:108"><nobr>processes. Before forking, a string is constructed to be used as the name of the communication port and</nobr></div>
+<div style="position:absolute;top:5156;left:108"><nobr>a port is allocated using the port_allocate call. Then the Environment Manager function</nobr></div>
+<div style="position:absolute;top:5179;left:108"><nobr>env_set_port is called to associate the name with the port. This name is available to both processes</nobr></div>
+<div style="position:absolute;top:5198;left:108"><nobr>after forking since it is a static variable.  After the fork the child can acquire send rights to the port using</nobr></div>
+<div style="position:absolute;top:5222;left:108"><nobr>env_get_port.</nobr></div>
+<div style="position:absolute;top:5258;left:125"><nobr>Now that both tasks have access to the communication port, a message is constructed by the child.</nobr></div>
+<div style="position:absolute;top:5280;left:108"><nobr>This message contains a fixed sized message header and a variable sized data portion.  When</nobr></div>
+<div style="position:absolute;top:5301;left:108"><nobr>constructing the message, the child sets the msg_remote_port field in the header to the communication</nobr></div>
+<div style="position:absolute;top:5323;left:108"><nobr>port established earlier.  This field designates the port to which the message is to be sent. Another</nobr></div>
+<div style="position:absolute;top:5344;left:108"><nobr>header field that the child must be sure to set properly is msg_local_port. This is the port on which</nobr></div>
+<div style="position:absolute;top:5365;left:108"><nobr>the child will wait for a reply message.  In this example, the child will receive the reply message on his</nobr></div>
+<div style="position:absolute;top:5387;left:108"><nobr>thread reply port. The task that receives the message constructed by the child automatically receives</nobr></div>
+<div style="position:absolute;top:5408;left:108"><nobr>send rights to the msg_local_port. Since the child task wishes to send a message and then</nobr></div>
+<div style="position:absolute;top:5430;left:108"><nobr>immediately receive a reply message, it uses msg_rpc instead of msg_send and msg_receive.</nobr></div>
+<div style="position:absolute;top:5453;left:108"><nobr>msg_rpc does a send followed by a receive using the same message buffer for both calls.</nobr></div>
+<div style="position:absolute;top:5489;left:125"><nobr>Next the parent takes a message structure and fills in the header fields needed by msg_receive:</nobr></div>
+<div style="position:absolute;top:5513;left:108"><nobr>msg_remote_port, representing the port on which the message is to be received, and msg_size, the</nobr></div>
+<div style="position:absolute;top:5532;left:108"><nobr>maximum size of the expected message.  With this message structure, the parent calls msg_receive.</nobr></div>
+<div style="position:absolute;top:5556;left:108"><nobr>msg_receive returns the message queued on the port designated by the msg_remote_port field.</nobr></div>
+<div style="position:absolute;top:5575;left:108"><nobr>Remember that the child’s message contained a port to send a reply message to, the msg_local_port</nobr></div>
+<div style="position:absolute;top:5596;left:108"><nobr>field. Upon return from msg_receive, the msg_remote_port field is set to the child’s</nobr></div>
+<div style="position:absolute;top:5620;left:108"><nobr>msg_local_port field, the expected reply port.</nobr></div>
+<div style="position:absolute;top:5656;left:125"><nobr>In our example, the parent is going to send a message back to the child indicating that it received the</nobr></div>
+<div style="position:absolute;top:5678;left:108"><nobr>message containing the data.  This reply message contains no data itself; it is just a confirmation.  The</nobr></div>
+<div style="position:absolute;top:5699;left:108"><nobr>parent sets the msg_remote_port field of the reply message to the msg_remote_port field of the</nobr></div>
+<div style="position:absolute;top:5720;left:108"><nobr>previously received message. msg_send is now called to send the reply message to the port indicated</nobr></div>
+<div style="position:absolute;top:5742;left:108"><nobr>by the msg_remote_port field.</nobr></div>
+<div style="position:absolute;top:5780;left:125"><nobr>The earlier call of msg_rpc by the child will now receive the parent’s reply message.  Our example is</nobr></div>
+<div style="position:absolute;top:5802;left:108"><nobr>over except for cleaning up. env_del_port is called to let the Environment Manager know the</nobr></div>
+<div style="position:absolute;top:5823;left:108"><nobr>name/port association is no longer needed. port_deallocate is then called by the parent which owns</nobr></div>
+<div style="position:absolute;top:5844;left:108"><nobr>the communication port to destroy it.</nobr></div>
+<div style="position:absolute;top:5883;left:125"><nobr>Detailed discussion of the various calls used by the example are given next and the complete text of</nobr></div>
+<div style="position:absolute;top:5904;left:108"><nobr>the program is given in Section 2.12.</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:6115;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="6"><b>Page 6</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:6165;left:455"><nobr><b>5</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:6219;left:108"><nobr><b>2.1. Mach Error Printing</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:6244;left:125"><nobr>mach_error is an error routine that accepts a string and an error value.  The string is then printed</nobr></div>
+<div style="position:absolute;top:6264;left:108"><nobr>along with an error string associated with the value.</nobr></div>
+<div style="position:absolute;top:6285;left:144"><nobr><b>kern_return_t error;</b></nobr></div>
+<div style="position:absolute;top:6319;left:144"><nobr><b>mach_error("PARENT: port_allocate returned value of ", error);</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:6391;left:108"><nobr><b>2.2. Port Allocation</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:6416;left:125"><nobr>port_allocate is used to create a port.  The first argument to port_allocate is the task the port</nobr></div>
+<div style="position:absolute;top:6435;left:108"><nobr>is to belong to, in this case the process itself or task_self().</nobr></div>
+<div style="position:absolute;top:6457;left:144"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:6457;left:288"><nobr><b>result;</b></nobr></div>
+<div style="position:absolute;top:6474;left:144"><nobr><b>kern_return_t error;</b></nobr></div>
+<div style="position:absolute;top:6508;left:144"><nobr><b>if ((error = port_allocate(task_self(), &amp;result)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:6525;left:216"><nobr><b>mach_error("PARENT: port_allocate returned value of ", error);</b></nobr></div>
+<div style="position:absolute;top:6542;left:216"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:6559;left:144"><nobr><b>}</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:6630;left:108"><nobr><b>2.3. Port Deallocation</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:6656;left:125"><nobr>port_deallocate is used to relinquish a task’s access to a port. If the task has ownership and</nobr></div>
+<div style="position:absolute;top:6675;left:108"><nobr>receive rights to the port, the port_deallocate destroys the port and notifies (on their notify ports) all</nobr></div>
+<div style="position:absolute;top:6696;left:108"><nobr>the other tasks that have send rights to the port.</nobr></div>
+<div style="position:absolute;top:6718;left:144"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:6718;left:288"><nobr><b>my_port;</b></nobr></div>
+<div style="position:absolute;top:6735;left:144"><nobr><b>kern_return_t error;</b></nobr></div>
+<div style="position:absolute;top:6769;left:144"><nobr><b>if ((error = port_deallocate(task_self(), my_port)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:6786;left:216"><nobr><b>mach_error("PARENT: port_deallocate returned value of ", error</b></nobr></div>
+<div style="position:absolute;top:6803;left:216"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:6820;left:144"><nobr><b>}</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:6891;left:108"><nobr><b>2.4. Environment Manager Server/Checking in a Port</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:6915;left:125"><nobr>The Environment Manager is used as a repository for named ports. env_get_port can be used to</nobr></div>
+<div style="position:absolute;top:6936;left:108"><nobr>associate a name with a port.  Note that the port must have been previously acquired either through a</nobr></div>
+<div style="position:absolute;top:6957;left:108"><nobr>message, or from port_allocate, or be one of the special system ports that are aquired on task</nobr></div>
+<div style="position:absolute;top:6979;left:108"><nobr>creation. Name has been set to a string.</nobr></div>
+<div style="position:absolute;top:7001;left:144"><nobr><b>env_name_t</b></nobr></div>
+<div style="position:absolute;top:7001;left:288"><nobr><b>name;</b></nobr></div>
+<div style="position:absolute;top:7018;left:144"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:7018;left:288"><nobr><b>comm_port;</b></nobr></div>
+<div style="position:absolute;top:7034;left:144"><nobr><b>kern_return_t error;</b></nobr></div>
+<div style="position:absolute;top:7074;left:144"><nobr><b>if ((error = env_set_port(environment_port, name,</b></nobr></div>
+<div style="position:absolute;top:7091;left:378"><nobr><b>comm_port)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:7108;left:216"><nobr><b>mach_error("PARENT: env_set_port returned value of ", error);</b></nobr></div>
+<div style="position:absolute;top:7125;left:216"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:7142;left:144"><nobr><b>}</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:7303;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="7"><b>Page 7</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:7353;left:455"><nobr><b>6</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:7407;left:108"><nobr><b>2.5. Environment Manager Server/Looking up a Port</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:7432;left:125"><nobr>env_get_port can be used to look up a port when the name of the port is known.  If env_set_port</nobr></div>
+<div style="position:absolute;top:7452;left:108"><nobr>has not been called to associate a port with the given name, env_get_port will fail.</nobr></div>
+<div style="position:absolute;top:7473;left:144"><nobr><b>env_name_t</b></nobr></div>
+<div style="position:absolute;top:7473;left:288"><nobr><b>name;</b></nobr></div>
+<div style="position:absolute;top:7490;left:144"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:7490;left:288"><nobr><b>comm_port;</b></nobr></div>
+<div style="position:absolute;top:7507;left:144"><nobr><b>kern_return_t error;</b></nobr></div>
+<div style="position:absolute;top:7541;left:144"><nobr><b>/* Name has been previously set to a desired string. */</b></nobr></div>
+<div style="position:absolute;top:7575;left:144"><nobr><b>if ((error = env_get_port(environment_port, name,</b></nobr></div>
+<div style="position:absolute;top:7592;left:360"><nobr><b>&amp;comm_port)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:7609;left:216"><nobr><b>mach_error("env_get_port returned ", error);</b></nobr></div>
+<div style="position:absolute;top:7626;left:216"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:7643;left:144"><nobr><b>}</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:7714;left:108"><nobr><b>2.6. Setting up a Simple Message</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:7738;left:125"><nobr>A message consists of a fixed length header defined by the structure msg_header_t followed by a</nobr></div>
+<div style="position:absolute;top:7759;left:108"><nobr>variable number of typed data items.  A message is <b>simple </b>if it does not contain any out-of-line data</nobr></div>
+<div style="position:absolute;top:7780;left:108"><nobr>(pointers) or any ports.  The msg_remote_port field must contain the port to which the message is to be</nobr></div>
+<div style="position:absolute;top:7802;left:108"><nobr>sent. In this case it is comm_port. The msg_local_port field should be set to the port on which a</nobr></div>
+<div style="position:absolute;top:7823;left:108"><nobr>reply message is expected. thread_reply(), which returns the thread’s reply port is used as the reply</nobr></div>
+<div style="position:absolute;top:7845;left:108"><nobr>port.</nobr></div>
+<div style="position:absolute;top:7866;left:144"><nobr><b>typedef struct {</b></nobr></div>
+<div style="position:absolute;top:7883;left:288"><nobr><b>unsigned int</b></nobr></div>
+<div style="position:absolute;top:7883;left:432"><nobr><b>:24,</b></nobr></div>
+<div style="position:absolute;top:7900;left:432"><nobr><b>msg_simple : 8;</b></nobr></div>
+<div style="position:absolute;top:7917;left:288"><nobr><b>unsigned int</b></nobr></div>
+<div style="position:absolute;top:7917;left:432"><nobr><b>msg_size;</b></nobr></div>
+<div style="position:absolute;top:7917;left:576"><nobr><b>/* in bytes */</b></nobr></div>
+<div style="position:absolute;top:7934;left:288"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:7934;left:432"><nobr><b>msg_type;</b></nobr></div>
+<div style="position:absolute;top:7934;left:576"><nobr><b>/* NORMAL, EMERGENCY *</b></nobr></div>
+<div style="position:absolute;top:7951;left:288"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:7951;left:432"><nobr><b>msg_local_port;</b></nobr></div>
+<div style="position:absolute;top:7968;left:288"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:7968;left:432"><nobr><b>msg_remote_port;</b></nobr></div>
+<div style="position:absolute;top:7985;left:288"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:7985;left:432"><nobr><b>msg_id;</b></nobr></div>
+<div style="position:absolute;top:7985;left:576"><nobr><b>/* user supplied id */</b></nobr></div>
+<div style="position:absolute;top:8002;left:144"><nobr><b>} msg_header_t;</b></nobr></div>
+<div style="position:absolute;top:8053;left:144"><nobr><b>struct simp_msg_struct {</b></nobr></div>
+<div style="position:absolute;top:8070;left:216"><nobr><b>msg_header_t</b></nobr></div>
+<div style="position:absolute;top:8070;left:360"><nobr><b>h;</b></nobr></div>
+<div style="position:absolute;top:8087;left:216"><nobr><b>msg_type_t</b></nobr></div>
+<div style="position:absolute;top:8087;left:360"><nobr><b>t;</b></nobr></div>
+<div style="position:absolute;top:8104;left:216"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:8104;left:360"><nobr><b>inline_data[MAXDATA];</b></nobr></div>
+<div style="position:absolute;top:8121;left:144"><nobr><b>};</b></nobr></div>
+<div style="position:absolute;top:8138;left:144"><nobr><b>struct simp_msg_struct  msg_xmt;</b></nobr></div>
+<div style="position:absolute;top:8155;left:144"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:8155;left:288"><nobr><b>comm_port;</b></nobr></div>
+<div style="position:absolute;top:8195;left:144"><nobr><b>msg_xmt= &amp;msg_xmt_data;</b></nobr></div>
+<div style="position:absolute;top:8212;left:144"><nobr><b>msg_xmt.h.msg_local_port = thread_reply();</b></nobr></div>
+<div style="position:absolute;top:8229;left:144"><nobr><b>msg_xmt.h.msg_remote_port = comm_port;</b></nobr></div>
+<div style="position:absolute;top:8245;left:144"><nobr><b>msg_xmt.h.msg_size = sizeof(struct simp_msg_struct);</b></nobr></div>
+<div style="position:absolute;top:8262;left:144"><nobr><b>msg_xmt.h.msg_id = 0x12345678;</b></nobr></div>
+<div style="position:absolute;top:8279;left:144"><nobr><b>msg_xmt.h.msg_type = MSG_TYPE_NORMAL;</b></nobr></div>
+<div style="position:absolute;top:8296;left:144"><nobr><b>msg_xmt.h.msg_simple = TRUE;</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:8491;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="8"><b>Page 8</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:8541;left:455"><nobr><b>7</b></nobr></div>
+<div style="position:absolute;top:8594;left:144"><nobr><b>msg_xmt.t.msg_type_name = MSG_TYPE_INTEGER_32;</b></nobr></div>
+<div style="position:absolute;top:8611;left:144"><nobr><b>msg_xmt.t.msg_type_size = 32;</b></nobr></div>
+<div style="position:absolute;top:8628;left:144"><nobr><b>msg_xmt.t.msg_type_number = MAXDATA;</b></nobr></div>
+<div style="position:absolute;top:8645;left:144"><nobr><b>msg_xmt.t.msg_type_inline = TRUE;</b></nobr></div>
+<div style="position:absolute;top:8662;left:144"><nobr><b>msg_xmt.t.msg_type_longform = FALSE;</b></nobr></div>
+<div style="position:absolute;top:8679;left:144"><nobr><b>msg_xmt.t.msg_type_deallocate = FALSE;</b></nobr></div>
+<div style="position:absolute;top:8695;left:144"><nobr><b>/* fill the msg_xmt.inline_data array with the desired data*/</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:8767;left:108"><nobr><b>2.7. Sending Messages</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:8790;left:125"><nobr>The first parameter to msg_send is the address of a msg_header_t. This message will be sent to the</nobr></div>
+<div style="position:absolute;top:8812;left:108"><nobr>port indicated by the msg_remote_port field. Send rights to msg_local_port are given to the</nobr></div>
+<div style="position:absolute;top:8833;left:108"><nobr>receiver so that it may send a reply message.</nobr></div>
+<div style="position:absolute;top:8855;left:144"><nobr><b>msg_return_t</b></nobr></div>
+<div style="position:absolute;top:8855;left:288"><nobr><b>ret;</b></nobr></div>
+<div style="position:absolute;top:8872;left:144"><nobr><b>struct simp_msg_struct {</b></nobr></div>
+<div style="position:absolute;top:8889;left:216"><nobr><b>msg_header_t</b></nobr></div>
+<div style="position:absolute;top:8889;left:360"><nobr><b>h;</b></nobr></div>
+<div style="position:absolute;top:8906;left:216"><nobr><b>msg_type_t</b></nobr></div>
+<div style="position:absolute;top:8906;left:360"><nobr><b>t;</b></nobr></div>
+<div style="position:absolute;top:8923;left:216"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:8923;left:360"><nobr><b>inline_data[MAXDATA];</b></nobr></div>
+<div style="position:absolute;top:8940;left:144"><nobr><b>};</b></nobr></div>
+<div style="position:absolute;top:8957;left:144"><nobr><b>struct simp_msg_struct  msg_xmt;</b></nobr></div>
+<div style="position:absolute;top:8990;left:144"><nobr><b>if ((ret = msg_send(&amp;msg_xmt.h, MSG_OPTION_NONE, 0)) != SEND_SUCCESS){</b></nobr></div>
+<div style="position:absolute;top:9007;left:216"><nobr><b>mach_error("CHILD: msg_send returned value of ", ret);</b></nobr></div>
+<div style="position:absolute;top:9024;left:216"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:9041;left:144"><nobr><b>}</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:9113;left:108"><nobr><b>2.8. Receiving Messages</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:9138;left:125"><nobr>msg_receive is used to retrieve the next message from a port specified in the msg_remote_port</nobr></div>
+<div style="position:absolute;top:9157;left:108"><nobr>field. The field msg_size must be set to the size of the buffer for the message and thus the maximum</nobr></div>
+<div style="position:absolute;top:9179;left:108"><nobr>permitted size of the message being received.  If the message that is queued on the port is too big, the</nobr></div>
+<div style="position:absolute;top:9200;left:108"><nobr>receive will fail. When msg_receive returns, the msg_remote_port field will be set to the sender’s</nobr></div>
+<div style="position:absolute;top:9224;left:108"><nobr>msg_local_port field, or the port that reply messages are expected on and msg_size will be set to the</nobr></div>
+<div style="position:absolute;top:9243;left:108"><nobr>size of the message that was received.</nobr></div>
+<div style="position:absolute;top:9265;left:144"><nobr><b>msg_return_t</b></nobr></div>
+<div style="position:absolute;top:9265;left:288"><nobr><b>ret;</b></nobr></div>
+<div style="position:absolute;top:9282;left:144"><nobr><b>struct simp_msg_struct {</b></nobr></div>
+<div style="position:absolute;top:9299;left:216"><nobr><b>msg_header_t</b></nobr></div>
+<div style="position:absolute;top:9299;left:360"><nobr><b>h;</b></nobr></div>
+<div style="position:absolute;top:9316;left:216"><nobr><b>msg_type_t</b></nobr></div>
+<div style="position:absolute;top:9316;left:360"><nobr><b>t;</b></nobr></div>
+<div style="position:absolute;top:9333;left:216"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:9333;left:360"><nobr><b>inline_data[MAXDATA];</b></nobr></div>
+<div style="position:absolute;top:9350;left:144"><nobr><b>};</b></nobr></div>
+<div style="position:absolute;top:9367;left:144"><nobr><b>struct simp_msg_struct  msg_rcv;</b></nobr></div>
+<div style="position:absolute;top:9400;left:144"><nobr><b>msg_rcv.h.msg_size = sizeof(msg_rcv);</b></nobr></div>
+<div style="position:absolute;top:9417;left:144"><nobr><b>msg_rcv.h.msg_local_port = comm_port;</b></nobr></div>
+<div style="position:absolute;top:9434;left:144"><nobr><b>if ((ret = msg_receive(&amp;msg_rcv.h, MSG_OPTION_NONE, 0)) !=</b></nobr></div>
+<div style="position:absolute;top:9451;left:216"><nobr><b>RCV_SUCCESS){</b></nobr></div>
+<div style="position:absolute;top:9468;left:216"><nobr><b>mach_error("CHILD: msg_receive returned value of ", ret);</b></nobr></div>
+<div style="position:absolute;top:9485;left:216"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:9502;left:144"><nobr><b>}</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:9679;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="9"><b>Page 9</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:9729;left:455"><nobr><b>8</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:9783;left:108"><nobr><b>2.9. Setting up a Reply Message</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:9806;left:125"><nobr>At this point a message has already been received in the structure msg_rcv. A reply message is to be</nobr></div>
+<div style="position:absolute;top:9828;left:108"><nobr>constructed and sent to the sender of msg_rcv. Note that the reply message, msg_xmt is simply a</nobr></div>
+<div style="position:absolute;top:9851;left:108"><nobr>msg_header_t since no data is required. The msg_remote_port field, where to send the message, is</nobr></div>
+<div style="position:absolute;top:9870;left:108"><nobr>set to the remote port of the previously received message.  The earlier msg_receive call set the remote</nobr></div>
+<div style="position:absolute;top:9892;left:108"><nobr>port field of msg_rcv to the msg_local_port field specified by the sender. See the comment in Section</nobr></div>
+<div style="position:absolute;top:9913;left:108"><nobr>2.6 about setting up the msg_local_port field.</nobr></div>
+<div style="position:absolute;top:9935;left:144"><nobr><b>struct simp_msg_struct {</b></nobr></div>
+<div style="position:absolute;top:9952;left:216"><nobr><b>msg_header_t</b></nobr></div>
+<div style="position:absolute;top:9952;left:360"><nobr><b>h;</b></nobr></div>
+<div style="position:absolute;top:9969;left:216"><nobr><b>msg_type_t</b></nobr></div>
+<div style="position:absolute;top:9969;left:360"><nobr><b>t;</b></nobr></div>
+<div style="position:absolute;top:9986;left:216"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:9986;left:360"><nobr><b>inline_data[MAXDATA];</b></nobr></div>
+<div style="position:absolute;top:10003;left:144"><nobr><b>};</b></nobr></div>
+<div style="position:absolute;top:10020;left:144"><nobr><b>msg_header_t</b></nobr></div>
+<div style="position:absolute;top:10020;left:360"><nobr><b>msg_xmt;</b></nobr></div>
+<div style="position:absolute;top:10037;left:144"><nobr><b>struct simp_msg_struct  *msg_rcv;</b></nobr></div>
+<div style="position:absolute;top:10076;left:144"><nobr><b>msg_xmt.h.msg_remote_port = msg_rcv-&gt;h.msg_remote_port;</b></nobr></div>
+<div style="position:absolute;top:10093;left:144"><nobr><b>msg_xmt.h.msg_local_port = PORT_NULL; /* no reply expected */</b></nobr></div>
+<div style="position:absolute;top:10110;left:144"><nobr><b>msg_xmt.h.msg_id = 0x12345678;</b></nobr></div>
+<div style="position:absolute;top:10127;left:144"><nobr><b>msg_xmt.h.msg_size = sizeof(msg_header_t);</b></nobr></div>
+<div style="position:absolute;top:10144;left:144"><nobr><b>msg_xmt.h.msg_type = MSG_TYPE_NORMAL;</b></nobr></div>
+<div style="position:absolute;top:10161;left:144"><nobr><b>msg_xmt.h.msg_simple = TRUE;</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:10250;left:108"><nobr><b>2.10. RPC, Send/Receive</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:10275;left:125"><nobr>msg_rpc does a msg_send followed by a msg_receive using the same message buffer. msg_size</nobr></div>
+<div style="position:absolute;top:10294;left:108"><nobr>is, as usual, the size of the message that is being sent.  The third parameter to msg_rpc represents the</nobr></div>
+<div style="position:absolute;top:10316;left:108"><nobr>maximum size of the message buffer for the message to be received. In this case it is the size of the</nobr></div>
+<div style="position:absolute;top:10337;left:108"><nobr>message being sent because we know that the reply message is smaller.</nobr></div>
+<div style="position:absolute;top:10359;left:144"><nobr><b>msg_return_t</b></nobr></div>
+<div style="position:absolute;top:10359;left:288"><nobr><b>ret;</b></nobr></div>
+<div style="position:absolute;top:10376;left:144"><nobr><b>struct simp_msg_struct {</b></nobr></div>
+<div style="position:absolute;top:10393;left:216"><nobr><b>msg_header_t</b></nobr></div>
+<div style="position:absolute;top:10393;left:360"><nobr><b>h;</b></nobr></div>
+<div style="position:absolute;top:10410;left:216"><nobr><b>msg_type_t</b></nobr></div>
+<div style="position:absolute;top:10410;left:360"><nobr><b>t;</b></nobr></div>
+<div style="position:absolute;top:10427;left:216"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:10427;left:360"><nobr><b>inline_data[MAXDATA];</b></nobr></div>
+<div style="position:absolute;top:10444;left:144"><nobr><b>};</b></nobr></div>
+<div style="position:absolute;top:10461;left:144"><nobr><b>struct simp_msg_struct  msg_xmt;</b></nobr></div>
+<div style="position:absolute;top:10495;left:144"><nobr><b>if ((ret = msg_rpc(&amp;msg_xmt.h, MSG_OPTION_NONE, sizeof(msg_xmt), 0,</b></nobr></div>
+<div style="position:absolute;top:10512;left:216"><nobr><b>0)) != RPC_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:10529;left:216"><nobr><b>mach_error("CHILD: msg_rpc returned value of ", ret);</b></nobr></div>
+<div style="position:absolute;top:10546;left:216"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:10562;left:144"><nobr><b>}</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:10634;left:108"><nobr><b>2.11. A Non-Simple Message</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:10657;left:125"><nobr>Messages are non-simple if they contain ports or out-of-line data. The next example shows how to</nobr></div>
+<div style="position:absolute;top:10679;left:108"><nobr>construct a data containing out-of-line data. The most common reasons for sending data out-of-line are</nobr></div>
+<div style="position:absolute;top:10700;left:108"><nobr>that the data block is very large or is of variable size. In-line data is copied by the sender into the</nobr></div>
+<div style="position:absolute;top:10721;left:108"><nobr>message structure and then often copied out of the message by the receiver. Out-of-line data, however,</nobr></div>
+<div style="position:absolute;top:10743;left:108"><nobr>is mapped by the kernel from the address space of the sender to the address space of the receiver. No</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:10867;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="10"><b>Page 10</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:10917;left:455"><nobr><b>9</b></nobr></div>
+<div style="position:absolute;top:10972;left:108"><nobr>actual copying of data is done unless one of the two tasks subsequently modifies the data. This is an</nobr></div>
+<div style="position:absolute;top:10993;left:108"><nobr>example of copy-on-write data sharing.</nobr></div>
+<div style="position:absolute;top:11032;left:125"><nobr>The fields that change values from those in the simple message example are msg_simple,</nobr></div>
+<div style="position:absolute;top:11055;left:108"><nobr>msg_type_inline, and possibly msg_type_deallocate. See Section 2.6 for details on</nobr></div>
+<div style="position:absolute;top:11076;left:108"><nobr>msg_remote_port and msg_local_port. An example program of non-simple message passing can</nobr></div>
+<div style="position:absolute;top:11096;left:108"><nobr>be found in the Mach examples directory. This example is not included in this document, but can be found</nobr></div>
+<div style="position:absolute;top:11117;left:108"><nobr>in the file ool_ipc.c in the Mach examples directory.</nobr></div>
+<div style="position:absolute;top:11139;left:144"><nobr><b>struct ool_msg_struct {</b></nobr></div>
+<div style="position:absolute;top:11156;left:216"><nobr><b>msg_header_t</b></nobr></div>
+<div style="position:absolute;top:11156;left:360"><nobr><b>h;</b></nobr></div>
+<div style="position:absolute;top:11173;left:216"><nobr><b>msg_type_t</b></nobr></div>
+<div style="position:absolute;top:11173;left:360"><nobr><b>t;</b></nobr></div>
+<div style="position:absolute;top:11190;left:216"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:11190;left:360"><nobr><b>*out_of_line_data;</b></nobr></div>
+<div style="position:absolute;top:11207;left:144"><nobr><b>};</b></nobr></div>
+<div style="position:absolute;top:11224;left:144"><nobr><b>struct ool_msg_struct msg_xmt;</b></nobr></div>
+<div style="position:absolute;top:11241;left:144"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:11241;left:288"><nobr><b>comm_port;</b></nobr></div>
+<div style="position:absolute;top:11280;left:144"><nobr><b>msg_xmt.h.msg_local_port = thread_reply();</b></nobr></div>
+<div style="position:absolute;top:11297;left:144"><nobr><b>msg_xmt.h.msg_remote_port = comm_port;</b></nobr></div>
+<div style="position:absolute;top:11314;left:144"><nobr><b>msg_xmt.h.msg_size = sizeof(struct ool_msg_struct);</b></nobr></div>
+<div style="position:absolute;top:11331;left:144"><nobr><b>msg_xmt.h.msg_id = 0x12345678;</b></nobr></div>
+<div style="position:absolute;top:11348;left:144"><nobr><b>msg_xmt.h.msg_type = MSG_TYPE_NORMAL;</b></nobr></div>
+<div style="position:absolute;top:11365;left:144"><nobr><b>msg_xmt.h.msg_simple = FALSE;</b></nobr></div>
+<div style="position:absolute;top:11399;left:144"><nobr><b>msg_xmt.t.msg_type_name = MSG_TYPE_INTEGER_32;</b></nobr></div>
+<div style="position:absolute;top:11416;left:144"><nobr><b>msg_xmt.t.msg_type_size = 32;</b></nobr></div>
+<div style="position:absolute;top:11433;left:144"><nobr><b>msg_xmt.t.msg_type_number = MAXDATA;</b></nobr></div>
+<div style="position:absolute;top:11450;left:144"><nobr><b>msg_xmt.t.msg_type_inline = FALSE;</b></nobr></div>
+<div style="position:absolute;top:11467;left:144"><nobr><b>msg_xmt.t.msg_type_longform = FALSE;</b></nobr></div>
+<div style="position:absolute;top:11484;left:144"><nobr><b>msg_xmt.t.msg_type_deallocate = FALSE;</b></nobr></div>
+<div style="position:absolute;top:11501;left:144"><nobr><b>/* set msg_xmt.out_of_line_data to point to the data */</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:12055;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="11"><b>Page 11</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:12105;left:451"><nobr><b>10</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:12159;left:108"><nobr><b>2.12. Programming Example I, simp_ipc.c</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:12187;left:108"><nobr><b>/*</b></nobr></div>
+<div style="position:absolute;top:12204;left:117"><nobr><b>* This program is an illustration of MACH message passing from a child</b></nobr></div>
+<div style="position:absolute;top:12221;left:117"><nobr><b>* to the parent process and back.  In this example, the child is passing</b></nobr></div>
+<div style="position:absolute;top:12238;left:117"><nobr><b>* a simple message where the data is stored in the message. The program</b></nobr></div>
+<div style="position:absolute;top:12255;left:117"><nobr><b>* allocates a port to use for communication.  The environment manager</b></nobr></div>
+<div style="position:absolute;top:12271;left:117"><nobr><b>* is used to register the port with a name that both the parent</b></nobr></div>
+<div style="position:absolute;top:12288;left:117"><nobr><b>* and child know. The program forks a child process which</b></nobr></div>
+<div style="position:absolute;top:12305;left:117"><nobr><b>* then uses env_get_port to acquire the port needed for communication.</b></nobr></div>
+<div style="position:absolute;top:12322;left:117"><nobr><b>* A message, containing the data the parent needs, is formed by the child</b></nobr></div>
+<div style="position:absolute;top:12339;left:117"><nobr><b>* and sent with msg_rpc to the parent.  msg_rpc does a send and a receive</b></nobr></div>
+<div style="position:absolute;top:12356;left:117"><nobr><b>* using the same message buffer.  The parent does a receive on the</b></nobr></div>
+<div style="position:absolute;top:12373;left:117"><nobr><b>* established communication port receiving the message from the child.</b></nobr></div>
+<div style="position:absolute;top:12390;left:117"><nobr><b>* Upon receiving the child’s message, the parent constructs and sends</b></nobr></div>
+<div style="position:absolute;top:12407;left:117"><nobr><b>* a confirmation or reply message back to the child indicating he received</b></nobr></div>
+<div style="position:absolute;top:12424;left:117"><nobr><b>* the child’s message and data.  The call to msg_rpc by the child</b></nobr></div>
+<div style="position:absolute;top:12441;left:117"><nobr><b>* receives the parent’s reply.  The child then tells the environment</b></nobr></div>
+<div style="position:absolute;top:12458;left:117"><nobr><b>* manager the communication port is no longer needed, and calls</b></nobr></div>
+<div style="position:absolute;top:12475;left:117"><nobr><b>* port_deallocate.</b></nobr></div>
+<div style="position:absolute;top:12492;left:117"><nobr><b>*</b></nobr></div>
+<div style="position:absolute;top:12509;left:117"><nobr><b>**********************************************************/</b></nobr></div>
+<div style="position:absolute;top:12543;left:108"><nobr><b>#include &lt;stdio.h&gt;</b></nobr></div>
+<div style="position:absolute;top:12560;left:108"><nobr><b>#include &lt;mach.h&gt;</b></nobr></div>
+<div style="position:absolute;top:12577;left:108"><nobr><b>#include &lt;mach_error.h&gt;</b></nobr></div>
+<div style="position:absolute;top:12594;left:108"><nobr><b>#include &lt;sys/message.h&gt;</b></nobr></div>
+<div style="position:absolute;top:12611;left:108"><nobr><b>#include &lt;servers/env_mgr.h&gt;</b></nobr></div>
+<div style="position:absolute;top:12645;left:108"><nobr><b>#define MAXDATA 20</b></nobr></div>
+<div style="position:absolute;top:12679;left:108"><nobr><b>/* simple message structure */</b></nobr></div>
+<div style="position:absolute;top:12696;left:108"><nobr><b>struct simp_msg_struct {</b></nobr></div>
+<div style="position:absolute;top:12713;left:180"><nobr><b>msg_header_t</b></nobr></div>
+<div style="position:absolute;top:12713;left:324"><nobr><b>h;</b></nobr></div>
+<div style="position:absolute;top:12730;left:180"><nobr><b>msg_type_t</b></nobr></div>
+<div style="position:absolute;top:12730;left:324"><nobr><b>t;</b></nobr></div>
+<div style="position:absolute;top:12747;left:180"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:12747;left:324"><nobr><b>inline_data[MAXDATA];</b></nobr></div>
+<div style="position:absolute;top:12763;left:108"><nobr><b>};</b></nobr></div>
+<div style="position:absolute;top:12831;left:108"><nobr><b>/* This routine is used to set up the message containing the data that</b></nobr></div>
+<div style="position:absolute;top:12848;left:117"><nobr><b>* the child will send to the parent.  Here the data is a simple array of</b></nobr></div>
+<div style="position:absolute;top:12865;left:117"><nobr><b>* integers.  */</b></nobr></div>
+<div style="position:absolute;top:12899;left:108"><nobr><b>void setup_simp_request(msg_xmt, my_port)</b></nobr></div>
+<div style="position:absolute;top:12916;left:180"><nobr><b>struct simp_msg_struct  *msg_xmt;</b></nobr></div>
+<div style="position:absolute;top:12933;left:180"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:12933;left:324"><nobr><b>my_port;</b></nobr></div>
+<div style="position:absolute;top:12967;left:108"><nobr><b>{</b></nobr></div>
+<div style="position:absolute;top:12984;left:180"><nobr><b>int i;</b></nobr></div>
+<div style="position:absolute;top:13018;left:180"><nobr><b>msg_xmt-&gt;h.msg_local_port = thread_reply();</b></nobr></div>
+<div style="position:absolute;top:13035;left:180"><nobr><b>msg_xmt-&gt;h.msg_remote_port = my_port;</b></nobr></div>
+<div style="position:absolute;top:13052;left:180"><nobr><b>msg_xmt-&gt;h.msg_size = sizeof(struct simp_msg_struct);</b></nobr></div>
+<div style="position:absolute;top:13069;left:180"><nobr><b>msg_xmt-&gt;h.msg_id = 0x12345678;</b></nobr></div>
+<div style="position:absolute;top:13086;left:180"><nobr><b>msg_xmt-&gt;h.msg_type = MSG_TYPE_NORMAL;</b></nobr></div>
+<div style="position:absolute;top:13103;left:180"><nobr><b>msg_xmt-&gt;h.msg_simple = TRUE;</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:13243;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="12"><b>Page 12</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:13293;left:451"><nobr><b>11</b></nobr></div>
+<div style="position:absolute;top:13346;left:180"><nobr><b>msg_xmt-&gt;t.msg_type_name = MSG_TYPE_INTEGER_32;</b></nobr></div>
+<div style="position:absolute;top:13363;left:180"><nobr><b>msg_xmt-&gt;t.msg_type_size = 32;</b></nobr></div>
+<div style="position:absolute;top:13380;left:180"><nobr><b>msg_xmt-&gt;t.msg_type_number = MAXDATA;</b></nobr></div>
+<div style="position:absolute;top:13397;left:180"><nobr><b>msg_xmt-&gt;t.msg_type_inline = TRUE;</b></nobr></div>
+<div style="position:absolute;top:13414;left:180"><nobr><b>msg_xmt-&gt;t.msg_type_longform = FALSE;</b></nobr></div>
+<div style="position:absolute;top:13431;left:180"><nobr><b>msg_xmt-&gt;t.msg_type_deallocate = FALSE;</b></nobr></div>
+<div style="position:absolute;top:13447;left:180"><nobr><b>for (i = 0; i &lt; MAXDATA; i++)</b></nobr></div>
+<div style="position:absolute;top:13464;left:252"><nobr><b>msg_xmt-&gt;inline_data[i] = i;</b></nobr></div>
+<div style="position:absolute;top:13498;left:108"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:13549;left:108"><nobr><b>/* This procedure is used to set up the reply message that the parent is</b></nobr></div>
+<div style="position:absolute;top:13566;left:117"><nobr><b>* sending to the child.  Note that the remote_port of the received message</b></nobr></div>
+<div style="position:absolute;top:13583;left:117"><nobr><b>* designates where the reply message will be sent. No data is sent in this</b></nobr></div>
+<div style="position:absolute;top:13600;left:117"><nobr><b>* message, so the size of the message is simply the size of the message</b></nobr></div>
+<div style="position:absolute;top:13617;left:117"><nobr><b>* header.  */</b></nobr></div>
+<div style="position:absolute;top:13651;left:108"><nobr><b>void setup_simp_reply(msg_xmt, msg_rcv)</b></nobr></div>
+<div style="position:absolute;top:13668;left:180"><nobr><b>msg_header_t</b></nobr></div>
+<div style="position:absolute;top:13668;left:396"><nobr><b>*msg_xmt;</b></nobr></div>
+<div style="position:absolute;top:13685;left:180"><nobr><b>struct simp_msg_struct  *msg_rcv;</b></nobr></div>
+<div style="position:absolute;top:13719;left:108"><nobr><b>{</b></nobr></div>
+<div style="position:absolute;top:13736;left:180"><nobr><b>msg_xmt-&gt;msg_remote_port = msg_rcv-&gt;h.msg_remote_port;</b></nobr></div>
+<div style="position:absolute;top:13753;left:180"><nobr><b>msg_xmt-&gt;msg_local_port = PORT_NULL;</b></nobr></div>
+<div style="position:absolute;top:13770;left:180"><nobr><b>msg_xmt-&gt;msg_id = 0x12345678;</b></nobr></div>
+<div style="position:absolute;top:13787;left:180"><nobr><b>msg_xmt-&gt;msg_size = sizeof(msg_header_t);</b></nobr></div>
+<div style="position:absolute;top:13804;left:180"><nobr><b>msg_xmt-&gt;msg_type = MSG_TYPE_NORMAL;</b></nobr></div>
+<div style="position:absolute;top:13821;left:180"><nobr><b>msg_xmt-&gt;msg_simple = TRUE;</b></nobr></div>
+<div style="position:absolute;top:13838;left:108"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:13906;left:108"><nobr><b>/* This procedure is used by the child to get the communication port.</b></nobr></div>
+<div style="position:absolute;top:13922;left:117"><nobr><b>* The child got the name as part of its inherited static variable space.</b></nobr></div>
+<div style="position:absolute;top:13939;left:117"><nobr><b>* Port rights, however, are not inherited across forks. env_get_port,</b></nobr></div>
+<div style="position:absolute;top:13956;left:117"><nobr><b>* a utility of the environment manager is called to return the port</b></nobr></div>
+<div style="position:absolute;top:13973;left:117"><nobr><b>* associated with the given name.</b></nobr></div>
+<div style="position:absolute;top:13990;left:117"><nobr><b>*/</b></nobr></div>
+<div style="position:absolute;top:14024;left:108"><nobr><b>port_t LookFor(name)</b></nobr></div>
+<div style="position:absolute;top:14041;left:180"><nobr><b>env_name_t</b></nobr></div>
+<div style="position:absolute;top:14041;left:324"><nobr><b>name;</b></nobr></div>
+<div style="position:absolute;top:14075;left:108"><nobr><b>{</b></nobr></div>
+<div style="position:absolute;top:14092;left:180"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:14092;left:324"><nobr><b>result;</b></nobr></div>
+<div style="position:absolute;top:14109;left:180"><nobr><b>kern_return_t error;</b></nobr></div>
+<div style="position:absolute;top:14143;left:180"><nobr><b>if ((error = env_get_port(environment_port, name,</b></nobr></div>
+<div style="position:absolute;top:14160;left:252"><nobr><b>&amp;result)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:14177;left:324"><nobr><b>mach_error("CHILD: env_get_port returned ",</b></nobr></div>
+<div style="position:absolute;top:14194;left:396"><nobr><b>error);</b></nobr></div>
+<div style="position:absolute;top:14211;left:324"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:14228;left:252"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:14262;left:180"><nobr><b>printf("CHILD: Successful env_get_port.\n");</b></nobr></div>
+<div style="position:absolute;top:14279;left:180"><nobr><b>return(result);</b></nobr></div>
+<div style="position:absolute;top:14296;left:108"><nobr><b>}</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:14431;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="13"><b>Page 13</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:14481;left:451"><nobr><b>12</b></nobr></div>
+<div style="position:absolute;top:14534;left:108"><nobr><b>/* This routine is used by the parent to create a port, and to associate the</b></nobr></div>
+<div style="position:absolute;top:14551;left:117"><nobr><b>* port name with the port via the environment manager.</b></nobr></div>
+<div style="position:absolute;top:14568;left:117"><nobr><b>* port_allocate is used to allocate a port, and then env_set_port is called</b></nobr></div>
+<div style="position:absolute;top:14585;left:117"><nobr><b>* passing the name of the port, and the newly allocated port. */</b></nobr></div>
+<div style="position:absolute;top:14619;left:108"><nobr><b>port_t Register(name)</b></nobr></div>
+<div style="position:absolute;top:14635;left:180"><nobr><b>env_name_t</b></nobr></div>
+<div style="position:absolute;top:14635;left:396"><nobr><b>name;</b></nobr></div>
+<div style="position:absolute;top:14669;left:108"><nobr><b>{</b></nobr></div>
+<div style="position:absolute;top:14686;left:180"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:14686;left:324"><nobr><b>result;</b></nobr></div>
+<div style="position:absolute;top:14703;left:180"><nobr><b>kern_return_t error;</b></nobr></div>
+<div style="position:absolute;top:14737;left:180"><nobr><b>if ((error = port_allocate(task_self(), &amp;result)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:14754;left:252"><nobr><b>mach_error("PARENT: port_allocate returned value of ", error);</b></nobr></div>
+<div style="position:absolute;top:14771;left:252"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:14788;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:14805;left:180"><nobr><b>if ((error = env_set_port(environment_port, name,</b></nobr></div>
+<div style="position:absolute;top:14822;left:252"><nobr><b>result)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:14839;left:252"><nobr><b>mach_error("PARENT: env_set_port returned value of ", error);</b></nobr></div>
+<div style="position:absolute;top:14856;left:252"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:14873;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:14890;left:180"><nobr><b>printf("PARENT: Successful env_set_port.\n");</b></nobr></div>
+<div style="position:absolute;top:14907;left:180"><nobr><b>return(result);</b></nobr></div>
+<div style="position:absolute;top:14924;left:108"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:15009;left:108"><nobr><b>/* This routine is called to demonstrate the passing of a simple message.</b></nobr></div>
+<div style="position:absolute;top:15026;left:117"><nobr><b>* Please see program comment for order of events. */</b></nobr></div>
+<div style="position:absolute;top:15060;left:108"><nobr><b>void child_routine(my_port)</b></nobr></div>
+<div style="position:absolute;top:15077;left:180"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:15077;left:324"><nobr><b>my_port;</b></nobr></div>
+<div style="position:absolute;top:15110;left:108"><nobr><b>{</b></nobr></div>
+<div style="position:absolute;top:15127;left:180"><nobr><b>msg_return_t</b></nobr></div>
+<div style="position:absolute;top:15127;left:324"><nobr><b>ret;</b></nobr></div>
+<div style="position:absolute;top:15144;left:180"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:15144;left:324"><nobr><b>i;</b></nobr></div>
+<div style="position:absolute;top:15161;left:180"><nobr><b>struct simp_msg_struct  msg_xmt, msg_rcv;</b></nobr></div>
+<div style="position:absolute;top:15195;left:180"><nobr><b>setup_simp_request(&amp;msg_xmt, my_port);</b></nobr></div>
+<div style="position:absolute;top:15212;left:180"><nobr><b>if ((ret = msg_rpc(&amp;msg_xmt.h, MSG_OPTION_NONE, sizeof(msg_xmt), 0,</b></nobr></div>
+<div style="position:absolute;top:15229;left:252"><nobr><b>0)) != RPC_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:15246;left:252"><nobr><b>mach_error("CHILD: msg_rpc returned value of ", ret);</b></nobr></div>
+<div style="position:absolute;top:15263;left:252"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:15280;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:15297;left:180"><nobr><b>printf("CHILD: Successful msg_rpc.\n");</b></nobr></div>
+<div style="position:absolute;top:15314;left:108"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:15399;left:108"><nobr><b>void parent_routine(my_port)</b></nobr></div>
+<div style="position:absolute;top:15416;left:180"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:15416;left:324"><nobr><b>my_port;</b></nobr></div>
+<div style="position:absolute;top:15450;left:108"><nobr><b>{</b></nobr></div>
+<div style="position:absolute;top:15467;left:180"><nobr><b>msg_return_t</b></nobr></div>
+<div style="position:absolute;top:15467;left:324"><nobr><b>ret;</b></nobr></div>
+<div style="position:absolute;top:15484;left:180"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:15484;left:324"><nobr><b>i;</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:15619;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="14"><b>Page 14</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:15669;left:451"><nobr><b>13</b></nobr></div>
+<div style="position:absolute;top:15722;left:180"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:15722;left:324"><nobr><b>x;</b></nobr></div>
+<div style="position:absolute;top:15739;left:180"><nobr><b>msg_header_t</b></nobr></div>
+<div style="position:absolute;top:15739;left:324"><nobr><b>msg_xmt;</b></nobr></div>
+<div style="position:absolute;top:15756;left:180"><nobr><b>struct simp_msg_struct msg_rcv;</b></nobr></div>
+<div style="position:absolute;top:15790;left:180"><nobr><b>msg_rcv.h.msg_local_port = my_port;</b></nobr></div>
+<div style="position:absolute;top:15807;left:180"><nobr><b>msg_rcv.h.msg_size = sizeof(msg_rcv);</b></nobr></div>
+<div style="position:absolute;top:15823;left:180"><nobr><b>if ((ret = msg_receive(&amp;msg_rcv.h, MSG_OPTION_NONE, 0)) !=</b></nobr></div>
+<div style="position:absolute;top:15840;left:252"><nobr><b>RCV_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:15857;left:252"><nobr><b>mach_error("PARENT: msg_receive returned value of ", ret);</b></nobr></div>
+<div style="position:absolute;top:15874;left:252"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:15891;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:15908;left:180"><nobr><b>printf("PARENT: Successful msg_receive.\n");</b></nobr></div>
+<div style="position:absolute;top:15925;left:180"><nobr><b>printf("PARENT: Data..");</b></nobr></div>
+<div style="position:absolute;top:15942;left:180"><nobr><b>for (i = 0; i &lt; MAXDATA; i++)</b></nobr></div>
+<div style="position:absolute;top:15959;left:252"><nobr><b>printf("%d ", msg_rcv.inline_data[i]);</b></nobr></div>
+<div style="position:absolute;top:15976;left:180"><nobr><b>printf("\n");</b></nobr></div>
+<div style="position:absolute;top:15993;left:180"><nobr><b>setup_simp_reply(&amp;msg_xmt, &amp;msg_rcv);</b></nobr></div>
+<div style="position:absolute;top:16010;left:180"><nobr><b>if ((ret = msg_send(&amp;msg_xmt, MSG_OPTION_NONE,</b></nobr></div>
+<div style="position:absolute;top:16027;left:252"><nobr><b>0)) != SEND_SUCCESS){</b></nobr></div>
+<div style="position:absolute;top:16044;left:252"><nobr><b>mach_error("PARENT: msg_send returned value of ", ret);</b></nobr></div>
+<div style="position:absolute;top:16061;left:252"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:16078;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:16095;left:180"><nobr><b>printf("PARENT: Successful msg_send.\n");</b></nobr></div>
+<div style="position:absolute;top:16112;left:108"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:16197;left:108"><nobr><b>main (argc, argv)</b></nobr></div>
+<div style="position:absolute;top:16214;left:180"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:16214;left:324"><nobr><b>argc;</b></nobr></div>
+<div style="position:absolute;top:16231;left:180"><nobr><b>char</b></nobr></div>
+<div style="position:absolute;top:16231;left:324"><nobr><b>**argv;</b></nobr></div>
+<div style="position:absolute;top:16265;left:108"><nobr><b>{</b></nobr></div>
+<div style="position:absolute;top:16282;left:180"><nobr><b>kern_return_t err;</b></nobr></div>
+<div style="position:absolute;top:16298;left:180"><nobr><b>port_t</b></nobr></div>
+<div style="position:absolute;top:16298;left:324"><nobr><b>my_port;</b></nobr></div>
+<div style="position:absolute;top:16315;left:180"><nobr><b>env_name_t</b></nobr></div>
+<div style="position:absolute;top:16315;left:324"><nobr><b>port_name;</b></nobr></div>
+<div style="position:absolute;top:16332;left:180"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:16332;left:324"><nobr><b>fret;</b></nobr></div>
+<div style="position:absolute;top:16366;left:180"><nobr><b>if (argc &gt; 1) {</b></nobr></div>
+<div style="position:absolute;top:16383;left:252"><nobr><b>printf("no arguments to simp_ipc\n");</b></nobr></div>
+<div style="position:absolute;top:16400;left:252"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:16417;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:16434;left:180"><nobr><b>/* create a port name that both the child and parent will know */</b></nobr></div>
+<div style="position:absolute;top:16451;left:180"><nobr><b>sprintf(port_name, "ipc_test_%d", getpid());</b></nobr></div>
+<div style="position:absolute;top:16485;left:180"><nobr><b>/* create and register port for parent to receive on */</b></nobr></div>
+<div style="position:absolute;top:16519;left:180"><nobr><b>if ((my_port = Register(port_name)) == PORT_NULL)</b></nobr></div>
+<div style="position:absolute;top:16536;left:252"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:16570;left:180"><nobr><b>/* fork returns 0 if child, and the child’s ID to the parent.  */</b></nobr></div>
+<div style="position:absolute;top:16587;left:180"><nobr><b>fret = fork();</b></nobr></div>
+<div style="position:absolute;top:16604;left:180"><nobr><b>if (fret == 0) { /* child process */</b></nobr></div>
+<div style="position:absolute;top:16621;left:252"><nobr><b>if ((my_port = LookFor(port_name)) == PORT_NULL)</b></nobr></div>
+<div style="position:absolute;top:16638;left:324"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:16655;left:252"><nobr><b>child_routine(my_port);</b></nobr></div>
+<div style="position:absolute;top:16672;left:252"><nobr><b>printf("CHILD: Finished successfully.\n");</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:16807;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="15"><b>Page 15</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:16857;left:451"><nobr><b>14</b></nobr></div>
+<div style="position:absolute;top:16910;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:16927;left:180"><nobr><b>else if (fret &gt;0) { /* parent process */</b></nobr></div>
+<div style="position:absolute;top:16944;left:252"><nobr><b>parent_routine(my_port);</b></nobr></div>
+<div style="position:absolute;top:16961;left:252"><nobr><b>if ((err = env_del_port(environment_port, port_name))</b></nobr></div>
+<div style="position:absolute;top:16978;left:324"><nobr><b>!= KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:16995;left:324"><nobr><b>mach_error("PARENT: env_del_port returned ", err);</b></nobr></div>
+<div style="position:absolute;top:17011;left:324"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:17028;left:252"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:17045;left:252"><nobr><b>if ((err = port_deallocate(task_self(), my_port))</b></nobr></div>
+<div style="position:absolute;top:17062;left:324"><nobr><b>!= KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:17079;left:324"><nobr><b>mach_error("PARENT: port_deallocate returned ", err);</b></nobr></div>
+<div style="position:absolute;top:17096;left:324"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:17113;left:252"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:17130;left:252"><nobr><b>printf("PARENT: Finished successfully.\n");</b></nobr></div>
+<div style="position:absolute;top:17147;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:17164;left:180"><nobr><b>else printf("Error from fork.\n");</b></nobr></div>
+<div style="position:absolute;top:17181;left:108"><nobr><b>}</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:17995;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="16"><b>Page 16</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:18045;left:451"><nobr><b>15</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:16px;font-family:Times">
+<div style="position:absolute;top:18099;left:108"><nobr><b>3. Use of Virtual Memory</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:18155;left:108"><nobr><b>3.1. Allocation, Deallocation, and Reading</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:18178;left:125"><nobr>The program for this section will demonstrate vm_allocate, vm_read, and vm_deallocate. The</nobr></div>
+<div style="position:absolute;top:18200;left:108"><nobr>purpose of this example is to check vm_read to be sure the data was read correctly.</nobr></div>
+<div style="position:absolute;top:18238;left:125"><nobr>The first step in solving this problem is to get a chunk of memory and fill it with data. vm_allocate is</nobr></div>
+<div style="position:absolute;top:18260;left:108"><nobr>used to get the virtual memory.  Data is then stored in it.  The next step is to call vm_read. vm_read</nobr></div>
+<div style="position:absolute;top:18281;left:108"><nobr>allows a task to read another task’s virtual memory. Passing the address of the previously allocated</nobr></div>
+<div style="position:absolute;top:18303;left:108"><nobr>memory as a starting point, vm_read is called.  Note that our example is a simplified use of vm_read</nobr></div>
+<div style="position:absolute;top:18324;left:108"><nobr>since a task is reading its own memory. vm_read returns a newly allocated region containg the data</nobr></div>
+<div style="position:absolute;top:18345;left:108"><nobr>read. Note that the parameter size, which is the number of bytes to be read, must be an integral</nobr></div>
+<div style="position:absolute;top:18367;left:108"><nobr>number of pages. vm_read can be checked by comparing the data received with the previously</nobr></div>
+<div style="position:absolute;top:18388;left:108"><nobr>allocated chunk.  If both spaces contain the same data, vm_read worked correctly.  To clean up before</nobr></div>
+<div style="position:absolute;top:18409;left:108"><nobr>ending this example program, both allocated spaces must be deallocated by calling vm_deallocate.</nobr></div>
+<div style="position:absolute;top:18431;left:108"><nobr>Note that the data returned by vm_read must be deallocated.</nobr></div>
+<div style="position:absolute;top:18474;left:108"><nobr><b>3.1.1. Virtual Memory Allocation</b></nobr></div>
+<div style="position:absolute;top:18498;left:125"><nobr>vm_allocate allocates a region of virtual memory, placing it in the specified task’s address space.</nobr></div>
+<div style="position:absolute;top:18517;left:108"><nobr>The size parameter is the number of bytes to allocate which is rounded to an integeral number of virtual</nobr></div>
+<div style="position:absolute;top:18538;left:108"><nobr>pages. If last parameter is TRUE the kernel allocates a region of memory at the next convenient location</nobr></div>
+<div style="position:absolute;top:18560;left:108"><nobr>and returns the virtual address as the second parameter.  If the last parameter is FALSE, the kernel</nobr></div>
+<div style="position:absolute;top:18581;left:108"><nobr>allocates memory starting at the address specified by the second parameter. vm_page_size is a global</nobr></div>
+<div style="position:absolute;top:18603;left:108"><nobr>constant defined via mach.h. A page of newly allocated memory is zero-filled when it is first touched.</nobr></div>
+<div style="position:absolute;top:18624;left:144"><nobr><b>char</b></nobr></div>
+<div style="position:absolute;top:18624;left:288"><nobr><b>*data1;</b></nobr></div>
+<div style="position:absolute;top:18641;left:144"><nobr><b>kern_return_t rtn;</b></nobr></div>
+<div style="position:absolute;top:18675;left:144"><nobr><b>if ((rtn = vm_allocate(task_self(), &amp;data1, vm_page_size,</b></nobr></div>
+<div style="position:absolute;top:18692;left:216"><nobr><b>TRUE)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:18709;left:216"><nobr><b>mach_error("vm_allocate returned value of ", rtn);</b></nobr></div>
+<div style="position:absolute;top:18726;left:216"><nobr><b>printf("vmread: Exiting.\n");</b></nobr></div>
+<div style="position:absolute;top:18743;left:216"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:18760;left:144"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:18821;left:108"><nobr><b>3.1.2. Virtual Memory Deallocation</b></nobr></div>
+<div style="position:absolute;top:18845;left:125"><nobr>vm_deallocate affects only the memory of task specified as the first parameter.  This function</nobr></div>
+<div style="position:absolute;top:18864;left:108"><nobr>reliquished access to the memory specified in the parameters:  address and size.  Other tasks which have</nobr></div>
+<div style="position:absolute;top:18886;left:108"><nobr>access to this physical memory may continue to use it.  Note the size is expected in bytes and is rounded</nobr></div>
+<div style="position:absolute;top:18907;left:108"><nobr>up to give a page boundary.  Never use vm_deallocate on memory that has been acquired by UNIX</nobr></div>
+<div style="position:absolute;top:18931;left:108"><nobr>malloc.</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:19183;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="17"><b>Page 17</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:19233;left:451"><nobr><b>16</b></nobr></div>
+<div style="position:absolute;top:19286;left:144"><nobr><b>char</b></nobr></div>
+<div style="position:absolute;top:19286;left:288"><nobr><b>*data1;</b></nobr></div>
+<div style="position:absolute;top:19303;left:144"><nobr><b>kern_return_t rtn;</b></nobr></div>
+<div style="position:absolute;top:19337;left:144"><nobr><b>if ((rtn = vm_deallocate(task_self(), data1,</b></nobr></div>
+<div style="position:absolute;top:19354;left:216"><nobr><b>vm_page_size)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:19371;left:216"><nobr><b>mach_error("vm_deallocate returned value of ", rtn);</b></nobr></div>
+<div style="position:absolute;top:19387;left:216"><nobr><b>printf("vmread: Exiting.\n");</b></nobr></div>
+<div style="position:absolute;top:19404;left:216"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:19421;left:144"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:19482;left:108"><nobr><b>3.1.3. Virtual Memory Reading</b></nobr></div>
+<div style="position:absolute;top:19506;left:125"><nobr>vm_read makes it possible for one task to read the virtual memory of another.  In the example below,</nobr></div>
+<div style="position:absolute;top:19526;left:108"><nobr>a task is reading its own memory.  The first parameter to vm_read is the task whose address space is to</nobr></div>
+<div style="position:absolute;top:19547;left:108"><nobr>be read.  Note the parameter address, which is the first address to be read, must be on a page</nobr></div>
+<div style="position:absolute;top:19568;left:108"><nobr>boundary. Size is in bytes and must be an integral number of pages.  The data read is returned in a</nobr></div>
+<div style="position:absolute;top:19590;left:108"><nobr>newly allocated region.  The size in bytes of this new region is also returned. vm_deallocate should be</nobr></div>
+<div style="position:absolute;top:19611;left:108"><nobr>used on the region returned by vm_read when it is no longer needed.</nobr></div>
+<div style="position:absolute;top:19633;left:144"><nobr><b>char</b></nobr></div>
+<div style="position:absolute;top:19633;left:288"><nobr><b>*data1, *data2;</b></nobr></div>
+<div style="position:absolute;top:19650;left:144"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:19650;left:288"><nobr><b>data_cnt;</b></nobr></div>
+<div style="position:absolute;top:19667;left:144"><nobr><b>kern_return_t rtn;</b></nobr></div>
+<div style="position:absolute;top:19701;left:144"><nobr><b>if ((rtn = vm_read(task_self(), data1, vm_page_size, &amp;data2,</b></nobr></div>
+<div style="position:absolute;top:19718;left:216"><nobr><b>&amp;data_cnt)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:19735;left:216"><nobr><b>mach_error("vm_read returned value of ", rtn);</b></nobr></div>
+<div style="position:absolute;top:19752;left:216"><nobr><b>printf("vmread: Exiting.\n");</b></nobr></div>
+<div style="position:absolute;top:19769;left:216"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:19786;left:144"><nobr><b>}</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:20371;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="18"><b>Page 18</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:20421;left:451"><nobr><b>17</b></nobr></div>
+<div style="position:absolute;top:20475;left:108"><nobr><b>3.1.4. Programming Example II, vm_read.c</b></nobr></div>
+<div style="position:absolute;top:20491;left:108"><nobr><b>/*</b></nobr></div>
+<div style="position:absolute;top:20508;left:117"><nobr><b>*</b></nobr></div>
+<div style="position:absolute;top:20525;left:117"><nobr><b>* This program is a test of vm_allocate, vm_read and vm_deallocate.</b></nobr></div>
+<div style="position:absolute;top:20542;left:117"><nobr><b>* First some memory is allocated, and filled with data.  vm_read is</b></nobr></div>
+<div style="position:absolute;top:20559;left:117"><nobr><b>* then called, with reading starting at the previously allocated chunk.</b></nobr></div>
+<div style="position:absolute;top:20576;left:117"><nobr><b>* The contents of the two pieces of memory, one retreived by vm_allocate, and</b></nobr></div>
+<div style="position:absolute;top:20593;left:117"><nobr><b>* one by vm_read is compared. vm_deallocate is then used to rid of the</b></nobr></div>
+<div style="position:absolute;top:20610;left:117"><nobr><b>* two chunks of memory.</b></nobr></div>
+<div style="position:absolute;top:20627;left:117"><nobr><b>*</b></nobr></div>
+<div style="position:absolute;top:20644;left:117"><nobr><b>*************************************************************/</b></nobr></div>
+<div style="position:absolute;top:20678;left:108"><nobr><b>#include &lt;mach.h&gt;</b></nobr></div>
+<div style="position:absolute;top:20695;left:108"><nobr><b>#include &lt;stdio.h&gt;</b></nobr></div>
+<div style="position:absolute;top:20729;left:108"><nobr><b>main(argc, argv)</b></nobr></div>
+<div style="position:absolute;top:20746;left:180"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:20746;left:252"><nobr><b>argc;</b></nobr></div>
+<div style="position:absolute;top:20763;left:180"><nobr><b>char</b></nobr></div>
+<div style="position:absolute;top:20763;left:252"><nobr><b>*argv[];</b></nobr></div>
+<div style="position:absolute;top:20780;left:108"><nobr><b>{</b></nobr></div>
+<div style="position:absolute;top:20797;left:180"><nobr><b>char</b></nobr></div>
+<div style="position:absolute;top:20797;left:324"><nobr><b>*data1, *temp;</b></nobr></div>
+<div style="position:absolute;top:20814;left:180"><nobr><b>char</b></nobr></div>
+<div style="position:absolute;top:20814;left:324"><nobr><b>*data2;</b></nobr></div>
+<div style="position:absolute;top:20831;left:180"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:20831;left:324"><nobr><b>data_cnt, i, min;</b></nobr></div>
+<div style="position:absolute;top:20848;left:180"><nobr><b>kern_return_t rtn;</b></nobr></div>
+<div style="position:absolute;top:20916;left:180"><nobr><b>if (argc &gt; 1) {</b></nobr></div>
+<div style="position:absolute;top:20933;left:252"><nobr><b>printf("vm_read takes no switches.  ");</b></nobr></div>
+<div style="position:absolute;top:20950;left:252"><nobr><b>printf("This program is an example vm_read\n");</b></nobr></div>
+<div style="position:absolute;top:20966;left:252"><nobr><b>exit();</b></nobr></div>
+<div style="position:absolute;top:20983;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:21017;left:180"><nobr><b>if ((rtn = vm_allocate(task_self(), &amp;data1, vm_page_size,</b></nobr></div>
+<div style="position:absolute;top:21034;left:252"><nobr><b>TRUE)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:21051;left:252"><nobr><b>mach_error("vm_allocate returned value of ", rtn);</b></nobr></div>
+<div style="position:absolute;top:21068;left:252"><nobr><b>printf("vmread: Exiting.\n");</b></nobr></div>
+<div style="position:absolute;top:21085;left:252"><nobr><b>exit();</b></nobr></div>
+<div style="position:absolute;top:21102;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:21136;left:180"><nobr><b>temp = data1;</b></nobr></div>
+<div style="position:absolute;top:21153;left:180"><nobr><b>for (i = 0; (i &lt; vm_page_size); i++)</b></nobr></div>
+<div style="position:absolute;top:21170;left:252"><nobr><b>temp[i] = i;</b></nobr></div>
+<div style="position:absolute;top:21187;left:180"><nobr><b>printf("Filled space allocated with some data.\n");</b></nobr></div>
+<div style="position:absolute;top:21204;left:180"><nobr><b>printf("Doing vm_read....\n");</b></nobr></div>
+<div style="position:absolute;top:21221;left:180"><nobr><b>if ((rtn = vm_read(task_self(), data1, vm_page_size, &amp;data2,</b></nobr></div>
+<div style="position:absolute;top:21238;left:252"><nobr><b>&amp;data_cnt)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:21255;left:252"><nobr><b>mach_error("vm_read returned value of ", rtn);</b></nobr></div>
+<div style="position:absolute;top:21272;left:252"><nobr><b>printf("vmread: Exiting.\n");</b></nobr></div>
+<div style="position:absolute;top:21289;left:252"><nobr><b>exit();</b></nobr></div>
+<div style="position:absolute;top:21306;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:21323;left:180"><nobr><b>printf("Successful vm_read.\n");</b></nobr></div>
+<div style="position:absolute;top:21357;left:180"><nobr><b>if (vm_page_size != data_cnt) {</b></nobr></div>
+<div style="position:absolute;top:21374;left:252"><nobr><b>printf("vmread: Number of bytes read not equal to number");</b></nobr></div>
+<div style="position:absolute;top:21391;left:252"><nobr><b>printf("available and requested.  \n");</b></nobr></div>
+<div style="position:absolute;top:21408;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:21425;left:180"><nobr><b>min = (vm_page_size &lt; data_cnt) ? vm_page_size : data_cnt;</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:21559;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="19"><b>Page 19</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:21609;left:451"><nobr><b>18</b></nobr></div>
+<div style="position:absolute;top:21662;left:180"><nobr><b>for (i = 0; (i &lt; min); i++) {</b></nobr></div>
+<div style="position:absolute;top:21679;left:252"><nobr><b>if (data1[i] != data2[i]) {</b></nobr></div>
+<div style="position:absolute;top:21696;left:324"><nobr><b>printf("vmread: Data not read correctly.\n");</b></nobr></div>
+<div style="position:absolute;top:21713;left:324"><nobr><b>printf("vmread: Exiting.\n");</b></nobr></div>
+<div style="position:absolute;top:21730;left:324"><nobr><b>exit();</b></nobr></div>
+<div style="position:absolute;top:21747;left:252"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:21763;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:21780;left:180"><nobr><b>printf("Checked data successfully.\n");</b></nobr></div>
+<div style="position:absolute;top:21814;left:180"><nobr><b>if ((rtn = vm_deallocate(task_self(), data1,</b></nobr></div>
+<div style="position:absolute;top:21831;left:252"><nobr><b>vm_page_size)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:21848;left:252"><nobr><b>mach_error("vm_deallocate returned value of ", rtn);</b></nobr></div>
+<div style="position:absolute;top:21865;left:252"><nobr><b>printf("vmread: Exiting.\n");</b></nobr></div>
+<div style="position:absolute;top:21882;left:252"><nobr><b>exit();</b></nobr></div>
+<div style="position:absolute;top:21899;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:21933;left:180"><nobr><b>if ((rtn = vm_deallocate(task_self(), data2,</b></nobr></div>
+<div style="position:absolute;top:21950;left:252"><nobr><b>data_cnt)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:21967;left:252"><nobr><b>mach_error("vm_deallocate returned value of ", rtn);</b></nobr></div>
+<div style="position:absolute;top:21984;left:252"><nobr><b>printf("vmread: Exiting.\n");</b></nobr></div>
+<div style="position:absolute;top:22001;left:252"><nobr><b>exit();</b></nobr></div>
+<div style="position:absolute;top:22018;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:22035;left:108"><nobr><b>}</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:22747;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="20"><b>Page 20</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:22797;left:451"><nobr><b>19</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:22851;left:108"><nobr><b>3.2. Virtual Memory Copying</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:22874;left:125"><nobr>The vm_copy primitive is another alternative to vm_read. In either case the task port used as the first</nobr></div>
+<div style="position:absolute;top:22896;left:108"><nobr>parameter may specify the caller’s address space or that of some other task. If another task’s port is used</nobr></div>
+<div style="position:absolute;top:22919;left:108"><nobr>vm_read copies memory from that task’s address space to the caller’s address space. On the other</nobr></div>
+<div style="position:absolute;top:22938;left:108"><nobr>hand, vm_copy moves the memory from one part of the designated task’s address space to another</nobr></div>
+<div style="position:absolute;top:22960;left:108"><nobr>section of that address space. The fact that these primitives do not actually copy the data regions, but</nobr></div>
+<div style="position:absolute;top:22981;left:108"><nobr>only map the regions as copy-on-write pages, means that they actually have some use even in copying</nobr></div>
+<div style="position:absolute;top:23002;left:108"><nobr>data in the caller’s own address space. If a task wants multiple virtual memory references to the same</nobr></div>
+<div style="position:absolute;top:23024;left:108"><nobr>data, it can use either of these primitives to set this up. No data is actually copied until one of the virtual</nobr></div>
+<div style="position:absolute;top:23045;left:108"><nobr>memory areas is modified.</nobr></div>
+<div style="position:absolute;top:23084;left:125"><nobr>The destination region must be allocated prior to the call to vm_copy.</nobr></div>
+<div style="position:absolute;top:23106;left:144"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:23106;left:288"><nobr><b>*data1, *data2;</b></nobr></div>
+<div style="position:absolute;top:23122;left:144"><nobr><b>kern_return_t rtn;</b></nobr></div>
+<div style="position:absolute;top:23156;left:144"><nobr><b>/* note that data2 was previously allocated. */</b></nobr></div>
+<div style="position:absolute;top:23190;left:144"><nobr><b>if ((rtn = vm_copy(task_self(), data1, vm_page_size, data2)) !=</b></nobr></div>
+<div style="position:absolute;top:23207;left:216"><nobr><b>KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:23224;left:216"><nobr><b>mach_error("vm_copy returned value of ", rtn);</b></nobr></div>
+<div style="position:absolute;top:23241;left:216"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:23258;left:144"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:23315;left:125"><nobr>An complete example of a program using vm_copy can be found in the Mach example directory as</nobr></div>
+<div style="position:absolute;top:23338;left:108"><nobr>vm_copy.c.</nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:23390;left:108"><nobr><b>3.3. Inheritance of Shared Versus Copied Memory</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:23413;left:125"><nobr>This final virtual memory example illustrates the use of vm_inherit, and the difference between</nobr></div>
+<div style="position:absolute;top:23434;left:108"><nobr>copied and shared memory.  The problem posed is to have two memory regions, one inherited and</nobr></div>
+<div style="position:absolute;top:23456;left:108"><nobr>shared by a child task and one region simply copied by the UNIX fork call.  To show the difference</nobr></div>
+<div style="position:absolute;top:23477;left:108"><nobr>between the two acquisition methods, the parent and child will take turns printing out and changing the</nobr></div>
+<div style="position:absolute;top:23498;left:108"><nobr>values of the two regions.</nobr></div>
+<div style="position:absolute;top:23537;left:125"><nobr>The first step towards a solution is to allocate and fill with data two regions of memory.  The address of</nobr></div>
+<div style="position:absolute;top:23558;left:108"><nobr>the memory that is to be shared by the child task is passed to vm_inherit, using the</nobr></div>
+<div style="position:absolute;top:23580;left:108"><nobr>VM_INHERIT_SHARED flag.  The shared memory is used in this program as a lock to regulate whether</nobr></div>
+<div style="position:absolute;top:23601;left:108"><nobr>the child or parent process is to proceed.  After forking, the child will wait while the parent prints out the</nobr></div>
+<div style="position:absolute;top:23622;left:108"><nobr>value of the shared memory and the value of the copied memory.  After the parent is finished, he changes</nobr></div>
+<div style="position:absolute;top:23644;left:108"><nobr>the lock causing himself to wait and signaling the child to continue.  The child prints the contents of the</nobr></div>
+<div style="position:absolute;top:23665;left:108"><nobr>two regions then changes the lock and waits.  The lock change signals the parent to once again print the</nobr></div>
+<div style="position:absolute;top:23687;left:108"><nobr>memory values. The parent changes the lock and exits.  The child notices the lock change, deallocates</nobr></div>
+<div style="position:absolute;top:23708;left:108"><nobr>the two memory regions, and exits.</nobr></div>
+<div style="position:absolute;top:23746;left:125"><nobr>Through execution of this program, the user will notice that the changes to the copied memory are not</nobr></div>
+<div style="position:absolute;top:23768;left:108"><nobr>seen from the child to the parent; that is when the parent changes the value, the child does not see this</nobr></div>
+<div style="position:absolute;top:23789;left:108"><nobr>change. On the other hand, any change in the shared memory is noticed by both tasks.</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:23935;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="21"><b>Page 21</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:23985;left:451"><nobr><b>20</b></nobr></div>
+<div style="position:absolute;top:24040;left:125"><nobr>The copied memory in this example is actually copy-on-write memory. That is, the memory is never</nobr></div>
+<div style="position:absolute;top:24061;left:108"><nobr>really copied until one of the tasks desires to write in this region.</nobr></div>
+<div style="position:absolute;top:24104;left:108"><nobr><b>3.3.1. Virtual Memory, Inheritance</b></nobr></div>
+<div style="position:absolute;top:24128;left:125"><nobr>vm_inherit allows a task to specify how the various regions of its memory will be passed to any child</nobr></div>
+<div style="position:absolute;top:24147;left:108"><nobr>tasks that it forks. By default all memory is passed to the child as a logical copy (actually copy-on-write).</nobr></div>
+<div style="position:absolute;top:24171;left:108"><nobr>vm_inherit allows a task to specify that certain page-regions of its memory are to be shared with any</nobr></div>
+<div style="position:absolute;top:24190;left:108"><nobr>children it subsequently forks, or are not to be passed at all to that child.</nobr></div>
+<div style="position:absolute;top:24228;left:125"><nobr>The inheritance parameter may be set to VM_INHERIT_SHARE, VM_INHERIT_COPY or</nobr></div>
+<div style="position:absolute;top:24252;left:108"><nobr>VM_INHERIT_NONE. The size parameter is measured in bytes but only integral numbers of pages are</nobr></div>
+<div style="position:absolute;top:24271;left:108"><nobr>dealt with. The pages are selected by rounding down the start address to a page boundary and then</nobr></div>
+<div style="position:absolute;top:24293;left:108"><nobr>rounding up the end address to a page boundary.</nobr></div>
+<div style="position:absolute;top:24314;left:144"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:24314;left:288"><nobr><b>*lock;</b></nobr></div>
+<div style="position:absolute;top:24331;left:144"><nobr><b>kern_return_t ret;</b></nobr></div>
+<div style="position:absolute;top:24365;left:144"><nobr><b>if ((ret = vm_inherit(task_self(), lock, sizeof(int),</b></nobr></div>
+<div style="position:absolute;top:24382;left:216"><nobr><b>VM_INHERIT_SHARE)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:24399;left:216"><nobr><b>mach_error("vm_inherit returned value of ", ret);</b></nobr></div>
+<div style="position:absolute;top:24416;left:216"><nobr><b>exit(1);</b></nobr></div>
+<div style="position:absolute;top:24433;left:144"><nobr><b>}</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:25123;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="22"><b>Page 22</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:25173;left:451"><nobr><b>21</b></nobr></div>
+<div style="position:absolute;top:25227;left:108"><nobr><b>3.3.2. Programming Example IV, cowtest.c</b></nobr></div>
+<div style="position:absolute;top:25254;left:108"><nobr><b>/*</b></nobr></div>
+<div style="position:absolute;top:25271;left:117"><nobr><b>* This program demonstrates the use of vm_inherit and copy on write</b></nobr></div>
+<div style="position:absolute;top:25288;left:117"><nobr><b>* memory. A child and parent process will share memory, polling this</b></nobr></div>
+<div style="position:absolute;top:25304;left:117"><nobr><b>* memory to see whos turn it is to proceed.  First some memory is allocated,</b></nobr></div>
+<div style="position:absolute;top:25321;left:117"><nobr><b>* and vm_inherit is called on this memory, the variable ’lock’.  Next more</b></nobr></div>
+<div style="position:absolute;top:25338;left:117"><nobr><b>* memory is allocated for the copy on write test. A fork is executed, and</b></nobr></div>
+<div style="position:absolute;top:25355;left:117"><nobr><b>* The parent then stores new data in the copy on write memory</b></nobr></div>
+<div style="position:absolute;top:25372;left:117"><nobr><b>* previously allocated, and sets the shared variable signaling to the</b></nobr></div>
+<div style="position:absolute;top:25389;left:117"><nobr><b>* child that he is now waiting.  The child, polling the shared variable,</b></nobr></div>
+<div style="position:absolute;top:25406;left:117"><nobr><b>* realizes it is his turn.  The child prints the value of the variable</b></nobr></div>
+<div style="position:absolute;top:25423;left:117"><nobr><b>* lock and a value of the copy on write memory as the child sees it.</b></nobr></div>
+<div style="position:absolute;top:25440;left:117"><nobr><b>* You will notice that the value of the lock is what the parent</b></nobr></div>
+<div style="position:absolute;top:25457;left:117"><nobr><b>* set it to be, but the value of the copy on write memory is the original</b></nobr></div>
+<div style="position:absolute;top:25474;left:117"><nobr><b>* value and not what the parent changed it to be.</b></nobr></div>
+<div style="position:absolute;top:25491;left:117"><nobr><b>* The parent then awakes and prints out the two values once more.</b></nobr></div>
+<div style="position:absolute;top:25508;left:117"><nobr><b>* The program then ends with the parent signaling the child via the</b></nobr></div>
+<div style="position:absolute;top:25525;left:117"><nobr><b>* shared variable lock.</b></nobr></div>
+<div style="position:absolute;top:25542;left:117"><nobr><b>********************************************************/</b></nobr></div>
+<div style="position:absolute;top:25559;left:108"><nobr><b>#include &lt;mach.h&gt;</b></nobr></div>
+<div style="position:absolute;top:25576;left:108"><nobr><b>#include &lt;stdio.h&gt;</b></nobr></div>
+<div style="position:absolute;top:25610;left:108"><nobr><b>#define NO_ONE_WAIT 0</b></nobr></div>
+<div style="position:absolute;top:25627;left:108"><nobr><b>#define PARENT_WAIT 1</b></nobr></div>
+<div style="position:absolute;top:25644;left:108"><nobr><b>#define CHILD_WAIT 2</b></nobr></div>
+<div style="position:absolute;top:25661;left:108"><nobr><b>#define COPY_ON_WRITE 0</b></nobr></div>
+<div style="position:absolute;top:25678;left:108"><nobr><b>#define PARENT_CHANGED 1</b></nobr></div>
+<div style="position:absolute;top:25695;left:108"><nobr><b>#define CHILD_CHANGED 2</b></nobr></div>
+<div style="position:absolute;top:25729;left:108"><nobr><b>#define MAXDATA 100</b></nobr></div>
+<div style="position:absolute;top:25763;left:108"><nobr><b>main(argc, argv)</b></nobr></div>
+<div style="position:absolute;top:25779;left:180"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:25779;left:252"><nobr><b>argc;</b></nobr></div>
+<div style="position:absolute;top:25796;left:180"><nobr><b>char</b></nobr></div>
+<div style="position:absolute;top:25796;left:252"><nobr><b>*argv[];</b></nobr></div>
+<div style="position:absolute;top:25813;left:108"><nobr><b>{</b></nobr></div>
+<div style="position:absolute;top:25830;left:180"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:25830;left:324"><nobr><b>pid;</b></nobr></div>
+<div style="position:absolute;top:25847;left:180"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:25847;left:324"><nobr><b>*mem;</b></nobr></div>
+<div style="position:absolute;top:25864;left:180"><nobr><b>int</b></nobr></div>
+<div style="position:absolute;top:25864;left:324"><nobr><b>*lock;</b></nobr></div>
+<div style="position:absolute;top:25881;left:180"><nobr><b>kern_return_t ret;</b></nobr></div>
+<div style="position:absolute;top:25915;left:180"><nobr><b>if (argc &gt; 1) {</b></nobr></div>
+<div style="position:absolute;top:25932;left:252"><nobr><b>printf("cowtest takes no switches.  ");</b></nobr></div>
+<div style="position:absolute;top:25949;left:252"><nobr><b>printf("This program is an example of copy on write \n");</b></nobr></div>
+<div style="position:absolute;top:25966;left:252"><nobr><b>printf("memory and of the use of vm_inherit.\n");</b></nobr></div>
+<div style="position:absolute;top:25983;left:252"><nobr><b>exit();</b></nobr></div>
+<div style="position:absolute;top:26000;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:26017;left:180"><nobr><b>if ((ret = vm_allocate(task_self(), &amp;lock, sizeof(int),</b></nobr></div>
+<div style="position:absolute;top:26034;left:252"><nobr><b>TRUE)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:26051;left:252"><nobr><b>mach_error("vm_allocate returned value of ", ret);</b></nobr></div>
+<div style="position:absolute;top:26068;left:252"><nobr><b>printf("Exiting with error.\n");</b></nobr></div>
+<div style="position:absolute;top:26085;left:252"><nobr><b>exit();</b></nobr></div>
+<div style="position:absolute;top:26102;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:26119;left:180"><nobr><b>if ((ret = vm_inherit(task_self(), lock, sizeof(int),</b></nobr></div>
+<div style="position:absolute;top:26136;left:252"><nobr><b>VM_INHERIT_SHARE)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:26153;left:252"><nobr><b>mach_error("vm_inherit returned value of ", ret);</b></nobr></div>
+<div style="position:absolute;top:26170;left:252"><nobr><b>printf("Exiting with error.\n");</b></nobr></div>
+<div style="position:absolute;top:26187;left:252"><nobr><b>exit();</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:26311;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="23"><b>Page 23</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:26361;left:451"><nobr><b>22</b></nobr></div>
+<div style="position:absolute;top:26414;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:26431;left:180"><nobr><b>*lock = NO_ONE_WAIT;</b></nobr></div>
+<div style="position:absolute;top:26448;left:180"><nobr><b>if ((ret = vm_allocate(task_self(), &amp;mem, sizeof(int) * MAXDATA,</b></nobr></div>
+<div style="position:absolute;top:26465;left:252"><nobr><b>TRUE)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:26482;left:252"><nobr><b>mach_error("vm_allocate returned value of ", ret);</b></nobr></div>
+<div style="position:absolute;top:26499;left:252"><nobr><b>printf("Exiting with error.\n");</b></nobr></div>
+<div style="position:absolute;top:26515;left:252"><nobr><b>exit();</b></nobr></div>
+<div style="position:absolute;top:26532;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:26549;left:180"><nobr><b>mem[0] = COPY_ON_WRITE;</b></nobr></div>
+<div style="position:absolute;top:26583;left:180"><nobr><b>printf("value of lock before fork: %d\n", *lock);</b></nobr></div>
+<div style="position:absolute;top:26600;left:180"><nobr><b>pid = fork();</b></nobr></div>
+<div style="position:absolute;top:26617;left:180"><nobr><b>if (pid) {</b></nobr></div>
+<div style="position:absolute;top:26634;left:252"><nobr><b>printf("PARENT: copied memory =  %d\n",</b></nobr></div>
+<div style="position:absolute;top:26651;left:324"><nobr><b>mem[0]);</b></nobr></div>
+<div style="position:absolute;top:26668;left:252"><nobr><b>printf("PARENT: changing to %d\n", PARENT_CHANGED);</b></nobr></div>
+<div style="position:absolute;top:26685;left:252"><nobr><b>mem[0] = PARENT_CHANGED;</b></nobr></div>
+<div style="position:absolute;top:26702;left:252"><nobr><b>printf("\n");</b></nobr></div>
+<div style="position:absolute;top:26719;left:252"><nobr><b>printf("PARENT: lock = %d\n", *lock);</b></nobr></div>
+<div style="position:absolute;top:26736;left:252"><nobr><b>printf("PARENT: changing lock to %d\n", PARENT_WAIT);</b></nobr></div>
+<div style="position:absolute;top:26753;left:252"><nobr><b>printf("\n");</b></nobr></div>
+<div style="position:absolute;top:26770;left:252"><nobr><b>*lock = PARENT_WAIT;</b></nobr></div>
+<div style="position:absolute;top:26787;left:252"><nobr><b>while (*lock == PARENT_WAIT)</b></nobr></div>
+<div style="position:absolute;top:26804;left:279"><nobr><b>/* wait for child to change the value */;</b></nobr></div>
+<div style="position:absolute;top:26821;left:252"><nobr><b>printf("PARENT: copied memory = %d\n",</b></nobr></div>
+<div style="position:absolute;top:26838;left:324"><nobr><b>mem[0]);</b></nobr></div>
+<div style="position:absolute;top:26855;left:252"><nobr><b>printf("PARENT: lock = %d\n", *lock);</b></nobr></div>
+<div style="position:absolute;top:26872;left:252"><nobr><b>printf("PARENT: Finished.\n");</b></nobr></div>
+<div style="position:absolute;top:26889;left:252"><nobr><b>*lock = PARENT_WAIT;</b></nobr></div>
+<div style="position:absolute;top:26906;left:252"><nobr><b>exit();</b></nobr></div>
+<div style="position:absolute;top:26923;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:26940;left:180"><nobr><b>while (*lock != PARENT_WAIT)</b></nobr></div>
+<div style="position:absolute;top:26957;left:252"><nobr><b>/* wait for parent to change lock */ ;</b></nobr></div>
+<div style="position:absolute;top:26974;left:180"><nobr><b>printf("CHILD: copied memory = %d\n", mem[0]);</b></nobr></div>
+<div style="position:absolute;top:26990;left:180"><nobr><b>printf("CHILD: changing to %d\n", CHILD_CHANGED);</b></nobr></div>
+<div style="position:absolute;top:27007;left:180"><nobr><b>mem[0] = CHILD_CHANGED;</b></nobr></div>
+<div style="position:absolute;top:27024;left:180"><nobr><b>printf("\n");</b></nobr></div>
+<div style="position:absolute;top:27041;left:180"><nobr><b>printf("CHILD: lock = %d\n", *lock);</b></nobr></div>
+<div style="position:absolute;top:27058;left:180"><nobr><b>printf("CHILD: changing lock to %d\n", CHILD_WAIT);</b></nobr></div>
+<div style="position:absolute;top:27075;left:180"><nobr><b>printf("\n");</b></nobr></div>
+<div style="position:absolute;top:27092;left:180"><nobr><b>*lock = CHILD_WAIT;</b></nobr></div>
+<div style="position:absolute;top:27109;left:180"><nobr><b>while (*lock == CHILD_WAIT)</b></nobr></div>
+<div style="position:absolute;top:27126;left:252"><nobr><b>/* wait for parent to change lock */ ;</b></nobr></div>
+<div style="position:absolute;top:27143;left:180"><nobr><b>if ((ret = vm_deallocate(task_self(), lock,</b></nobr></div>
+<div style="position:absolute;top:27160;left:252"><nobr><b>sizeof(int), TRUE)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:27177;left:252"><nobr><b>mach_error("vm_deallocate returned value of ", ret);</b></nobr></div>
+<div style="position:absolute;top:27194;left:252"><nobr><b>printf("Exiting.\n");</b></nobr></div>
+<div style="position:absolute;top:27211;left:252"><nobr><b>exit();</b></nobr></div>
+<div style="position:absolute;top:27228;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:27245;left:180"><nobr><b>if ((ret = vm_deallocate(task_self(), mem,</b></nobr></div>
+<div style="position:absolute;top:27262;left:252"><nobr><b>MAXDATA * sizeof(char), TRUE)) != KERN_SUCCESS) {</b></nobr></div>
+<div style="position:absolute;top:27279;left:252"><nobr><b>mach_error("vm_deallocate returned value of ", ret);</b></nobr></div>
+<div style="position:absolute;top:27296;left:252"><nobr><b>printf("Exiting.\n");</b></nobr></div>
+<div style="position:absolute;top:27313;left:252"><nobr><b>exit();</b></nobr></div>
+<div style="position:absolute;top:27330;left:180"><nobr><b>}</b></nobr></div>
+<div style="position:absolute;top:27347;left:180"><nobr><b>printf("CHILD: Finished.\n");</b></nobr></div>
+<div style="position:absolute;top:27364;left:108"><nobr><b>}</b></nobr></div>
+</span></font>
+
+<div style="position:absolute;top:27499;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="24"><b>Page 24</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:27549;left:451"><nobr><b>23</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:16px;font-family:Times">
+<div style="position:absolute;top:27603;left:108"><nobr><b>4. Mach environment</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:27627;left:125"><nobr>See the section <b>General Mach Information </b>at the end of the <b>A Programmers’s Guide to the Mach</b></nobr></div>
+<div style="position:absolute;top:27648;left:108"><nobr><b>User Environment </b>to find the current include file names and paths needed to compile code using the</nobr></div>
+<div style="position:absolute;top:27670;left:108"><nobr>Mach system calls.</nobr></div>
+</span></font>
+
+<div style="position:absolute;top:28687;left:0"><hr><table border="0" width="100%"><tbody><tr><td bgcolor="eeeeee" align="right"><font face="arial,sans-serif"><a name="25"><b>Page 25</b></a></font></td></tr></tbody></table></div><font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:28737;left:457"><nobr><b>i</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:16px;font-family:Times">
+<div style="position:absolute;top:28791;left:383"><nobr><b>Table of Contents</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:28811;left:136"><nobr><b>1. Introduction</b></nobr></div>
+<div style="position:absolute;top:28811;left:801"><nobr><b>1</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:28829;left:166"><nobr><b>1.1. Tutorial documents</b></nobr></div>
+<div style="position:absolute;top:28829;left:802"><nobr><b>1</b></nobr></div>
+<div style="position:absolute;top:28847;left:166"><nobr><b>1.2. Basic Mach Concepts</b></nobr></div>
+<div style="position:absolute;top:28847;left:802"><nobr><b>1</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:28864;left:136"><nobr><b>2. Message Communication Between Processes</b></nobr></div>
+<div style="position:absolute;top:28864;left:801"><nobr><b>3</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:28882;left:166"><nobr><b>2.1. Mach Error Printing</b></nobr></div>
+<div style="position:absolute;top:28882;left:802"><nobr><b>5</b></nobr></div>
+<div style="position:absolute;top:28900;left:166"><nobr><b>2.2. Port Allocation</b></nobr></div>
+<div style="position:absolute;top:28900;left:802"><nobr><b>5</b></nobr></div>
+<div style="position:absolute;top:28917;left:166"><nobr><b>2.3. Port Deallocation</b></nobr></div>
+<div style="position:absolute;top:28917;left:802"><nobr><b>5</b></nobr></div>
+<div style="position:absolute;top:28934;left:166"><nobr><b>2.4. Environment Manager Server/Checking in a Port</b></nobr></div>
+<div style="position:absolute;top:28934;left:802"><nobr><b>5</b></nobr></div>
+<div style="position:absolute;top:28951;left:166"><nobr><b>2.5. Environment Manager Server/Looking up a Port</b></nobr></div>
+<div style="position:absolute;top:28951;left:802"><nobr><b>6</b></nobr></div>
+<div style="position:absolute;top:28969;left:166"><nobr><b>2.6. Setting up a Simple Message</b></nobr></div>
+<div style="position:absolute;top:28969;left:802"><nobr><b>6</b></nobr></div>
+<div style="position:absolute;top:28986;left:166"><nobr><b>2.7. Sending Messages</b></nobr></div>
+<div style="position:absolute;top:28986;left:802"><nobr><b>7</b></nobr></div>
+<div style="position:absolute;top:29003;left:166"><nobr><b>2.8. Receiving Messages</b></nobr></div>
+<div style="position:absolute;top:29003;left:802"><nobr><b>7</b></nobr></div>
+<div style="position:absolute;top:29020;left:166"><nobr><b>2.9. Setting up a Reply Message</b></nobr></div>
+<div style="position:absolute;top:29020;left:802"><nobr><b>8</b></nobr></div>
+<div style="position:absolute;top:29038;left:166"><nobr><b>2.10. RPC, Send/Receive</b></nobr></div>
+<div style="position:absolute;top:29038;left:802"><nobr><b>8</b></nobr></div>
+<div style="position:absolute;top:29055;left:166"><nobr><b>2.11. A Non-Simple Message</b></nobr></div>
+<div style="position:absolute;top:29055;left:802"><nobr><b>8</b></nobr></div>
+<div style="position:absolute;top:29072;left:166"><nobr><b>2.12. Programming Example I, simp_ipc.c</b></nobr></div>
+<div style="position:absolute;top:29072;left:793"><nobr><b>10</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:29089;left:136"><nobr><b>3. Use of Virtual Memory</b></nobr></div>
+<div style="position:absolute;top:29089;left:792"><nobr><b>15</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:13px;font-family:Times">
+<div style="position:absolute;top:29108;left:166"><nobr><b>3.1. Allocation, Deallocation, and Reading</b></nobr></div>
+<div style="position:absolute;top:29108;left:793"><nobr><b>15</b></nobr></div>
+<div style="position:absolute;top:29125;left:200"><nobr><b>3.1.1. Virtual Memory Allocation</b></nobr></div>
+<div style="position:absolute;top:29125;left:793"><nobr><b>15</b></nobr></div>
+<div style="position:absolute;top:29142;left:200"><nobr><b>3.1.2. Virtual Memory Deallocation</b></nobr></div>
+<div style="position:absolute;top:29142;left:793"><nobr><b>15</b></nobr></div>
+<div style="position:absolute;top:29160;left:200"><nobr><b>3.1.3. Virtual Memory Reading</b></nobr></div>
+<div style="position:absolute;top:29160;left:793"><nobr><b>16</b></nobr></div>
+<div style="position:absolute;top:29177;left:200"><nobr><b>3.1.4. Programming Example II, vm_read.c</b></nobr></div>
+<div style="position:absolute;top:29177;left:793"><nobr><b>17</b></nobr></div>
+<div style="position:absolute;top:29194;left:166"><nobr><b>3.2. Virtual Memory Copying</b></nobr></div>
+<div style="position:absolute;top:29194;left:793"><nobr><b>19</b></nobr></div>
+<div style="position:absolute;top:29211;left:166"><nobr><b>3.3. Inheritance of Shared Versus Copied Memory</b></nobr></div>
+<div style="position:absolute;top:29211;left:793"><nobr><b>19</b></nobr></div>
+<div style="position:absolute;top:29229;left:200"><nobr><b>3.3.1. Virtual Memory, Inheritance</b></nobr></div>
+<div style="position:absolute;top:29229;left:793"><nobr><b>20</b></nobr></div>
+<div style="position:absolute;top:29246;left:200"><nobr><b>3.3.2. Programming Example IV, cowtest.c</b></nobr></div>
+<div style="position:absolute;top:29246;left:793"><nobr><b>21</b></nobr></div>
+</span></font>
+<font size="3" face="Times"><span style="font-size:14px;font-family:Times">
+<div style="position:absolute;top:29263;left:136"><nobr><b>4. Mach environment</b></nobr></div>
+<div style="position:absolute;top:29263;left:792"><nobr><b>23</b></nobr></div>
+</span></font>
+
+
+</div></body></html>

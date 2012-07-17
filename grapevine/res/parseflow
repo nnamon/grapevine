@@ -1,0 +1,18 @@
+[parser]
+syscall_profile
+`- bsd_syscall_collection
+   `- bsd_syscall
+`- mach_syscall_collection
+   `- mach_syscall
+
+[generation]
+generator
+`- syscall_profile
+`- generation_rules
+
+[fuzzer]
+host_control
+listener
+
+[multifuzzing]
+vm_control
