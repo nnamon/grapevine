@@ -75,15 +75,13 @@ class BSDSyscallsCollection:
 class MachSyscall(Syscall):
     pass
 
-# Syscall Collection #
+# Syscall Profile #
 
 class SyscallsProfile:
     bsd_syscalls = None
     mach_syscalls = None
-    rules = None
 
-    def __init__(self, bsd_syscalls = [], mach_syscalls = [], rules = []):
+    def __init__(self, bsd_syscalls, mach_syscalls):
         self.bsd_syscalls = bsd_syscalls
         self.mach_syscalls = mach_syscalls
-        self.rules = rules
 
