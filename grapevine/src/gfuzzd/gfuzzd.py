@@ -1,3 +1,11 @@
+from fuzzd.gvfuzz import FuzzD
+from fuzzd.gvcallingmechanisms import XNUCallingMechanism
+
+UDP_IP="127.0.0.1"
+UDP_PORT=10001
+log_ip = "0.0.0.0"
+log_port = 0
+
 from ctypes import *
 import random
 import socket
@@ -5,15 +13,11 @@ import time
 import pickle
 import binascii
 from time import sleep
-import fuzzmod.randomFI
+#import fuzzmod.randomFI
 from threading import Timer
 from threading import Thread
-randomFI = fuzzmod.randomFI()
-libc = cdll.LoadLibrary("libc.dylib")
-UDP_IP="127.0.0.1"
-UDP_PORT=10001
-log_ip = "0.0.0.0"
-log_port = 0
+#randomFI = fuzzmod.randomFI()
+#libc = cdll.LoadLibrary("libc.dylib")
 
 #This ignore list is customized for xnu-1504.9.37 (10.6.7).
 
@@ -115,22 +119,9 @@ def checkFuzz(thread):
     else:
         print "Thread is alive"
         
-
+def main():
+    fuzzd = FuzzD("REPLACE ME", XNUCallingMechanism(), UDP_IP, UDP_PORT)
+    fuzzd.listen()
     
 if __name__ == "__main__":
-    sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
-    sock.bind ( (UDP_IP,UDP_PORT) )
-    print "Socket binding success. Listening on",UDP_PORT
-    while True:
-        data, addr = sock.recvfrom( 1024 ) #buffer 1024
-        print "Instructs: ",data
-        print "From: ",addr
-        if data == 'fuzz':
-            log_ip = addr[0]
-            log_port = int(sock.recvfrom( 512 )[0]) #recv log port
-            fuzzing = Thread(target=memfuzz,name="fuzz")
-            fuzzing.start() #starts the fuzzing function
-            checker = Timer(30.0, checkFuzz, [fuzzing]) #checks for dead fuzzing thread
-            checker.start()
-        if data == "exit":
-            exit()
+    main()
