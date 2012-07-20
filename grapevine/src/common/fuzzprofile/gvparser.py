@@ -4,7 +4,13 @@ from gvsyscalls import *
 import re
 
 class GrapevineParser:
-    
+
+    def parse(self, bsd_file):
+        bsd_syscalls = self.parse_bsdsyscalls(bsd_file)
+        mach_syscalls = None
+        new_profile = SyscallProfile(bsd_syscalls, mach_syscalls)
+        return new_profile
+        
     def parse_bsdsyscalls(self, filename):
         syscall_collection = BSDSyscallsCollection()
         parse_strings = [i.strip() for i in file(filename).read().splitlines()]

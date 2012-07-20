@@ -5,11 +5,6 @@ class randomFI:
     def getseed(self):
         return int(binascii.hexlify(open("/dev/urandom", 'r').read(5).rstrip()),16)
 
-    def getrand(self):
-            f = open('/dev/urandom', 'r')
-            d = f.read(128).rstrip()
-            f.close()
-            return d
 
     def getnumber(self):
            state = random.randrange(0,5)

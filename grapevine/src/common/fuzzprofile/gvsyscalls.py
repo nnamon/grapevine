@@ -77,7 +77,7 @@ class MachSyscall(Syscall):
 
 # Syscall Profile #
 
-class SyscallsProfile:
+class SyscallProfile:
     bsd_syscalls = None
     mach_syscalls = None
 

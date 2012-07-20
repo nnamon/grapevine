@@ -1,7 +1,9 @@
 #!/usr/bin/python
 
 import socket
-import pickle
+import sys
+from common.fuzzgenerator.gvgenerator import DefaultGenerator
+from threading import Thread
 
 # Main entry class
 class FuzzD:
@@ -11,10 +13,15 @@ class FuzzD:
     call_mech = None
     sock = None
     generator = None
+    generator_namespace = {}
+    syscall_profile = None
+    fuzzing = False
+    fuzz_thread = None
 
-    def __init__(self, logger, call_mech, udp_ip, udp_port):
+    def __init__(self, logger, call_mech, syscalls_profile, udp_ip="127.0.0.1", udp_port=10001):
         self.logger = logger
         self.call_mech = call_mech
+        self.generator = DefaultGenerator(syscalls_profile, 0)
         self.udp_ip = udp_ip
         self.udp_port = udp_port
 
@@ -26,24 +33,49 @@ class FuzzD:
             data, addr = self.sock.recvfrom(1024) # buffer 1024
             self.__handle(data, addr)
 
+    def __fuzz(self):
+        """Begin the fuzzing process with the specified generator inputs called by the calling mechanism."""
+        while self.fuzzing:
+            gin = self.generator.getNext()
+            gout = self.call_mech.call(gin[0], *gin[1:])
+            self.generator.affectState(gout)
+
+    def __sendback(self, msg, addr):
+        self.sock.sendto(msg, addr)
+        
     def __handle(self, data, addr):
         """Protocol handling."""
-        data = data.lower()
+        data = data.lower().strip()
+        print "Received data from host control: %s" % data
         if data == "loadgen":
-            pass
+            gen_name, _ = sock.recvfrom(2048)
+            seed, _ = sock.recvfrom(2048)
+            exe_code, _ = sock.recvfrom(1024*10)
+            exec exe_code in self.generator_namespace # load dynamic code into temp namespace
+            self.generator = self.generator_namespace[gen_name](self.seed, self.syscalls_profile)
         elif data == "dumpstate":
-            pass
+            self_dump = dict((name, getattr(self, name)) for name in dir(self))
+            dump_to_requester = "Dump of current state:\n\n"
+            dump_to_requester = dump_to_requester + "".join(("%s: %s\n" % (i, str(self_dump[i])) for i in self_dump))
+            self.__sendback(dump_to_requester, addr)
         elif data == "fuzz":
-            log_ip = addr[0]
-            log_port = int(sock.recvfrom( 512 )[0]) #recv log port
-#            fuzzing = Thread(target=memfuzz,name="fuzz")
-#            fuzzing.start() #starts the fuzzing function
-#            checker = Timer(30.0, checkFuzz, [fuzzing]) #checks for dead fuzzing thread
-#            checker.start()
+            if not self.fuzzing:
+                self.fuzzing = True
+                self.fuzz_thread = Thread(target=self.__fuzz, name="fuzz")
+                self.fuzz_thread.start()
+                self.__sendback("Fuzzing is turned on.", addr)
+            else:
+                self.__sendback("Error: A fuzzing instance is already running.", addr)
+        elif data == "stopfuzz":
+            if self.fuzzing:
+                self.fuzzing = False
+                self.__sendback("Fuzzing is turned off.", addr)
+            else:
+                self.__sendback("Error: There is no fuzzing instance to stop.", addr)
         elif data == "exit":
-            exit()
+            sys.exit()
         else:
-            self.sock.sendto("Error: Invalid command.", addr)
+            self.__sendback("Error: Invalid command.", addr)
             
 
 
