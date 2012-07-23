@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from fuzzd.gvfuzz import FuzzD
 from fuzzd.gvcallingmechanisms import XNUCallingMechanism, TestCallingMechanism
 from common.fuzzprofile.gvparser import GrapevineParser

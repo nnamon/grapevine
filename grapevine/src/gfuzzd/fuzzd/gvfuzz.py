@@ -2,7 +2,7 @@
 
 import socket
 import sys
-from common.fuzzgenerator.gvgenerator import DefaultGenerator
+from common.fuzzgenerator.gvgenerator import DefaultGenerator, RandomFI
 from threading import Thread
 
 # Main entry class
@@ -21,7 +21,7 @@ class FuzzD:
     def __init__(self, logger, call_mech, syscalls_profile, udp_ip="127.0.0.1", udp_port=10001):
         self.logger = logger
         self.call_mech = call_mech
-        self.generator = DefaultGenerator(syscalls_profile, 0)
+        self.generator = RandomFI(syscalls_profile, 0)
         self.udp_ip = udp_ip
         self.udp_port = udp_port
 
@@ -53,6 +53,8 @@ class FuzzD:
             exe_code, _ = sock.recvfrom(1024*10)
             exec exe_code in self.generator_namespace # load dynamic code into temp namespace
             self.generator = self.generator_namespace[gen_name](self.seed, self.syscalls_profile)
+        elif data == "hello":
+            self.__sendback("hello from %s" % self, addr)
         elif data == "dumpstate":
             self_dump = dict((name, getattr(self, name)) for name in dir(self))
             dump_to_requester = "Dump of current state:\n\n"
@@ -73,6 +75,7 @@ class FuzzD:
             else:
                 self.__sendback("Error: There is no fuzzing instance to stop.", addr)
         elif data == "exit":
+            self.__sendback("goodbye", addr)
             sys.exit()
         else:
             self.__sendback("Error: Invalid command.", addr)
