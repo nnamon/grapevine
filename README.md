@@ -1,7 +1,9 @@
-grapevine 
-
+grapevine OSX XNU Kernel Fuzzer
+===============================
 Mac OSX/Darwin Kernel Automated Fuzzer Generator.
+-------------------------------------------------
 
+##Aims
  - Automatically parses syscall files/headers to generate fuzz input.
     - Dynamic, if there are new or removed syscalls, fuzzer will change accordingly.
  - Modular
@@ -9,5 +11,5 @@ Mac OSX/Darwin Kernel Automated Fuzzer Generator.
  - Extensible 
     - Write parsers to parse syscalls from other kernels (Linux/BSD/etc)
     
-
--- amon
+##Program Flow
+Refer to [parseflow](https://github.com/jergorn93/grapevine/blob/master/grapevine/res/parseflow)
