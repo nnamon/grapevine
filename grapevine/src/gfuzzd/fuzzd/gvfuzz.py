@@ -53,6 +53,7 @@ class FuzzD:
             exe_code, _ = sock.recvfrom(1024*10)
             exec exe_code in self.generator_namespace # load dynamic code into temp namespace
             self.generator = self.generator_namespace[gen_name](self.seed, self.syscalls_profile)
+            self.__sendback("generator %s loaded" % gen_name)
         elif data == "hello":
             self.__sendback("hello from %s" % self, addr)
         elif data == "dumpstate":

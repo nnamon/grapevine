@@ -1,18 +1,31 @@
-[parser]
-syscall_profile
-`- bsd_syscall_collection
-   `- bsd_syscall
-`- mach_syscall_collection
-   `- mach_syscall
+Assuming one machine is under fuzz,
 
-[generation]
-generator
-`- syscall_profile
-`- generation_rules
+pre-requisites:
+gfuzzd is installed on the machine to be fuzzed with all required kernel source files.
+ghost is installed on the machine acting as controller to VMs under fuzz along with the required generator definitions.
 
-[fuzzer]
-host_control
-listener
+listen:
+1. gfuzzd parses the syscall source files and creates a syscall profile.
+2. gfuzzd creates a fuzzd instance by supplying a logger, calling mechanism, and the syscall profile.
+2. gfuzzd begins listening on a specified udp address and port pair.
 
-[multifuzzing]
-vm_control
+expected process:
+1. ghost sends a 'hello' to the specified udp address and port pair.
+2. If gfuzzd is listening, it will acknowledge with 'hello from %s' % self.
+3. ghost sends 'loadgen', generator_name, initial_seed, and generator definition. generator_name must correspond to the class definition.
+4. gfuzzd receives and installs the generator into a private namespace with the generator_name as a key. Then, gfuzzd instantiates the newly installed generator with the initial_seed and syscall_profiles as the current generator. gfuzzd returns 'generator %s loaded' % generator_name.
+5. ghost sends 'fuzz'.
+6. gfuzzd spawns a new thread and begins fuzzing using inputs generated from the generator.getNext() function. It returns 'fuzzing is turned on'.
+7. ghost sends 'stopfuzz'.
+7. gfuzzd stops the fuzzing thread by signalling to the running loop that fuzzing is cancelled and returns 'fuzzing is turned off'.
+8. ghost sends 'exit'.
+9. gfuzzd returns 'goodbye' and exits the python program.
+
+glossary
+
+gfuzzd - listener framework to be installed on the machines to be fuzzed. 
+ghost - controller that manages many gfuzzd instances. 
+syscall collection - collection of syscalls represented in object form for easy generation of fuzz input data through information extracted in the form of data types of returns or arguments.
+calling mechanism - controls how fuzz input data is executed as a syscall.
+syscall profile - consolidated group(s) of syscall collections to be utilised by a generator when generating fuzz input data.
+generator - a state machine that when instantiated with a seed value may return fuzz data or affect the state of the state machine through two public functions: getNext() and affectState(return_val) respectively.
