@@ -73,7 +73,34 @@ class BSDSyscallsCollection:
 # Mach Syscalls #
 
 class MachSyscall(Syscall):
-    pass
+    number = None
+    name = None
+    arg_count = None
+    munge_w = None # No idea what
+    munge_d = None # these are at this point of time.
+
+    def __init__(self, number, name, arg_count = 0, munge_w = "NULL", munge_d = "NULL"):
+        self.number = number
+        self.name = name
+        self.arg_count = arg_count
+        self.munge_w = munge_w
+        self.munge_d = munge_d
+
+    def __str__(self):
+        return "/* %d */    MACH_TRAP(%s, %d, %s, %s)" % (self.number, self.name, self.arg_count, self.munge_w, self.munge_d)
+
+    def __repr__(self):
+        return "<MachSyscall: %d %s>" % (self.number, self.name)    
+
+class MachSyscallsCollection:
+    syscalls = []
+    
+    def add_syscall(self, syscall):
+        if syscall not in self.syscalls:
+            self.syscalls.append(syscall)
+            return True
+        else:
+            return False
 
 # Syscall Profile #
 

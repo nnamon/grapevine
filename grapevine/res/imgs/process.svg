@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1052.3622"
+   height="744.09448"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.2 r9819"
+   sodipodi:docname="process.svg">
+  <defs
+     id="defs4">
+    <marker
+       inkscape:stockid="Arrow1Lstart"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lstart"
+       style="overflow:visible">
+      <path
+         id="path3977"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none"
+         transform="scale(0.8) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0.0"
+       refX="0.0"
+       id="Arrow1Lend"
+       style="overflow:visible;">
+      <path
+         id="path3901"
+         d="M 0.0,0.0 L 5.0,-5.0 L -12.5,0.0 L 5.0,5.0 L 0.0,0.0 z "
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1.0pt;marker-start:none;"
+         transform="scale(0.8) rotate(180) translate(12.5,0)" />
+    </marker>
+    <marker
+       inkscape:stockid="Arrow1Lend"
+       orient="auto"
+       refY="0"
+       refX="0"
+       id="Arrow1Lend-3"
+       style="overflow:visible">
+      <path
+         inkscape:connector-curvature="0"
+         id="path3901-8"
+         d="M 0,0 5,-5 -12.5,0 5,5 0,0 z"
+         style="fill-rule:evenodd;stroke:#000000;stroke-width:1pt;marker-start:none"
+         transform="matrix(-0.8,0,0,-0.8,-10,0)" />
+    </marker>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="518.54313"
+     inkscape:cy="280.79286"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1366"
+     inkscape:window-height="744"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-308.2677)">
+    <text
+       xml:space="preserve"
+       style="font-size:40px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Balham;-inkscape-font-specification:Balham"
+       x="32.857143"
+       y="372.36218"
+       id="text2985"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2987"
+         x="32.857143"
+         y="372.36218">Process Communication Diagram</tspan></text>
+    <g
+       id="g3048"
+       transform="translate(-3.1022469,16.562364)">
+      <text
+         sodipodi:linespacing="125%"
+         id="text3009"
+         y="650.93365"
+         x="148.57143"
+         style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Balham;-inkscape-font-specification:Balham"
+         xml:space="preserve"><tspan
+           y="650.93365"
+           x="148.57143"
+           id="tspan3011"
+           sodipodi:role="line">ghost</tspan></text>
+      <g
+         transform="translate(0,-4)"
+         id="g3044">
+        <path
+           sodipodi:type="arc"
+           style="fill:#ffffff;fill-opacity:0.24657533;stroke:#000000;stroke-width:1;stroke-miterlimit:3.29999995;stroke-opacity:1;stroke-dasharray:none"
+           id="path2989"
+           sodipodi:cx="167.85715"
+           sodipodi:cy="390.52304"
+           sodipodi:rx="95"
+           sodipodi:ry="95"
+           d="m 262.85715,390.52304 c 0,52.46705 -42.53295,95 -95,95 -52.46705,0 -95.000003,-42.53295 -95.000003,-95 0,-52.46705 42.532953,-95 95.000003,-95 52.46705,0 95,42.53295 95,95 z"
+           transform="translate(5.7142857,319.69627)" />
+        <path
+           style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           d="M 86.428572,363.3802 259.64286,361.95162"
+           id="path3017"
+           inkscape:connector-curvature="0"
+           transform="translate(0,308.2677)" />
+      </g>
+    </g>
+    <g
+       id="g3093"
+       transform="translate(-3.1022469,-4.5594777)">
+      <g
+         id="g3072">
+        <g
+           id="g3055"
+           transform="translate(2.0203051,12.121831)">
+          <text
+             sodipodi:linespacing="125%"
+             id="text3013"
+             y="659.505"
+             x="850.00006"
+             style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Balham;-inkscape-font-specification:Balham"
+             xml:space="preserve"><tspan
+               y="659.505"
+               x="850.00006"
+               id="tspan3015"
+               sodipodi:role="line">gfuzzd</tspan></text>
+          <g
+             transform="translate(241.42857,-88.571429)"
+             id="g3040">
+            <path
+               sodipodi:type="arc"
+               style="fill:#ffffff;fill-opacity:0.24657533;stroke:#000000;stroke-width:1;stroke-miterlimit:3.29999995;stroke-opacity:1;stroke-dasharray:none"
+               id="path2989-71"
+               sodipodi:cx="167.85715"
+               sodipodi:cy="390.52304"
+               sodipodi:rx="95"
+               sodipodi:ry="95"
+               d="m 262.85715,390.52304 c 0,52.46705 -42.53295,95 -95,95 -52.46705,0 -95.000003,-42.53295 -95.000003,-95 0,-52.46705 42.532953,-95 95.000003,-95 52.46705,0 95,42.53295 95,95 z"
+               transform="translate(467.85714,413.26771)" />
+            <path
+               style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+               d="m 548.57142,765.21934 173.2143,-1.42858"
+               id="path3017-7"
+               inkscape:connector-curvature="0" />
+          </g>
+        </g>
+        <text
+           xml:space="preserve"
+           style="font-size:20px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Balham;-inkscape-font-specification:Balham"
+           x="820.56689"
+           y="710.69342"
+           id="text3062"
+           sodipodi:linespacing="125%"><tspan
+             sodipodi:role="line"
+             id="tspan3064"
+             x="820.56689"
+             y="710.69342">- generator</tspan><tspan
+             sodipodi:role="line"
+             x="820.56689"
+             y="735.69342"
+             id="tspan3066">- syscall_profile</tspan><tspan
+             sodipodi:role="line"
+             x="820.56689"
+             y="760.69342"
+             id="tspan3068">- logger</tspan><tspan
+             sodipodi:role="line"
+             x="820.56689"
+             y="785.69342"
+             id="tspan3070">- fuzzd</tspan></text>
+      </g>
+    </g>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 164.28571,628.07646 c 0,0 93.94488,-91.94243 150.43164,-124.12031 58.92857,-33.56886 123.62022,-67.20164 191.4168,-68.95372 72.47757,-1.87305 144.04642,29.20871 208.16747,63.04653 60.51177,31.93314 159.98409,128.59893 159.98409,128.59893"
+       id="path3125"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="caaac" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Balham;-inkscape-font-specification:Balham"
+       x="330.71432"
+       y="425.93359"
+       id="text4339"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4341"
+         x="330.71432"
+         y="425.93359">1. sends 'hello' to a specified udp address and port pair.</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart);marker-end:none"
+       d="m 221.42857,334.09448 c 0,0 178.3743,-148.73357 286.20448,-150.91734 116.90191,-2.36748 316.65266,150.91734 316.65266,150.91734"
+       id="path3790"
+       inkscape:connector-curvature="0"
+       transform="translate(0,308.2677)"
+       sodipodi:nodetypes="cac" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Balham;-inkscape-font-specification:Balham"
+       x="509.49783"
+       y="467.77191"
+       id="text4420"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan4422"
+         x="509.49783"
+         y="467.77191">2. Acknowledges</tspan><tspan
+         sodipodi:role="line"
+         x="509.49783"
+         y="487.77191"
+         id="tspan3028">with 'hello from %s' % self</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 244.28571,354.09448 c 0,0 172.74608,-94.95434 265.84132,-94.95434 93.09524,0 292.73012,94.95434 292.73012,94.95434"
+       id="path4424"
+       inkscape:connector-curvature="0"
+       transform="translate(0,308.2677)"
+       sodipodi:nodetypes="czc" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:100%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Balham;-inkscape-font-specification:Balham"
+       x="509.06927"
+       y="523.03802"
+       id="text4426"
+       sodipodi:linespacing="100%"><tspan
+         sodipodi:role="line"
+         id="tspan4428"
+         x="510.86618"
+         y="523.03802">3. sends </tspan><tspan
+         sodipodi:role="line"
+         x="510.86618"
+         y="539.03802"
+         id="tspan4430">'loadgen', generator_name, </tspan><tspan
+         sodipodi:role="line"
+         x="509.06927"
+         y="555.03802"
+         id="tspan4440">initial_seed, and generator definition.</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Balham;-inkscape-font-specification:Balham"
+       x="412.14224"
+       y="261.24158"
+       id="text4432"
+       sodipodi:linespacing="125%"
+       transform="translate(0,308.2677)"><tspan
+         sodipodi:role="line"
+         id="tspan4434" /></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 921.25912,329.93194 c 0,0 8.03147,-37.27216 21.91212,-51.24974 13.88065,-13.97758 32.7665,-10.74428 40.85221,-3.12879 8.08571,7.61549 12.64207,28.39112 -0.80915,42.45412 -13.45122,14.063 -52.1408,19.59592 -52.1408,19.59592"
+       id="path3994"
+       inkscape:connector-curvature="0"
+       transform="translate(0,308.2677)"
+       sodipodi:nodetypes="czzzc" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Balham;-inkscape-font-specification:Balham"
+       x="936.88599"
+       y="403.79077"
+       id="text4180"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4182"
+         x="938.68286"
+         y="403.79077">4. receives and installs </tspan><tspan
+         sodipodi:role="line"
+         x="938.68286"
+         y="423.79077"
+         id="tspan4184">the generator into a private </tspan><tspan
+         sodipodi:role="line"
+         x="938.68286"
+         y="443.79077"
+         id="tspan4186">namespace with the </tspan><tspan
+         sodipodi:role="line"
+         x="938.68286"
+         y="463.79077"
+         id="tspan4188">generator_name as a key. </tspan><tspan
+         sodipodi:role="line"
+         x="936.88599"
+         y="483.79077"
+         id="tspan4190">Then, gfuzzd instantiates</tspan><tspan
+         sodipodi:role="line"
+         x="938.68286"
+         y="503.79077"
+         id="tspan4192"> the newly installed generator </tspan><tspan
+         sodipodi:role="line"
+         x="938.68286"
+         y="523.79077"
+         id="tspan4194">with the initial_seed </tspan><tspan
+         sodipodi:role="line"
+         x="938.68286"
+         y="543.79077"
+         id="tspan4196">and syscall_profiles as </tspan><tspan
+         sodipodi:role="line"
+         x="938.68286"
+         y="563.79077"
+         id="tspan4198">the current generator. </tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart)"
+       d="m 261.42857,388.3802 c 0,0 162.85714,-67.14286 250,-67.14286 87.14286,0 272.85715,67.14286 272.85715,67.14286"
+       id="path4200"
+       inkscape:connector-curvature="0"
+       transform="translate(0,308.2677)"
+       sodipodi:nodetypes="czc" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Balham;-inkscape-font-specification:Balham"
+       x="511.30215"
+       y="600.93359"
+       id="text4202"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4204"
+         x="513.099"
+         y="600.93359">5. 'returns 'generator </tspan><tspan
+         sodipodi:role="line"
+         x="511.30215"
+         y="620.93359"
+         id="tspan4206">%s loaded' % generator_name</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 264.28572,415.52305 c 0,0 164.04794,-49.10697 250.00032,-48.63078 C 600.23842,367.36846 780,418.3802 780,418.3802"
+       id="path4392"
+       inkscape:connector-curvature="0"
+       transform="translate(0,308.2677)"
+       sodipodi:nodetypes="czc" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Balham;-inkscape-font-specification:Balham"
+       x="465.71429"
+       y="663.79077"
+       id="text4578"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4580"
+         x="465.71429"
+         y="663.79077">6. sends 'fuzz'</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Arrow1Lend)"
+       d="m 926.18052,804.73102 c 0,0 8.03147,37.27216 21.91212,51.24974 13.88065,13.97758 32.7665,10.74428 40.85221,3.12879 8.08571,-7.61549 12.64205,-28.39112 -0.80915,-42.45412 -13.45122,-14.063 -52.1408,-19.59592 -52.1408,-19.59592"
+       id="path3994-3"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="czzzc" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Balham;-inkscape-font-specification:Balham"
+       x="945.50671"
+       y="892.36218"
+       id="text4608"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan4610"
+         x="947.30359"
+         y="892.36218">7. spawns a new thread </tspan><tspan
+         sodipodi:role="line"
+         x="947.30359"
+         y="912.36218"
+         id="tspan4612">and begins fuzzing </tspan><tspan
+         sodipodi:role="line"
+         x="947.30359"
+         y="932.36218"
+         id="tspan4614">using inputs generated </tspan><tspan
+         sodipodi:role="line"
+         x="947.30359"
+         y="952.36218"
+         id="tspan4616">from the </tspan><tspan
+         sodipodi:role="line"
+         x="945.50671"
+         y="972.36218"
+         id="tspan4618">generator.getNext() function.</tspan></text>
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-start:url(#Arrow1Lstart)"
+       d="m 260,442.66591 c 0,0 172.20044,41.73974 259.99425,42.11955 89.60502,0.38764 265.72004,-40.69098 265.72004,-40.69098"
+       id="path4620"
+       inkscape:connector-curvature="0"
+       transform="translate(0,308.2677)"
+       sodipodi:nodetypes="cac" />
+    <text
+       xml:space="preserve"
+       style="font-size:16px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Balham;-inkscape-font-specification:Balham"
+       x="460"
+       y="508.38019"
+       id="text4808"
+       sodipodi:linespacing="125%"
+       transform="translate(0,308.2677)"><tspan
+         sodipodi:role="line"
+         id="tspan4810"
+         x="460"
+         y="508.38019" /></text>
+  </g>
+</svg>

@@ -5,9 +5,9 @@ import re
 
 class GrapevineParser:
 
-    def parse(self, bsd_file):
+    def parse(self, bsd_file, mach_file):
         bsd_syscalls = self.parse_bsdsyscalls(bsd_file)
-        mach_syscalls = None
+        mach_syscalls = self.parse_machsyscalls(mach_file)
         new_profile = SyscallProfile(bsd_syscalls, mach_syscalls)
         return new_profile
         
@@ -61,8 +61,29 @@ class GrapevineParser:
                 
         return syscall_collection
 
+    def parse_machsyscalls(self, filename):
+        syscall_collection = MachSyscallsCollection()
+        parse_strings = [i.strip() for i in file(filename).read().splitlines()]
+        syscall_pattern = re.compile(r"/\* (\d+) \*/\s+MACH_TRAP\((\w+), (\d+), (\w+), (\w+)\),")
+
+        for i in parse_strings:
+            syscalldef_match = syscall_pattern.match(i)
+            
+            if syscalldef_match:
+                number = syscalldef_match.group(1)
+                name = syscalldef_match.group(2)
+                arg_count = syscalldef_match.group(3)
+                munge_w = syscalldef_match.group(4)
+                munge_d = syscalldef_match.group(5)
+
+                new_machsyscall = MachSyscall(int(number), name, int(arg_count), munge_w, munge_d)
+                syscall_collection.add_syscall(new_machsyscall)
+                
+        return syscall_collection
 
 if __name__ == "__main__":
     g = GrapevineParser()
-    a = g.parse_bsdsyscalls("../res/syscalls.master")
+    a = g.parse_bsdsyscalls("../../../res/syscalls.master")
+    b = g.parse_machsyscalls("../../../res/syscall_sw.c")
     print a.syscall_tree['default']
+    print b.syscalls

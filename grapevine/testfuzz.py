@@ -114,7 +114,7 @@ def checkFuzz(thread):
         fuzzing.start()
     else:
         print "Thread is alive"
-        
+
 
     
 if __name__ == "__main__":

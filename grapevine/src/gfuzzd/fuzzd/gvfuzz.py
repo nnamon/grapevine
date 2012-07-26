@@ -4,6 +4,7 @@ import socket
 import sys
 from common.fuzzgenerator.gvgenerator import DefaultGenerator, RandomFI
 from threading import Thread
+import signal
 
 # Main entry class
 class FuzzD:
@@ -24,6 +25,10 @@ class FuzzD:
         self.generator = RandomFI(syscalls_profile, 0)
         self.udp_ip = udp_ip
         self.udp_port = udp_port
+        
+        # Set up the signals
+        signal.signal(signal.SIGSEGV, self.__sig_handler)
+        signal.signal(signal.SIGILL, self.__sig_handler)
 
     def listen(self):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -39,6 +44,7 @@ class FuzzD:
             gin = self.generator.getNext()
             gout = self.call_mech.call(gin[0], *gin[1:])
             self.generator.affectState(gout)
+        
 
     def __sendback(self, msg, addr):
         self.sock.sendto(msg, addr)
@@ -82,7 +88,11 @@ class FuzzD:
             self.__sendback("Error: Invalid command.", addr)
             
 
-
+    # Signal handling to continue fuzzing
+    def __sig_handler(self, sig_no, stack_frame):
+        print "Signal handled: %d." % sig_no
+    
+        
 
 
     

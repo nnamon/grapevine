@@ -47,6 +47,7 @@ class RandomFI(Generator):
     seed = None
     
     def __init__(self, profile, seed):
+        self.state = 0
         pass
 
     def getNext(self):
@@ -57,7 +58,8 @@ class RandomFI(Generator):
         return args
 
     def affectState(self, data):
-        print data
+        self.state = self.state + 1
+        print "Generator got %s back. (State %d)" % (data, self.state)
 
     def __getsyscall(self):
         ignore = [8, 11, 17, 19, 21, 22, 38, 40, 45, 62, 63, 64, 67,

@@ -8,7 +8,10 @@ class CallingMechanism:
     def call(self, syscall_number, *args):
         raise Exception("Unimplemented call() in abstract CallingMechanism class.")
 
-# Calling mechanism used for this project    
+# Calling mechanism used for this project   
+# UNCOMMENT OUT THE FOLLOWING LINES TO RUN IN A MAC OS X ENVIRONMENT
+# from ctypes import *
+# libc = .LoadLibrary("libc.dylib")
 class XNUCallingMechanism(CallingMechanism):
     
     def call(self, syscall_number, *args):
