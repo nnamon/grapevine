@@ -5,6 +5,7 @@ import sys
 from common.fuzzgenerator.gvgenerator import DefaultGenerator, RandomFI
 from threading import Thread
 import signal
+import time
 
 # Main entry class
 class FuzzD:
@@ -29,6 +30,8 @@ class FuzzD:
         # Set up the signals
         signal.signal(signal.SIGSEGV, self.__sig_handler)
         signal.signal(signal.SIGILL, self.__sig_handler)
+        signal.signal(signal.SIGSYS, self.__sig_handler)
+        signal.signal(signal.SIGINT, self.__interrupt_handler)
 
     def listen(self):
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -42,7 +45,9 @@ class FuzzD:
         """Begin the fuzzing process with the specified generator inputs called by the calling mechanism."""
         while self.fuzzing:
             gin = self.generator.getNext()
+            self.logger.log_syscall(gin[0], *gin[1:])
             gout = self.call_mech.call(gin[0], *gin[1:])
+            self.logger.log_return(gout)
             self.generator.affectState(gout)
         
 
@@ -82,6 +87,7 @@ class FuzzD:
             else:
                 self.__sendback("Error: There is no fuzzing instance to stop.", addr)
         elif data == "exit":
+            self.fuzzing = False
             self.__sendback("goodbye", addr)
             sys.exit()
         else:
@@ -91,6 +97,14 @@ class FuzzD:
     # Signal handling to continue fuzzing
     def __sig_handler(self, sig_no, stack_frame):
         print "Signal handled: %d." % sig_no
+
+    def __interrupt_handler(self, sig_no, stack_frame):
+        print "Interrupt signal detected, terminating program."
+        self.fuzzing = False
+        time.sleep(0.25)
+        sys.exit()
+
+    
     
         
 

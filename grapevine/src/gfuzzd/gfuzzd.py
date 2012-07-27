@@ -3,11 +3,12 @@
 from fuzzd.gvfuzz import FuzzD
 from fuzzd.gvcallingmechanisms import XNUCallingMechanism, TestCallingMechanism
 from common.fuzzprofile.gvparser import GrapevineParser
+from fuzzlogger.gvlogger import LoggerClient
 
 UDP_IP="127.0.0.1"
 UDP_PORT=10001
-log_ip = "0.0.0.0"
-log_port = 0
+log_ip = "127.0.0.1"
+log_port = 9001
         
 def main():
     # Get syscall profile first
@@ -18,8 +19,11 @@ def main():
     gp = GrapevineParser()
     syscall_profile = gp.parse(bsd_syscalls_master, mach_syscall_sw)
 
+    # New Logger
+    logger = LoggerClient(log_ip, log_port)
+    
     # Create our fuzzd instance
-    fuzzd = FuzzD("REPLACE ME", TestCallingMechanism(), syscall_profile, UDP_IP, UDP_PORT)
+    fuzzd = FuzzD(logger, TestCallingMechanism(), syscall_profile, UDP_IP, UDP_PORT)
     fuzzd.listen()
     
 if __name__ == "__main__":
