@@ -74,6 +74,8 @@ class FuzzD:
             self.__sendback(dump_to_requester, addr)
         elif data == "fuzz":
             if not self.fuzzing:
+                log_port = int(sock.recvfrom( 512 )[0]) #recv log port
+                self.logger.set_logger( addr[0], log_port ) #set logger's details
                 self.fuzzing = True
                 self.fuzz_thread = Thread(target=self.__fuzz, name="fuzz")
                 self.fuzz_thread.start()

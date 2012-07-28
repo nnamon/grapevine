@@ -54,8 +54,7 @@ if __name__ == "__main__":
     sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
     #print "Fuzzd IP: ", UDP_IP
     #print "Fuzzd Port: ", UDP_PORT
-    ipregex = re.compile('\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\b', re.VERBOSE)
-    portregex = re.compile('\b\d{1,5}\b')
+
     while True:
         msg = prompt()
         #if fuzzing, program should fork a new udp listener at a specific port, and send the details to fuzzd for logging.
@@ -98,12 +97,18 @@ if __name__ == "__main__":
             logging.daemon = True
             loggers.append(logging)
             logging.start()
+        elif msg == "stopfuzz":
+            pass
+        elif msg == "dumpstate":
+            pass
+        elif msg == "loadgen":
+            pass
         elif msg == "exit":
             print "Exiting"
             sock.sendto(msg, ( udp_ip, udp_port ) )
             exit()
         elif msg == "help":
-            sys.stdout.write( "Grapevine Host Control alpha\nCommands:\n\tcurrentvm:\t displays IP and PORT of currently connected VM\n\tconnect:\t prompts for new connection details\n\tfuzz:\t\t start fuzzing in the connected vm.\n\texit:\t\t exits the program.\n\thelp:\t\t Prints this help message.\n" )
+            sys.stdout.write( "Grapevine Host Control alpha\nCommands:\n\tcurrentvm:\t displays IP and PORT of currently connected VM\n\tconnect:\t prompts for new connection details\n\tfuzz:\t\t start fuzzing in the connected vm.\n\texit:\t\t exits the program.\n\tstopfuzz:\t\t Stops fuzzing.\n\tdumpstate:\t\t Stuff.\n\tloadgen:\t\tStuff.\n\thelp:\t\t Prints this help message.\n" )
         else:
             sys.stdout.write("Command not supported\n")
         
