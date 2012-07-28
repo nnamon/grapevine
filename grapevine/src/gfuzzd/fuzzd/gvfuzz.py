@@ -9,7 +9,7 @@ import time
 
 # Main entry class
 class FuzzD:
-    udp_ip = "127.0.0.1"
+    udp_ip = "0.0.0.0" #Listens on all addresses
     udp_port = 10001
     logger = None
     call_mech = None
@@ -20,7 +20,7 @@ class FuzzD:
     fuzzing = False
     fuzz_thread = None
 
-    def __init__(self, logger, call_mech, syscalls_profile, udp_ip="127.0.0.1", udp_port=10001):
+    def __init__(self, logger, call_mech, syscalls_profile, udp_ip="0.0.0.0", udp_port=10001):
         self.logger = logger
         self.call_mech = call_mech
         self.generator = RandomFI(syscalls_profile, 0)
