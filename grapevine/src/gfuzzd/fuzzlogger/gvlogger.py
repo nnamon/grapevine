@@ -40,4 +40,4 @@ class LoggerClient:
         self.__dgram_send(payload)
 
     def __dgram_send(self, payload):
-        sock.sendto(payload, (self.log_ip, self.log_port))
+        self.sock.sendto(payload, (self.log_ip, self.log_port))
