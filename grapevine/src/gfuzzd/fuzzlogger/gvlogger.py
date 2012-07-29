@@ -30,13 +30,18 @@ class LoggerClient:
         self.__dgram_send(payload)
 
     def log_return(self, retVal):
-        """Sends return value of syscall to logger."""
+        """Sends JSON string of the return value of an executed syscall to logger."""
         payload = json.dumps({"return_value": str(retVal)}, ensure_ascii=True)
         self.__dgram_send(payload)
 
     def log_event(self, event, urgency):
-        """Sends a string describing an event and sets its urgency type"""
+        """Sends a JSON string describing an event and sets its urgency type"""
         payload = json.dumps({"event": event, "urgency": urgency}, ensure_ascii=True)
+        self.__dgram_send(payload)
+
+    def log_command(self, command, addr):
+        """Sends a JSON string of the command and addr when a command is received type"""
+        payload = json.dumps({"command": command, "addr": addr}, ensure_ascii=True)
         self.__dgram_send(payload)
 
     def __dgram_send(self, payload):

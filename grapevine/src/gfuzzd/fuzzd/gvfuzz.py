@@ -67,6 +67,8 @@ class FuzzD:
             self.__sendback("generator %s loaded" % gen_name)
         elif data == "hello":
             self.__sendback("hello from %s" % self, addr)
+        elif data == "ping":
+            self.__sendback("pong", addr)
         elif data == "dumpstate":
             self_dump = dict((name, getattr(self, name)) for name in dir(self))
             dump_to_requester = "Dump of current state:\n\n"
