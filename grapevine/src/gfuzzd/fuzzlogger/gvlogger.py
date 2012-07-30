@@ -16,10 +16,9 @@ class LoggerClient:
         self.log_port = log_port
         self.sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
     
-    def set_logger(self, log_ip, log_port):
+    def set_conn(self, log_ip, log_port):
         self.log_ip = log_ip
-        self.log_port = log_port
-        self.sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
+        self.log_port = int(log_port)
         
     def log_syscall(self, syscallnr, *arg):
         """Logging to UDP listener. Sends a JSON string with syscall numbers and arguments. Arguments and hexlifyied."""

@@ -57,11 +57,12 @@ class FuzzD:
     def __handle(self, data, addr):
         """Protocol handling."""
         data = data.lower().strip()
+        self.logger.log_command(data, addr)
         print "Received data from host control: %s" % data
         if data == "loadgen":
-            gen_name, _ = sock.recvfrom(2048)
-            seed, _ = sock.recvfrom(2048)
-            exe_code, _ = sock.recvfrom(1024*10)
+            gen_name, _ = self.sock.recvfrom(2048)
+            seed, _ = self.sock.recvfrom(2048)
+            exe_code, _ = self.sock.recvfrom(1024*10)
             exec exe_code in self.generator_namespace # load dynamic code into temp namespace
             self.generator = self.generator_namespace[gen_name](self.seed, self.syscalls_profile)
             self.__sendback("generator %s loaded" % gen_name)
@@ -69,6 +70,11 @@ class FuzzD:
             self.__sendback("hello from %s" % self, addr)
         elif data == "ping":
             self.__sendback("pong", addr)
+        elif data == "log":
+            log_details, _ = self.sock.recvfrom(2048) # To be sent in the form "127.0.0.1 9001"
+            log_ip, log_port = log_details.split()
+            self.logger.set_conn(log_ip, log_port)
+            self.__sendback("Set the address to log on to %s:%d." % (log_ip, int(log_port)), addr)
         elif data == "dumpstate":
             self_dump = dict((name, getattr(self, name)) for name in dir(self))
             dump_to_requester = "Dump of current state:\n\n"
@@ -76,8 +82,6 @@ class FuzzD:
             self.__sendback(dump_to_requester, addr)
         elif data == "fuzz":
             if not self.fuzzing:
-                log_port = int(self.sock.recvfrom( 512 )[0]) #recv log port
-                self.logger.set_logger( addr[0], log_port ) #set logger's details
                 self.fuzzing = True
                 self.fuzz_thread = Thread(target=self.__fuzz, name="fuzz")
                 self.fuzz_thread.start()
@@ -91,9 +95,8 @@ class FuzzD:
             else:
                 self.__sendback("Error: There is no fuzzing instance to stop.", addr)
         elif data == "exit":
-            self.fuzzing = False
             self.__sendback("goodbye", addr)
-            sys.exit()
+            self.__safe_exit("Controller requests exit, terminating program.")
         else:
             self.__sendback("Error: Invalid command.", addr)
             
@@ -103,12 +106,14 @@ class FuzzD:
         print "Signal handled: %d." % sig_no
 
     def __interrupt_handler(self, sig_no, stack_frame):
-        print "Interrupt signal detected, terminating program."
+        self.__safe_exit("Interrupt signal detected, terminating program.")
+
+    # Ensuring a thread safe exit.
+    def __safe_exit(self, reason):
+        print reason
         self.fuzzing = False
         time.sleep(0.25)
-        sys.exit()
-
-    
+        sys.exit()    
     
         
 

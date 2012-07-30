@@ -1,0 +1,11 @@
+Protocol Specification for Communication Between Multiple Instances of gfuzzd and fuzzer controller only ghost.
+
+Assumptions:
+gfuzzd is installed on the target machine.
+
+Protocol:
+
+- Connect Phase (Req: Establish that gfuzzd is listening. Initialise logging and generator.)
+ghost sends "hello"
+gfuzzd replies "hello from %s" % self
+ghost sends "
