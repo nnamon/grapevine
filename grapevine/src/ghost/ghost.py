@@ -85,6 +85,11 @@ if __name__ == "__main__":
             set_connection( ip, int(port) )
         elif msg == "parse":
             sys.stdout.write("Do some parsing, get some values\n")
+        elif msg == "log":
+            sys.stdout.write( "Input logger details (ip port)> ")
+            log_details = raw_input().rstrip()
+            sock.sendto( msg, (udp_ip, udp_port) )
+            sock.sendto( log_details, (udp_ip, udp_port) )
         elif msg == "fuzz":
             print "Fuzzing:",udp_ip
             sock.sendto( msg, (udp_ip, udp_port) ) #send "fuzz"
