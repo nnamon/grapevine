@@ -88,7 +88,7 @@ class FuzzD:
                 self.__sendback("Fuzzing is turned on.", addr)
             else:
                 self.__sendback("Error: A fuzzing instance is already running.", addr)
-        elif data == "stopfuzz":
+        elif data == "stop":
             if self.fuzzing:
                 self.fuzzing = False
                 self.__sendback("Fuzzing is turned off.", addr)
