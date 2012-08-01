@@ -18,9 +18,9 @@ def logger(port,udp_ip,udp_port):
     print "Port Bound",port
     filename = str(int(time()))
     f = open( filename, 'w')
-    f.write("VMIP: ")
+    f.write("HOSTIP: ")
     f.write(udp_ip)
-    f.write(" VMPORT: ")
+    f.write(" HOSTPORT: ")
     f.write(str(udp_port))
     f.write(" Logger port ")
     f.write(str(port))
@@ -41,27 +41,27 @@ def __handle(msg, ghost):
     log_match = re.compile("log\s+((?:(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s+(\d+)").match(msg)
 
     if con_match:
-        ghost.set_current_vm(con_match.group(1), con_match.group(2))
-        print "Connected to %s:%d." % (ghost.current_vm_ip, 
-                                       ghost.current_vm_port)
+        ghost.connect(con_match.group(1), con_match.group(2))
+        print "Connecting to %s:%d." % (ghost.current_host_ip, 
+                                       ghost.current_host_port)
     elif log_match:
         ghost.set_log(log_match.group(1), log_match.group(2))
         print "Logging to %s:%d." % (ghost.log_ip, ghost.log_port)
     elif msg == "fuzz":
-        print "Fuzzing %s:%d." % (ghost.current_vm_ip, 
-                                 ghost.current_vm_port)
+        print "Fuzzing %s:%d." % (ghost.current_host_ip, 
+                                 ghost.current_host_port)
     elif msg == "stopfuzz":
-        print "We stopped fuzzing %s:%d." % (ghost.current_vm_ip, 
-                                            ghost.current_vm_port)
+        print "We stopped fuzzing %s:%d." % (ghost.current_host_ip, 
+                                            ghost.current_host_port)
     elif msg == "dumpstate":
         pass
     elif msg == "loadgen":
         pass
     elif msg == "shutdown":
-        ghost.shutdownvm()
-        print "We shut down %s:%d. Removed from tracking." % (ghost.current_vm_ip, ghost.current_vm_port)
+        ghost.shutdownhost()
+        print "We shut down %s:%d. Removed from tracking." % (ghost.current_host_ip, ghost.current_host_port)
     elif msg == "help":
-        sys.stdout.write( "Grapevine Host Control alpha\nCommands:\n\tcurrentvm:\t displays IP and PORT of currently connected VM\n\tconnect:\t prompts for new connection details\n\tfuzz:\t\t start fuzzing in the connected vm.\n\texit:\t\t exits the program.\n\tstopfuzz:\t\t Stops fuzzing.\n\tdumpstate:\t\t Stuff.\n\tloadgen:\t\tStuff.\n\thelp:\t\t Prints this help message.\n" )
+        sys.stdout.write( "Grapevine Host Control alpha\nCommands:\n\tcurrenthost:\t displays IP and PORT of currently connected HOST\n\tconnect:\t prompts for new connection details\n\tfuzz:\t\t start fuzzing in the connected host.\n\texit:\t\t exits the program.\n\tstopfuzz:\t\t Stops fuzzing.\n\tdumpstate:\t\t Stuff.\n\tloadgen:\t\tStuff.\n\thelp:\t\t Prints this help message.\n" )
     else:
         sys.stdout.write("Command not supported\n")        
 
