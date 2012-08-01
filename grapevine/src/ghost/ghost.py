@@ -62,8 +62,17 @@ def __handle(msg, ghost):
         print "We stopped fuzzing %s:%d." % (ghost.current_host.ip, 
                                             ghost.current_host.port)
         ghost.current_host.stopfuzz()
-    elif msg == "dumpstate":
-        pass
+    elif msg == "hoststatus":
+        states = {
+            '0': "UNINITIALISED",
+            '1': "CONNECTED",
+            '2': "WAITING_FOR_PING",
+            '3': "LOST_CONNECTION",
+            '-1': "TERMINATED",
+            '-2': "UNCONNECTED",
+            }
+        for i in ghost.hosts:
+            print "%s:%d - %s" % (i.ip, i.port, states[str(i.state)])
     elif msg == "loadgen":
         pass
     elif msg == "shutdown":

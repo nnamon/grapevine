@@ -17,10 +17,13 @@ class Host:
     callback_set = {}
     mon_timeout = 0.02
     mon_ticks = 0
+    mon_pings_missed = 0
 
     # Constants
     UNINITIALISED = 0
     CONNECTED = 1
+    WAITING_FOR_PING = 2
+    LOST_CONNECTION = 3
     TERMINATED = -1
     UNCONNECTED = -2
 
@@ -33,6 +36,7 @@ class Host:
             self.callback_set['unable_to_connect'] = self.__default_unable_to_connect_callback
             self.callback_set['crash_detected'] =  self.__default_crash_detected_callback
             self.callback_set['data_received'] =  self.__default_data_received_callback
+            self.callback_set['reconnected'] =  self.__default_reconnected_callback
 
             
     # Internal host functions
@@ -52,12 +56,16 @@ class Host:
         print "Advice: Unable to connect event is not handled."
 
     @staticmethod
+    def __default_reconnected_callback():
+        print "Advice: Reconnected event is not handled."
+
+    @staticmethod
     def __default_data_received_callback(data):
         print "\nData is Received:\n", data
 
     def start(self):
         Thread(target=self.monitor, name="monitor").start()
-        self.__send_cmd("hello")
+        self.hello()
 
     def monitor(self):
         """Run in a separate thread to block on select calls. On the first run the timeout is set to 5 seconds, otherwise it takes a minute to timeout. Pings should be sent every 2 seconds so if there is no response in a minute, it is assumed that a crash has occured and the crash_detected callback will be called. On the first run, it will call the unable_to_connect callback."""
@@ -76,18 +84,33 @@ class Host:
         if secs_elapsed > 5.0 and self.state == self.UNINITIALISED:
             self.__call_callback("unable_to_connect")
             self.state = self.UNCONNECTED
-        
+        if secs_elapsed % 2 == 0:
+            self.ping()
+            if self.state == self.CONNECTED:
+                self.state = self.WAITING_FOR_PING
+        if self.state == self.WAITING_FOR_PING:
+            self.mon_pings_missed = self.mon_pings_missed + 1
+        if (self.mon_pings_missed/(1/self.mon_timeout)) > 5 and self.state == self.WAITING_FOR_PING:
+            self.__call_callback("crash_detected")
+            self.state = self.LOST_CONNECTION
 
     def __handle(self, data):
         self.callback_set['data_received'](data)
         if data.startswith("hello from "):
             self.state = self.CONNECTED
+            self.mon_pings_missed = 0
+        elif data == "pong":
+            if self.state == self.WAITING_FOR_PING:
+                self.state = self.CONNECTED
+            elif self.state == self.LOST_CONNECTION:
+                self.state = self.UNINITIALISED
+                self.__call_callback("reconnected")
+                self.mon_ticks = 0
+                self.hello()
+            self.mon_pings_missed = 0
 
     def stop(self):
         self.state = self.TERMINATED
-
-    def set_state(self, state):
-        self.state = state
         
     def is_host(self, ip, port):
         if self.ip == ip and self.port == int(port):
@@ -103,6 +126,12 @@ class Host:
     def bye(self):
         self.__send_cmd("bye")
 
+    def hello(self):
+        self.__send_cmd("hello")
+
+    def ping(self):
+        self.__send_cmd("ping")
+
     def fuzz(self):
         self.__send_cmd("fuzz")
 
@@ -111,6 +140,9 @@ class Host:
 
     def loadgen(self):
         self.__send_cmd("loadgen")
+
+    def log(self, ip, port):
+        self.__send_cmd("%s %d" % (ip, int(port)))
 
 class HostsController:
     hosts = [] # A list of Hosts
@@ -127,10 +159,6 @@ class HostsController:
         self.log_ip = log_ip
         self.log_port = log_port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-    def __send_cmd(self, cmd):
-        self.sock.sendto(cmd, (self.current_host.ip, 
-                                  self.current_host.port))        
 
     def connect(self, ip, port):
         new_host = True
@@ -167,7 +195,7 @@ class HostsController:
 
     def __interrupt_handler(self, sig_no, stack_frame):
         self.__safe_exit("Interrupt signal detected, terminating program.")
-
+        
     # Ensuring a thread safe exit.
     def safe_exit(self, reason):
         print reason
