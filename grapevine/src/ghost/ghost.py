@@ -1,32 +1,14 @@
 #!/usr/bin/python
 
-import socket
 import sys
 import re
-from threading import Thread
-from time import time
-
-udp_ip="127.0.0.1"
-udp_port=10001
-log_listeners = [4999]
-loggers = []
-
-def parse():
-    """Function to make use of the parser."""
-    pass
+from host import gvhost
 
 def prompt():
     """Helper function"""
-    sys.stdout.write( "command> ")
+    sys.stdout.write( "ghost> ")
     uin = raw_input().rstrip()
     return uin
-
-def set_connection(ip,port):
-    """Set currently targetted VM"""
-    global udp_ip 
-    udp_ip = ip
-    global udp_port 
-    udp_port = port
 
 def logger(port,udp_ip,udp_port):
     """UDP Logging function, writes to file"""
@@ -50,73 +32,46 @@ def logger(port,udp_ip,udp_port):
         f.write(data)
         f.write("\nNEWSET\n")
         f.close()
-        
 
-if __name__ == "__main__":
-    sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
-    #print "Fuzzd IP: ", UDP_IP
-    #print "Fuzzd Port: ", UDP_PORT
+def __handle(msg, ghost):
+    msg = msg.strip()
+    
+    # Warning: Ugly regex ahead.
+    con_match = re.compile("connect\s+((?:(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s+(\d+)").match(msg)
+    log_match = re.compile("log\s+((?:(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}(?:[0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]))\s+(\d+)").match(msg)
+
+    if con_match:
+        ghost.set_current_vm(con_match.group(1), con_match.group(2))
+        print "Connected to %s:%d." % (ghost.current_vm_ip, 
+                                       ghost.current_vm_port)
+    elif log_match:
+        ghost.set_log(log_match.group(1), log_match.group(2))
+        print "Logging to %s:%d." % (ghost.log_ip, ghost.log_port)
+    elif msg == "fuzz":
+        print "Fuzzing %s:%d." % (ghost.current_vm_ip, 
+                                 ghost.current_vm_port)
+    elif msg == "stopfuzz":
+        print "We stopped fuzzing %s:%d." % (ghost.current_vm_ip, 
+                                            ghost.current_vm_port)
+    elif msg == "dumpstate":
+        pass
+    elif msg == "loadgen":
+        pass
+    elif msg == "shutdown":
+        ghost.shutdownvm()
+        print "We shut down %s:%d. Removed from tracking." % (ghost.current_vm_ip, ghost.current_vm_port)
+    elif msg == "help":
+        sys.stdout.write( "Grapevine Host Control alpha\nCommands:\n\tcurrentvm:\t displays IP and PORT of currently connected VM\n\tconnect:\t prompts for new connection details\n\tfuzz:\t\t start fuzzing in the connected vm.\n\texit:\t\t exits the program.\n\tstopfuzz:\t\t Stops fuzzing.\n\tdumpstate:\t\t Stuff.\n\tloadgen:\t\tStuff.\n\thelp:\t\t Prints this help message.\n" )
+    else:
+        sys.stdout.write("Command not supported\n")        
+
+def main():
+    ghost = gvhost.HostsController()
 
     while True:
         msg = prompt()
-        #if fuzzing, program should fork a new udp listener at a specific port, and send the details to fuzzd for logging.
-        print "Msg:",msg
-        #sock.sendto( msg, ( udp_ip, udp_port ) )
-        if msg == "currentvm":
-            print "Current VM ip:",udp_ip
-            print "Current VM port:",udp_port
-        elif msg == "connect":
-            badport = True
-            badip = True
-            while badip:
-                sys.stdout.write( "Input IP address of VM to send commands to> ")
-                ip = raw_input().rstrip()
-                try:
-                    socket.inet_aton(ip)
-                    badip = False
-                except socket.error:
-                    badip = True
-                
-            while badport:
-                sys.stdout.write("Input port> ")
-                port = raw_input().rstrip()
-                if re.match('\d{1,5}',port) and len(port) < 6:
-                    badport = False
-                else:
-                    badport = True
-            set_connection( ip, int(port) )
-        elif msg == "parse":
-            sys.stdout.write("Do some parsing, get some values\n")
-        elif msg == "log":
-            sys.stdout.write( "Input logger details (ip port)> ")
-            log_details = raw_input().rstrip()
-            sock.sendto( msg, (udp_ip, udp_port) )
-            sock.sendto( log_details, (udp_ip, udp_port) )
-        elif msg == "fuzz":
-            print "Fuzzing:",udp_ip
-            sock.sendto( msg, (udp_ip, udp_port) ) #send "fuzz"
-            #fork udp logger listener
-            #global log_listeners
-            log_listeners.append(log_listeners[len(log_listeners)-1]+1) #add new port to list
-            port = log_listeners[len(log_listeners)-1] #same value as above
-            sock.sendto( str(port), (udp_ip,udp_port) ) #send logger port
-            logging = Thread( target=logger, args=([port,udp_ip,udp_port]) )
-            logging.daemon = True
-            loggers.append(logging)
-            logging.start()
-        elif msg == "stopfuzz":
-            pass
-        elif msg == "dumpstate":
-            pass
-        elif msg == "loadgen":
-            pass
-        elif msg == "exit":
-            print "Exiting"
-            sock.sendto(msg, ( udp_ip, udp_port ) )
-            exit()
-        elif msg == "help":
-            sys.stdout.write( "Grapevine Host Control alpha\nCommands:\n\tcurrentvm:\t displays IP and PORT of currently connected VM\n\tconnect:\t prompts for new connection details\n\tfuzz:\t\t start fuzzing in the connected vm.\n\texit:\t\t exits the program.\n\tstopfuzz:\t\t Stops fuzzing.\n\tdumpstate:\t\t Stuff.\n\tloadgen:\t\tStuff.\n\thelp:\t\t Prints this help message.\n" )
-        else:
-            sys.stdout.write("Command not supported\n")
-        
-        
+        __handle(msg, ghost)
+
+if __name__ == "__main__":
+    main()
+

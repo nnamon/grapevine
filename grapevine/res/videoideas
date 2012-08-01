@@ -25,3 +25,22 @@ Educational
 
 Script:
 On why we break things with Grapevine.
+[Opening scene starts off: a sped up video with a quick sketch of the grapevine logo and a couple of embellishments.]
+
+Grapevine is a fuzzing framework focused towards the discovery of bugs living in arguably the most important part of the operating system, the kernel. The kernel sits between the hardware, the software, and you. The magic of this is in something called system calls, or in short, syscalls. It allows software to interact with hardware. However, programmers aren't perfect and certain syscalls might be flawed.
+
+Fuzzers come to the rescue. What a typical fuzzer does is to pump random data into these syscalls and hopes the tested system dies. A great method to ensure general robustness. However, this strategy is a dumb one and lacks depth of reach.
+
+Enter Grapevine, a fuzzer of extraordinary flexibility. Designed to mould itself closely to its user's needs, it requires very little human intervention. Highly extensible, it can be made to target a wide variety of kernels, and applications. A diverse set of techniques may be employed to ensure maximum coverage.
+
+The aptly named, ghost component of grapevine acts as the overseer of fuzzing activities. It keeps track of many machines running the fuzzing component, gfuzzd.
+
+On start up, gfuzzd analyses its environment for syscall definitions and listens for commands from the ghost. When ghost starts up, it spawns a logger to listen for log entries that will be sent by instances of gfuzzd during certain events. It then establishes a link to the listening gfuzzd. The ghost may then send logger and input generation configuration details to prepare for the fuzzing phase.
+
+When gfuzzd receives a command to start fuzzing from ghost, it generates input data through the generator that was cofigured earlier. A generator is user defined and contains rules that dictate what data to input and dynamically affects the data it generates based on values returned by calling a syscall. Syscalls are called by the calling mechanism, the method by which syscalls are passed and executed by the kernel. Generators and calling mechanisms pluggable modules, and are easy for users to modify to their needs.
+
+Syscalls and their generated input are logged before the syscall is called. The resulting return value is then logged as well.
+
+In the event of a crash, it is detected, logged, and a dump of its virtual memory is created for further analysis.
+
+Grapevine is completely open source, and accessible at https://github.com/jergorn93/grapevine. Contributers are welcome.
