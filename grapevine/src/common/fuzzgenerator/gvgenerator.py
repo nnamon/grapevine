@@ -42,7 +42,7 @@ class DefaultGenerator(Generator):
 
 # Syscall Profile Use Generator
 class XNUIntellect(Generator):
-"""A generator designed to make use of syscall list parsing and intelligent filtering of unusable syscalls and their orders."""
+    """A generator designed to make use of syscall list parsing and intelligent filtering of unusable syscalls and their orders."""
     def getNext(self):
         pass
 

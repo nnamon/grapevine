@@ -2,6 +2,10 @@
 
 import socket
 import select
+from threading import Thread
+import time
+import signal
+import sys
 
 class Host:
     """Host does monitoring of the host and allows control through callbacks."""
@@ -11,64 +15,102 @@ class Host:
     state =  0 # Uninitialised
     sock = None
     callback_set = {}
+    mon_timeout = 0.02
+    mon_ticks = 0
 
     # Constants
     UNINITIALISED = 0
     CONNECTED = 1
     TERMINATED = -1
+    UNCONNECTED = -2
 
     def __init__(self, ip, port, callback_set = {}):
         self.ip = ip
-        self.port = port
+        self.port = int(port)
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.sock.setblocking(0)
         if callback_set == {}:
-            callback_set['unable_to_connect'] = self.__default_unable_to_connect_callback
-            callback_set['crash_detected'] =  self.__default_crash_detected_callback
-        self.start()
+            self.callback_set['unable_to_connect'] = self.__default_unable_to_connect_callback
+            self.callback_set['crash_detected'] =  self.__default_crash_detected_callback
+            self.callback_set['data_received'] =  self.__default_data_received_callback
+
+            
+    # Internal host functions
 
     def __send_cmd(self, data):
-        self.sock.sendto(data, (self.current_host.ip, self.current_host.port))
+        self.sock.sendto(data, (self.ip, self.port))
+
+    def __call_callback(self, event):
+        self.callback_set[event]()
 
     @staticmethod
     def __default_crash_detected_callback():
-        print "Crash detected event is not handled."
+        print "Advice: Crash detected event is not handled."
 
     @staticmethod
     def __default_unable_to_connect_callback():
-        print "Unable to connect event is not handled."
+        print "Advice: Unable to connect event is not handled."
 
-    def start():
-        pass
+    @staticmethod
+    def __default_data_received_callback(data):
+        print "\nData is Received:\n", data
 
-    def monitor():
+    def start(self):
+        Thread(target=self.monitor, name="monitor").start()
+        self.__send_cmd("hello")
+
+    def monitor(self):
         """Run in a separate thread to block on select calls. On the first run the timeout is set to 5 seconds, otherwise it takes a minute to timeout. Pings should be sent every 2 seconds so if there is no response in a minute, it is assumed that a crash has occured and the crash_detected callback will be called. On the first run, it will call the unable_to_connect callback."""
-
-        self.mon_callback = self.callback_set['unable_to_connect']
-        self.mon_timeout = 5
-        
-        while self.state != self.TERMINATED:
-            ready = None
-            ready = select.select([self.socket], [], [], self.mon_timeout)
+        while self.state >= 0:
+            self.mon_ticks = self.mon_ticks + 1
+            ready = select.select([self.sock], [], [], self.mon_timeout)
             if ready[0]:
-                data = self.socket
-                self.mon_callback = self.callback_set['crash_detected']
-                self.mon_timeout = 60
-            else:
-                self.mon_callback()
-                break
+                data = self.sock.recv(4092)
+                self.__handle(data)
+                ready = None
+            self.__tick_check()
 
-    def stop():
+    def __tick_check(self):
+        ticks_per_sec = 1/self.mon_timeout
+        secs_elapsed = self.mon_ticks/ticks_per_sec
+        if secs_elapsed > 5.0 and self.state == self.UNINITIALISED:
+            self.__call_callback("unable_to_connect")
+            self.state = self.UNCONNECTED
+        
+
+    def __handle(self, data):
+        self.callback_set['data_received'](data)
+        if data.startswith("hello from "):
+            self.state = self.CONNECTED
+
+    def stop(self):
         self.state = self.TERMINATED
 
     def set_state(self, state):
         self.state = state
         
     def is_host(self, ip, port):
-        if self.ip == ip and self.port == port:
+        if self.ip == ip and self.port == int(port):
             return True
         else:
             return False
 
+    # Command sending functions
+
+    def shutdown(self):
+        self.__send_cmd("exit")
+
+    def bye(self):
+        self.__send_cmd("bye")
+
+    def fuzz(self):
+        self.__send_cmd("fuzz")
+
+    def stopfuzz(self):
+        self.__send_cmd("stopfuzz")
+
+    def loadgen(self):
+        self.__send_cmd("loadgen")
 
 class HostsController:
     hosts = [] # A list of Hosts
@@ -92,7 +134,7 @@ class HostsController:
 
     def connect(self, ip, port):
         new_host = True
-        for i in hosts:
+        for i in self.hosts:
             if i.is_host(ip, port):
                 new_host = False
         if new_host:
@@ -100,20 +142,21 @@ class HostsController:
         self.set_current_host(ip, port)
 
     def add_new_host(self, ip, port):
-        for i in hosts:
+        for i in self.hosts:
             if i.is_host(ip, port):
                 return False
         new_host = Host(ip, port)
-        hosts.append(new_host)
+        self.hosts.append(new_host)
+        new_host.start()
 
     def remove_host(self, ip, port):
-        for i in hosts:
+        for i in self.hosts:
             if i.is_host(ip, port):
                 i.stop()
-                hosts.remove(i)
+                self.hosts.remove(i)
         
     def set_current_host(self, ip, port):
-        for i in hosts:
+        for i in self.hosts:
             if i.is_host(ip, port):
                 self.current_host = i
 
@@ -122,15 +165,14 @@ class HostsController:
         self.log_port = int(port)
         # Inform all hosts.
 
-    def fuzz(self):
-        self.__send_cmd("fuzz")
+    def __interrupt_handler(self, sig_no, stack_frame):
+        self.__safe_exit("Interrupt signal detected, terminating program.")
 
-    def stopfuzz(self):
-        self.__send_cmd("stopfuzz")
-
-    def loadgen(self):
-        self.__send_cmd("loadgen")
-
-    def shutdownhost(self):
-        self.__send_cmd("exit")
-                
+    # Ensuring a thread safe exit.
+    def safe_exit(self, reason):
+        print reason
+        for i in self.hosts:
+            i.bye()
+            i.state = Host.TERMINATED
+        time.sleep(0)
+        sys.exit()

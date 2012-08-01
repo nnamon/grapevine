@@ -68,6 +68,8 @@ class FuzzD:
             self.__sendback("generator %s loaded" % gen_name)
         elif data == "hello":
             self.__sendback("hello from %s" % self, addr)
+        elif data == "bye":
+            self.__sendback("bye %s:%d." % addr ,addr)
         elif data == "ping":
             self.__sendback("pong", addr)
         elif data == "log":
@@ -112,7 +114,7 @@ class FuzzD:
     def __safe_exit(self, reason):
         print reason
         self.fuzzing = False
-        time.sleep(0.25)
+        time.sleep(0)
         sys.exit()    
     
         
