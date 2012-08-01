@@ -31,7 +31,7 @@ class HostsController:
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     def __send_cmd(self, cmd):
-        self.sock.sendto("fuzz", (self.current_vm_ip, 
+        self.sock.sendto(cmd, (self.current_vm_ip, 
                                   self.current_vm_port))        
 
     def start(self):
