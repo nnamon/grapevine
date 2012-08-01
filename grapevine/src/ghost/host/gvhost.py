@@ -1,6 +1,7 @@
 #/usr/bin/python
 
 import socket
+import select
 
 class Host:
     """Host does monitoring of the host and allows control through callbacks."""
@@ -14,24 +15,50 @@ class Host:
     # Constants
     UNINITIALISED = 0
     CONNECTED = 1
+    TERMINATED = -1
 
     def __init__(self, ip, port, callback_set = {}):
         self.ip = ip
         self.port = port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        if callback_set == {}:
+            callback_set['unable_to_connect'] = self.__default_unable_to_connect_callback
+            callback_set['crash_detected'] =  self.__default_crash_detected_callback
         self.start()
 
     def __send_cmd(self, data):
         self.sock.sendto(data, (self.current_host.ip, self.current_host.port))
 
+    @staticmethod
+    def __default_crash_detected_callback():
+        print "Crash detected event is not handled."
+
+    @staticmethod
+    def __default_unable_to_connect_callback():
+        print "Unable to connect event is not handled."
+
     def start():
         pass
 
     def monitor():
-        pass
-    
+        """Run in a separate thread to block on select calls. On the first run the timeout is set to 5 seconds, otherwise it takes a minute to timeout. Pings should be sent every 2 seconds so if there is no response in a minute, it is assumed that a crash has occured and the crash_detected callback will be called. On the first run, it will call the unable_to_connect callback."""
+
+        self.mon_callback = self.callback_set['unable_to_connect']
+        self.mon_timeout = 5
+        
+        while self.state != self.TERMINATED:
+            ready = None
+            ready = select.select([self.socket], [], [], self.mon_timeout)
+            if ready[0]:
+                data = self.socket
+                self.mon_callback = self.callback_set['crash_detected']
+                self.mon_timeout = 60
+            else:
+                self.mon_callback()
+                break
+
     def stop():
-        pass
+        self.state = self.TERMINATED
 
     def set_state(self, state):
         self.state = state

@@ -33,6 +33,9 @@ def logger(port,udp_ip,udp_port):
         f.write("\nNEWSET\n")
         f.close()
 
+def unable_to_connect_callback():
+    print "Unable to connect."
+
 def __handle(msg, ghost):
     msg = msg.strip()
     
