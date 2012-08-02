@@ -59,7 +59,7 @@ class Information(object):
 				crashedMachinesID.append(machine.id)
 
 		if crashedMachinesID != None:
-			return crashedMachiensID
+			return crashedMachinesID
 		else:
 			return "0"		## For JavaScript to interpret
 
