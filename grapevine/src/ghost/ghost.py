@@ -56,8 +56,21 @@ def __handle(msg, ghost):
         print "Logging to %s:%d." % (ghost.log_ip, ghost.log_port)
     elif msg == "SIGINT":
         ghost.safe_exit("Interrupt signal detected, terminating program.")
+    elif msg == "hoststatus":
+        states = {
+            '0': "UNINITIALISED",
+            '1': "CONNECTED",
+            '2': "WAITING_FOR_PING",
+            '3': "LOST_CONNECTION",
+            '-1': "TERMINATED",
+            '-2': "UNCONNECTED",
+            }
+        for i in ghost.hosts:
+            print "%s:%d - %s" % (i.ip, i.port, states[str(i.state)])
     elif msg == "help":
         sys.stdout.write( "Grapevine Host Control alpha\nCommands:\n\tcurrenthost:\t displays IP and PORT of currently connected HOST\n\tconnect:\t prompts for new connection details\n\tfuzz:\t\t start fuzzing in the connected host.\n\texit:\t\t exits the program.\n\tstopfuzz:\t\t Stops fuzzing.\n\tdumpstate:\t\t Stuff.\n\tloadgen:\t\tStuff.\n\thelp:\t\t Prints this help message.\n" )
+    elif msg == "exit":
+         ghost.safe_exit("User exited, terminating program.")       
     elif ghost.current_host != None:
         if msg == "fuzz":
             print "Fuzzing %s:%d." % (ghost.current_host.ip, 
@@ -67,17 +80,6 @@ def __handle(msg, ghost):
             print "We stopped fuzzing %s:%d." % (ghost.current_host.ip, 
                                                  ghost.current_host.port)
             ghost.current_host.stopfuzz()
-        elif msg == "hoststatus":
-            states = {
-                '0': "UNINITIALISED",
-                '1': "CONNECTED",
-                '2': "WAITING_FOR_PING",
-                '3': "LOST_CONNECTION",
-                '-1': "TERMINATED",
-                '-2': "UNCONNECTED",
-                }
-            for i in ghost.hosts:
-                print "%s:%d - %s" % (i.ip, i.port, states[str(i.state)])
         elif msg == "loadgen":
             generator_name = raw_input("Generator Name: ")
             seed = raw_input("Seed: ")
@@ -120,7 +122,8 @@ def __connected_callback(addr):
     sys.stdout.flush()
 
 def __data_received_callback(addr, data):
-    if not data.startswith("hello") and not data == "pong":
+    no_print = ['pong']
+    if not data.startswith("hello") and not data.startswith("bye") and not data in no_print:
         sys.stdout.write("\nNotice: We have received data from %s:%d.\n" % addr)
         sys.stdout.write("%s\nghost> " % data)
         sys.stdout.flush()

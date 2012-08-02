@@ -6,7 +6,7 @@ from common.fuzzprofile.gvparser import GrapevineParser
 from fuzzlogger.gvlogger import LoggerClient
 
 UDP_IP="127.0.0.1"
-UDP_PORT=10001
+UDP_PORT=10002
 log_ip = "127.0.0.1"
 log_port = 9001
         

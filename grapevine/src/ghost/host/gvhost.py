@@ -157,6 +157,7 @@ class Host:
         self.__send_cmd(code)
 
     def log(self, ip, port):
+        self.__send_cmd("log")
         self.__send_cmd("%s %d" % (ip, int(port)))
 
     def dumpstate(self):
@@ -201,8 +202,8 @@ class HostsController:
         for i in self.hosts:
             if i.is_host(ip, port):
                 i.stop()
-                if i == self.current_host:
-                    self.remove_current_host
+                if self.current_host.is_host(ip, port):
+                    self.remove_current_host()
                 else:
                     self.hosts.remove(i)
 
@@ -218,10 +219,18 @@ class HostsController:
     def set_log(self, ip, port):
         self.log_ip = ip
         self.log_port = int(port)
-        # Inform all hosts.
+        self.broadcast("log", self.log_ip, self.log_port)
 
     def __interrupt_handler(self, sig_no, stack_frame):
         self.__safe_exit("Interrupt signal detected, terminating program.")
+
+    def broadcast(self, fun_name, *args):
+        try:
+            for i in self.hosts:
+                getattr(i, fun_name)(*args)
+            return True
+        except AttributeError:
+            return False
         
     # Ensuring a thread safe exit.
     def safe_exit(self, reason):
