@@ -1,0 +1,36 @@
+HOST (127.0.0.1:42769)
+{"command": "hello", "addr": ["127.0.0.1", 59643]}
+NEWSET
+HOST (127.0.0.1:42769)
+{"command": "ping", "addr": ["127.0.0.1", 59643]}
+NEWSET
+HOST (127.0.0.1:42769)
+{"command": "ping", "addr": ["127.0.0.1", 59643]}
+NEWSET
+HOST (127.0.0.1:42769)
+{"command": "ping", "addr": ["127.0.0.1", 59643]}
+NEWSET
+HOST (127.0.0.1:42769)
+{"command": "ping", "addr": ["127.0.0.1", 59643]}
+NEWSET
+HOST (127.0.0.1:42769)
+{"command": "ping", "addr": ["127.0.0.1", 59643]}
+NEWSET
+HOST (127.0.0.1:42769)
+{"command": "ping", "addr": ["127.0.0.1", 59643]}
+NEWSET
+HOST (127.0.0.1:42769)
+{"command": "ping", "addr": ["127.0.0.1", 59643]}
+NEWSET
+HOST (127.0.0.1:42769)
+{"command": "ping", "addr": ["127.0.0.1", 59643]}
+NEWSET
+HOST (127.0.0.1:42769)
+{"command": "ping", "addr": ["127.0.0.1", 59643]}
+NEWSET
+HOST (127.0.0.1:42769)
+{"command": "ping", "addr": ["127.0.0.1", 59643]}
+NEWSET
+HOST (127.0.0.1:42769)
+{"command": "ping", "addr": ["127.0.0.1", 59643]}
+NEWSET

@@ -1,7 +1,8 @@
-#!/bin/bash
+#!usr/bin/python
 
 import socket
 import time
+import select
 
 class LogListener:
     
@@ -20,11 +21,13 @@ class LogListener:
         filename = str(int(time.time()))
         log_file = open(filename, 'w')
         while self.logging:
-            data, addr = self.sock.recvfrom(10240)
-            log_file.write("HOST (%s:%d)\n" % addr)
-            log_file.write(data)
-            log_file.write("\nNEWSET\n")
-            log_file.flush()
+            ready = select.select([self.sock], [], [], 0.025)
+            if ready[0]:
+                data, addr = self.sock.recvfrom(10240)
+                log_file.write("HOST (%s:%d)\n" % addr)
+                log_file.write(data)
+                log_file.write("\nNEWSET\n")
+                log_file.flush()
             
     def stop_logging(self):
         self.logging = False
