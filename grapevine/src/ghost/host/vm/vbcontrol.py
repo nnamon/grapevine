@@ -41,7 +41,7 @@ class Controller(object):
 
 		console = session.console
 		options = {
-			'shutdown':			lambda: consdole.powerDown(),
+			'shutdown':			lambda: console.powerDown(),
 			'takeSnapshot':		lambda: console.takeSnapshot(),
 			'deleteSnapshot':	lambda: console.deleteSnapshot(arguments),
 			'restoreSnapshot':	lambda:	console.restoreSnapshot(arguments),

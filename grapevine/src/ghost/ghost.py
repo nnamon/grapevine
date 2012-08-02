@@ -7,7 +7,7 @@ import threading
 from logger.gvloglistener import LogListener
 import host.vm.vbcontrol as VBControl
 import host.vm.vbinfo as VBInformation
-
+import time
 def prompt():
     """Helper function"""
     try:
@@ -98,28 +98,33 @@ def __lost_connection_callback(addr):
     vbc = VBControl.Controller()
     dead = vbi.getCrashedMachines()
     #to implement grab system logs, track ip to vmid
-    if dead == "0":
+    if not dead:
         sys.stdout.write( "No dead machine. Lost connection due to network error or PANIC." )
-        live = vbi.getLiveMachinesID()
+        live = vbi.getAllLiveMachinesID()
         sys.stdout.write("Attempting fix.")
-        if live[0] == "0":
+        if not live or live[0] == 0:
             sys.stdout.write("Network error")
         elif live == None:
             sys.stdout.write("Network error")
         else:
             for livemachineid in live:
                 vbc.dumpGuestCore(livemachineid)
+                time.sleep(30)
                 vbc.shutdownMachine(livemachineid)
+                time.sleep(30)
                 vbc.activateMachine(livemachineid, True)
-        sys.stdout.write("Restarted possible Panic machines. ")
+        sys.stdout.write("Restarting possible Panic machines. This will take some time ")
     else:
         sys.stdout.write( "Restarting dead machines. " )
         for deadmachineid in dead:
             vbc.dumpGuestCore(deadmachineid)
+            time.sleep(30)
             vbc.shutdownMachine(deadmachinemid)
+            time.sleep(30)
             vbc.activateMachine(deadmachinemid, True)
+            time.sleep(5)
             
-        sys.stdout.write( "Restarted dead machines." )
+        sys.stdout.write( "Restarting dead machines." )
     
     sys.stdout.flush()
 
