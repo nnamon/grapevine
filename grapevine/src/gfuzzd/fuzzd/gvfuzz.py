@@ -2,7 +2,7 @@
 
 import socket
 import sys
-from common.fuzzgenerator.gvgenerator import DefaultGenerator, RandomFI
+from common.fuzzgenerator.gvgenerator import DefaultGenerator
 from threading import Thread
 import signal
 import time
@@ -16,14 +16,14 @@ class FuzzD:
     sock = None
     generator = None
     generator_namespace = {}
-    syscall_profile = None
+    syscalls_profile = None
     fuzzing = False
     fuzz_thread = None
 
     def __init__(self, logger, call_mech, syscalls_profile, udp_ip="0.0.0.0", udp_port=10001):
         self.logger = logger
         self.call_mech = call_mech
-        self.generator = RandomFI(syscalls_profile, 0)
+        self.generator = DefaultGenerator(syscalls_profile, 0)
         self.udp_ip = udp_ip
         self.udp_port = udp_port
         
@@ -64,8 +64,8 @@ class FuzzD:
             seed, _ = self.sock.recvfrom(2048)
             exe_code, _ = self.sock.recvfrom(1024*10)
             exec exe_code in self.generator_namespace # load dynamic code into temp namespace
-            self.generator = self.generator_namespace[gen_name](self.seed, self.syscalls_profile)
-            self.__sendback("generator %s loaded" % gen_name)
+            self.generator = self.generator_namespace[gen_name](seed, self.syscalls_profile)
+            self.__sendback("generator %s loaded" % gen_name, addr)
         elif data == "hello":
             self.__sendback("hello from %s" % self, addr)
         elif data == "bye":
@@ -79,6 +79,7 @@ class FuzzD:
             self.__sendback("Set the address to log on to %s:%d." % (log_ip, int(log_port)), addr)
         elif data == "dumpstate":
             self_dump = dict((name, getattr(self, name)) for name in dir(self))
+            self_dump['generator_namespace'] = "Removed for practical reasons."
             dump_to_requester = "Dump of current state:\n\n"
             dump_to_requester = dump_to_requester + "".join(("%s: %s\n" % (i, str(self_dump[i])) for i in self_dump))
             self.__sendback(dump_to_requester, addr)

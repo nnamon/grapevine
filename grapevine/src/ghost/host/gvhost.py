@@ -33,10 +33,15 @@ class Host:
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.sock.setblocking(0)
         if callback_set == {}:
-            self.callback_set['unable_to_connect'] = self.__default_unable_to_connect_callback
-            self.callback_set['crash_detected'] =  self.__default_crash_detected_callback
-            self.callback_set['data_received'] =  self.__default_data_received_callback
-            self.callback_set['reconnected'] =  self.__default_reconnected_callback
+            self.callback_set = {
+                'unable_to_connect': self.__default_unable_to_connect_callback,
+                'lost_connection':  self.__default_lost_connection_callback,
+                'data_received':  self.__default_data_received_callback,
+                'reconnected':  self.__default_reconnected_callback,
+                'connected': self.__default_connected_callback,
+                }
+        else:
+            self.callback_set = callback_set
 
             
     # Internal host functions
@@ -44,23 +49,27 @@ class Host:
     def __send_cmd(self, data):
         self.sock.sendto(data, (self.ip, self.port))
 
-    def __call_callback(self, event):
-        self.callback_set[event]()
+    def __call_callback(self, event, *args):
+        self.callback_set[event](*args)
 
     @staticmethod
-    def __default_crash_detected_callback():
-        print "Advice: Crash detected event is not handled."
+    def __default_lost_connection_callback(addr):
+        print "Advice: Lost connection event is not handled."
 
     @staticmethod
-    def __default_unable_to_connect_callback():
+    def __default_unable_to_connect_callback(addr):
         print "Advice: Unable to connect event is not handled."
 
     @staticmethod
-    def __default_reconnected_callback():
+    def __default_reconnected_callback(addr):
         print "Advice: Reconnected event is not handled."
 
     @staticmethod
-    def __default_data_received_callback(data):
+    def __default_connected_callback(addr):
+        print "Advice: Connected event is not handled."
+
+    @staticmethod
+    def __default_data_received_callback(addr, data):
         print "\nData is Received:\n", data
 
     def start(self):
@@ -82,7 +91,8 @@ class Host:
         ticks_per_sec = 1/self.mon_timeout
         secs_elapsed = self.mon_ticks/ticks_per_sec
         if secs_elapsed > 5.0 and self.state == self.UNINITIALISED:
-            self.__call_callback("unable_to_connect")
+            self.__call_callback("unable_to_connect", 
+                                 (self.ip, self.port))
             self.state = self.UNCONNECTED
         if secs_elapsed % 2 == 0:
             self.ping()
@@ -91,20 +101,21 @@ class Host:
         if self.state == self.WAITING_FOR_PING:
             self.mon_pings_missed = self.mon_pings_missed + 1
         if (self.mon_pings_missed/(1/self.mon_timeout)) > 5 and self.state == self.WAITING_FOR_PING:
-            self.__call_callback("crash_detected")
+            self.__call_callback("lost_connection", (self.ip, self.port))
             self.state = self.LOST_CONNECTION
 
     def __handle(self, data):
-        self.callback_set['data_received'](data)
+        self.__call_callback('data_received', (self.ip, self.port), data)
         if data.startswith("hello from "):
             self.state = self.CONNECTED
+            self.__call_callback("connected", (self.ip, self.port))
             self.mon_pings_missed = 0
         elif data == "pong":
             if self.state == self.WAITING_FOR_PING:
                 self.state = self.CONNECTED
             elif self.state == self.LOST_CONNECTION:
                 self.state = self.UNINITIALISED
-                self.__call_callback("reconnected")
+                self.__call_callback("reconnected", (self.ip, self.port))
                 self.mon_ticks = 0
                 self.hello()
             self.mon_pings_missed = 0
@@ -122,6 +133,7 @@ class Host:
 
     def shutdown(self):
         self.__send_cmd("exit")
+        self.state = self.TERMINATED
 
     def bye(self):
         self.__send_cmd("bye")
@@ -138,11 +150,17 @@ class Host:
     def stopfuzz(self):
         self.__send_cmd("stopfuzz")
 
-    def loadgen(self):
+    def loadgen(self, gen_name, seed, code):
         self.__send_cmd("loadgen")
+        self.__send_cmd(gen_name)
+        self.__send_cmd(seed)
+        self.__send_cmd(code)
 
     def log(self, ip, port):
         self.__send_cmd("%s %d" % (ip, int(port)))
+
+    def dumpstate(self):
+        self.__send_cmd("dumpstate")
 
 class HostsController:
     hosts = [] # A list of Hosts
@@ -150,8 +168,9 @@ class HostsController:
     log_port = 5000
     sock = None
     current_host = None
+    callbacks = {}
     
-    def __init__(self, hosts = [], log_ip = "127.0.0.1", log_port = 5000):
+    def __init__(self, hosts = [], log_ip = "127.0.0.1", log_port = 5000, callbacks = {}):
         # hosts is to be a list of tuples in the form (addr, port)
         for i in hosts:
             ip, port = i
@@ -159,6 +178,7 @@ class HostsController:
         self.log_ip = log_ip
         self.log_port = log_port
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+        self.callbacks = callbacks
 
     def connect(self, ip, port):
         new_host = True
@@ -173,7 +193,7 @@ class HostsController:
         for i in self.hosts:
             if i.is_host(ip, port):
                 return False
-        new_host = Host(ip, port)
+        new_host = Host(ip, port, self.callbacks)
         self.hosts.append(new_host)
         new_host.start()
 
@@ -181,8 +201,15 @@ class HostsController:
         for i in self.hosts:
             if i.is_host(ip, port):
                 i.stop()
-                self.hosts.remove(i)
-        
+                if i == self.current_host:
+                    self.remove_current_host
+                else:
+                    self.hosts.remove(i)
+
+    def remove_current_host(self):
+        self.hosts.remove(self.current_host)
+        self.current_host = None
+
     def set_current_host(self, ip, port):
         for i in self.hosts:
             if i.is_host(ip, port):
