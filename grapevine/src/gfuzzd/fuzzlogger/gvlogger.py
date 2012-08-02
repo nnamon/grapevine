@@ -35,13 +35,29 @@ class LoggerClient:
 
     def log_event(self, event, urgency):
         """Sends a JSON string describing an event and sets its urgency type"""
-        payload = json.dumps({"event": event, "urgency": urgency}, ensure_ascii=True)
+        pay = {"event": event, "urgency": urgency}
+        payload = json.dumps(pay, ensure_ascii=True)
         self.__dgram_send(payload)
 
     def log_command(self, command, addr):
         """Sends a JSON string of the command and addr when a command is received type"""
-        payload = json.dumps({"command": command, "addr": addr}, ensure_ascii=True)
+        pay = {"command": command, "addr": addr}
+        payload = json.dumps(pay, ensure_ascii=True)
         self.__dgram_send(payload)
+
+    def log_data(self, data, addr, **params):
+        """Sends a JSON string of the data set name and the list of data as named parameters"""
+        pay = {"data": data, "addr": addr}
+        for i in params.keys():
+            pay[i] = params[i]
+        payload = json.dumps(pay, ensure_ascii=True)
+        self.__dgram_send(payload)
+
+    def log_signal(self, signal):
+        """Sends a JSON string of the signal received."""
+        payload = json.dumps({"signal": str(retVal)}, ensure_ascii=True)
+        self.__dgram_send(payload)
+        
 
     def __dgram_send(self, payload):
         self.sock.sendto(payload, (self.log_ip, self.log_port))

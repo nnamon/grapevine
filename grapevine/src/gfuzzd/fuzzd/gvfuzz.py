@@ -65,6 +65,11 @@ class FuzzD:
             exe_code, _ = self.sock.recvfrom(1024*10)
             exec exe_code in self.generator_namespace # load dynamic code into temp namespace
             self.generator = self.generator_namespace[gen_name](seed, self.syscalls_profile)
+            self.logger.log_data('loadgen_params', 
+                                 addr, 
+                                 gen_name = gen_name,
+                                 seed = seed,
+                                 exe_code = exe_code)
             self.__sendback("generator %s loaded" % gen_name, addr)
         elif data == "hello":
             self.__sendback("hello from %s" % self, addr)
@@ -76,6 +81,10 @@ class FuzzD:
             log_details, _ = self.sock.recvfrom(2048) # To be sent in the form "127.0.0.1 9001"
             log_ip, log_port = log_details.split()
             self.logger.set_conn(log_ip, log_port)
+            self.logger.log_data('log_params', 
+                                 addr, 
+                                 log_ip = log_ip,
+                                 log_port = log_port)
             self.__sendback("Set the address to log on to %s:%d." % (log_ip, int(log_port)), addr)
         elif data == "dumpstate":
             self_dump = dict((name, getattr(self, name)) for name in dir(self))
@@ -106,6 +115,7 @@ class FuzzD:
 
     # Signal handling to continue fuzzing
     def __sig_handler(self, sig_no, stack_frame):
+        self.log_signal(sig_no)
         print "Signal handled: %d." % sig_no
 
     def __interrupt_handler(self, sig_no, stack_frame):
