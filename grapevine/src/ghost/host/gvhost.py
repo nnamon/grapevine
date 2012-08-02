@@ -7,6 +7,7 @@ import time
 import signal
 import sys
 
+
 class Host:
     """Host does monitoring of the host and allows control through callbacks."""
     # Instance Variables
@@ -54,11 +55,11 @@ class Host:
 
     @staticmethod
     def __default_lost_connection_callback(addr):
-        print "Advice: Lost connection event is not handled."
+        print "Not implemented."
 
     @staticmethod
     def __default_unable_to_connect_callback(addr):
-        print "Advice: Unable to connect event is not handled."
+        print "Advice: Not implememnted."
 
     @staticmethod
     def __default_reconnected_callback(addr):
@@ -165,6 +166,7 @@ class Host:
 
 class HostsController:
     hosts = [] # A list of Hosts
+    hostVMID = []
     log_ip = "127.0.0.1" # Externally accessible host IP address.
     log_port = 5000
     sock = None

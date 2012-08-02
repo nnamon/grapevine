@@ -5,6 +5,8 @@ import re
 from host.gvhost import HostsController
 import threading
 from logger.gvloglistener import LogListener
+import host.vm.vbcontrol as VBControl
+import host.vm.vbinfo as VBInformation
 
 def prompt():
     """Helper function"""
@@ -91,6 +93,33 @@ def __unable_to_connect_callback(addr):
     
 def __lost_connection_callback(addr):
     sys.stdout.write("\nError: We lost our connection to %s:%d. Attempting to reconnect.\nghost> " % addr)
+    vbi = VBInformation.Information()
+    vbc = VBControl.Controller()
+    dead = vbi.getCrashedMachines()
+    #to implement grab system logs, track ip to vmid
+    if dead == "0":
+        sys.stdout.write( "No dead machine. Lost connection due to network error or PANIC." )
+        live = vbi.getLiveMachinesID()
+        sys.stdout.write("Attempting fix.")
+        if live[0] == "0":
+            sys.stdout.write("Network error")
+        elif live == None:
+            sys.stdout.write("Network error")
+        else:
+            for livemachineid in live:
+                vbc.dumpGuestCore(livemachineid)
+                vbc.shutdownMachine(livemachineid)
+                vbc.activateMachine(livemachineid, True)
+        sys.stdout.write("Restarted possible Panic machines. ")
+    else:
+        sys.stdout.write( "Restarting dead machines. " )
+        for deadmachineid in dead:
+            vbc.dumpGuestCore(deadmachineid)
+            vbc.shutdownMachine(deadmachinemid)
+            vbc.activateMachine(deadmachinemid, True)
+            
+        sys.stdout.write( "Restarted dead machines." )
+    
     sys.stdout.flush()
 
 def __reconnected_callback(addr):
