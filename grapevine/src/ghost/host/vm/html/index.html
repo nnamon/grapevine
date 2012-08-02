@@ -1,0 +1,383 @@
+<!DOCTYPE HTML>
+
+
+
+<head>
+	<meta http-equiv="content-type" content="text/html" />
+	<meta name="author" content="Keechin" />
+    <link  rel="stylesheet" href="reset.css"/>
+	<title>Web UI</title>
+</head>
+<script src="jquery.min.js" /></script>
+<style>
+ body {
+        background-color: #262525;
+        }
+        
+        
+    header {
+        margin: auto 0;
+        width: 100%;
+        min-width: 1024px;
+        height: 140px;
+        
+    }
+    
+    #innerHead {
+        margin: 0 auto;
+        width: 1024px;
+        height: 140px;
+    }
+    
+    #body {
+    width: 1024px;
+    height: 700px;
+    margin: 0 auto;
+    }
+    
+    #title-div {
+        position: absolute;
+        margin-top : 30px;
+        margin-left: 10px;
+        width: 350px;
+
+
+    }
+    #title {
+        width: 400px;
+        height: auto;
+        background-color: white;
+        border-radius: 10px;
+    }
+    
+    .menu{
+      list-style: none;
+      counter-reset: li;
+    }
+   
+    .menu li {
+      position: relative;
+      float: left;
+      cursor: pointer;
+      height: 50px; 
+      width: 1000px;
+      margin: 10px 0 0 10px;
+      color: #ffffff;
+      border-radius: 10px;
+      background-color: #111010;
+
+} 
+/* -------------------------------- */
+
+    .menu li::after{
+      content: counter(li);
+      counter-increment: li;
+      font: italic bold 10px serif, georgia;
+      position: absolute;
+      color: rgba(255,255,255,.1);
+      opacity: 0;
+      transition: all .2s ease-out;    
+    }      
+
+    .menu li:hover::after, .menu li:focus::after{
+      position: absolute;
+      margin-top: 15px;
+      margin-left: -40px;
+      font-size: 1.5em;
+      opacity: 1; 
+    }
+
+    .menu .cover::after{
+      z-index: -1;
+    }
+
+/* -------------------------------- */       
+
+.menu .content{
+  opacity: 0; display: none\9;
+  overflow: hidden;
+  font: 12px Arial, Helvetica;
+  position: absolute;
+  height: 120px; width: 200px; 
+  transition: all .3s ease-out;      
+}  
+
+/* -------------------------------- */    
+
+#expand {
+  height: 150px;
+}
+
+.addHost {
+  -moz-box-shadow:inset 0px 1px 0px 0px #e184f3;
+  -webkit-box-shadow:inset 0px 1px 0px 0px #e184f3;
+  box-shadow:inset 0px 1px 0px 0px #e184f3;
+  background-color:#c123de;
+  -moz-border-radius:6px;
+  -webkit-border-radius:6px;
+  border-radius:6px;
+  border:1px solid #a511c0;
+  display:inline-block;
+  color:#ffffff;
+  font-family:arial;
+  font-size:15px;
+  font-weight:bold;
+  padding:6px 24px;
+  text-decoration:none;
+  text-shadow:1px 1px 0px #9b14b3;
+  float : left;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.addHost:hover {
+  background-color:#a20dbd;
+}
+.addHost:active {
+  position:relative;
+  top:1px;
+}
+.notifications{
+  position :absolute;
+  font: 0.9em Arial, Helvetica;
+  font-weight: bold;
+  color : #DDDDDD;
+  width: 400px;
+  max-height: 300px;
+  left : 50%;
+  margin-left: -200px;
+  text-align: center;
+  z-index : 999;
+  background-color: #262525;
+}
+.notifications-expanded{
+  -moz-box-shadow: 0 0px 3px 3px black;
+  -webkit-box-shadow: 0 0px 3px 3px black;
+  box-shadow: 0 0px 3px 3px black;
+  overflow-y: scroll;
+}
+li h1 {
+    position: relative;
+    color: #00abff; 
+    font: 0.8em Arial, Helvetica;
+    letter-spacing: 1px;
+    padding: 15px 0 0 0;
+}
+
+h1 span {
+    color: white;
+}
+
+h1 #status {
+    color: red;
+}
+
+#col1 {
+    position: absolute;
+    width: 280px;
+    height: 120px;
+    margin: 5px 0 0 30px;
+}
+
+#col2 {
+    position: absolute;
+    width: 280px;
+    height: 120px;
+    margin: 5px 0 0 350px;
+}
+
+#col3{
+    position: absolute;
+    width: 280px;
+    height: 120px;
+    margin: 5px 0 0 670px;
+}
+.arrowUp {
+    position: absolute;
+    width: 0;
+    height: 0;
+    right: 0px;
+    bottom: 0px;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid white;
+}
+
+</style>
+
+<body>
+    <header>
+        <div id="innerHead">
+            <div id="title-div">
+            <img id='title' src='./title.png'/>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+      <div class="addHost" onclick="javascript:VBInformation.addHostAction();">Add Host</div>
+      <div class="addHost" id="history" onclick="javascript:VBInformation.showStatusHistory();">Show History</div>
+      <div class="notifications"></div>
+        <ul class="menu">
+            
+          </ul>
+    </div>
+<script type="text/javascript" >
+/* VirtualBox Information Objects */
+var VBInformation = {
+
+  HostLists : ['127.0.0.1:8080'],
+  VBObjectsArray : [],
+  NotificationHistory : [],
+
+  numberOfMachines : 0,
+  newHost : null,
+
+  $Menu : $('.menu'),
+  $Status : $('.notifications'),
+
+  _ajaxInformation : function(hostAddress){
+    $.ajax({
+      url : 'http://' + hostAddress,
+      cache : false,
+      async : false,
+      dataType : 'json'
+    }).done(function(data){
+      VBInformation.VBObjectsArray.push(data);
+    });
+  },
+
+  addHostAction : function(){
+    var hostAddress = prompt("Enter <IP:PORT> :");
+    if(hostAddress != null && hostAddress != ""){
+      if(/\b(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?):\d{1,5}\b/.test(hostAddress)){
+        this.addHost(hostAddress);
+        this.updateStatus('New Host : ' + hostAddress + ' has been added.');
+      }else{
+        this.updateStatus('Incorrect IP:PORT Received.');
+      }
+    }
+  },
+
+  addHost : function(hostAddress){
+    this.HostLists.push(hostAddress);
+    this.newHost = 1;
+    this.$Menu.html("");
+    this.generateSegments();
+  },
+
+  generateSegments : function(){
+    var numberOfHost = this.HostLists.length;
+    var numberOfMachines = 0;
+    this.VBObjectsArray = [];
+    VBSection = '<li id="expand" tabindex="1" style="opacity : 0"><section id="col1"><h1>Machine Name: <span id="name"></span></h1> <h1>Virtual Box ID: <span id="virtualBoxId"></span></h1> <h1>Operating System: <span id="os"></span></h1> <h1>Host: <span id="host"></span></h1> </section> <section id="col2"> <h1>Status: <span id="status"></span></h1> <h1>Memory: <span id="mem"></span></h1> <h1>Session State: <span id="state"></span></h1> </section> </li>';
+
+    for( var i = 0; i < numberOfHost; i++){
+      this._ajaxInformation(this.HostLists[i]);
+      numberOfMachines += this.VBObjectsArray[i].Machines.length;
+    }
+
+    for(var i = 0; i < numberOfMachines; i++){
+      this.$Menu.append(VBSection);
+      this.$Menu.children().last().delay(i * 150).animate({opacity : 1});
+    }
+
+    this.numberOfMachines = numberOfMachines;
+
+      this._updateInformation();
+
+  },
+
+  _getPermissionToRun : function(){
+    if(this.newHost == null){
+      return true;
+    }else{
+      this.newHost = null;
+      return false;
+    }
+  },
+
+  _updateInformation : function(){
+    var numberOfHost = this.HostLists.length;
+    this.VBObjectsArray = [];
+
+    for( var i = 0; i < numberOfHost; i++){
+      this._ajaxInformation(this.HostLists[i]);
+    } 
+
+    this.refreshInformation();
+
+    if(this._getPermissionToRun()){
+      setTimeout('VBInformation._updateInformation()', 3000);
+    }
+  },
+
+  refreshInformation : function(){
+    var sectionCounter = 0;
+    for (var i = 0; i < this.VBObjectsArray.length; i++) {
+      for (var j = 0; j < this.VBObjectsArray[i].Machines.length; j++) {
+
+        var $currentSection = this.$Menu.children().eq(sectionCounter);
+        sectionCounter++;
+
+        $currentSection.find('#name').text(this.VBObjectsArray[i].Machines[j].MachineName);
+        $currentSection.find('#virtualBoxId').text(this.VBObjectsArray[i].Machines[j].MachineID);
+        $currentSection.find('#os').text(this.VBObjectsArray[i].Machines[j].MachineOS);
+        $currentSection.find('#host').text(this.HostLists[i]);
+
+        if($currentSection.find('#status').text() != this.VBObjectsArray[i].Machines[j].MachineState){
+          if(this.VBObjectsArray[i].Machines[j].MachineState == "Running"){
+            $currentSection.find('#status').css({color : 'lawngreen', fontWeight : 'bold'});
+          }else if(this.VBObjectsArray[i].Machines[j].MachineState == "Paused"){
+            $currentSection.find('#status').css({color : 'yellow', fontWeight : 'bold'});
+          }else{
+            $currentSection.find('#status').css({color : 'red', fontWeight : 'bold'});
+          }
+          $currentSection.find('#status').animate({opacity : 0.1}).animate({opacity : 1});
+        }
+
+        $currentSection.find('#status').text(this.VBObjectsArray[i].Machines[j].MachineState);
+        $currentSection.find('#mem').text(this.VBObjectsArray[i].Machines[j].MachineMemSize);
+        $currentSection.find('#state').text(this.VBObjectsArray[i].Machines[j].SessionState);
+      };
+    };
+  },
+
+  updateStatus : function(notification){
+    this.$Status.slideUp(function(){
+      VBInformation.$Status.text(notification);
+      VBInformation.$Status.slideDown();
+    });
+    this.NotificationHistory.push(notification);
+  },
+
+  showStatusHistory : function(){
+    var history = "";
+    for (var i = 0; i < this.NotificationHistory.length; i++) {
+      history += this.NotificationHistory[i] + "<br>";
+    };
+    this.$Status.addClass('notifications-expanded');
+    this.$Status.slideUp(function(){
+      VBInformation.$Status.html(history + '<br>');
+      VBInformation.$Status.slideDown();
+    });
+    $('#history').text('Hide History').attr('onclick', 'javascript:VBInformation.hideStatusHistory()');
+  },
+
+  hideStatusHistory : function(){
+    this.$Status.removeClass('notifications-expanded');
+     this.$Status.slideUp(function(){
+      VBInformation.$Status.text(VBInformation.NotificationHistory[VBInformation.NotificationHistory.length - 1]);
+      VBInformation.$Status.slideDown();
+    });
+    $('#history').text('Show History').attr('onclick', 'javascript:VBInformation.showStatusHistory()');   
+  },
+
+  init : function(){
+    this.generateSegments();
+  }
+
+
+};
+VBInformation.init();
+</script>
+</body>
+</html>
