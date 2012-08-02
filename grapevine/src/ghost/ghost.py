@@ -3,6 +3,8 @@
 import sys
 import re
 from host.gvhost import HostsController
+import threading
+from logger.gvloglistener import LogListener
 
 def prompt():
     """Helper function"""
@@ -13,29 +15,6 @@ def prompt():
     except KeyboardInterrupt:
         return "SIGINT"
 
-
-def logger(port,udp_ip,udp_port):
-    """UDP Logging function, writes to file"""
-    print "Logger spawned"
-    sock = socket.socket( socket.AF_INET, socket.SOCK_DGRAM )
-    sock.bind( ('0.0.0.0',port) )
-    print "Port Bound",port
-    filename = str(int(time()))
-    f = open( filename, 'w')
-    f.write("HOSTIP: ")
-    f.write(udp_ip)
-    f.write(" HOSTPORT: ")
-    f.write(str(udp_port))
-    f.write(" Logger port ")
-    f.write(str(port))
-    f.write("\n")
-    f.close()
-    while True:
-        f = open(filename, 'a')
-        data, addr = sock.recvfrom( 3072 )
-        f.write(data)
-        f.write("\nNEWSET\n")
-        f.close()
 
 def unable_to_connect_callback():
     print "Unable to connect."
@@ -55,6 +34,7 @@ def __handle(msg, ghost):
         ghost.set_log(log_match.group(1), log_match.group(2))
         print "Logging to %s:%d." % (ghost.log_ip, ghost.log_port)
     elif msg == "SIGINT":
+        logger.stop_logging() 
         ghost.safe_exit("Interrupt signal detected, terminating program.")
     elif msg == "hoststatus":
         states = {
@@ -136,6 +116,11 @@ def main():
         'data_received': __data_received_callback,
         'connected': __connected_callback,
         }
+
+    global logger
+    logger = LogListener("0.0.0.0", 5001)
+    logger_thread = threading.Thread(target=logger.listen)
+    logger_thread.start()
 
     global ghost 
     ghost = HostsController(callbacks=callbacks)

@@ -5,10 +5,10 @@ from fuzzd.gvcallingmechanisms import XNUCallingMechanism, TestCallingMechanism
 from common.fuzzprofile.gvparser import GrapevineParser
 from fuzzlogger.gvlogger import LoggerClient
 
-UDP_IP="127.0.0.1"
-UDP_PORT=10002
+UDP_IP="0.0.0.0"
+UDP_PORT=10001
 log_ip = "127.0.0.1"
-log_port = 9001
+log_port = 5001
         
 def main():
     # Get syscall profile first
