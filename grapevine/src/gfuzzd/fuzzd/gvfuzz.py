@@ -115,7 +115,7 @@ class FuzzD:
 
     # Signal handling to continue fuzzing
     def __sig_handler(self, sig_no, stack_frame):
-        self.log_signal(sig_no)
+        self.logger.log_signal(sig_no)
         print "Signal handled: %d." % sig_no
 
     def __interrupt_handler(self, sig_no, stack_frame):
