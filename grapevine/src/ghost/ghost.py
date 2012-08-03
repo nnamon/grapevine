@@ -94,6 +94,7 @@ def __unable_to_connect_callback(addr):
     
 def __lost_connection_callback(addr):
     sys.stdout.write("\nError: We lost our connection to %s:%d. Attempting to reconnect.\nghost> " % addr)
+    #Bad function that restarts VM even though connection has been regained.
     vbi = VBInformation.Information()
     vbc = VBControl.Controller()
     dead = vbi.getCrashedMachines()
