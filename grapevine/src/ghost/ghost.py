@@ -95,38 +95,38 @@ def __unable_to_connect_callback(addr):
 def __lost_connection_callback(addr):
     sys.stdout.write("\nError: We lost our connection to %s:%d. Attempting to reconnect.\nghost> " % addr)
     #Bad function that restarts VM even though connection has been regained.
-    vbi = VBInformation.Information()
-    vbc = VBControl.Controller()
-    dead = vbi.getCrashedMachines()
+    #vbi = VBInformation.Information()
+    #vbc = VBControl.Controller()
+    #dead = vbi.getCrashedMachines()
     #to implement grab system logs, track ip to vmid
-    if not dead:
-        sys.stdout.write( "No dead machine. Lost connection due to network error or PANIC." )
-        live = vbi.getAllLiveMachinesID()
-        sys.stdout.write("Attempting fix.")
-        if not live or live[0] == 0:
-            sys.stdout.write("Network error")
-        elif live == None:
-            sys.stdout.write("Network error")
-        else:
-            for livemachineid in live:
-                vbc.dumpGuestCore(livemachineid)
-                time.sleep(30)
-                vbc.shutdownMachine(livemachineid)
-                time.sleep(30)
-                vbc.activateMachine(livemachineid, True)
-        sys.stdout.write("Restarting possible Panic machines. This will take some time ")
-    else:
-        sys.stdout.write( "Restarting dead machines. " )
-        for deadmachineid in dead:
-            vbc.dumpGuestCore(deadmachineid)
-            time.sleep(30)
-            vbc.shutdownMachine(deadmachinemid)
-            time.sleep(30)
-            vbc.activateMachine(deadmachinemid, True)
-            time.sleep(5)
-            
-        sys.stdout.write( "Restarting dead machines." )
-    
+    #if not dead:
+    #    sys.stdout.write( "No dead machine. Lost connection due to network error or PANIC." )
+    #    live = vbi.getAllLiveMachinesID()
+    #    sys.stdout.write("Attempting fix.")
+    #    if not live or live[0] == 0:
+    #        sys.stdout.write("Network error")
+    #    elif live == None:
+    #        sys.stdout.write("Network error")
+    #    else:
+    #        for livemachineid in live:
+    #            vbc.dumpGuestCore(livemachineid)
+    #            time.sleep(30)
+    #            vbc.shutdownMachine(livemachineid)
+    #            time.sleep(30)
+    #            vbc.activateMachine(livemachineid, True)
+    #    sys.stdout.write("Restarting possible Panic machines. This will take some time ")
+    #else:
+    #    sys.stdout.write( "Restarting dead machines. " )
+    #    for deadmachineid in dead:
+    #        vbc.dumpGuestCore(deadmachineid)
+    #        time.sleep(30)
+    #        vbc.shutdownMachine(deadmachinemid)
+    #        time.sleep(30)
+    #        vbc.activateMachine(deadmachinemid, True)
+    #        time.sleep(5)
+    #        
+    #    sys.stdout.write( "Restarting dead machines." )
+   
     sys.stdout.flush()
 
 def __reconnected_callback(addr):
