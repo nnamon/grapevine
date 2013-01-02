@@ -11,7 +11,7 @@ class CallingMechanism:
 # Calling mechanism used for this project   
 # UNCOMMENT OUT THE FOLLOWING LINES TO RUN IN A MAC OS X ENVIRONMENT
 # from ctypes import *
-# libc = .LoadLibrary("libc.dylib")
+# libc = cdll.LoadLibrary("libc.dylib")
 class XNUCallingMechanism(CallingMechanism):
     
     def call(self, syscall_number, *args):
