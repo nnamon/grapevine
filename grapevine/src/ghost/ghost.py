@@ -2,11 +2,11 @@
 
 import sys
 import re
-from host.gvhost import HostsController
+#from host.gvhost import HostsController
 import threading
 from logger.gvloglistener import LogListener
-import host.vm.vbcontrol as VBControl
-import host.vm.vbinfo as VBInformation
+#import host.vm.vbcontrol as VBControl
+#import host.vm.vbinfo as VBInformation
 import time
 def prompt():
     """Helper function"""

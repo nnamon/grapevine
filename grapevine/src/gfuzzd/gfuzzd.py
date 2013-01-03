@@ -11,6 +11,7 @@ log_ip = "127.0.0.1"
 log_port = 5001
         
 def main():
+    #change paths accordingly
     # Get syscall profile first
     bsd_syscalls_master = "/home/jaybles/grapevine/grapevine/res/syscalls.master"
     mach_syscall_sw = "/home/jaybles/grapevine/grapevine/res/syscall_sw.c"
@@ -22,6 +23,7 @@ def main():
     # New Logger
     logger = LoggerClient(log_ip, log_port)
     
+    #change TestCallingMechanism to XNUCallingMechanism() for fuzzing
     # Create our fuzzd instance
     fuzzd = FuzzD(logger, TestCallingMechanism(), syscall_profile, UDP_IP, UDP_PORT)
     fuzzd.listen()
